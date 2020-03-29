@@ -6,3 +6,7 @@ __pycache__
 *.pyc
 
 *_.py
+
+libs
+*.so
+*.o
