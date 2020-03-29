@@ -316,18 +316,16 @@ def libraries():
     # if not OPTION_BUILD_LIBXML2XSLT:
     #     standard_libs.append('z')
     # standard_libs.append('m')
-
-    # if sys.platform in ('win32',):
-    #     libs = ['libxslt', 'libexslt', 'libxml2', 'iconv']
-    #     if OPTION_STATIC:
-    #         libs = ['%s_a' % lib for lib in libs]
-    #     libs.extend(['zlib', 'WS2_32'])
+    libs = ["xpdf"]
+    if sys.platform in ('win32',):
+        xpdf_deps = ['shell32', 'advapi32']
+        libs.extend(xpdf_deps)
     # elif OPTION_STATIC:
     #     libs = standard_libs
     # else:
     #     libs = ['xslt', 'exslt', 'xml2'] + standard_libs
     # return libs
-    return ['xpdf', ]
+    return libs
 
 
 def library_dirs(static_library_dirs):
