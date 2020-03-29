@@ -27,8 +27,9 @@ def download_and_extract_libxpdf(destdir):
     url = "https://github.com/ashutoshvarma/libxpdf/releases"
     filenames = list(get_filelist(url))
 
-    release_path = "/download/v%s/" % (find_max_version(
-        'libxpdf', filenames, re.compile(r'/releases/tag/v([0-9.]+[0-9])$')))
+    lib_version = find_max_version(
+        'libxpdf', filenames, re.compile(r'/releases/tag/v([0-9.]+[0-9])$'))
+    release_path = "/download/v%s/" % lib_version
     url += release_path
     filenames = [
         filename.rsplit('/', 1)[1]
@@ -51,14 +52,21 @@ def download_and_extract_libxpdf(destdir):
         raise Exception("No Prebuit binary available for %s" %
                         (platform.system()))
 
-    print("Downloading %s" % (libname))
-
     if not os.path.exists(destdir):
         os.makedirs(destdir)
 
     lib_url = urljoin(url, libname)
     lib_dest_path = os.path.join(destdir, 'libxpdf')
-    unpack_zipfile(StringIO(get(lib_url).content), lib_dest_path)
+
+    if os.path.exists(os.path.join(destdir, libname + lib_version + ".keep")):
+        print("Version %s of %s already downloaded. Skipping download." % (lib_version, libname))
+    else:
+        for keep_file in os.listdir(destdir):
+            if libname in keep_file and keep_file.endswith(".keep"):
+                os.remove(keep_file)
+        print("Downloading %s" % (libname))
+        unpack_zipfile(StringIO(get(lib_url).content), lib_dest_path)
+        open(os.path.join(destdir, libname + lib_version + ".keep"), 'w').close()
 
     return lib_dest_path
 
