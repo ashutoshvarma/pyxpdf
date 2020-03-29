@@ -2,4 +2,7 @@
 build
 venv
 
+__pycache__
+*.pyc
+
 *_.py
