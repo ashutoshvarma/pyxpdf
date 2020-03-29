@@ -57,13 +57,16 @@ def download_and_extract_libxpdf(destdir):
         os.makedirs(destdir)
 
     lib_url = urljoin(url, libname)
-    unpack_zipfile(StringIO(get(lib_url).content), destdir)
+    lib_dest_path = os.path.join(destdir, 'libxpdf')
+    unpack_zipfile(StringIO(get(lib_url).content), lib_dest_path)
+
+    return lib_dest_path
 
 
 def get_prebuilt_libxpdf(download_dir, static_include_dirs, static_library_dirs):
-    download_and_extract_libxpdf(download_dir)
-    inc_path = os.path.join(download_dir, 'include')
-    lib_path = os.path.join(download_dir, 'lib')
+    lib_dest_path = download_and_extract_libxpdf(download_dir)
+    inc_path = os.path.join(lib_dest_path, 'include')
+    lib_path = os.path.join(lib_dest_path, 'lib')
     assert os.path.exists(inc_path), 'does not exist: %s' % inc_path
     assert os.path.exists(lib_path), 'does not exist: %s' % lib_path
     static_include_dirs.append(inc_path)
