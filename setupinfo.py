@@ -6,7 +6,6 @@ import subprocess
 from distutils.core import Extension
 from distutils.errors import CompileError, DistutilsOptionError
 from distutils.command.build_ext import build_ext as _build_ext
-# from versioninfo import get_base_dir
 
 try:
     import Cython.Compiler.Version
@@ -14,26 +13,16 @@ try:
 except ImportError:
     CYTHON_INSTALLED = False
 
-# EXT_MODULES = ["lxml.etree", "lxml.objectify"]
 EXT_MODULES = ["pyxpdf.xpdf", ]
-# COMPILED_MODULES = [
-#     "lxml.builder",
-#     "lxml._elementpath",
-#     "lxml.html.diff",
-#     "lxml.html.clean",
-#     "lxml.sax",
-# ]
 COMPILED_MODULES = []
-# HEADER_FILES = ['etree.h', 'etree_api.h']
 HEADER_FILES = ['pyxpdf_defs.h', ]
 
-# if hasattr(sys, 'pypy_version_info') or (
-# getattr(sys, 'implementation', None) and sys.implementation.name != 'cpython'):
-# disable Cython compilation of Python modules in PyPy and other non-CPythons
-# del COMPILED_MODULES[:]
+if hasattr(sys, 'pypy_version_info') or (
+    getattr(sys, 'implementation', None) and sys.implementation.name != 'cpython'):
+    # disable Cython compilation of Python modules in PyPy and other non-CPythons
+    del COMPILED_MODULES[:]
 
 SOURCE_PATH = "src"
-# INCLUDE_PACKAGE_PATH = os.path.join(SOURCE_PATH, 'lxml', 'includes')
 INCLUDE_PACKAGE_PATH = os.path.join(SOURCE_PATH, 'pyxpdf', 'includes')
 
 if sys.version_info[0] >= 3:
@@ -75,39 +64,18 @@ def _prefer_reldirs(base_dir, dirs):
 
 def ext_modules(static_include_dirs, static_library_dirs,
                 static_cflags, static_binaries):
-    # global XML2_CONFIG, XSLT_CONFIG
-    # if OPTION_BUILD_LIBXML2XSLT:
-    #     from buildlibxml import build_libxml2xslt, get_prebuilt_libxml2xslt
-    #     if sys.platform.startswith('win'):
-    #         get_prebuilt_libxml2xslt(
-    #             OPTION_DOWNLOAD_DIR, static_include_dirs, static_library_dirs)
-    #     else:
-    #         XML2_CONFIG, XSLT_CONFIG = build_libxml2xslt(
-    #             OPTION_DOWNLOAD_DIR, 'build/tmp',
-    #             static_include_dirs, static_library_dirs,
-    #             static_cflags, static_binaries,
-    #             libiconv_version=OPTION_LIBICONV_VERSION,
-    #             libxml2_version=OPTION_LIBXML2_VERSION,
-    #             libxslt_version=OPTION_LIBXSLT_VERSION,
-    #             zlib_version=OPTION_ZLIB_VERSION,
-    #             multicore=OPTION_MULTICORE)
     from get_libxpdf import get_prebuilt_libxpdf
     get_prebuilt_libxpdf(
         OPTION_DOWNLOAD_DIR, static_include_dirs, static_library_dirs)
 
-    # modules = EXT_MODULES + COMPILED_MODULES
-    modules = EXT_MODULES
-    # if OPTION_WITHOUT_OBJECTIFY:
-    #     modules = [entry for entry in modules if 'objectify' not in entry]
+    modules = EXT_MODULES + COMPILED_MODULES
 
     module_files = list(os.path.join(SOURCE_PATH, *module.split('.'))
                         for module in modules)
-    # c_files_exist = [os.path.exists(module + '.c') for module in module_files]
     cpp_files_exist = [os.path.exists(module + '.cpp')
                        for module in module_files]
 
     use_cython = True
-    # if CYTHON_INSTALLED and (OPTION_WITH_CYTHON or not all(c_files_exist)):
     if CYTHON_INSTALLED and (OPTION_WITH_CYTHON or not all(cpp_files_exist)):
         print("Building with Cython %s." % Cython.Compiler.Version.version)
         # generate module cleanup code
@@ -118,19 +86,17 @@ def ext_modules(static_include_dirs, static_library_dirs,
         for exists, module in zip(cpp_files_exist, module_files):
             if not exists:
                 raise RuntimeError(
-                    "ERROR: Trying to build without Cython, but pre-generated '%s.c' "
+                    "ERROR: Trying to build without Cython, but pre-generated '%s.cpp' "
                     "is not available (pass --without-cython to ignore this error)." % module)
     else:
         if not all(cpp_files_exist):
             for exists, module in zip(cpp_files_exist, module_files):
                 if not exists:
                     print("WARNING: Trying to build without Cython, but pre-generated "
-                          "'%s.c' is not available." % module)
+                          "'%s.cpp' is not available." % module)
         use_cython = False
         print("Building without Cython.")
 
-    # if not check_build_dependencies():
-    #     raise RuntimeError("Dependency missing")
 
     base_dir = get_base_dir()
     _include_dirs = _prefer_reldirs(
@@ -147,13 +113,6 @@ def ext_modules(static_include_dirs, static_library_dirs,
     _libraries = libraries()
 
     if _library_dirs:
-        # message = "Building against libxml2/libxslt in "
-        # if len(_library_dirs) > 1:
-        #     print(message + "one of the following directories:")
-        #     for dir in _library_dirs:
-        #         print("  " + dir)
-        # else:
-        # print(message + "the following directory: " +
         message = "Building against libxpdf in "
         print(message + "the following directory: " +
               _library_dirs[0])
@@ -197,59 +156,14 @@ def ext_modules(static_include_dirs, static_library_dirs,
             ext.cython_gdb = True
 
     if CYTHON_INSTALLED and use_cython:
-        # build .c files right now and convert Extension() objects
+        # build .cpp files right now and convert Extension() objects
         from Cython.Build import cythonize
         result = cythonize(result, compiler_directives=cythonize_directives)
-
-    # for backwards compatibility reasons, provide "etree[_api].h" also as "lxml.etree[_api].h"
-    # for header_filename in HEADER_FILES:
-    #     src_file = os.path.join(SOURCE_PATH, 'lxml', header_filename)
-    #     dst_file = os.path.join(SOURCE_PATH, 'lxml', 'lxml.' + header_filename)
-    #     if not os.path.exists(src_file):
-    #         continue
-    #     if os.path.exists(dst_file) and os.path.getmtime(dst_file) >= os.path.getmtime(src_file):
-    #         continue
-
-    #     with io.open(src_file, 'r', encoding='iso8859-1') as f:
-    #         content = f.read()
-    #     for filename in HEADER_FILES:
-    #         content = content.replace(
-    #             '"%s"' % filename, '"lxml.%s"' % filename)
-    #     with io.open(dst_file, 'w', encoding='iso8859-1') as f:
-    #         f.write(content)
 
     return result
 
 
 def find_dependencies(module):
-    # if not CYTHON_INSTALLED or 'lxml.html' in module:
-    #     return []
-    # base_dir = get_base_dir()
-    # package_dir = os.path.join(base_dir, SOURCE_PATH, 'lxml')
-    # includes_dir = os.path.join(base_dir, INCLUDE_PACKAGE_PATH)
-
-    # pxd_files = [
-    #     os.path.join(INCLUDE_PACKAGE_PATH, filename)
-    #     for filename in os.listdir(includes_dir)
-    #     if filename.endswith('.pxd')
-    # ]
-
-    # if module == 'lxml.etree':
-    #     pxi_files = [
-    #         os.path.join(SOURCE_PATH, 'lxml', filename)
-    #         for filename in os.listdir(package_dir)
-    #         if filename.endswith('.pxi') and 'objectpath' not in filename
-    #     ]
-    #     pxd_files = [
-    #         filename for filename in pxd_files
-    #         if 'etreepublic' not in filename
-    #     ]
-    # elif module == 'lxml.objectify':
-    #     pxi_files = [os.path.join(SOURCE_PATH, 'lxml', 'objectpath.pxi')]
-    # else:
-    #     pxi_files = pxd_files = []
-
-    # return pxd_files + pxi_files
     if not CYTHON_INSTALLED:
         return []
     base_dir = get_base_dir()
@@ -274,87 +188,19 @@ def find_dependencies(module):
     return pxd_files + pxi_files
 
 
-# def extra_setup_args():
-#     class CheckLibxml2BuildExt(_build_ext):
-#         """Subclass to check whether libxml2 is really available if the build fails"""
-
-#         def run(self):
-#             try:
-#                 _build_ext.run(self)  # old-style class in Py2
-#             except CompileError as e:
-#                 print('Compile failed: %s' % e)
-#                 if not seems_to_have_libxml2():
-#                     print_libxml_error()
-#                 raise
-#     result = {'cmdclass': {'build_ext': CheckLibxml2BuildExt}}
-#     return result
-
-
-# def seems_to_have_libxml2():
-#     from distutils import ccompiler
-#     compiler = ccompiler.new_compiler()
-#     return compiler.has_function(
-#         'xmlXPathInit',
-#         include_dirs=include_dirs([]) + ['/usr/include/libxml2'],
-#         includes=['libxml/xpath.h'],
-#         library_dirs=library_dirs([]),
-#         libraries=['xml2'])
-
-
-# def print_libxml_error():
-#     print('*********************************************************************************')
-#     print('Could not find function xmlCheckVersion in library libxml2. Is libxml2 installed?')
-#     # if sys.platform in ('darwin',):
-#     #     print('Perhaps try: xcode-select --install')
-#     print('*********************************************************************************')
-
-
 def libraries():
-    # standard_libs = []
-    # if 'linux' in sys.platform:
-    #     standard_libs.append('rt')
-    # if not OPTION_BUILD_LIBXML2XSLT:
-    #     standard_libs.append('z')
-    # standard_libs.append('m')
     libs = ["xpdf"]
     if sys.platform in ('win32',):
         xpdf_deps = ['shell32', 'advapi32']
         libs.extend(xpdf_deps)
-    # elif OPTION_STATIC:
-    #     libs = standard_libs
-    # else:
-    #     libs = ['xslt', 'exslt', 'xml2'] + standard_libs
-    # return libs
     return libs
 
 
 def library_dirs(static_library_dirs):
-    # if OPTION_STATIC:
-    #     if not static_library_dirs:
-    #         static_library_dirs = env_var('LIBRARY')
-    #     assert static_library_dirs, "Static build not configured, see doc/build.txt"
-    #     return static_library_dirs
-    # # filter them from xslt-config --libs
-    # result = []
-    # possible_library_dirs = flags('libs')
-    # for possible_library_dir in possible_library_dirs:
-    #     if possible_library_dir.startswith('-L'):
-    #         result.append(possible_library_dir[2:])
-    # return result
     return static_library_dirs
 
 
 def include_dirs(static_include_dirs):
-    # if OPTION_STATIC:
-    #     if not static_include_dirs:
-    #         static_include_dirs = env_var('INCLUDE')
-    # # filter them from xslt-config --cflags
-    # result = []
-    # possible_include_dirs = flags('cflags')
-    # for possible_include_dir in possible_include_dirs:
-    #     if possible_include_dir.startswith('-I'):
-    #         result.append(possible_include_dir[2:])
-    # return result
     return static_include_dirs
 
 
@@ -365,26 +211,9 @@ def cflags(static_cflags):
     if OPTION_DEBUG_GCC:
         result.append('-g2')
 
-    # if OPTION_STATIC:
-    #     if not static_cflags:
-    #         static_cflags = env_var('CFLAGS')
-    #     result.extend(static_cflags)
     if not static_cflags:
         static_cflags = env_var('CFLAGS')
     result.extend(static_cflags)
-    # else:
-    #     # anything from xslt-config --cflags that doesn't start with -I
-    #     possible_cflags = flags('cflags')
-    #     for possible_cflag in possible_cflags:
-    #         if not possible_cflag.startswith('-I'):
-    #             result.append(possible_cflag)
-
-    # if sys.platform in ('darwin',):
-    #     for opt in result:
-    #         if 'flat_namespace' in opt:
-    #             break
-    #     else:
-    #         result.append('-flat_namespace')
 
     return result
 
@@ -418,110 +247,6 @@ def run_command(cmd, *args):
     if errors:
         return ''
     return decode_input(stdout_data).strip()
-
-
-# def check_min_version(version, min_version, libname):
-#     if not version:
-#         # this is ok for targets like sdist etc.
-#         return True
-#     lib_version = tuple(map(int, version.split('.')[:3]))
-#     req_version = tuple(map(int, min_version.split('.')[:3]))
-#     if lib_version < req_version:
-#         print("Minimum required version of %s is %s. Your system has version %s." % (
-#             libname, min_version, version))
-#         return False
-#     return True
-
-
-# def get_library_version(prog, libname=None):
-#     if libname:
-#         return run_command(prog, '--modversion %s' % libname)
-#     else:
-#         return run_command(prog, '--version')
-
-
-# PKG_CONFIG = None
-# XML2_CONFIG = None
-# XSLT_CONFIG = None
-
-# def get_library_versions():
-#     global XML2_CONFIG, XSLT_CONFIG
-
-#     # Pre-built libraries
-#     if XML2_CONFIG and XSLT_CONFIG:
-#         xml2_version = get_library_version(XML2_CONFIG)
-#         xslt_version = get_library_version(XSLT_CONFIG)
-#         return xml2_version, xslt_version
-
-#     # Path to xml2-config and xslt-config specified on the command line
-#     if OPTION_WITH_XML2_CONFIG:
-#         xml2_version = get_library_version(OPTION_WITH_XML2_CONFIG)
-#         if xml2_version and OPTION_WITH_XSLT_CONFIG:
-#             xslt_version = get_library_version(OPTION_WITH_XSLT_CONFIG)
-#             if xslt_version:
-#                 XML2_CONFIG = OPTION_WITH_XML2_CONFIG
-#                 XSLT_CONFIG = OPTION_WITH_XSLT_CONFIG
-#                 return xml2_version, xslt_version
-
-#     # Try pkg-config
-#     global PKG_CONFIG
-#     PKG_CONFIG = os.getenv('PKG_CONFIG', 'pkg-config')
-#     xml2_version = get_library_version(PKG_CONFIG, 'libxml-2.0')
-#     if xml2_version:
-#         xslt_version = get_library_version(PKG_CONFIG, 'libxslt')
-#         if xml2_version and xslt_version:
-#             return xml2_version, xslt_version
-
-#     # Try xml2-config and xslt-config
-#     XML2_CONFIG = os.getenv('XML2_CONFIG', 'xml2-config')
-#     xml2_version = get_library_version(XML2_CONFIG)
-#     if xml2_version:
-#         XSLT_CONFIG = os.getenv('XSLT_CONFIG', 'xslt-config')
-#         xslt_version = get_library_version(XSLT_CONFIG)
-#         if xml2_version and xslt_version:
-#             return xml2_version, xslt_version
-
-#     # One or both build dependencies not found. Fail on Linux platforms only.
-#     if sys.platform.startswith('win'):
-#         return '', ''
-#     print("Error: Please make sure the libxml2 and libxslt development packages are installed.")
-#     sys.exit(1)
-
-
-# def check_build_dependencies():
-#     xml2_version, xslt_version = get_library_versions()
-
-#     xml2_ok = check_min_version(xml2_version, '2.7.0', 'libxml2')
-#     xslt_ok = check_min_version(xslt_version, '1.1.23', 'libxslt')
-
-#     if xml2_version and xslt_version:
-#         print("Building against libxml2 %s and libxslt %s" % (xml2_version, xslt_version))
-#     else:
-#         print("Building against pre-built libxml2 andl libxslt libraries")
-
-#     return (xml2_ok and xslt_ok)
-
-
-# def get_flags(prog, option, libname=None):
-#     if libname:
-#         return run_command(prog, '--%s %s' % (option, libname))
-#     else:
-#         return run_command(prog, '--%s' % option)
-
-
-# def flags(option):
-#     if XML2_CONFIG:
-#         xml2_flags = get_flags(XML2_CONFIG, option)
-#         xslt_flags = get_flags(XSLT_CONFIG, option)
-#     else:
-#         xml2_flags = get_flags(PKG_CONFIG, option, 'libxml-2.0')
-#         xslt_flags = get_flags(PKG_CONFIG, option, 'libxslt')
-
-#     flag_list = xml2_flags.split()
-#     for flag in xslt_flags.split():
-#         if flag not in flag_list:
-#             flag_list.append(flag)
-#     return flag_list
 
 
 def get_xcode_isysroot():
@@ -560,9 +285,7 @@ def option_value(name):
     return env_val
 
 
-staticbuild = bool(os.environ.get('STATICBUILD', ''))
 # pick up any commandline options and/or env variables
-# OPTION_WITHOUT_OBJECTIFY = has_option('without-objectify')
 # OPTION_WITH_UNICODE_STRINGS = has_option('with-unicode-strings')
 OPTION_WITHOUT_ASSERT = has_option('without-assert')
 OPTION_WITHOUT_THREADING = has_option('without-threading')
@@ -574,20 +297,9 @@ OPTION_WITH_COVERAGE = has_option('with-coverage')
 OPTION_WITH_CLINES = has_option('with-clines')
 if OPTION_WITHOUT_CYTHON:
     CYTHON_INSTALLED = False
-# OPTION_STATIC = staticbuild or has_option('static')
 OPTION_DEBUG_GCC = has_option('debug-gcc')
 OPTION_SHOW_WARNINGS = has_option('warnings')
 OPTION_AUTO_RPATH = has_option('auto-rpath')
-# OPTION_BUILD_LIBXML2XSLT = staticbuild or has_option('static-deps')
-# if OPTION_BUILD_LIBXML2XSLT:
-    # OPTION_STATIC = True
-# OPTION_WITH_XML2_CONFIG = option_value('xml2-config')
-# OPTION_WITH_XSLT_CONFIG = option_value('xslt-config')
-# OPTION_LIBXML2_VERSION = option_value('libxml2-version')
-# OPTION_LIBXSLT_VERSION = option_value('libxslt-version')
-# OPTION_LIBICONV_VERSION = option_value('libiconv-version')
-# OPTION_ZLIB_VERSION = option_value('zlib-version')
-# OPTION_MULTICORE = option_value('multicore')
 OPTION_DOWNLOAD_DIR = option_value('download-dir')
 if OPTION_DOWNLOAD_DIR is None:
     OPTION_DOWNLOAD_DIR = 'libs'
