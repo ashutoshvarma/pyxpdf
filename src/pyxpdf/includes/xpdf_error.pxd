@@ -27,7 +27,7 @@ cdef extern from "Error.h":
 
     cdef const char *errorCategoryNames[]
 
-    cdef void setErrorCallback(void (*cbk)(void *data, ErrorCategory category, int pos, char *msg), void *data);
+    cdef void setErrorCallback(void (*cbk)(void *data, ErrorCategory category, int pos, char *msg), void *data)
 
     cdef void *getErrorCallbackData()
 
