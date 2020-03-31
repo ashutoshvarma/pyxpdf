@@ -8,8 +8,9 @@ venv
 __pycache__
 *.pyc
 
-*_.py
+*test_*.py
 
 libs
 *.so
+*.pyd
 *.o
