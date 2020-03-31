@@ -141,6 +141,7 @@ cdef extern from "Object.h" nogil:
         # void print(FILE *f = stdout)
 
         # Memory testing.
+        @staticmethod
         void memCheck(FILE *f)
 
 

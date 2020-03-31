@@ -17,6 +17,7 @@ cdef extern from "Outline.h" nogil:
     cdef cppclass OutlineItem:
         OutlineItem(Object *itemRefA, Dict *dict, OutlineItem *parentA, XRef *xrefA)
 
+        @staticmethod
         GList *readItemList(Object *firstItemRef, Object *lastItemRef,
                         OutlineItem *parentA, XRef *xrefA)
 

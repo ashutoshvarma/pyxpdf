@@ -44,4 +44,5 @@ cdef extern from "Lexer.h" nogil:
             
 
         # Returns true if <c> is a whitespace character.
+        @staticmethod
         GBool isSpace(int c)

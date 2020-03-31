@@ -10,6 +10,7 @@ from pyxpdf.includes.Form cimport Form, FormField
 
 cdef extern from "AcroForm.h" nogil:
     cdef cppclass AcroForm(Form):
+        @staticmethod
         AcroForm *load(PDFDoc *docA, Catalog *catalog, Object *acroFormObjA)
 
         const char *getType() 
@@ -33,6 +34,7 @@ cdef extern from "AcroForm.h" nogil:
 
 
     cdef cppclass AcroFormField(FormField):
+        @staticmethod
         AcroFormField *load(AcroForm *acroFormA, Object *fieldRefA)
 
         int getPageNum()

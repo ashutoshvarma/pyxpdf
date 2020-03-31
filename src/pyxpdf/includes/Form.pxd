@@ -8,6 +8,7 @@ from pyxpdf.includes.Catalog cimport Catalog
 
 cdef extern from "Form.h" nogil:
     cdef cppclass Form:
+        @staticmethod
         Form *load(PDFDoc *docA, Catalog *catalog, Object *acroFormObj)
 
         const char *getType()

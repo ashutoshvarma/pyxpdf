@@ -10,6 +10,7 @@ cdef extern from "Decrypt.h" nogil:
         # and returns true if either is correct.  Sets <ownerPasswordOk> if
         # the owner password was correct.  Either or both of the passwords
         # may be NULL, which is treated as an empty string.
+        @staticmethod
         GBool makeFileKey(int encVersion, int encRevision, int keyLength,
                     GString *ownerKey, GString *userKey,
                     GString *ownerEnc, GString *userEnc,

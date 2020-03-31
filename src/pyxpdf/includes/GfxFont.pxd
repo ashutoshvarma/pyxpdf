@@ -98,6 +98,7 @@ cdef extern from "GfxFont.h" nogil:
     cdef cppclass GfxFont:
 
         # Build a GfxFont object.
+        @staticmethod
         GfxFont *makeFont(XRef *xref, const char *tagA,
                     Ref idA, Dict *fontDict)
 
@@ -160,6 +161,7 @@ cdef extern from "GfxFont.h" nogil:
         GfxFontLoc *locateFont(XRef *xref, GBool ps)
 
         # Locate a Base-14 font file for a specified font name.
+        @staticmethod
         GfxFontLoc *locateBase14Font(GString *base14Name)
 
         # Read an embedded font file into a buffer.

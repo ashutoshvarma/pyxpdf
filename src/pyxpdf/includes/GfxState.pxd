@@ -47,28 +47,31 @@ cdef extern from "GfxState.h" nogil:
 
     cdef int gfxColorComp1 
 
+    @staticmethod
     GfxColorComp dblToCol(double x)
 
+    @staticmethod
     double colToDbl(GfxColorComp x) 
 
+    @staticmethod
     GfxColorComp byteToCol(Guchar x)
     # (x / 255) << 16  =  (0.0000000100000001... * x) << 16
     #                  =  ((x << 8) + (x) + (x >> 8) + ...)
     #                  =  (x << 8) + (x) + (x >> 7)
     #                                      [for rounding]
 
-
+    @staticmethod
     GfxColorComp wordToCol(Gushort x)
     # (x / 65535) << 16  =  (0.0000000000000001... * x) << 16
     #                    =  x + (x >> 15)
     #                           [for rounding]
 
-
+    @staticmethod
     Guchar colToByte(GfxColorComp x)
     # 255 * x + 0.5  =  256 * x - x + 0.5
     #                =  [256 * (x << 16) - (x << 16) + (1 << 15)] >> 16
 
-
+    @staticmethod
     Gushort colToWord(GfxColorComp x)
     # 65535 * x + 0.5  =  65536 * x - x + 0.5
     #                  =  [65536 * (x << 16) - (x << 16) + (1 << 15)] >> 16
@@ -138,11 +141,13 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode()
 
         # Construct a color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Object *csObj,
                         int recursion = 0)
 
         # Construct a simple color space.  The <mode> argument can be
         # csDeviceGray, csDeviceRGB, or csDeviceCMYK.
+        @staticmethod
         GfxColorSpace *create(GfxColorSpaceMode mode)
 
 
@@ -174,9 +179,11 @@ cdef extern from "GfxState.h" nogil:
         Guint getOverprintMask() 
 
         # Return the number of color space modes
+        @staticmethod
         int getNumColorSpaceModes()
 
         # Return the name of the <idx>th color space mode.
+        @staticmethod
         const char *getColorSpaceModeName(int idx)
 
         
@@ -209,6 +216,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a CalGray color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -259,6 +267,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a CalRGB color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -312,6 +321,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a Lab color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -350,6 +360,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct an ICCBased color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -380,6 +391,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct an Indexed color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -412,6 +424,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a Separation color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -443,6 +456,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a DeviceN color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -473,6 +487,7 @@ cdef extern from "GfxState.h" nogil:
         GfxColorSpaceMode getMode() 
 
         # Construct a Pattern color space.  Returns NULL if unsuccessful.
+        @staticmethod
         GfxColorSpace *parse(Array *arr, int recursion)
 
         void getGray(GfxColor *color, GfxGray *gray, GfxRenderingIntent ri)
@@ -494,7 +509,7 @@ cdef extern from "GfxState.h" nogil:
 
         GfxPattern(int typeA)
         
-
+        @staticmethod
         GfxPattern *parse(Object *objRef, Object *obj)
 
         GfxPattern *copy()
@@ -507,7 +522,7 @@ cdef extern from "GfxState.h" nogil:
     #------------------------------------------------------------------------
 
     cdef cppclass GfxTilingPattern(GfxPattern):
-
+        @staticmethod
         GfxTilingPattern *parse(Object *patObjRef, Object *patObj)
         
 
@@ -529,7 +544,7 @@ cdef extern from "GfxState.h" nogil:
     #------------------------------------------------------------------------
 
     cdef cppclass GfxShadingPattern(GfxPattern):
-
+        @staticmethod
         GfxShadingPattern *parse(Object *patObj)
         
 
@@ -548,7 +563,7 @@ cdef extern from "GfxState.h" nogil:
         GfxShading(int typeA)
         GfxShading(GfxShading *shading)
         
-
+        @staticmethod
         GfxShading *parse(Object *obj)
 
         GfxShading *copy()
@@ -574,7 +589,7 @@ cdef extern from "GfxState.h" nogil:
                     Function **funcsA, int nFuncsA)
         GfxFunctionShading(GfxFunctionShading *shading)
         
-
+        @staticmethod
         GfxFunctionShading *parse(Dict *dict)
 
         GfxShading *copy()
@@ -600,7 +615,7 @@ cdef extern from "GfxState.h" nogil:
                 GBool extend0A, GBool extend1A)
         GfxAxialShading(GfxAxialShading *shading)
         
-
+        @staticmethod       
         GfxAxialShading *parse(Dict *dict)
 
         GfxShading *copy()
@@ -629,7 +644,7 @@ cdef extern from "GfxState.h" nogil:
                 GBool extend0A, GBool extend1A)
         GfxRadialShading(GfxRadialShading *shading)
         
-
+        @staticmethod
         GfxRadialShading *parse(Dict *dict)
 
         GfxShading *copy()
@@ -663,7 +678,7 @@ cdef extern from "GfxState.h" nogil:
                         int nCompsA, Function **funcsA, int nFuncsA)
         GfxGouraudTriangleShading(GfxGouraudTriangleShading *shading)
         
-
+        @staticmethod
         GfxGouraudTriangleShading *parse(int typeA, Dict *dict, Stream *str)
 
         GfxShading *copy()
@@ -692,7 +707,7 @@ cdef extern from "GfxState.h" nogil:
                     int nCompsA, Function **funcsA, int nFuncsA)
         GfxPatchMeshShading(GfxPatchMeshShading *shading)
         
-
+        @staticmethod
         GfxPatchMeshShading *parse(int typeA, Dict *dict, Stream *str)
 
         GfxShading *copy()
