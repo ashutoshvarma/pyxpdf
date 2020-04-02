@@ -41,7 +41,7 @@ from pyxpdf.includes.XRef cimport XRef
 cdef extern from "Object.h" nogil:
     cdef cppclass Object:
         # Default constructor.
-        Object():type(objNone)
+        Object()
 
           # Initialize an object.
         Object *initBool(GBool boolnA)
