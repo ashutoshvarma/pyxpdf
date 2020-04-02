@@ -48,31 +48,31 @@ cdef extern from "GfxState.h" nogil:
     cdef int gfxColorComp1 
 
     @staticmethod
-    GfxColorComp dblToCol(double x)
+    cdef GfxColorComp dblToCol(double x)
 
     @staticmethod
-    double colToDbl(GfxColorComp x) 
+    cdef double colToDbl(GfxColorComp x) 
 
     @staticmethod
-    GfxColorComp byteToCol(Guchar x)
+    cdef GfxColorComp byteToCol(Guchar x)
     # (x / 255) << 16  =  (0.0000000100000001... * x) << 16
     #                  =  ((x << 8) + (x) + (x >> 8) + ...)
     #                  =  (x << 8) + (x) + (x >> 7)
     #                                      [for rounding]
 
     @staticmethod
-    GfxColorComp wordToCol(Gushort x)
+    cdef GfxColorComp wordToCol(Gushort x)
     # (x / 65535) << 16  =  (0.0000000000000001... * x) << 16
     #                    =  x + (x >> 15)
     #                           [for rounding]
 
     @staticmethod
-    Guchar colToByte(GfxColorComp x)
+    cdef Guchar colToByte(GfxColorComp x)
     # 255 * x + 0.5  =  256 * x - x + 0.5
     #                =  [256 * (x << 16) - (x << 16) + (1 << 15)] >> 16
 
     @staticmethod
-    Gushort colToWord(GfxColorComp x)
+    cdef Gushort colToWord(GfxColorComp x)
     # 65535 * x + 0.5  =  65536 * x - x + 0.5
     #                  =  [65536 * (x << 16) - (x << 16) + (1 << 15)] >> 16
 

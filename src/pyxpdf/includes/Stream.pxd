@@ -40,9 +40,6 @@ cdef extern from "Stream.h" nogil:
         # Constructor.
         Stream()
 
-        # Destructor.
-        
-
         Stream *copy()
 
         # Get kind of stream.
