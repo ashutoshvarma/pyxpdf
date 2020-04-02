@@ -8,13 +8,8 @@ cdef extern from "Array.h" nogil:
         Array(XRef *xrefA)
 
         # Reference counting.
-        #if MULTITHREADED
         long incRef() 
         long decRef() 
-        #else
-        long incRef() 
-        long decRef() 
-        #endif
 
         # Get number of elements.
         int getLength() 
