@@ -151,7 +151,7 @@ setup(
     maintainer_email="ashutoshvarma11@live.com",
     license="GPL",
     url="https://github.com/ashutoshvarma/pyxpdf",
-    bugtrack_url="https://github.com/ashutoshvarma/pyxpdf",
+    # bugtrack_url="https://github.com/ashutoshvarma/pyxpdf",
     description=(
         "Powerful and Pythonic PDF processing library based on xpdf-4.02"
     ),
