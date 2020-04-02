@@ -6,6 +6,7 @@ import re
 import platform
 import sys
 import zipfile
+from contextlib import closing
 
 try:
     from urlparse import unquote, urljoin
@@ -26,7 +27,7 @@ def is64():
 
 def download_and_extract_libxpdf(destdir):
     url = "https://github.com/ashutoshvarma/libxpdf/releases"
-    filenames = list(get_filelist(url))
+    filenames = list(_list_dir_urllib(url))
 
     lib_version = find_max_version(
         'libxpdf', filenames, re.compile(r'/releases/tag/v([0-9.]+[0-9])$'))
@@ -89,9 +90,31 @@ def unpack_zipfile(zipfn, destdir):
     print("Extracted zip to %s" % (destdir))
 
 
-def get_filelist(url):
-    s = get(url).text
+def _find_content_encoding(response, default='iso8859-1'):
+    from email.message import Message
+    content_type = response.headers.get('Content-Type')
+    if content_type:
+        msg = Message()
+        msg.add_header('Content-Type', content_type)
+        charset = msg.get_content_charset(default)
+    else:
+        charset = default
+    return charset
 
+
+def _list_dir_urllib(url):
+    with closing(urlopen(url)) as res:
+        charset = _find_content_encoding(res)
+        content_type = res.headers.get('Content-Type')
+        data = res.read()
+
+    data = data.decode(charset)
+    assert content_type.startswith('text/html')
+    files = parse_html_filelist(data)
+    return files
+   
+
+def parse_html_filelist(s):
     re_href = re.compile(
         r'<a\s+(?:[^>]*\s+)?href=["\']([^;?"\']+?)[;?"\']',
         re.I | re.M)
