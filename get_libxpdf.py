@@ -6,12 +6,13 @@ import re
 import platform
 import sys
 import zipfile
-from requests import get
 
 try:
     from urlparse import unquote, urljoin
+    from urllib import urlopen
 except ImportError:
     from urllib.parse import unquote, urljoin
+    from urllib.request import urlopen
 
 try:
     from io import BytesIO as StringIO
@@ -65,7 +66,8 @@ def download_and_extract_libxpdf(destdir):
             if libname in keep_file and keep_file.endswith(".keep"):
                 os.remove(keep_file)
         print("Downloading %s" % (libname))
-        unpack_zipfile(StringIO(get(lib_url).content), lib_dest_path)
+        dwd_req = urlopen(lib_url)
+        unpack_zipfile(StringIO(dwd_req.read()), lib_dest_path)
         open(os.path.join(destdir, libname + lib_version + ".keep"), 'w').close()
 
     return lib_dest_path
