@@ -11,7 +11,19 @@ def pdftotext(pdf_file, start=1, end=0, layout="reading", ownerpass=None, userpa
         start - (optional) Page to start (default - 1).
                 Note: index start from 1
         end - (optional) Page to end (default - last page)
-        layout - (optional) Text extraction layout (default - "table")
+        layout - (optional) Text extraction layout (default - "reading")
+                 Possible values :-
+                 layout - Maintain (as best as possible) the original physical
+                          layout  of the  text.
+                 simple - Similar to -layout, but optimized for simple  one-column  pages.
+                 table  - Table mode is similar to physical layout mode, but optimized for
+                          tabular data, with the goal of keeping rows and columns  aligned
+                          (at  the  expense of inserting extra whitespace).
+                 lineprinter- the page is broken into  a  grid,  and characters  are  placed
+                              into that grid.
+                 raw   -  Keep the text in content stream order.  Depending on how the PDF
+                          file was generated, this may or may not be useful.
+                 reading- Keep the text in reading order.
         ownerpass - (optional) owner password (default - None)
         userpass - (optional) user password (default - None)
         cfg_file - (optional) XPDF Configuration file (default - None)
