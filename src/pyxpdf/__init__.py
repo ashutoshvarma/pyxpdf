@@ -2,7 +2,7 @@ __version__ = "0.0.1"
 
 from pyxpdf.xpdf import pdftotext_raw, PDFError
 
-def pdftotext(pdf_file, start=1, end=0, layout="table", ownerpass=None, userpass=None, cfg_file=None):
+def pdftotext(pdf_file, start=1, end=0, layout="reading", ownerpass=None, userpass=None, cfg_file=None):
     """
     Extract text from pdf
 
