@@ -28,6 +28,7 @@ cdef void dummpy_error_callback(void *data, ErrorCategory category, int pos, cha
 
 include "pdferror.pxi"
 
+from os import linesep
 
 from cython.operator cimport dereference as deref
 from libcpp.string cimport string
@@ -54,6 +55,8 @@ cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, owner
     cdef TextOutputControl *control =  NULL
 
     globalParams = new GlobalParams(pytext_to_char(cfg_file))
+    globalParams.setTextEncoding(b"UTF-8")
+    globalParams.setTextEOL(pytext_to_char(linesep))
 
     if ownerpass:
         ownerpassG = new GString(pytext_to_char(ownerpass))
