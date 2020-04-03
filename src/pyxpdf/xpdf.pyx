@@ -53,8 +53,10 @@ cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, owner
     cdef PDFDoc* doc
     cdef TextOutputDev* text_dev = NULL
     cdef TextOutputControl *control =  NULL
+    global globalParams
 
-    globalParams = new GlobalParams(pytext_to_char(cfg_file))
+    if cfg_file:
+        globalParams = new GlobalParams(pytext_to_char(cfg_file))
     globalParams.setTextEncoding(b"UTF-8")
     globalParams.setTextEOL(pytext_to_char(linesep))
 
