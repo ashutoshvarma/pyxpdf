@@ -34,7 +34,7 @@ pip -e git+https://github.com/ashutoshvarma/pyxpdf@master
 ``` 
 
 ## License
-`pyxpdf` is licensed under the GNU General Public License (GPL), version 2.
+`pyxpdf` is licensed under the GNU General Public License (GPL), version 3. See the [LICENSE](https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE)
 
 It uses following third party sources :-
 - Xpdf Reader [https://www.xpdfreader.com/] by Derek Noonburg
