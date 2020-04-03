@@ -2,7 +2,7 @@
 # cython: language_level=2
 
 __all__ = [
-"pdftotext, PDFError"
+"pdftotext_raw, PDFError"
 ]
 
 
@@ -44,7 +44,7 @@ cdef void _text_out_func(void *stream, const char *text, int length):
     cdef string *stream_str = <string*>stream
     stream_str[0] += string(text, length)
 
-cdef _pdftotext(str pdf_file, int start = 0, int end = 0, layout=None, ownerpass=None, userpass=None, cfg_file=""):
+cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, ownerpass=None, userpass=None, cfg_file=""):
     cdef string ext_text
     cdef int err_code
     cdef GString *ownerpassG = NULL 
@@ -117,7 +117,6 @@ cdef _pdftotext(str pdf_file, int start = 0, int end = 0, layout=None, ownerpass
         raise PDFError("Error in pdf options")
 
     doc.displayPages(text_dev, start, end, 72, 72, 0, gFalse, gTrue, gFalse)
-    return cstr_to_pytext(ext_text)
+    return ext_text
 
-def pdftotext(pdf_file, start=1, end=0, layout="table", ownerpass=None, userpass=None, cfg_file=""):
-    return _pdftotext(pdf_file, start, end, layout, ownerpass, userpass, cfg_file)
+
