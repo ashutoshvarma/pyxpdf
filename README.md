@@ -9,7 +9,7 @@ Done | Name
 :---:| ---
 :heavy_check_mark:| pdftotext
 ⬜️| pdftohtml, pdftopng, pdftimages, etc
-⬜️| Make all xpdf classeds usable in Python 
+⬜️| Make all xpdf classes usable in Python 
 ⬜️| Python API based on xpdf (similar to poppler C++ API) 
 ⬜️| Documentation
 ⬜️| Full Test Coverage
@@ -29,7 +29,7 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
 ```
 
 ### Note:-
-1. #### Text Encoding
+1. **Text Encoding**
     + `pdftotext` returns Unicode encoded string, so if your PDF contain characters outside of utf-8 then they will be ignored [`decode('utf-8', errors='ignore')`].
     + If you are working with different encoding then you can use `pdftotext_raw` which has same function signature but returns `bytes` object. You can then decode it yourself but make sure to set `textEncoding` in [`xpdfrc`](https://github.com/ashutoshvarma/libxpdf/blob/master/xpdf-4.02/doc/xpdfrc.cat) to your encoding so that xpdf can properly extract text.
 
@@ -38,7 +38,7 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
 
 ## Install
 ```
-pip -e git+https://github.com/ashutoshvarma/pyxpdf@master
+pip install git+https://github.com/ashutoshvarma/pyxpdf@master
 ``` 
 
 ## License
