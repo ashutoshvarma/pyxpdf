@@ -42,8 +42,7 @@ from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextOutputMode, TextOu
 globalParams = new GlobalParams(b"")
 
 cdef void _text_out_func(void *stream, const char *text, int length):
-    cdef string *stream_str = <string*>stream
-    stream_str[0] += string(text, length)
+    (<string*>stream)[0] += string(text, length)
 
 cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, ownerpass=None, userpass=None, cfg_file=""):
     cdef string ext_text
