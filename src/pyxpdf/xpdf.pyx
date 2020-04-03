@@ -1,14 +1,20 @@
 # distutils: language=c++
 # cython: language_level=2
+# cython: profile=True
+import cython
 
 __all__ = [
 "pdftotext_raw, PDFError"
 ]
 
+cdef char* _chars(s):
+    if isinstance(s, unicode):
+        # encode to the specific encoding used inside of the module
+        s = (<unicode>s).encode('UTF-8')
+    return s
 
-
-cdef char *pytext_to_char(pystr):
-    return pystr.encode('UTF-8')
+# cdef char *pytext_to_char(pystr):
+#     return pystr.encode('UTF-8')
 
 cdef object cstr_to_pytext(cstr, l = None):
     if l:
@@ -44,7 +50,7 @@ globalParams = new GlobalParams(b"")
 cdef void _text_out_func(void *stream, const char *text, int length):
     (<string*>stream)[0] += string(text, length)
 
-cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, ownerpass=None, userpass=None, cfg_file=""):
+cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", ownerpass=None, userpass=None, cfg_file=""):
     cdef string ext_text
     cdef int err_code
     cdef GString *ownerpassG = NULL 
@@ -55,16 +61,16 @@ cpdef pdftotext_raw(str pdf_file, int start = 0, int end = 0, layout=None, owner
     global globalParams
 
     if cfg_file:
-        globalParams = new GlobalParams(pytext_to_char(cfg_file))
+        globalParams = new GlobalParams(_chars(cfg_file))
     globalParams.setTextEncoding(b"UTF-8")
-    globalParams.setTextEOL(pytext_to_char(linesep))
+    globalParams.setTextEOL(_chars(linesep))
 
     if ownerpass:
-        ownerpassG = new GString(pytext_to_char(ownerpass))
+        ownerpassG = new GString(_chars(ownerpass))
     if userpass:
-        userpassG = new GString(pytext_to_char(userpass))
+        userpassG = new GString(_chars(userpass))
 
-    doc = new PDFDoc(pytext_to_char(pdf_file), ownerpassG, userpassG)
+    doc = new PDFDoc(_chars(pdf_file), ownerpassG, userpassG)
     if doc.isOk() == gFalse:
         err_code = doc.getErrorCode()
         if ownerpassG is not NULL:
