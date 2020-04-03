@@ -28,6 +28,14 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
                      cfg_file="~/.xpdfrc")
 ```
 
+### Note:-
+1. #### Text Encoding
+    + `pdftotext` returns Unicode encoded string, so if your PDF contain characters outside of utf-8 then they will be ignored [`decode('utf-8', errors='ignore')`].
+    + If you are working with different encoding then you can use `pdftotext_raw` which has same function signature but returns `bytes` object. You can then decode it yourself but make sure to set `textEncoding` in [`xpdfrc`](https://github.com/ashutoshvarma/libxpdf/blob/master/xpdf-4.02/doc/xpdfrc.cat) to your encoding so that xpdf can properly extract text.
+
+2. Line endings in extracted text is os dependent i.e `\n` in Unix and `\r\n` in DOS/Windows (can be change with [`xpdfrc`](https://github.com/ashutoshvarma/libxpdf/blob/master/xpdf-4.02/doc/xpdfrc.cat)).
+
+
 ## Install
 ```
 pip -e git+https://github.com/ashutoshvarma/pyxpdf@master
