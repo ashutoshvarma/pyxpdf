@@ -7,11 +7,8 @@ __all__ = [
 "pdftotext_raw, PDFError"
 ]
 
-cdef char* _chars(s):
-    if isinstance(s, unicode):
-        # encode to the specific encoding used inside of the module
-        s = (<unicode>s).encode('UTF-8')
-    return s
+# Helper functions (like conversions from str to chars)
+include "helper.pxi"
 
 # cdef char *pytext_to_char(pystr):
 #     return pystr.encode('UTF-8')
