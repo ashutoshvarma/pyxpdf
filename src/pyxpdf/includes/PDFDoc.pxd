@@ -17,12 +17,13 @@ cdef extern from "PDFDoc.h" nogil:
     cdef cppclass PDFDoc:
         # This version takes a UTF-8 file name (which is only relevant on
         # Windows).
-        PDFDoc(char *fileNameA, GString *ownerPassword, GString *userPassword, 
-                PDFCore *coreA = NULL)
+        PDFDoc(char *fileNameA, GString *ownerPassword, GString *userPassword, PDFCore *coreA = NULL)
 
         # BUG: Workaround as Cython assumes these two have same signature
-        # PDFDoc "PDFDoc2"(GString *fileName, GString *ownerPassword = NULL, GString *userPassword = NULL, 
-        #       PDFCore *coreA = NULL)
+        PDFDoc(GString *fileName, GString *ownerPassword, GString *userPassword)
+
+        PDFDoc(BaseStream *strA, GString *owner, GString *user)
+        
         GBool isOk()
 
         int getErrorCode()
