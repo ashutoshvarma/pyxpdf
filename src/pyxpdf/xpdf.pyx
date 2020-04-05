@@ -4,21 +4,11 @@
 import cython
 
 __all__ = [
-"pdftotext_raw, PDFError"
+"pdftotext_raw, PDFError", "XPDFDoc"
 ]
 
 # Helper functions (like conversions from str to chars)
 include "helper.pxi"
-
-# cdef char *pytext_to_char(pystr):
-#     return pystr.encode('UTF-8')
-
-cdef object cstr_to_pytext(cstr, l = None):
-    if l:
-        return cstr[:l].decode('UTF-8', errors="ignore")
-    else:
-        return cstr.decode('UTF-8', errors="ignore")
-
 
 
 from pyxpdf.includes.xpdf_error cimport ErrorCategory, setErrorCallback
@@ -126,4 +116,6 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     doc.displayPages(text_dev, start, end, 72, 72, 0, gFalse, gTrue, gFalse)
     return ext_text
 
+
+include "document.pxi"
 
