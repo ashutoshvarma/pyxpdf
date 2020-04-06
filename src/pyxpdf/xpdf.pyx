@@ -11,12 +11,12 @@ __all__ = [
 include "helper.pxi"
 
 
-from pyxpdf.includes.xpdf_error cimport ErrorCategory, setErrorCallback
+from pyxpdf.includes.xpdf_error cimport ErrorCategory, setErrorCallback, ErrorCallback
 # Dummy callback to silence errors for now.
-cdef void dummpy_error_callback(void *data, ErrorCategory category, int pos, char *msg):
+cdef void dummpy_error_callback():
     return
     
-#setErrorCallback(&dummpy_error_callback, NULL)
+setErrorCallback(<ErrorCallback>&dummpy_error_callback, NULL)
 
 include "globaliniter.pxi"
 
