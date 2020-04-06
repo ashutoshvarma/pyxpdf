@@ -38,7 +38,7 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
 
 ## Install
 ```
-pip install https://github.com/ashutoshvarma/pyxpdf/archive/master.tar.gx
+pip install https://github.com/ashutoshvarma/pyxpdf/archive/master.tar.gz
 ``` 
 
 ## License
