@@ -33,3 +33,6 @@ cdef extern from "Error.h":
 
     cdef void error(ErrorCategory category, GFileOffset pos,
 			const char *msg, ...)
+
+# Make sure to keep it consistent with setErrorCallback
+ctypedef void (*ErrorCallback)(void *data, ErrorCategory category, int pos, char *msg)
