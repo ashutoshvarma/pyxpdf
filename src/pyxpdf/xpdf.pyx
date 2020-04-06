@@ -18,6 +18,7 @@ cdef void dummpy_error_callback(void *data, ErrorCategory category, int pos, cha
     
 #setErrorCallback(&dummpy_error_callback, NULL)
 
+include "globaliniter.pxi"
 
 include "pdferror.pxi"
 
