@@ -1,4 +1,4 @@
-from pyxpdf.includes.xpdf_types cimport GString
+from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue
 
 
 cdef inline char* _chars(object s):
@@ -10,3 +10,8 @@ cdef inline char* _chars(object s):
 cdef inline GString* to_GString(object s):
     return new GString(_chars(s))
 
+cdef inline object GString_to_unicode(GString *gstr):
+    return gstr.getCString()[:gstr.getLength()].decode("UTF-8")
+
+cdef inline bint GBool_to_bool(GBool b):
+    return True if b == gTrue else False
