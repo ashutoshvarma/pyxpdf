@@ -25,5 +25,5 @@ cdef inline GString* to_GString(object s):
 cdef inline object GString_to_unicode(GString *gstr):
     return gstr.getCString()[:gstr.getLength()].decode("UTF-8")
 
-cdef inline bint GBool_to_bool(GBool b):
+cdef inline GBool_to_bool(GBool b):
     return True if b == gTrue else False
