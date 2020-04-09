@@ -1,5 +1,5 @@
 from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue
-
+from pyxpdf.includes.Page cimport PDFRectangle
 
 cdef inline char* _chars(object s):
     if isinstance(s, unicode):
@@ -27,3 +27,12 @@ cdef inline object GString_to_unicode(GString *gstr):
 
 cdef inline GBool_to_bool(GBool b):
     return True if b == gTrue else False
+
+cdef inline GBool to_GBool(pyb):
+    return gTrue if pyb else gFalse
+
+
+cdef inline PDFRectangle_to_tuple(PDFRectangle *rect):
+    cdef tuple rect_tp 
+    rect_tp = (rect.x1, rect.y1, rect.x2, rect.y2)
+    return rect_tp
