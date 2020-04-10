@@ -8,14 +8,15 @@ cdef int GLOBAL_COUNT = 0
 cdef string GLOBAL_CONFIG_FILE
 
 cdef class GlobalParamsIniter:
+    cdef GlobalParams* global_params
+
     def __cinit__(self):
         global GLOBAL_COUNT
         global GLOBAL_CONFIG_FILE
-        global globalParams
         if GLOBAL_COUNT == 0:
             global globalParams
             globalParams = new GlobalParams(<const char*>NULL if GLOBAL_CONFIG_FILE.size() == 0 else GLOBAL_CONFIG_FILE.c_str())
-
+        self.global_params = globalParams
         # GLOBAL_COUNT++
         inc(GLOBAL_COUNT)
         # print(f"+ GLOBAL_COUNT = {GLOBAL_COUNT}")

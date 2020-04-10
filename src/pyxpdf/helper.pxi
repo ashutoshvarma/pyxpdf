@@ -1,4 +1,9 @@
-from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue
+from libcpp.vector cimport vector
+
+from cython.operator cimport dereference as deref
+
+from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
+from pyxpdf.includes.CharTypes cimport Unicode
 from pyxpdf.includes.Page cimport PDFRectangle
 
 cdef inline char* _chars(object s):
@@ -36,3 +41,23 @@ cdef inline PDFRectangle_to_tuple(PDFRectangle *rect):
     cdef tuple rect_tp 
     rect_tp = (rect.x1, rect.y1, rect.x2, rect.y2)
     return rect_tp
+
+cdef void utf32_to_Unicode_vector(text, vector[Unicode]& vec):
+    cdef bytes by = _utf32_bytes(text)
+    cdef char* ch = by
+
+    cdef size_t l_bytes = len(by)
+    cdef size_t l_utf32 = (l_bytes/4) - 1
+
+    vec.resize(l_utf32)  # Not including BOM
+
+    # print(f"{l_bytes}")
+    # print(f"Loop - {list(range(4, l_bytes, 4))}")
+    cdef int i 
+    for i in range(4, l_bytes, 4):
+        vec[(i/4) - 1] = deref(<Unicode*>(&ch[i]))
+        # print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
+
+
+cdef void append_to_cpp_string(void *stream, const char *text, int length):
+    (<string*>stream)[0] += string(text, length)

@@ -18,8 +18,6 @@ cdef void dummpy_error_callback(void *data, ErrorCategory category, int pos, cha
     
 #setErrorCallback(&dummpy_error_callback, NULL)
 
-include "globaliniter.pxi"
-
 include "pdferror.pxi"
 
 from os import linesep
@@ -96,5 +94,15 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     return ext_text
 
 
+
+## Internal Xpdf Objects
+
+# Manage xpdf globalParams
+include "globaliniter.pxi"
+
+# Python Objects based on TextOutputDev.pxd
+include "textoutput.pxi"
+
+# Pythonn Objects based on PDFDoc.pxd ,Page.pxd
 include "document.pxi"
 
