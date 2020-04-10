@@ -190,7 +190,6 @@ cdef extern from "GlobalParams.h" nogil:
         void setPrintCommands(GBool printCommandsA)
         void setErrQuiet(GBool errQuietA)
 
-        @staticmethod
         const char *defaultTextEncoding
         
     cdef GlobalParams *globalParams
