@@ -19,7 +19,7 @@ from pyxpdf.includes.Catalog cimport Catalog
 from enum import Enum
 
 
-cdef class XPDFDoc(GlobalParamsIniter):
+cdef class XPDFDoc:
     cdef PDFDoc *doc
     cdef GString *ownerpass 
     cdef GString *userpass 
@@ -141,7 +141,7 @@ cdef class XPDFDoc(GlobalParamsIniter):
         return self.get_metadata()
 
 
-cdef class XPage(GlobalParamsIniter):
+cdef class XPage:
     cdef Page *page
     cdef int index
     cdef readonly XPDFDoc doc

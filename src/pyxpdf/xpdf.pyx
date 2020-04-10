@@ -32,7 +32,6 @@ from pyxpdf.includes.PDFDoc cimport PDFDoc
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams
 from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextOutputMode, TextOutputControl
 
-globalParams = new GlobalParams(b"")
 
 cdef void _text_out_func(void *stream, const char *text, int length):
     (<string*>stream)[0] += string(text, length)
@@ -45,12 +44,10 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     cdef unique_ptr[PDFDoc] doc
     cdef unique_ptr[TextOutputDev] text_dev
     cdef unique_ptr[TextOutputControl] control 
-    global globalParams
 
     if cfg_file:
-        globalParams = new GlobalParams(_chars(cfg_file))
-    globalParams.setTextEncoding(b"UTF-8")
-    globalParams.setTextEOL(_chars(linesep))
+        Config.load_file(cfg_file)
+    Config.text_encoding = "UTF-8"
 
     if ownerpass:
         ownerpassG = make_unique[GString](_chars(ownerpass))
@@ -98,7 +95,7 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
 ## Internal Xpdf Objects
 
 # Manage xpdf globalParams
-include "globaliniter.pxi"
+include "globalconfig.pxi"
 
 # Python Objects based on TextOutputDev.pxd
 include "textoutput.pxi"
