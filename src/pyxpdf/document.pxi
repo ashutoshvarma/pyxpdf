@@ -2,6 +2,7 @@ from libcpp.string cimport string
 from libcpp.memory cimport unique_ptr, make_unique
 from libcpp.vector cimport vector
 
+from cpython cimport bool as PyBool
 from cython.operator cimport dereference as deref
 
 from pyxpdf.includes.xpdf_error cimport errEncrypted
@@ -13,6 +14,7 @@ from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Stream cimport MemStream
 from pyxpdf.includes.PDFDoc cimport PDFDoc
 from pyxpdf.includes.Page cimport Page
+from pyxpdf.includes.OutputDev cimport OutputDev
 from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextPage, TextOutputControl
 from pyxpdf.includes.Catalog cimport Catalog
 
@@ -130,9 +132,25 @@ cdef class XPDFDoc:
 
 
 cdef class XPage:
+    # No need to free Page* as it is own by PDFDoc
     cdef Page *page
     cdef int index
     cdef readonly XPDFDoc doc
+
+
+    cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt, 
+                        double hDPI = 72, double vDPI = 72, int rotate = 0, 
+                        GBool use_media_box = gFalse, GBool crop = gTrue, 
+                        GBool printing = gFalse):
+        self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop, 
+                                x1, y1, hgt, wdt, printing)
+
+    cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,
+                        int rotate = 0, GBool use_media_box = gFalse, 
+                        GBool crop = gTrue, GBool printing = gFalse):
+        self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate, 
+                            use_media_box, crop, printing)
+
 
     def __cinit__(self, XPDFDoc doc not None, int index):
         if index < 0 or index >= doc.num_pages:
@@ -163,7 +181,7 @@ cdef class XPage:
         cdef unique_ptr[TextOutputControl] text_control = make_unique[TextOutputControl]()
         cdef unique_ptr[TextOutputDev] td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
         cdef unique_ptr[TextPage] text_page
-        self.doc.doc.displayPage(td.get(), self.index + 1, 72, 72, rotation_value, gFalse, gTrue, gFalse)
+        self.display(td.get(), 72, 72, rotation_value)
         text_page.reset(deref(td).takeText())
 
         cdef GBool res = deref(text_page).findText(u.data(), u.size(), to_GBool(start_at_top), 
@@ -183,10 +201,10 @@ cdef class XPage:
 
         if search_box == None:
             # Why crop=gTrue in displayPage?
-            self.doc.doc.displayPage(text_dev.get(), self.index + 1, 72, 72, 0, gFalse, gTrue, gFalse)
+            self.display(text_dev.get())
         else:
-            self.doc.doc.displayPageSlice(text_dev.get(), self.index + 1, 72, 72, 0, gFalse, gTrue, gFalse, 
-                                        search_box[0], search_box[1], search_box[2], search_box[3])
+            self.display_slice(text_dev.get(), search_box[0], search_box[1], 
+                                search_box[2], search_box[3])
 
         return deref(out)
 
