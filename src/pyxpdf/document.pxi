@@ -106,6 +106,10 @@ cdef class XPDFDoc:
     def is_linearized(self):
         return GBool_to_bool(self.doc.isLinearized())
 
+    @property
+    def is_encrypted(self):
+        return GBool_to_bool(self.doc.isEncrypted())
+
     # PDF Permissions
     @property
     def ok_to_print(self):
@@ -220,3 +224,56 @@ cdef class XPage:
             else:
                 return None       
         return None
+
+
+    @property
+    def rotation(self):
+        return self.page.getRotate()
+
+    @property
+    def is_cropped(self):
+        return GBool_to_bool(self.page.isCropped())
+
+    @property
+    def media_height(self):
+        return self.page.getMediaHeight()
+
+    @property
+    def media_width(self):
+        return self.page.getMediaWidth()
+
+    @property
+    def crop_height(self):
+        return self.page.getCropHeight()
+
+    @property
+    def crop_height(self):
+        return self.page.getCropHeight()
+
+    @property
+    def mediabox(self):
+        return PDFRectangle_to_tuple(self.page.getMediaBox())
+
+    @property
+    def cropbox(self):
+        return PDFRectangle_to_tuple(self.page.getCropBox())
+
+    @property
+    def bleedbox(self):
+        return PDFRectangle_to_tuple(self.page.getBleedBox())
+
+    @property
+    def trimbox(self):
+        return PDFRectangle_to_tuple(self.page.getTrimBox())
+
+    @property
+    def artbox(self):
+        return PDFRectangle_to_tuple(self.page.getArtBox())
+
+    
+
+    
+
+
+
+
