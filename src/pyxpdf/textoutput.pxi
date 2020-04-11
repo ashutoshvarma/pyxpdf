@@ -1,12 +1,12 @@
 from pyxpdf.includes.xpdf_types cimport GBool
 from pyxpdf.includes.TextOutputDev cimport TextOutputMode, TextOutputControl
 
-XTextPhysicalLayout = TextOutputMode.textOutPhysLayout
-XTextSimpleLayout = TextOutputMode.textOutSimpleLayout
-XTextTableLayout = TextOutputMode.textOutTableLayout
-XTextLinePrinter = TextOutputMode.textOutLinePrinter
-XTextRawOrder = TextOutputMode.textOutRawOrder
-XTextReadingOrder = TextOutputMode.textOutReadingOrder
+TextPhysicalLayout = TextOutputMode.textOutPhysLayout
+TextSimpleLayout = TextOutputMode.textOutSimpleLayout
+TextTableLayout = TextOutputMode.textOutTableLayout
+TextLinePrinter = TextOutputMode.textOutLinePrinter
+TextRawOrder = TextOutputMode.textOutRawOrder
+TextReadingOrder = TextOutputMode.textOutReadingOrder
 
 
 cdef class XTextOutputControl:
