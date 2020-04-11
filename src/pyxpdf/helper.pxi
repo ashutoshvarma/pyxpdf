@@ -1,6 +1,7 @@
 from libcpp.vector cimport vector
 
 from cython.operator cimport dereference as deref
+from cpython cimport bool as PyBool
 
 from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
 from pyxpdf.includes.CharTypes cimport Unicode
@@ -29,7 +30,10 @@ cdef inline GString* to_GString(object s):
     return new GString(_chars(s))
 
 cdef inline object GString_to_unicode(GString *gstr):
-    return gstr.getCString()[:gstr.getLength()].decode("UTF-8")
+    if gstr is not NULL:
+        return gstr.getCString()[:gstr.getLength()].decode("UTF-8")
+    else:
+        return ""
 
 cdef inline GBool_to_bool(GBool b):
     return True if b == gTrue else False
