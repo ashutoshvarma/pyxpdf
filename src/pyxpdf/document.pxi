@@ -25,21 +25,11 @@ cdef class XPDFDoc:
     cdef bytes doc_data
 
     cdef dict get_info_dict(XPDFDoc self):
-        cdef Object info 
-        if self.doc.getDocInfo(&info).isDict() == gFalse:
-            info.free()
-            return dict()
-
-        cdef Dict *info_dict = info.getDict()
-        cdef Object obj
-        cdef dict result = {}
-        cdef const char* key 
-        for i in range(info_dict.getLength()):
-            key = info_dict.getKey(i)
-            if info_dict.lookup(key, &obj).isString() == gTrue:
-                result[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
-
-        obj.free()
+        cdef: 
+            Object info 
+            dict result = {}
+        if self.doc.getDocInfo(&info).isDict() == gTrue:
+            Dict_to_pydict(info.getDict(), result)
         info.free()
         return result
         

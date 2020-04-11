@@ -4,6 +4,7 @@ from cython.operator cimport dereference as deref
 
 from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
 from pyxpdf.includes.CharTypes cimport Unicode
+from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Page cimport PDFRectangle
 
 cdef inline char* _chars(object s):
@@ -57,6 +58,20 @@ cdef void utf32_to_Unicode_vector(text, vector[Unicode]& vec):
     for i in range(4, l_bytes, 4):
         vec[(i/4) - 1] = deref(<Unicode*>(&ch[i]))
         # print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
+
+
+cdef dict Dict_to_pydict(Dict* xdict, dict pydict = {}):
+    cdef Object obj
+    cdef const char* key 
+    if xdict != NULL:
+        for i in range(xdict.getLength()):
+            key = xdict.getKey(i)
+            if xdict.lookup(key, &obj).isString() == gTrue:
+                pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
+            elif xdict.lookup(key, &obj).isNum() == gTrue:
+                pydict[key.decode('UTF-8')] = obj.getNum()
+        obj.free()
+    return pydict
 
 
 cdef void append_to_cpp_string(void *stream, const char *text, int length):
