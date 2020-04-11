@@ -59,7 +59,7 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
         err_code = deref(doc).getErrorCode()
         raise PDFError(f"Cannot open pdf file. ErrorCode-{err_code}")
 
-    if deref(doc).okToCopy() == gFalse:
+    if deref(doc).okToCopy(ignoreOwnerPW=gFalse) == gFalse:
         raise PDFError("Copying of text from this document is not allowed.")
 
     if start < 1:

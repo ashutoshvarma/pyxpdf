@@ -16,8 +16,6 @@ from pyxpdf.includes.Page cimport Page
 from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextPage, TextOutputControl
 from pyxpdf.includes.Catalog cimport Catalog
 
-from enum import Enum
-
 
 cdef class XPDFDoc:
     cdef PDFDoc *doc
@@ -119,19 +117,19 @@ cdef class XPDFDoc:
     # PDF Permissions
     @property
     def ok_to_print(self):
-        return GBool_to_bool(self.doc.okToPrint())
+        return GBool_to_bool(self.doc.okToPrint(ignoreOwnerPW=gFalse))
     
     @property
     def ok_to_change(self):
-        return GBool_to_bool(self.doc.okToChange())
+        return GBool_to_bool(self.doc.okToChange(ignoreOwnerPW=gFalse))
     
     @property
     def ok_to_copy(self):
-        return GBool_to_bool(self.doc.okToCopy())
+        return GBool_to_bool(self.doc.okToCopy(ignoreOwnerPW=gFalse))
     
     @property
     def ok_to_add_notes(self):
-        return GBool_to_bool(self.doc.okToAddNotes())
+        return GBool_to_bool(self.doc.okToAddNotes(ignoreOwnerPW=gFalse))
 
     
     def info_dict(self):

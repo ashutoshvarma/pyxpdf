@@ -103,10 +103,10 @@ cdef extern from "PDFDoc.h" nogil:
 
 
         # Check various permissions.
-        GBool okToPrint(GBool ignoreOwnerPW = gFalse)
-        GBool okToChange(GBool ignoreOwnerPW = gFalse)
-        GBool okToCopy(GBool ignoreOwnerPW = gFalse)
-        GBool okToAddNotes(GBool ignoreOwnerPW = gFalse)
+        GBool okToPrint(GBool ignoreOwnerPW)
+        GBool okToChange(GBool ignoreOwnerPW)
+        GBool okToCopy(GBool ignoreOwnerPW)
+        GBool okToAddNotes(GBool ignoreOwnerPW)
 
         # Is this document linearized?
         GBool isLinearized()
