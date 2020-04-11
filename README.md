@@ -24,7 +24,7 @@ from pyxpdf import pdftotext
 file = "sample.pdf"
 # Get text from first two pages of pdf
 pdf_text = pdftotext(file, start=1, end=2, layout="table",
-                     userpass="1234", ownerpss="1234", 
+                     userpass="1234", ownerpass="1234", 
                      cfg_file="~/.xpdfrc")
 ```
 
