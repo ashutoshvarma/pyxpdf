@@ -40,6 +40,9 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
 ```
 pip install git+https://github.com/ashutoshvarma/pyxpdf@master
 ``` 
+### Note (Windows):-
+To build this in windows you will need Visual C++ compiler which you can get by installing [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
+
 
 ## License
 `pyxpdf` is licensed under the GNU General Public License (GPL), version 3. See the [LICENSE](https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE)
