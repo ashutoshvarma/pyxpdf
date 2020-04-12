@@ -1,3 +1,7 @@
+# distutils: language=c++
+# cython: language_level=2
+# cython: profile=True
+
 from __future__ import absolute_import
 from __future__ import print_function
 
