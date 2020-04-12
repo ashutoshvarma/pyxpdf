@@ -167,7 +167,7 @@ cdef class XPDFDoc:
 cdef class XPage:
     # No need to free Page* as it is own by PDFDoc
     cdef Page *page
-    cdef int index
+    cdef public int index
     cdef readonly XPDFDoc doc
 
 

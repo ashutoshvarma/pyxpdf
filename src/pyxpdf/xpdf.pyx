@@ -4,7 +4,7 @@
 import cython
 
 __all__ = [
-"pdftotext_raw, PDFError", "XPDFDoc"
+"pdftotext_raw, PDFError", "XPDFDoc", "XPage", "Config", "TextControl" 
 ]
 
 # Helper functions (like conversions from str to chars)
