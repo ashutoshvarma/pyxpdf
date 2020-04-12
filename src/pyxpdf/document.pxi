@@ -206,7 +206,7 @@ cdef class XPage:
         return (x_min, y_min, x_max, y_max) if res == gTrue else None
 
 
-    def text_raw(self, search_box=None, XTextOutputControl control = None):
+    def text_raw(self, search_box=None, TextControl control = None):
         cdef:
             TextOutputControl text_control = control.control if control else TextOutputControl()
             unique_ptr[string] out = make_unique[string]()

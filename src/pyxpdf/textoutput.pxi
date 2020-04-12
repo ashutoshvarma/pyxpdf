@@ -9,10 +9,10 @@ TextRawOrder = TextOutputMode.textOutRawOrder
 TextReadingOrder = TextOutputMode.textOutReadingOrder
 
 
-cdef class XTextOutputControl:
+cdef class TextControl:
     cdef TextOutputControl control
 
-    def __cinit__(self, TextOutputMode mode = XTextReadingOrder, double fixed_pitch = 0, double fixed_line_spacing=0, enable_html=False,
+    def __cinit__(self, TextOutputMode mode = TextReadingOrder, double fixed_pitch = 0, double fixed_line_spacing=0, enable_html=False,
                 clip_text=False, discard_diagonal=False, discard_invisible=False, discard_clipped=False,
                 insert_bom=False, double margin_left=0, double margin_right=0, double margin_top=0, double margin_bottom=0):
     
