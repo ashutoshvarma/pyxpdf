@@ -99,6 +99,10 @@ cdef class XPDFDoc:
         return GString_to_unicode(self.doc.getFileName())
 
     @property
+    def has_page_labels(self):
+        return GBool_to_bool(self.get_catalog().hasPageLabels())
+
+    @property
     def num_pages(self):
         return self.doc.getNumPages()
 
@@ -143,6 +147,22 @@ cdef class XPDFDoc:
             return XPage(self, pgno)
         else:
             return None
+
+    cpdef get_page_from_label(self, label):
+        cdef:
+            int pgno
+            unique_ptr[TextString] tstr
+
+        tstr.reset(to_TextString(label))
+        pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
+        if pgno == -1:
+            return None
+        else:
+            # xpdf page index start from 1 not 0
+            return self.get_page(pgno - 1)
+
+        
+
 
 cdef class XPage:
     # No need to free Page* as it is own by PDFDoc
