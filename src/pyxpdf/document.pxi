@@ -138,6 +138,11 @@ cdef class XPDFDoc:
     def metadata(self):
         return self.get_metadata()
 
+    cpdef get_page(self, int pgno):
+        if 0 <= pgno < self.num_pages:
+            return XPage(self, pgno)
+        else:
+            return None
 
 cdef class XPage:
     # No need to free Page* as it is own by PDFDoc
