@@ -28,6 +28,9 @@ cdef extern from "PDFDoc.h" nogil:
 
         int getErrorCode()
 
+        # Get file name.
+        GString *getFileName()
+        
         # Get the xref table.
         XRef *getXRef()
 

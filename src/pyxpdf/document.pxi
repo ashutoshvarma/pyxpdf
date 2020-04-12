@@ -95,6 +95,10 @@ cdef class XPDFDoc:
         del self.userpass
 
     @property
+    def filename(self):
+        return GString_to_unicode(self.doc.getFileName())
+
+    @property
     def num_pages(self):
         return self.doc.getNumPages()
 
