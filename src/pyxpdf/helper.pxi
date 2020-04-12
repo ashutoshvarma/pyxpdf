@@ -7,6 +7,7 @@ from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
 from pyxpdf.includes.CharTypes cimport Unicode
 from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Page cimport PDFRectangle
+from pyxpdf.includes.TextString cimport TextString
 
 cdef inline char* _chars(object s):
     if isinstance(s, unicode):
@@ -77,6 +78,13 @@ cdef dict Dict_to_pydict(Dict* xdict, dict pydict = {}):
         obj.free()
     return pydict
 
+cdef object TextString_to_unicode(TextString* text_str):
+    return GString_to_unicode(text_str.toPDFTextString())
+
+cdef TextString* to_TextString(tstr):
+    cdef TextString* text_string
+    text_string = new TextString(to_GString(tstr))
+    return text_string
 
 cdef void append_to_cpp_string(void *stream, const char *text, int length):
     (<string*>stream)[0] += string(text, length)
