@@ -74,7 +74,7 @@ cdef class GlobalParamsConfig:
 
     @text_encoding.setter
     def text_encoding(self, encoding):
-        self._global.setTextEncoding(_chars(encoding))
+        self._global.setTextEncoding(_chars(encoding.upper()))
 
 
     @property
