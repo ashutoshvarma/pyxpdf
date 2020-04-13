@@ -53,7 +53,7 @@ cdef inline PDFRectangle_to_tuple(PDFRectangle *rect):
     rect_tp = (rect.x1, rect.y1, rect.x2, rect.y2)
     return rect_tp
 
-cdef void utf32_to_Unicode_vector(text, vector[Unicode]& vec):
+cdef int utf32_to_Unicode_vector(text, vector[Unicode]& vec) except -1:
     cdef bytes by = _utf32_bytes(text)
     cdef char* ch = by
 
@@ -68,6 +68,7 @@ cdef void utf32_to_Unicode_vector(text, vector[Unicode]& vec):
     for i in range(4, l_bytes, 4):
         vec[(i/4) - 1] = deref(<Unicode*>(&ch[i]))
         # print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
+    return 0
 
 
 cdef dict Dict_to_pydict(Dict* xdict, dict pydict = {}):
