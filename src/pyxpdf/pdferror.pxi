@@ -47,7 +47,7 @@ cdef class XPDFNotInplementedError(XPDFError):
 
 
 
-cdef int xpdf_error_callback(void *data, ErrorCategory category, int pos, char *msg) except -1:
+cdef int xpdf_error_callback(void *data, ErrorCategory category, int pos, char *msg) except -1 with gil:
     message = msg.decode('UTF-8') 
     if pos != -1:
         message += " , at internal position {pos}".format(pos=pos)
@@ -71,4 +71,4 @@ cdef int xpdf_error_callback(void *data, ErrorCategory category, int pos, char *
         raise XPDFError("Unkown Error Occured")
 
 
-setErrorCallback(<ErrorCallback>&xpdf_error_callback, NULL)
+# setErrorCallback(<ErrorCallback>&xpdf_error_callback, NULL)
