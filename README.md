@@ -38,7 +38,7 @@ pdf_text = pdftotext(file, start=1, end=2, layout="table",
 
 ## Install
 ```
-pip install git+https://github.com/ashutoshvarma/pyxpdf@master
+pip install https://github.com/ashutoshvarma/pyxpdf/archive/master.tar.gz
 ``` 
 ### Note (Windows):-
 To build this in windows you will need Visual C++ compiler which you can get by installing [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)

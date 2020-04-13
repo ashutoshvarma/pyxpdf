@@ -4,6 +4,7 @@ build
 dist
 *.egg-info
 venv
+venv2
 
 __pycache__
 *.pyc
@@ -16,3 +17,5 @@ libs
 *.o
 
 *.prof
+
+src/*/*.html
