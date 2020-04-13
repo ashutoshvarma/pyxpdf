@@ -22,9 +22,14 @@ cdef inline bytes _utf8_bytes(object s):
     return s
 
 cdef inline bytes _utf32_bytes(object s):
-    if isinstance(s, unicode):
+    if type(s) is unicode:
         # encode to the specific encoding used inside of the module
         s = (<unicode>s).encode('UTF-32')
+    elif isinstance(s, unicode):
+        # We know from the above that 's' can only be a subtype here.
+        s = unicode(s).encode('UTF-32')
+    else:
+        raise TypeError("Could not convert to utf-32 bytes.")
     return s
 
 cdef inline GString* to_GString(object s):
