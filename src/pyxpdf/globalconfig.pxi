@@ -2,7 +2,7 @@ from cython.operator cimport preincrement as inc, predecrement as dec
 
 from libcpp.string cimport string
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams, EndOfLineKind
-from pyxpdf.includes.xpdf_error cimport ErrorCallback, setErrorCallback
+from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
 
 cdef class GlobalParamsConfig:
@@ -74,7 +74,11 @@ cdef class GlobalParamsConfig:
 
     @text_encoding.setter
     def text_encoding(self, encoding):
+        cdef UnicodeMap* umap
         self._global.setTextEncoding(_chars(encoding.upper()))
+        umap = self._global.getTextEncoding()
+        if umap == NULL:
+            raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
 
 
     @property
