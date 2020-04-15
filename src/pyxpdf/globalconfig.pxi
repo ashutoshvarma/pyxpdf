@@ -24,6 +24,8 @@ cdef class GlobalParamsConfig:
 
         globalParams = self._global
 
+    def reset(self):
+        self.load_file(None)
 
     def __cinit__(self, cfg_path=None):
         self.load_file(cfg_path)
@@ -101,7 +103,7 @@ cdef class GlobalParamsConfig:
         elif eol == 'mac':
             c_eol = EndOfLineKind.eolMac
         else:
-            raise PDFError("Invalid EOL type.")
+            raise XPDFConfigError(f"Invalid EOL type - {eol}.")
         self._global.setTextEOL(_chars(eol))
 
 
