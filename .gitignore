@@ -9,7 +9,7 @@ venv2
 __pycache__
 *.pyc
 
-*test_*.py
+*test_.py
 
 libs
 *.so
