@@ -78,7 +78,7 @@ class PageIterator:
     def __init__(self, doc):
         self.doc = doc
         self.index = -1
-    
+
     def __iter__(self):
         return self
 
@@ -109,3 +109,17 @@ class Page:
 
     def text(self, text_area=None, control=None):
         return self.xpage.text_raw(text_area, control).decode('UTF-8', errors='ignore')
+
+    def find_text(self, text, search_box=None, direction="top", case_sensitive=False,
+                  wholeword=False, rotation=0):
+        result = None
+        if direction == "top":
+            result = self.xpage.find_text(text, search_box, True, True, False, False,
+                                          case_sensitive, False, wholeword, rotation)
+        if direction == "next":
+            result = self.xpage.find_text(text, search_box, False, True, True, False,
+                                          case_sensitive, False, wholeword, rotation)
+        if direction == "previous":
+            result = self.xpage.find_text(text, search_box, False, True, True, False,
+                                          case_sensitive, True, wholeword, rotation)
+        return result

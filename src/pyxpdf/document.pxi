@@ -167,6 +167,7 @@ cdef class XPDFDoc:
 cdef class XPage:
     # No need to free Page* as it is own by PDFDoc
     cdef Page *page
+    cdef unique_ptr[TextPage] textpage
     cdef public int index
     cdef readonly XPDFDoc doc
 
@@ -184,11 +185,24 @@ cdef class XPage:
         self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate, 
                             use_media_box, crop, printing)
 
+    cdef _init_TextPage(self, int rotation):
+        cdef: 
+            unique_ptr[TextOutputControl] text_control
+            unique_ptr[TextOutputDev] td 
+        
+        text_control = make_unique[TextOutputControl]()
+        td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
+
+        self.display(td.get(), 72, 72, rotation)
+        self.textpage.reset(deref(td).takeText())
+
+
 
     def __cinit__(self, XPDFDoc doc not None, int index):
         if index < 0 or index >= doc.num_pages:
             raise IndexError("Page index must be positive integer less than total pages")
         self.page = doc.get_catalog().getPage(index + 1)
+        # self.textpage.reset()
         self.index = index
         self.doc = doc
 
@@ -205,19 +219,15 @@ cdef class XPage:
             x_max = search_box[2] or 0
             y_max = search_box[3] or 0
 
-        cdef int rotation_value = rotation
-
         # Convert python str to xpdf Unicode
         cdef vector[Unicode] u
         utf32_to_Unicode_vector(text, u)
 
-        cdef unique_ptr[TextOutputControl] text_control = make_unique[TextOutputControl]()
-        cdef unique_ptr[TextOutputDev] td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
-        cdef unique_ptr[TextPage] text_page
-        self.display(td.get(), 72, 72, rotation_value)
-        text_page.reset(deref(td).takeText())
+        # Lazy load TextPage
+        if self.textpage.get() == NULL:
+            self._init_TextPage(rotation)
 
-        cdef GBool res = deref(text_page).findText(u.data(), u.size(), to_GBool(start_at_top), 
+        cdef GBool res = deref(self.textpage).findText(u.data(), u.size(), to_GBool(start_at_top), 
                                         to_GBool(stop_at_bottom), to_GBool(start_at_last), 
                                         to_GBool(stop_at_last), to_GBool(case_sensitive), 
                                         to_GBool(backward), to_GBool(wholeword),
