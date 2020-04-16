@@ -1,3 +1,4 @@
+import os
 import unittest
 from pyxpdf.xpdf import Config, GlobalParamsConfig
 
@@ -23,3 +24,8 @@ class PropertyTextCase(unittest.TestCase):
             with self.assertRaises(exception):
                 setattr(parent, property, value)
 
+
+
+def file_in_test_dir(name):
+    _testdir = os.path.dirname(__file__)
+    return os.path.join(_testdir, name)

@@ -4,7 +4,8 @@ from pyxpdf.xpdf import Config, XPDFConfigError
 
 
 class GlobalConfigTestCase(InitGlobalTextCase, PropertyTextCase):
-
+    #TODO: add test for load_file
+    
     def test_text_encoding(self):
         self.assertProperty(Config, 'text_encoding', 'utf-8'.upper())
         self.assertRaiseProperty(Config, 'text_encoding', 'ABC', exception=XPDFConfigError)
