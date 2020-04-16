@@ -44,6 +44,15 @@ require-cython:
 wheel:
 	$(PYTHON) setup.py $(SETUPFLAGS) bdist_wheel $(PYTHON_WITH_CYTHON)
 
+test_inplace: inplace
+	$(PYTHON) test.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON_WITH_COVERAGE)
+
+test_inplace2: inplace2
+	$(PYTHON2) test.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON2_WITH_COVERAGE)
+
+ftest_inplace: inplace
+	$(PYTHON) test.py -f $(TESTFLAGS) $(TESTOPTS)
+
 valgrind_test_inplace: inplace
 	# Don't know why but supression file is not supressing any python malloc errors
 	# So for Python >= 3.6, using this hack. 
@@ -51,7 +60,13 @@ valgrind_test_inplace: inplace
 	valgrind --tool=memcheck --leak-check=full  --suppressions=valgrind-python.supp \
 		$(PYTHON) -E -tt test_x.py
 
+test: test_inplace
+
+test2: test_inplace2
+
 valtest: valgrind_test_inplace
+
+ftest: ftest_inplace
 
 clean:
 	find . \( -name '*.o' -o -name '*.so' -o -name '*.py[cod]' -o -name '*.dll' \) -exec rm -f {} \;
