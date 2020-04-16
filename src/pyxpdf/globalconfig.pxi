@@ -149,7 +149,9 @@ cdef class GlobalParamsConfig:
         
 
     
-Config = GlobalParamsConfig() 
+Config = GlobalParamsConfig()
+# default text encoding 
+Config.text_encoding = 'utf-8'
 
     
 
