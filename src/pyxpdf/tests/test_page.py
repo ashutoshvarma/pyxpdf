@@ -39,10 +39,9 @@ class PageTestCase(unittest.TestCase):
             self.assertEqual(self.doc[0].text(), fp.read())
 
     def test_page_find(self):
-        page9 = self.doc[9]
-        self.assertEqual(self.find_result[0], page9.find_text(self.find_char))
-        self.assertEqual(self.find_result[1], page9.find_text(self.find_char, direction="next"))
-        self.assertEqual(self.find_result[2], page9.find_text(self.find_char, direction="next"))
+        self.assertEqual(self.find_result[0], self.doc[9].find_text(self.find_char))
+        self.assertEqual(self.find_result[1], self.doc[9].find_text(self.find_char, direction="next"))
+        self.assertEqual(self.find_result[2], self.doc[9].find_text(self.find_char, direction="next"))
 
 
 

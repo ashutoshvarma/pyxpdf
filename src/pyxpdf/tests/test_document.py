@@ -3,10 +3,13 @@ from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_d
 from pyxpdf.pdf import Document
 from pyxpdf.xpdf import Config, XPDFConfigError
 
-#TODO: add tests for encodings
+# TODO: add tests for encodings
+
+
 class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
     simple_file = "samples/simple1.pdf"
     dmca_pdf = "samples/nonfree/dmca.pdf"
+    mandarin_pdf = 'samples/nonfree/mandarin.pdf'
     dmca_prop = {
         'num_pages': 18,
         'pdf_version': 1.4,
@@ -60,6 +63,12 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
             doc[list()]
 
         self.assertEqual([], doc[18:])
+
+    def test_document_page_by_label(self):
+        doc = Document(self.mandarin_pdf)
+        with self.subTest("Test get page by labels"):
+            for i in range(len(doc)):
+                self.assertEqual(doc[i].index, doc[str(i+1)].index)
 
 
 def test_suite():
