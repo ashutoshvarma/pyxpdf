@@ -9,9 +9,14 @@ from pyxpdf.xpdf import XPDFDoc, XPage, TextControl, PDFError
 
 
 class Document:
+    _pages_cache = []
+
     def __init__(self, pdf, ownerpass=None, userpass=None):
         self.xdoc = XPDFDoc(pdf, ownerpass, userpass)
         self.filename = self.xdoc.filename
+
+        # build empty cache
+        self._pages_cache = [None] * self.num_pages
 
     def __repr__(self):
         fname = "Stream" if self.filename == "" else self.filename
@@ -26,19 +31,16 @@ class Document:
 
     def __getitem__(self, key):
         if isinstance(key, str):
-            xpage = self.xdoc.get_page_from_label(key)
-            if xpage == None:
+            pgno = self.xdoc.label_to_index(key)
+            if pgno == -1:
                 raise KeyError(
                     "Could not find page with label '{key}'".format(key=key))
-            return Page(xpage)
+            return self.get_page(pgno)
         elif isinstance(key, int):
             # handle neg key
             if key < 0:
                 key += len(self)
-            if key < 0 or key >= len(self):
-                raise IndexError(
-                    "The index {key} is out of page range".format(key=key))
-            return Page(self.xdoc.get_page(key))
+            return self.get_page(key)
         elif isinstance(key, slice):
             # Return the list of Pages
             return [self[i] for i in range(*key.indices(len(self)))]
@@ -49,7 +51,13 @@ class Document:
         return PageIterator(self)
 
     def get_page(self, idx):
-        return self[idx]
+        if idx < 0 or idx >= len(self):
+            raise IndexError(
+                "The index {idx} is out of page range".format(idx=idx))
+        # load page in cache if not present
+        if self._pages_cache[idx] == None:
+            self._pages_cache[idx] = Page(self.xdoc.get_page(idx))
+        return self._pages_cache[idx]
 
     @property
     def num_pages(self):

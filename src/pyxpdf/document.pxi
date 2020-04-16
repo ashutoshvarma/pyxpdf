@@ -148,18 +148,26 @@ cdef class XPDFDoc:
         else:
             return None
 
-    cpdef get_page_from_label(self, label):
+    cpdef int label_to_index(self, label):
         cdef:
             int pgno
             unique_ptr[TextString] tstr
 
         tstr.reset(to_TextString(label))
         pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
+        # xpdf page index start from 1 not 0
+        if pgno != -1:
+            pgno = pgno - 1
+        return pgno
+
+
+    cpdef get_page_from_label(self, label):
+        cdef int pgno
+        pgno = self.label_to_index(label)
         if pgno == -1:
             return None
         else:
-            # xpdf page index start from 1 not 0
-            return self.get_page(pgno - 1)
+            return self.get_page(pgno)
 
         
 
