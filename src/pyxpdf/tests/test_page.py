@@ -6,7 +6,7 @@ from pyxpdf.pdf import Document, Page
 from pyxpdf.xpdf import Config
 
 
-class PageTestCase(unittest.TestCase):
+class PageTestCase(InitGlobalTextCase):
     mandarin_pdf = "samples/nonfree/mandarin.pdf"
     find_char = "通"
     find_result = [(
@@ -32,6 +32,7 @@ class PageTestCase(unittest.TestCase):
     def setUp(self):
         super().setUp()
         Config.text_encoding = 'utf-8'
+        Config.text_eol = 'unix'
         self.doc = Document(self.mandarin_pdf)
 
     def test_page_text(self):
