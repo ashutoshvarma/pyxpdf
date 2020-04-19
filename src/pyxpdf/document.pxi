@@ -5,7 +5,7 @@ from libcpp.vector cimport vector
 from cpython cimport bool as PyBool
 from cython.operator cimport dereference as deref
 
-from pyxpdf.includes.xpdf_error cimport errEncrypted
+from pyxpdf.includes.xpdf_error cimport errEncrypted, errOpenFile
 from pyxpdf.includes.xpdf_types cimport GBool, GString, gFalse, gTrue
 from pyxpdf.includes.CharTypes cimport Unicode
 from pyxpdf.includes.TextString cimport TextString
@@ -69,9 +69,12 @@ cdef class XPDFDoc:
     cdef check(self):
         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
             if self.doc.getErrorCode() == errEncrypted:
-                raise PDFError("PDF cannot be decrypted please provide correct passwords.")
+                raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
+        elif self.doc.getErrorCode() == errOpenFile:
+            raise PDFIOError(f"Failed to load {self.filename}")
         else:
-            raise PDFError(f"Cannot Parse PDF. ErrorCode - {self.doc.getErrorCode()}")
+            err_code = self.doc.getErrorCode()
+            raise ErrorCodeMapping[err_code]
 
     cdef Catalog *get_catalog(self):
         return self.doc.getCatalog()

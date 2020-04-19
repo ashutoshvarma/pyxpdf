@@ -15,6 +15,20 @@ ErrorCodesDict = {
     errFileIO : "Error while r/w File"
 }
 
+ErrorCodeMapping = {
+    errNone : XPDFError,
+    errHighlightFile : XPDFError,
+    errBadPrinter : XPDFError,
+    errPrinting : XPDFError,
+    errOpenFile : PDFIOError,
+    errBadPageNum : XPDFError,
+    errBadCatalog : PDFSyntaxError,
+    errDamaged : PDFSyntaxError,
+    errEncrypted : PDFPermissionError,
+    errPermission : PDFPermissionError,
+    errFileIO : PDFIOError
+}
+
 
 cdef class PDFError(Exception):
     """Main exception base class for pyxpdf.  All other exceptions inherit from
@@ -25,7 +39,15 @@ cdef class PDFError(Exception):
         
 
 cdef class XPDFError(PDFError):
-    pass
+    def __init__(self, message = None):
+        if message:
+            super().__init__(message)
+        else:
+            default_msg = "Uncaught error in xpdf library."
+            for code, err in ErrorCodeMapping.items():
+                if err == type(self):
+                    default_msg = ErrorCodesDict[code]
+            super().__init__(default_msg)
 
 cdef class PDFSyntaxError(XPDFError):
     pass
