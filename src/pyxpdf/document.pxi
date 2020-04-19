@@ -314,8 +314,8 @@ cdef class XPage:
         return self.page.getCropHeight()
 
     @property
-    def crop_height(self):
-        return self.page.getCropHeight()
+    def crop_width(self):
+        return self.page.getCropWidth()
 
     @property
     def mediabox(self):
