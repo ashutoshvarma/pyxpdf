@@ -117,6 +117,52 @@ class Page:
         else:
             return "<Page[{index}](label='{label}')>".format(index=self.index, label=self.label)
 
+
+    @property
+    def rotation(self):
+        return self.xpage.rotation
+
+    @property
+    def is_cropped(self):
+        return self.xpage.is_cropped
+
+    @property
+    def media_height(self):
+        return self.xpage.media_height
+
+    @property
+    def media_width(self):
+        return self.xpage.media_width
+
+    @property
+    def crop_height(self):
+        return self.xpage.crop_height
+
+    @property
+    def crop_width(self):
+        return self.xpage.crop_width
+
+    @property
+    def mediabox(self):
+        return self.xpage.mediabox
+
+    @property
+    def cropbox(self):
+        return self.xpage.cropbox
+
+    @property
+    def bleedbox(self):
+        return self.xpage.bleedbox
+
+    @property
+    def trimbox(self):
+        return self.xpage.trimbox
+
+    @property
+    def artbox(self):
+        return self.xpage.artbox
+
+
     def btext(self, text_area=None, control=None):
         return self.xpage.text_raw(text_area, control)
 

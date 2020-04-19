@@ -6,8 +6,9 @@ from pyxpdf.pdf import Document, Page
 from pyxpdf.xpdf import Config
 
 
-class PageTestCase(InitGlobalTextCase):
+class PageTestCase(InitGlobalTextCase, PropertyTextCase):
     mandarin_pdf = "samples/nonfree/mandarin.pdf"
+    mandarin_prop = {'artbox': (0.0, 0.0, 612.0, 792.0), 'bleedbox': (0.0, 0.0, 612.0, 792.0), 'crop_height': 792.0, 'crop_width': 612.0, 'cropbox': (0.0, 0.0, 612.0, 792.0), 'index': 0, 'is_cropped': True, 'label': '1', 'media_height': 792.0, 'media_width': 612.0, 'mediabox': (0.0, 0.0, 612.0, 792.0), 'rotation': 0, 'trimbox': (0.0, 0.0, 612.0, 792.0)}
     find_char = "通"
     find_result = [(
         122.69618999999997,
@@ -34,6 +35,10 @@ class PageTestCase(InitGlobalTextCase):
         Config.text_encoding = 'utf-8'
         Config.text_eol = 'unix'
         self.doc = Document(self.mandarin_pdf)
+
+    def test_page_properties(self):
+        for prop, val in self.mandarin_prop.items():
+            self.assertProperty(self.doc[0], prop, val, setter=False)
 
     def test_page_text(self):
         with open(file_in_test_dir('mandarin_first.txt'), 'r', encoding='utf-8') as fp:
