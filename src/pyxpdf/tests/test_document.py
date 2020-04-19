@@ -28,6 +28,7 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
     def setUp(self):
         super().setUp()
         Config.text_encoding = 'utf-8'
+        Config.text_eol = 'unix'
         with open(file_in_test_dir('dcma_xmp.xml'), 'r', encoding='utf-8') as fp:
             self.dmca_prop['xmp_metadata()'] = fp.read()
 
@@ -69,6 +70,11 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
         with self.subTest("Test get page by labels"):
             for i in range(len(doc)):
                 self.assertEqual(doc[i].index, doc[str(i+1)].index)
+
+    def test_document_text_raw(self):
+        doc = Document(self.mandarin_pdf)
+        with open(file_in_test_dir('mandarin_first.txt'), 'r', encoding='utf-8') as fp:
+            self.assertEqual(doc.text(end=0), fp.read())
 
 
 def test_suite():

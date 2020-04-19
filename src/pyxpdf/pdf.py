@@ -59,6 +59,11 @@ class Document:
             self._pages_cache[idx] = Page(self.xdoc.get_page(idx))
         return self._pages_cache[idx]
 
+    def text(self, start=0, end=-1, control=None):
+        return self.xdoc.text_raw(start=start, end=end, control=control
+                                ).decode('UTF-8', errors='ignore')
+
+
     @property
     def num_pages(self):
         return self.xdoc.num_pages
@@ -131,3 +136,10 @@ class Page:
             result = self.xpage.find_text(text, search_box, False, True, True, False,
                                           case_sensitive, True, wholeword, rotation)
         return result
+
+    def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False, 
+                      rotation=0):
+        res = self.find_text(text, search_box, "top", case_sensitive, wholeword)
+        while res:
+            yield res
+            res = self.find_text(text, search_box, "next", case_sensitive, wholeword)
