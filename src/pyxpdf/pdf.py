@@ -61,8 +61,7 @@ class Document:
 
     def text(self, start=0, end=-1, control=None):
         return self.xdoc.text_raw(start=start, end=end, control=control
-                                ).decode('UTF-8', errors='ignore')
-
+                                  ).decode('UTF-8', errors='ignore')
 
     @property
     def num_pages(self):
@@ -117,7 +116,6 @@ class Page:
         else:
             return "<Page[{index}](label='{label}')>".format(index=self.index, label=self.label)
 
-
     @property
     def rotation(self):
         return self.xpage.rotation
@@ -162,7 +160,6 @@ class Page:
     def artbox(self):
         return self.xpage.artbox
 
-
     def btext(self, text_area=None, control=None):
         return self.xpage.text_raw(text_area, control)
 
@@ -183,9 +180,11 @@ class Page:
                                           case_sensitive, True, wholeword, rotation)
         return result
 
-    def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False, 
+    def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,
                       rotation=0):
-        res = self.find_text(text, search_box, "top", case_sensitive, wholeword)
+        res = self.find_text(text, search_box, "top",
+                             case_sensitive, wholeword)
         while res:
             yield res
-            res = self.find_text(text, search_box, "next", case_sensitive, wholeword)
+            res = self.find_text(text, search_box, "next",
+                                 case_sensitive, wholeword)
