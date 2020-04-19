@@ -26,6 +26,18 @@ cdef class XPDFDoc:
     # Using string to store char array
     cdef bytes doc_data
 
+
+    cdef display_pages(self, OutputDev* out, int first, int end, 
+                        double hDPI = 72, double vDPI = 72, int rotate = 0, 
+                        GBool use_media_box = gFalse, GBool crop = gTrue, 
+                        GBool printing = gFalse):
+        if first < 0 or first >= self.num_pages:
+            first = 0
+        if end < 0 or end >= self.num_pages:
+            end = self.num_pages - 1
+        self.doc.displayPages(out, first + 1, end + 1, hDPI, vDPI, rotate, 
+                            use_media_box, crop, printing)
+
     cdef dict get_info_dict(XPDFDoc self):
         cdef: 
             Object info 
@@ -169,7 +181,15 @@ cdef class XPDFDoc:
         else:
             return self.get_page(pgno)
 
-        
+    
+    cpdef text_raw(self, int start=0, int end=-1, TextControl control=None):
+        cdef:
+            TextOutputControl text_control = control.control if control else TextOutputControl()
+            unique_ptr[string] out = make_unique[string]()
+            unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
+
+        self.display_pages(text_dev.get(), start, end)
+        return deref(out) 
 
 
 cdef class XPage:
