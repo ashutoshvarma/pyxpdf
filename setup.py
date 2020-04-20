@@ -138,7 +138,7 @@ setup(
     description=(
         "Powerful and Pythonic PDF processing library based on xpdf-4.02"
     ),
-    long_description=readme,
+    long_description=versioninfo.changes() + readme,
     long_description_content_type='text/markdown',
     keywords=[
         'pdf parser',

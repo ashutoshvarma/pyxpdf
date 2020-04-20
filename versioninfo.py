@@ -43,12 +43,12 @@ def changes():
     with io.open(os.path.join(get_base_dir(), "CHANGES.md"), 'r', encoding='utf8') as f:
         lines = []
         for line in f:
-            if line.startswith('## '):
+            if line.startswith('### '):
                 if len(lines) > 1:
                     break
             if lines:
                 lines.append(line)
-            elif line.startswith("## " + _version):
+            elif line.startswith("### " + _version):
                 lines.append(line)
     return ''.join(lines[:-1])
 
