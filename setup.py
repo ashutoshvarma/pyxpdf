@@ -1,3 +1,5 @@
+# adapted from https://github.com/lxml/lxml/blob/master/setup.py
+
 import os
 import re
 import sys
@@ -20,8 +22,8 @@ except ImportError:
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 import setupinfo
+import versioninfo
 
-pyxpdf_version = "0.0.1"
 # override these and pass --static for a static build. See
 # doc/build.txt for more information. If you do not pass --static
 # changing this will have no effect.
@@ -30,15 +32,14 @@ STATIC_LIBRARY_DIRS = []
 STATIC_CFLAGS = []
 STATIC_BINARIES = []
 
-
+pyxpdf_version = versioninfo.version()
 print("Building pyxpdf version %s." % pyxpdf_version)
+
+OPTION_RUN_TESTS = setupinfo.has_option('run-tests')
 
 extra_options = {}
 if 'setuptools' in sys.modules:
     extra_options['zip_safe'] = False
-    # extra_options['python_requires'] = (
-    #     # NOTE: keep in sync with Trove classifier list below.
-    #     '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*')
     extra_options['python_requires'] = (
         # NOTE: keep in sync with Trove classifier list below.
         '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*')
@@ -55,6 +56,7 @@ if 'setuptools' in sys.modules:
             f.close()
         extra_options['extras_require'] = {
             'source': deps,
+            "dev": ["cython",],
         }
 
 extra_options['package_data'] = {
@@ -142,6 +144,10 @@ def setup_extra_options():
     return extra_opts
 
 
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md',),  encoding='utf8') as f:
+    readme = f.read()
+
+
 setup(
     name="pyxpdf",
     version=pyxpdf_version,
@@ -155,9 +161,19 @@ setup(
     description=(
         "Powerful and Pythonic PDF processing library based on xpdf-4.02"
     ),
+    long_description=readme,
+    long_description_content_type='text/markdown',
+    keywords=[
+        'pdf parser',
+        'pdf converter',
+        'text mining',
+        'xpdf bindings',
+    ],
     classifiers=[
+         versioninfo.dev_status(),
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
+        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Cython',
         # NOTE: keep in sync with 'python_requires' list above.
@@ -171,6 +187,7 @@ setup(
         'Programming Language :: C',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules'
+        'Topic :: Text Processing',
     ],
 
     **setup_extra_options()

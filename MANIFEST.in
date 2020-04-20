@@ -1,5 +1,5 @@
 exclude *.py
-include setup.py setupinfo.py get_libxpdf.py
+include setup.py setupinfo.py versioninfo.py get_libxpdf.py
 include MANIFEST.in Makefile requirements.txt
 include src/pyxpdf/*.cpp 
 recursive-include src *.pyx *.pxd *.pxi *.py
