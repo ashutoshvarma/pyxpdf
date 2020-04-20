@@ -1,6 +1,10 @@
 exclude *.py
 include setup.py setupinfo.py versioninfo.py get_libxpdf.py
+include test.py
 include MANIFEST.in Makefile requirements.txt
+include CHANGES.txt LICENSE README.md
 include src/pyxpdf/*.cpp 
 recursive-include src *.pyx *.pxd *.pxi *.py
 recursive-include src/pyxpdf pyxpdf_defs.h
+recursive-include src/pyxpdf/tests *.xml *.txt
+recursive-include samples *.pdf
