@@ -13,19 +13,26 @@ from pyxpdf.includes.Object cimport Object
 from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Stream cimport MemStream
 from pyxpdf.includes.PDFDoc cimport PDFDoc
-from pyxpdf.includes.Page cimport Page
+# Change import name as it was conflicting with cdef classes
+from pyxpdf.includes.Page cimport Page as XPage
 from pyxpdf.includes.OutputDev cimport OutputDev
 from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextPage, TextOutputControl
 from pyxpdf.includes.Catalog cimport Catalog
 
 
-cdef class XPDFDoc:
-    cdef PDFDoc *doc
-    cdef GString *ownerpass 
-    cdef GString *userpass 
-    # Using string to store char array
-    cdef bytes doc_data
+cdef class Document:
+    cdef:
+        PDFDoc *doc
+        GString *ownerpass 
+        GString *userpass 
+        # Using string to store char array
+        bytes doc_data
+        # for caching pages
+        list _pages_cache
 
+
+    cdef Catalog *get_catalog(self):
+        return self.doc.getCatalog()
 
     cdef display_pages(self, OutputDev* out, int first, int end, 
                         double hDPI = 72, double vDPI = 72, int rotate = 0, 
@@ -38,7 +45,7 @@ cdef class XPDFDoc:
         self.doc.displayPages(out, first + 1, end + 1, hDPI, vDPI, rotate, 
                             use_media_box, crop, printing)
 
-    cdef dict get_info_dict(XPDFDoc self):
+    cdef dict get_info_dict(self):
         cdef: 
             Object info 
             dict result = {}
@@ -54,12 +61,12 @@ cdef class XPDFDoc:
             return GString_to_unicode(meta.get())
         return None
 
-    cdef _load_from_file(XPDFDoc self, GString *pdf):
+    cdef _load_from_file(self, GString *pdf):
         self.doc = new PDFDoc(pdf, self.ownerpass, self.userpass)
         if self.doc == NULL:
             raise MemoryError("Cannot allocate memory for internal objects")
         
-    cdef _load_from_char_array(XPDFDoc self, char *pdf, int data_length):
+    cdef _load_from_char_array(self, char *pdf, int data_length):
         cdef Object *obj_null = new Object()
         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
         if mem_stream == NULL:
@@ -76,14 +83,30 @@ cdef class XPDFDoc:
             err_code = self.doc.getErrorCode()
             raise ErrorCodeMapping[err_code]
 
-    cdef Catalog *get_catalog(self):
-        return self.doc.getCatalog()
-        
+    cdef int label_to_index(self, label):
+        cdef:
+            int pgno
+            unique_ptr[TextString] tstr
+
+        tstr.reset(to_TextString(label))
+        pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
+        # xpdf page index start from 1 not 0
+        if pgno != -1:
+            pgno = pgno - 1
+        return pgno
+
+    cdef get_page(self, int idx):
+        if idx < 0 or idx >= self.num_pages:
+            raise IndexError(
+                "The index {idx} is out of page range".format(idx=idx))
+        # load page in cache if not present
+        if self._pages_cache[idx] == None:
+            self._pages_cache[idx] = Page(self, idx)
+        return self._pages_cache[idx]
+
 
     def __cinit__(self, pdf, ownerpass=None, userpass=None):
-        # self.global_params.setTextEncoding(b"UTF-8")
         self.doc = NULL
-        self.doc_data = string()
 
         # Type casting NULL to prebent MSVC/C14 errors
         self.ownerpass = <GString*> NULL if ownerpass == None else to_GString(ownerpass)
@@ -103,11 +126,45 @@ cdef class XPDFDoc:
         # check PDFDoc
         self.check()
 
+        # build empty cache
+        self._pages_cache = [None] * self.num_pages
     
     def __dealloc__(self):
         del self.doc
         del self.ownerpass
         del self.userpass
+
+    def __repr__(self):
+        fname = "Stream" if self.filename == "" else self.filename
+        return "<Document [{fname}]>".format(fname=fname)
+
+    def __str__(self):
+        fname = "Stream" if self.filename == "" else self.filename
+        return "<Document [{fname}] [{pages}]>".format(fname=fname, pages=self.num_pages)
+
+    def __len__(self):
+        return self.num_pages
+
+    def __getitem__(self, key):
+        if isinstance(key, str):
+            pgno = self.label_to_index(key)
+            if pgno == -1:
+                raise KeyError(
+                    "Could not find page with label '{key}'".format(key=key))
+            return self.get_page(pgno)
+        elif isinstance(key, int):
+            # handle neg key
+            if key < 0:
+                key += self.num_pages
+            return self.get_page(key)
+        elif isinstance(key, slice):
+            # Return the list of Pages
+            return [self[i] for i in range(*key.indices(self.num_pages))]
+        else:
+            raise TypeError("Invalid Key type")
+
+    def __iter__(self):
+        return PageIterator(self)
 
     @property
     def filename(self):
@@ -151,40 +208,13 @@ cdef class XPDFDoc:
         return GBool_to_bool(self.doc.okToAddNotes(ignoreOwnerPW=gFalse))
 
     
-    def info_dict(self):
+    def info(self):
         return self.get_info_dict()
 
-    def metadata(self):
+    def xmp_metadata(self):
         return self.get_metadata()
 
-    cpdef get_page(self, int pgno):
-        if 0 <= pgno < self.num_pages:
-            return XPage(self, pgno)
-        else:
-            return None
 
-    cpdef int label_to_index(self, label):
-        cdef:
-            int pgno
-            unique_ptr[TextString] tstr
-
-        tstr.reset(to_TextString(label))
-        pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
-        # xpdf page index start from 1 not 0
-        if pgno != -1:
-            pgno = pgno - 1
-        return pgno
-
-
-    cpdef get_page_from_label(self, label):
-        cdef int pgno
-        pgno = self.label_to_index(label)
-        if pgno == -1:
-            return None
-        else:
-            return self.get_page(pgno)
-
-    
     cpdef text_raw(self, int start=0, int end=-1, TextControl control=None):
         cdef:
             TextOutputControl text_control = control.control if control else TextOutputControl()
@@ -194,13 +224,39 @@ cdef class XPDFDoc:
         self.display_pages(text_dev.get(), start, end)
         return deref(out) 
 
+    cpdef text(self, start=0, end=-1, control=None):
+        return self.text_raw(start=start, end=end, control=control
+                                  ).decode('UTF-8', errors='ignore')
 
-cdef class XPage:
+
+
+cdef class PageIterator:
+    cdef:
+        Document doc
+        int index
+
+    def __init__(self, doc):
+        self.doc = doc
+        self.index = -1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.index += 1
+        if self.index >= len(self.doc):
+            raise StopIteration()
+        return self.doc[self.index]
+
+
+
+cdef class Page:
     # No need to free Page* as it is own by PDFDoc
-    cdef Page *page
+    cdef XPage *page
     cdef unique_ptr[TextPage] textpage
     cdef public int index
-    cdef readonly XPDFDoc doc
+    cdef public object label
+    cdef readonly Document doc
 
 
     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt, 
@@ -227,18 +283,21 @@ cdef class XPage:
         self.display(td.get(), 72, 72, rotation)
         self.textpage.reset(deref(td).takeText())
 
+    cdef get_label(self):
+        cdef:
+            unique_ptr[GString] glabel 
+            unique_ptr[TextString] txt_label 
 
+        if self.doc.get_catalog().hasPageLabels() == gTrue:
+            txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))     
+            if txt_label != NULL:
+                glabel.reset(deref(txt_label).toPDFTextString())
+                return GString_to_unicode(glabel.get())
+            else:
+                return None       
+        return None
 
-    def __cinit__(self, XPDFDoc doc not None, int index):
-        if index < 0 or index >= doc.num_pages:
-            raise IndexError("Page index must be positive integer less than total pages")
-        self.page = doc.get_catalog().getPage(index + 1)
-        # self.textpage.reset()
-        self.index = index
-        self.doc = doc
-
-
-    def find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False, 
+    cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False, 
                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):
         cdef double x_min = 0
         cdef double y_min = 0
@@ -267,33 +326,20 @@ cdef class XPage:
         return (x_min, y_min, x_max, y_max) if res == gTrue else None
 
 
-    def text_raw(self, search_box=None, TextControl control = None):
-        cdef:
-            TextOutputControl text_control = control.control if control else TextOutputControl()
-            unique_ptr[string] out = make_unique[string]()
-            unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
+    def __cinit__(self, Document doc not None, int index):
+        if index < 0 or index >= doc.num_pages:
+            raise IndexError("Page index must be positive integer less than total pages")
+        self.page = doc.get_catalog().getPage(index + 1)
+        # self.textpage.reset()
+        self.doc = doc
+        self.index = index
+        self.label = self.get_label()
 
-        if search_box == None:
-            # Why crop=gTrue in displayPage?
-            self.display(text_dev.get())
+    def __repr__(self):
+        if self.label == None:
+            return "<Page[{index}]>".format(index=self.index)
         else:
-            self.display_slice(text_dev.get(), search_box[0], search_box[1], 
-                                search_box[2], search_box[3])
-
-        return deref(out)
-
-    @property
-    def label(self):
-        cdef unique_ptr[GString] glabel 
-        cdef unique_ptr[TextString] txt_label 
-        if self.doc.get_catalog().hasPageLabels() == gTrue:
-            txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))     
-            if txt_label != NULL:
-                glabel.reset(deref(txt_label).toPDFTextString())
-                return GString_to_unicode(glabel.get())
-            else:
-                return None       
-        return None
+            return "<Page[{index}](label='{label}')>".format(index=self.index, label=self.label)
 
 
     @property
@@ -339,6 +385,52 @@ cdef class XPage:
     @property
     def artbox(self):
         return PDFRectangle_to_tuple(self.page.getArtBox())
+
+
+    def find_text(self, text, search_box=None, direction="top", case_sensitive=False,
+                  wholeword=False, rotation=0):
+        result = None
+        if direction == "top":
+            result = self._find_text(text, search_box, True, True, False, False,
+                                          case_sensitive, False, wholeword, rotation)
+        if direction == "next":
+            result = self._find_text(text, search_box, False, True, True, False,
+                                          case_sensitive, False, wholeword, rotation)
+        if direction == "previous":
+            result = self._find_text(text, search_box, False, True, True, False,
+                                          case_sensitive, True, wholeword, rotation)
+        return result
+    
+
+    def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,
+                      rotation=0):
+        res = self.find_text(text, search_box, "top",
+                             case_sensitive, wholeword)
+        while res:
+            yield res
+            res = self.find_text(text, search_box, "next",
+                                 case_sensitive, wholeword)
+
+
+    def text_raw(self, search_box=None, TextControl control = None):
+        cdef:
+            TextOutputControl text_control = control.control if control else TextOutputControl()
+            unique_ptr[string] out = make_unique[string]()
+            unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
+
+        if search_box == None:
+            # Why crop=gTrue in displayPage?
+            self.display(text_dev.get())
+        else:
+            self.display_slice(text_dev.get(), search_box[0], search_box[1], 
+                                search_box[2], search_box[3])
+
+        return deref(out)
+
+
+    def text(self, text_area=None, control=None):
+        return self.text_raw(text_area, control).decode('UTF-8', errors='ignore')
+
 
     
 

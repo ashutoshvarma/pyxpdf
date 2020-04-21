@@ -17,7 +17,8 @@ except ImportError:
     CYTHON_INSTALLED = False
 
 EXT_MODULES = ["pyxpdf.xpdf", ]
-COMPILED_MODULES = ['pyxpdf.pdf']
+# COMPILED_MODULES = ['pyxpdf.pdf']
+COMPILED_MODULES = []
 HEADER_FILES = ['pyxpdf_defs.h', ]
 
 if hasattr(sys, 'pypy_version_info') or (

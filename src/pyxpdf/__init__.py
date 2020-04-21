@@ -1,7 +1,6 @@
 __version__ = "0.1"
 
-from pyxpdf.xpdf import pdftotext_raw, PDFError, Config
-from pyxpdf.pdf import *
+from pyxpdf.xpdf import pdftotext_raw, PDFError, Config, Document, Page
 
 def pdftotext(pdf_file, start=1, end=0, layout="reading", ownerpass=None, userpass=None, cfg_file=None):
     """
