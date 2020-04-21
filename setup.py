@@ -151,7 +151,7 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Cython',
         # NOTE: keep in sync with 'python_requires' list above.
         'Programming Language :: Python :: 2',
@@ -161,9 +161,9 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Programming Language :: C',
+        'Programming Language :: C++',
         'Operating System :: OS Independent',
-        'Topic :: Software Development :: Libraries :: Python Modules'
+        'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing',
     ],
 
