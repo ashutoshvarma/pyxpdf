@@ -17,6 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
+# Modified by;
+# Copyright (C) 2020, Ashutosh Varma <ashutoshvarma11@live.com>
 """
 SchoolTool test runner.
 
@@ -546,7 +548,11 @@ def main(argv):
     cov = None
     if cfg.run_tests and cfg.coverage:
         from coverage import coverage
-        cov = coverage(omit=['test.py'])
+        # load the coverage file from same directory
+        cov_cfg =os.path.join(os.path.dirname(os.path.realpath(__file__)), '.coveragerc')
+        if not os.path.isfile(cov_cfg):
+            cov_cfg = None
+        cov = coverage(config_file=cov_cfg)
 
     # Finding and importing
     test_files = get_test_files(cfg)
