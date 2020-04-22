@@ -214,7 +214,6 @@ def cflags(static_cflags):
     if not static_cflags:
         static_cflags = env_var('CFLAGS')
     result.extend(static_cflags)
-    result.append('/MD')
     return result
 
 
