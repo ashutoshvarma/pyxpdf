@@ -53,10 +53,10 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     doc = make_unique[PDFDoc](_chars(pdf_file), ownerpassG.get(), userpassG.get())
     if deref(doc).isOk() == gFalse:
         err_code = deref(doc).getErrorCode()
-        raise PDFError(f"Cannot open pdf file. ErrorCode-{err_code}")
+        raise ErrorCodeMapping[err_code]
 
     if deref(doc).okToCopy(ignoreOwnerPW=gFalse) == gFalse:
-        raise PDFError("Copying of text from this document is not allowed.")
+        raise PDFPermissionError("Copying of text from this document is not allowed.")
 
     if start < 1:
         start = 1
@@ -77,11 +77,11 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     elif layout == "reading":
         deref(control).mode = TextOutputMode.textOutReadingOrder
     else:
-        raise ValueError(f"Unknown layout - {layout}")
+        raise ValueError(f"Unknown layout - {layout}.")
 
     text_dev = make_unique[TextOutputDev](&_text_out_func, &ext_text, control.get())
     if deref(text_dev).isOk() == gFalse:
-        raise PDFError("Error in pdf options")
+        raise XPDFConfigError("Failed to create TextOutputDev with given options")
 
     deref(doc).displayPages(text_dev.get(), start, end, 72, 72, 0, gFalse, gTrue, gFalse)
     return ext_text
