@@ -1,7 +1,6 @@
 import unittest
 from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir
-from pyxpdf.pdf import Document
-from pyxpdf.xpdf import Config, XPDFConfigError
+from pyxpdf.xpdf import Config, XPDFConfigError, Document
 
 # TODO: add tests for encodings
 

@@ -2,8 +2,7 @@
 
 import unittest
 from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir
-from pyxpdf.pdf import Document, Page
-from pyxpdf.xpdf import Config
+from pyxpdf.xpdf import Config, Document, Page
 
 
 class PageTestCase(InitGlobalTextCase, PropertyTextCase):

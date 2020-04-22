@@ -17,7 +17,8 @@ except ImportError:
     CYTHON_INSTALLED = False
 
 EXT_MODULES = ["pyxpdf.xpdf", ]
-COMPILED_MODULES = ['pyxpdf.pdf']
+# COMPILED_MODULES = ['pyxpdf.pdf']
+COMPILED_MODULES = []
 HEADER_FILES = ['pyxpdf_defs.h', ]
 
 if hasattr(sys, 'pypy_version_info') or (
@@ -213,7 +214,6 @@ def cflags(static_cflags):
     if not static_cflags:
         static_cflags = env_var('CFLAGS')
     result.extend(static_cflags)
-    result.append('/MD')
     return result
 
 
