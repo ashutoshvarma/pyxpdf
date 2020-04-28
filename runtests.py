@@ -198,12 +198,21 @@ def get_test_files(cfg):
 def import_module(filename, cfg, cov=None):
     """Imports and returns a module."""
     filename = os.path.splitext(filename)[0]
-    modname = filename[len(cfg.basedir):].replace(os.path.sep, '.')
+
+    # get the dir where 'tests'/'ftests' are located.
+    parent_path = os.sep.join(filename.split(os.sep)[:-2])
+    # get the module name like 'tests.demo_test'
+    modname = '.'.join(filename.split(os.sep)[-2:])
+
+    sys.path.insert(0, parent_path)
+
     if modname.startswith('.'):
         modname = modname[1:]
     if cov is not None:
         cov.start()
+
     mod = __import__(modname)
+    
     if cov is not None:
         cov.stop()
     components = modname.split('.')
@@ -542,7 +551,7 @@ def main(argv):
         cfg.unit_tests = True
 
     # Set up the python path
-    sys.path[0] = cfg.basedir
+    sys.path.append(cfg.basedir)
 
     # Set up tracing before we start importing things
     cov = None
