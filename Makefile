@@ -45,13 +45,17 @@ wheel:
 	$(PYTHON) setup.py $(SETUPFLAGS) bdist_wheel $(PYTHON_WITH_CYTHON)
 
 test_inplace: inplace
-	$(PYTHON) test.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON_WITH_COVERAGE)
+	$(PYTHON) runtests.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON_WITH_COVERAGE)
 
 test_inplace2: inplace2
-	$(PYTHON2) test.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON2_WITH_COVERAGE)
+	$(PYTHON2) runtests.py $(TESTFLAGS) $(TESTOPTS) $(CYTHON2_WITH_COVERAGE)
 
 ftest_inplace: inplace
-	$(PYTHON) test.py -f $(TESTFLAGS) $(TESTOPTS)
+	$(PYTHON) runtests.py -f $(TESTFLAGS) $(TESTOPTS)
+
+test_wheel: wheel	
+	pip install -U dist/*.whl
+	$(PYTHON) runtests.py $(TESTFLAGS) $(TESTOPTS) 
 
 valgrind_test_inplace: inplace
 	# Don't know why but supression file is not supressing any python malloc errors
@@ -63,6 +67,8 @@ valgrind_test_inplace: inplace
 test: test_inplace
 
 test2: test_inplace2
+
+testw: test_wheel
 
 valtest: valgrind_test_inplace
 
