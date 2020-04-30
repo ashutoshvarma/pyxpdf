@@ -82,18 +82,20 @@ except ImportError:
 
 __metaclass__ = type
 
+
 def stderr(text):
     sys.stderr.write(text)
     sys.stderr.write("\n")
+
 
 class Options:
     """Configurable properties of the test runner."""
 
     # test location
     basedir = ''                # base directory for tests (defaults to
-                                # basedir of argv[0] + 'src'), must be absolute
+    # basedir of argv[0] + 'src'), must be absolute
     follow_symlinks = True      # should symlinks to subdirectories be
-                                # followed? (hardcoded, may cause loops)
+    # followed? (hardcoded, may cause loops)
 
     # which tests to run
     unit_tests = False          # unit tests (default if both are false)
@@ -101,7 +103,7 @@ class Options:
 
     # test filtering
     level = 1                   # run only tests at this or lower level
-                                # (if None, runs all tests)
+    # (if None, runs all tests)
     pathname_regex = ''         # regexp for filtering filenames
     test_regex = ''             # regexp for filtering test cases
 
@@ -115,7 +117,7 @@ class Options:
     verbosity = 0               # verbosity level (-v)
     quiet = 0                   # do not print anything on success (-q)
     warn_omitted = False        # produce warnings when a test case is
-                                # not included in a test suite (-w)
+    # not included in a test suite (-w)
     progress = False            # show running progress (-p)
     coverage = False            # produce coverage reports (--coverage)
     coverdir = 'coverage'       # where to put them (currently hardcoded)
@@ -170,6 +172,7 @@ def get_test_files(cfg):
     if cfg.functional_tests:
         test_names.append('ftests')
     baselen = len(cfg.basedir) + 1
+
     def visit(ignored, dir, files):
         if os.path.basename(dir) not in test_names:
             for name in test_names:
@@ -198,21 +201,25 @@ def get_test_files(cfg):
 def import_module(filename, cfg, cov=None):
     """Imports and returns a module."""
     filename = os.path.splitext(filename)[0]
-
-    # get the dir where 'tests'/'ftests' are located.
-    parent_path = os.sep.join(filename.split(os.sep)[:-2])
-    # get the module name like 'tests.demo_test'
-    modname = '.'.join(filename.split(os.sep)[-2:])
-
-    sys.path.insert(0, parent_path)
+    modname = filename[len(cfg.basedir):].replace(os.path.sep, '.')
 
     if modname.startswith('.'):
         modname = modname[1:]
+
     if cov is not None:
         cov.start()
 
-    mod = __import__(modname)
-    
+    try:
+        mod = __import__(modname)
+    except ImportError:
+        # get the dir where 'tests'/'ftests' are located.
+        parent_path = os.sep.join(filename.split(os.sep)[:-2])
+        # get the module name like 'tests.demo_test'
+        modname = '.'.join(filename.split(os.sep)[-2:])
+        sys.path.reverse()
+        sys.path.insert(0, parent_path)
+        mod = __import__(modname)
+
     if cov is not None:
         cov.stop()
     components = modname.split('.')
@@ -230,7 +237,7 @@ def filter_testsuite(suite, matcher, level=None):
         if level is not None and getattr(test, 'level', 0) > level:
             continue
         if isinstance(test, unittest.TestCase):
-            testname = test.id() # package.module.class.method
+            testname = test.id()  # package.module.class.method
             if matcher(testname):
                 results.append(test)
         else:
@@ -247,7 +254,7 @@ def get_all_test_cases(module):
             continue
         item = getattr(module, name)
         if (isinstance(item, (type, types.ClassType)) and
-            issubclass(item, unittest.TestCase)):
+                issubclass(item, unittest.TestCase)):
             results.append(item)
     return results
 
@@ -287,9 +294,9 @@ def get_test_cases(test_files, cfg, cov=None):
                 # surround the warning with blank lines, otherwise it tends
                 # to get lost in the noise
                 stderr("\n%s: WARNING: %s not in test suite\n"
-                                      % (file, test_class.__name__))
+                       % (file, test_class.__name__))
         if (cfg.level is not None and
-            getattr(test_suite, 'level', 0) > cfg.level):
+                getattr(test_suite, 'level', 0) > cfg.level):
             continue
         filtered = filter_testsuite(test_suite, matcher, cfg.level)
         results.extend(filtered)
@@ -351,7 +358,7 @@ class CustomTestResult(_TextTestResult):
             if self.count:
                 self.stream.write("/%d (%5.1f%%)"
                                   % (self.count, n * 100.0 / self.count))
-            if self.showAll: # self.cfg.verbosity == 1
+            if self.showAll:  # self.cfg.verbosity == 1
                 self.stream.write(": ")
             elif self.cfg.verbosity:
                 name = self.getShortDescription(test)
@@ -449,7 +456,8 @@ class CustomTestRunner(unittest.TextTestRunner):
             if failed:
                 self.stream.write("failures=%d" % failed)
             if errored:
-                if failed: self.stream.write(", ")
+                if failed:
+                    self.stream.write(", ")
                 self.stream.write("errors=%d" % errored)
             self.stream.writeln(")")
         elif not self.cfg.quiet:
@@ -551,20 +559,38 @@ def main(argv):
         cfg.unit_tests = True
 
     # Set up the python path
-    sys.path.append(cfg.basedir)
+    # sys.path.append(cfg.basedir)
+    sys.path.insert(0, cfg.basedir)
 
     # Set up tracing before we start importing things
     cov = None
     if cfg.run_tests and cfg.coverage:
         from coverage import coverage
         # load the coverage file from same directory
-        cov_cfg =os.path.join(os.path.dirname(os.path.realpath(__file__)), '.coveragerc')
+        cov_cfg = os.path.join(os.path.dirname(
+            os.path.realpath(__file__)), '.coveragerc')
         if not os.path.isfile(cov_cfg):
             cov_cfg = None
         cov = coverage(config_file=cov_cfg)
 
     # Finding and importing
     test_files = get_test_files(cfg)
+
+    # Determine whether using inpace module or from site-packages
+    try:
+        filename = os.path.splitext(test_files[0])[0]
+        modname = filename[len(cfg.basedir):].replace(os.path.sep, '.')
+        if modname.startswith('.'):
+            modname = modname[1:]
+        mod = __import__(modname)
+        del mod
+        del sys.modules[modname]
+    except ImportError:
+        if cfg.verbosity:
+            print("Using package from site-packages.")
+    else:
+        if cfg.verbosity:
+            print("Using inplace built. {mpath}".format(mpath=mod.__file__))
 
     if cov is not None:
         cov.start()
