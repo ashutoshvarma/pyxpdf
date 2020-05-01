@@ -13,6 +13,9 @@ if (2, 7) != sys.version_info[:2] < (3, 5):
     print("This pyxpdf version requires Python 2.7, 3.5 or later.")
     sys.exit(1)
 
+if sys.version_info[0] < 3:
+    from io import open
+
 try:
     from setuptools import setup
 except ImportError:
