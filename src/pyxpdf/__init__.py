@@ -1,8 +1,15 @@
 __version__ = "0.1"
 
-from pyxpdf.xpdf import pdftotext_raw, PDFError, Config, Document, Page
+from pyxpdf.xpdf import (
+    pdftotext_raw, PDFError, Config, Document, Page
+)
 
-def pdftotext(pdf_file, start=1, end=0, layout="reading", ownerpass=None, userpass=None, cfg_file=None):
+def pdftotext(pdf_file, start = 0, end = 0, ownerpass=None, 
+              userpass=None, layout = "reading", fixed_pitch=0,
+              fixed_line_spacing=0, clip_text=False, discard_diagonal=False, 
+              insert_bom=False, margin_left=0, margin_right=0, 
+              margin_top=0, margin_bottom=0, eol=None, nopgbrk=False, 
+              quiet=False, cfg_file=None):
     """
     Extract text from pdf
 
@@ -34,4 +41,4 @@ def pdftotext(pdf_file, start=1, end=0, layout="reading", ownerpass=None, userpa
     Exceptions:
         `PDFError` - Base error for pyxpdf
     """
-    return pdftotext_raw(pdf_file, start, end, layout, ownerpass, userpass, cfg_file).decode("UTF-8", errors="ignore")
+    return pdftotext_raw(**locals()).decode("UTF-8", errors="ignore")
