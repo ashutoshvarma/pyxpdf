@@ -4,10 +4,10 @@
 import cython
 
 __all__ = [
-"pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
-"PDFError", 'XPDFError', "PDFSyntaxError", "XPDFConfigError",
-"PDFIOError", "PDFPermissionError", "XPDFInternalError",
-"XPDFNotInplementedError"
+    "pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
+    "PDFError", 'XPDFError', "PDFSyntaxError", "XPDFConfigError",
+    "PDFIOError", "PDFPermissionError", "XPDFInternalError",
+    "XPDFNotInplementedError"
 ]
 
 # Helper functions (like conversions from str to chars)
