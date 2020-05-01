@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/ashutoshvarma/pyxpdf.svg?branch=master)](https://travis-ci.com/ashutoshvarma/pyxpdf)
+[![Build status](https://ci.appveyor.com/api/projects/status/y4qys3oquc4bo8wd/branch/master?svg=true)](https://ci.appveyor.com/project/ashutoshvarma/pyxpdf/branch/master)
+[![codecov](https://codecov.io/gh/ashutoshvarma/pyxpdf/branch/master/graph/badge.svg)](https://codecov.io/gh/ashutoshvarma/pyxpdf)
+
 # pyxpdf
 Fast Python PDF module based on [xpdf-reader](https://www.xpdfreader.com/) sources.
 
