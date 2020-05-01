@@ -583,14 +583,14 @@ def main(argv):
         if modname.startswith('.'):
             modname = modname[1:]
         mod = __import__(modname)
-        del mod
-        del sys.modules[modname]
     except ImportError:
         if cfg.verbosity:
             print("Using package from site-packages.")
     else:
         if cfg.verbosity:
             print("Using inplace built. {mpath}".format(mpath=mod.__file__))
+        del mod
+        del sys.modules[modname]
 
     if cov is not None:
         cov.start()
