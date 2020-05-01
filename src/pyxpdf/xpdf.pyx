@@ -4,7 +4,10 @@
 import cython
 
 __all__ = [
-"pdftotext_raw, PDFError", "XPDFDoc", "XPage", "Config", "TextControl" 
+    "pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
+    "PDFError", 'XPDFError', "PDFSyntaxError", "XPDFConfigError",
+    "PDFIOError", "PDFPermissionError", "XPDFInternalError",
+    "XPDFNotInplementedError"
 ]
 
 # Helper functions (like conversions from str to chars)
@@ -23,13 +26,19 @@ from libc.stdio cimport printf
 from pyxpdf.includes.xpdf_types cimport GString, gFalse, gTrue
 from pyxpdf.includes.PDFDoc cimport PDFDoc
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams
-from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextOutputMode, TextOutputControl
-
+from pyxpdf.includes.TextOutputDev cimport (
+    TextOutputDev, TextOutputMode, TextOutputControl
+)
 
 cdef void _text_out_func(void *stream, const char *text, int length):
     (<string*>stream)[0] += string(text, length)
 
-cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", ownerpass=None, userpass=None, cfg_file=""):
+cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None, 
+                    userpass=None, layout = "reading", double fixed_pitch=0,
+                    double fixed_line_spacing=0, clip_text=False, discard_diagonal=False, 
+                    insert_bom=False, double margin_left=0, double margin_right=0, 
+                    double margin_top=0, double margin_bottom=0, eol=None, nopgbrk=False, 
+                    quiet=False, cfg_file=None):
     cdef string ext_text
     cdef int err_code
     cdef unique_ptr[GString] ownerpassG  
@@ -38,7 +47,7 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     cdef unique_ptr[TextOutputDev] text_dev
     cdef unique_ptr[TextOutputControl] control 
 
-    if cfg_file:
+    if cfg_file is not None:
         Config.load_file(cfg_file)
     Config.text_encoding = "UTF-8"
 
@@ -50,10 +59,10 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     doc = make_unique[PDFDoc](_chars(pdf_file), ownerpassG.get(), userpassG.get())
     if deref(doc).isOk() == gFalse:
         err_code = deref(doc).getErrorCode()
-        raise PDFError(f"Cannot open pdf file. ErrorCode-{err_code}")
+        raise ErrorCodeMapping[err_code]
 
     if deref(doc).okToCopy(ignoreOwnerPW=gFalse) == gFalse:
-        raise PDFError("Copying of text from this document is not allowed.")
+        raise PDFPermissionError("Copying of text from this document is not allowed.")
 
     if start < 1:
         start = 1
@@ -61,6 +70,19 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
         end = deref(doc).getNumPages()
 
     control = make_unique[TextOutputControl]()
+
+    deref(control).fixedPitch = fixed_pitch
+    deref(control).fixedLineSpacing = fixed_line_spacing
+
+    deref(control).clipText = to_GBool(clip_text)
+    deref(control).discardDiagonalText = to_GBool(discard_diagonal)
+    deref(control).insertBOM = to_GBool(insert_bom)
+
+    deref(control).marginRight = margin_right
+    deref(control).marginLeft = margin_left
+    deref(control).marginTop = margin_top
+    deref(control).marginBottom = margin_bottom
+
     if layout == "table":
         deref(control).mode = TextOutputMode.textOutTableLayout
     elif layout == "physical":
@@ -74,11 +96,11 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, layout="reading", owne
     elif layout == "reading":
         deref(control).mode = TextOutputMode.textOutReadingOrder
     else:
-        raise ValueError(f"Unknown layout - {layout}")
+        raise ValueError(f"Unknown layout - {layout}.")
 
     text_dev = make_unique[TextOutputDev](&_text_out_func, &ext_text, control.get())
     if deref(text_dev).isOk() == gFalse:
-        raise PDFError("Error in pdf options")
+        raise XPDFConfigError("Failed to create TextOutputDev with given options")
 
     deref(doc).displayPages(text_dev.get(), start, end, 72, 72, 0, gFalse, gTrue, gFalse)
     return ext_text

@@ -9,7 +9,7 @@ venv2
 __pycache__
 *.pyc
 
-*test_*.py
+_test*.py
 
 libs
 *.so
@@ -19,3 +19,8 @@ libs
 *.prof
 
 src/*/*.html
+
+.coverage
+coverage/
+coverage.xml
+htmlcov/

@@ -2,7 +2,7 @@ from cython.operator cimport preincrement as inc, predecrement as dec
 
 from libcpp.string cimport string
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams, EndOfLineKind
-from pyxpdf.includes.xpdf_error cimport ErrorCallback, setErrorCallback
+from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
 
 cdef class GlobalParamsConfig:
@@ -24,6 +24,8 @@ cdef class GlobalParamsConfig:
 
         globalParams = self._global
 
+    def reset(self):
+        self.load_file(None)
 
     def __cinit__(self, cfg_path=None):
         self.load_file(cfg_path)
@@ -74,7 +76,11 @@ cdef class GlobalParamsConfig:
 
     @text_encoding.setter
     def text_encoding(self, encoding):
+        cdef UnicodeMap* umap
         self._global.setTextEncoding(_chars(encoding.upper()))
+        umap = self._global.getTextEncoding()
+        if umap == NULL:
+            raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
 
 
     @property
@@ -97,7 +103,7 @@ cdef class GlobalParamsConfig:
         elif eol == 'mac':
             c_eol = EndOfLineKind.eolMac
         else:
-            raise PDFError("Invalid EOL type.")
+            raise XPDFConfigError(f"Invalid EOL type - {eol}.")
         self._global.setTextEOL(_chars(eol))
 
 
@@ -143,7 +149,9 @@ cdef class GlobalParamsConfig:
         
 
     
-Config = GlobalParamsConfig() 
+Config = GlobalParamsConfig()
+# default text encoding 
+Config.text_encoding = 'utf-8'
 
     
 

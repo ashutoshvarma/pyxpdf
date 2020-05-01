@@ -37,7 +37,7 @@ cdef inline GString* to_GString(object s):
 
 cdef inline object GString_to_unicode(GString *gstr):
     if gstr is not NULL:
-        return gstr.getCString()[:gstr.getLength()].decode("UTF-8")
+        return gstr.getCString()[:gstr.getLength()].decode("UTF-8", errors='ignore')
     else:
         return ""
 

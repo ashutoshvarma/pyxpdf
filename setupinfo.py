@@ -1,3 +1,5 @@
+# adapted from https://github.com/lxml/lxml/blob/master/setupinfo.py
+
 import sys
 import io
 import os
@@ -6,6 +8,7 @@ import subprocess
 from distutils.core import Extension
 from distutils.errors import CompileError, DistutilsOptionError
 from distutils.command.build_ext import build_ext as _build_ext
+from versioninfo import get_base_dir
 
 try:
     import Cython.Compiler.Version
@@ -14,7 +17,8 @@ except ImportError:
     CYTHON_INSTALLED = False
 
 EXT_MODULES = ["pyxpdf.xpdf", ]
-COMPILED_MODULES = ['pyxpdf.pdf']
+# COMPILED_MODULES = ['pyxpdf.pdf']
+COMPILED_MODULES = []
 HEADER_FILES = ['pyxpdf_defs.h', ]
 
 if hasattr(sys, 'pypy_version_info') or (
@@ -49,10 +53,6 @@ def env_var(name):
             return value.split()
     else:
         return []
-
-
-def get_base_dir():
-    return os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
 def _prefer_reldirs(base_dir, dirs):
@@ -214,7 +214,6 @@ def cflags(static_cflags):
     if not static_cflags:
         static_cflags = env_var('CFLAGS')
     result.extend(static_cflags)
-
     return result
 
 

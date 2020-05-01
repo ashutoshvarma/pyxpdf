@@ -1,0 +1,47 @@
+<?xpacket begin='' id='W5M0MpCehiHzreSzNTczkc9d' bytes='2053'?>
+
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+ xmlns:iX='http://ns.adobe.com/iX/1.0/'>
+
+ <rdf:Description about=''
+  xmlns='http://ns.adobe.com/pdf/1.3/'
+  xmlns:pdf='http://ns.adobe.com/pdf/1.3/'>
+  <pdf:Creator>C:My DocumentsSUMMARY6.WPD</pdf:Creator>
+  <pdf:CreationDate>0-01-01T00:00:00Z</pdf:CreationDate>
+  <pdf:Title>The Digital Millennium Copyright Act of 1998</pdf:Title>
+  <pdf:Author>United States Copyright Office - jmf</pdf:Author>
+  <pdf:Producer>Acrobat PDFWriter 3.02 for Windows</pdf:Producer>
+  <pdf:Keywords>digital millennium copyright act circumvention technological protection management information online service provider liability limitation computer maintenance competitiion repair ephemeral recording webcasting distance education study vessel hull</pdf:Keywords>
+  <pdf:Subject>Copyright Office Summary of the DMCA</pdf:Subject>
+  <pdf:ModDate>2001-10-17T18:09:26-03:00</pdf:ModDate>
+ </rdf:Description>
+
+ <rdf:Description about=''
+  xmlns='http://ns.adobe.com/xap/1.0/'
+  xmlns:xap='http://ns.adobe.com/xap/1.0/'>
+  <xap:CreateDate>0-01-01T00:00:00Z</xap:CreateDate>
+  <xap:Title>
+   <rdf:Alt>
+    <rdf:li xml:lang='x-default'>The Digital Millennium Copyright Act of 1998</rdf:li>
+   </rdf:Alt>
+  </xap:Title>
+  <xap:Author>United States Copyright Office - jmf</xap:Author>
+  <xap:Description>
+   <rdf:Alt>
+    <rdf:li xml:lang='x-default'>Copyright Office Summary of the DMCA</rdf:li>
+   </rdf:Alt>
+  </xap:Description>
+  <xap:ModifyDate>2001-10-17T18:09:26-03:00</xap:ModifyDate>
+  <xap:MetadataDate>2001-10-17T18:09:26-03:00</xap:MetadataDate>
+ </rdf:Description>
+
+ <rdf:Description about=''
+  xmlns='http://purl.org/dc/elements/1.1/'
+  xmlns:dc='http://purl.org/dc/elements/1.1/'>
+  <dc:title>The Digital Millennium Copyright Act of 1998</dc:title>
+  <dc:creator>United States Copyright Office - jmf</dc:creator>
+  <dc:description>Copyright Office Summary of the DMCA</dc:description>
+ </rdf:Description>
+
+</rdf:RDF>
+<?xpacket end='r'?>

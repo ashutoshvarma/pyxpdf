@@ -1,0 +1,52 @@
+version: 1.0.{build}
+
+image:
+  - Visual Studio 2019
+    
+# skip_commits:
+#   files:
+#     - dir/*
+#     - dir/*.md
+#     - full/path.txt
+#     - another/dir/here/
+#     - '**/*.md'
+
+environment:
+  matrix:
+  - python: 38
+  - python: 38-x64
+  - python: 37
+  - python: 37-x64
+  - python: 36
+  - python: 36-x64
+  - python: 35
+  - python: 35-x64
+
+install:
+    - SET PATH=C:\\Python%PYTHON%;c:\\Python%PYTHON%\\scripts;%PATH%
+    - python -m pip.__main__ install -U pip wheel setuptools 
+    - pip install -r requirements.txt
+
+build: off
+build_script:
+  - python -u setup.py -vv bdist_wheel --with-cython
+  - del /F /Q "src\pyxpdf\*.cpp" "src\pyxpdf\*.pyd" 2>NUL || echo
+  - pip install -vv --pre --no-index --upgrade --find-links=dist pyxpdf
+  - python -u runtests.py -vv 
+
+test: off
+test_script:
+  - ps: Get-ChildItem dist\*.whl | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  
+# on_success:
+#   - ps: |
+#         if ($env:APPVEYOR_REPO_TAG -eq "true" -and $env:APPVEYOR_REPO_TAG_NAME.StartsWith('v'))
+#         {
+#           python -m twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ .\dist\*
+          
+#           # Unnesessary Write-Host for making exitcode 0
+#           if ($?)
+#             { Write-Host "Wheel uploaded." }
+#           else 
+#             { Write-Host "Wheel upload failed." }
+#         }
