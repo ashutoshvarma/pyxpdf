@@ -48,5 +48,5 @@ def add_standard_options_to(parser):
                       help="Run the benchmark through cProfile.")
     parser.add_option("--profile_sort", action="store", type="str",
                       default="time", help="Column to sort cProfile output by.")
-    parser.add_option("--take_geo_mean", action="store_true",
+    parser.add_option("-m", "--take_geo_mean", action="store_true",
                       help="Return the geo mean, rather than individual data.")
