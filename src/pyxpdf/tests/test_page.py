@@ -45,7 +45,7 @@ class PageTestCase(InitGlobalTextCase, PropertyTextCase):
     ]
 
     def setUp(self):
-        super().setUp()
+        super(PageTestCase, self).setUp()
         Config.text_encoding = 'utf-8'
         Config.text_eol = 'unix'
         self.doc = Document(self.mandarin_pdf)

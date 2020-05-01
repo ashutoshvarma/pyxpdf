@@ -8,7 +8,7 @@ class PTT_TestCase(InitGlobalTextCase):
     mandarin_pdf = 'samples/nonfree/mandarin.pdf'
     mandarin_txt = file_in_test_dir('mandarin_first.txt')
     def setUp(self):
-        super().setUp()
+        super(PTT_TestCase, self).setUp()
         Config.text_eol = 'unix'
         with open(self.mandarin_txt, 'rb') as fp:
             self.text_raw = fp.read()

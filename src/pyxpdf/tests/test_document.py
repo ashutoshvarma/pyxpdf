@@ -25,7 +25,7 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
     }
 
     def setUp(self):
-        super().setUp()
+        super(DocumentTextCase, self).setUp()
         Config.text_encoding = 'utf-8'
         Config.text_eol = 'unix'
         with open(file_in_test_dir('dcma_xmp.xml'), 'r', encoding='utf-8') as fp:
