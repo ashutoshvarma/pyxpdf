@@ -1,6 +1,9 @@
 [![Build Status](https://travis-ci.com/ashutoshvarma/pyxpdf.svg?branch=master)](https://travis-ci.com/ashutoshvarma/pyxpdf)
-[![Build status](https://ci.appveyor.com/api/projects/status/y4qys3oquc4bo8wd/branch/master?svg=true)](https://ci.appveyor.com/project/ashutoshvarma/pyxpdf/branch/master)
+[![Build Status](https://ashutoshvarma.visualstudio.com/pyxpdf/_apis/build/status/ashutoshvarma.pyxpdf?branchName=master)](https://ashutoshvarma.visualstudio.com/pyxpdf/_build/latest?definitionId=1&branchName=master)
 [![codecov](https://codecov.io/gh/ashutoshvarma/pyxpdf/branch/master/graph/badge.svg)](https://codecov.io/gh/ashutoshvarma/pyxpdf)
+[![GitHub license](https://img.shields.io/github/license/ashutoshvarma/pyxpdf?color=blue)](https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyxpdf)](https://pypi.org/project/pyxpdf/)
+[![PyPI](https://img.shields.io/pypi/v/pyxpdf?color=green)](https://pypi.org/project/pyxpdf/)
 
 # pyxpdf
 Fast Python PDF parser module based on [xpdf-reader](https://www.xpdfreader.com/) sources.
