@@ -78,7 +78,7 @@ jobs:
           - bash: ls wheelhouse
           - task: GitHubRelease@1
             inputs:
-              gitHubConnection: 
+              gitHubConnection: 'github.com_ashutoshvarma'
               repositoryName: '$(Build.Repository.Name)'
               action: 'create'
               target: '$(Build.SourceVersion)'
