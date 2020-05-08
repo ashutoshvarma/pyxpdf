@@ -1,0 +1,90 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - v*
+
+jobs:
+- job: Build
+  strategy:
+    maxParallel: 4
+    matrix:
+      LinuxWheels:
+        imageName: 'ubuntu-latest'
+        artifactName: linuxwheels
+        CFLAGS: "-std=c++14"
+      MacWheels:
+        imageName: 'macOS-10.15'
+        artifactName: macwheels
+        CFLAGS: "-std=c++14"
+      WinWheels:
+        imageName: 'windows-latest'
+        artifactName: winwheels
+        CIBW_BEFORE_BUILD_WINDOWS: pip install -r {project}\requirements.txt && rmdir /S /Q libs || echo "No libs"
+  pool: { vmImage: $(imageName) }
+  variables:
+    WITH_CYTHON: true
+#     CIBW_TEST_COMMAND: "python3 {project}/runtests.py -v"
+    CIBW_SKIP: "?p27* pp*"
+    CIBW_BUILD_VERBOSITY: 1
+  steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.8'
+      displayName: "Python Setup"
+      
+    - bash: |
+        brew postinstall openssl
+        export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem
+        echo "##vso[task.setvariable variable=SSL_CERT_FILE]$SSL_CERT_FILE"
+      displayName: "Update SSL Certs"
+      condition: contains(variables['imageName'], 'macOS')
+    - bash: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
+        python setup.py build_ext -i  -vv --warnings
+        python runtests.py -vv || exit 1
+        make clean 
+      displayName: "Initial Build Tests"
+      
+    - bash: |
+        pip3 install cibuildwheel==1.4.1
+        cibuildwheel --output-dir wheelhouse .
+      displayName: "Build Wheels"
+        
+    - task: PublishBuildArtifacts@1
+      inputs: 
+        pathtoPublish: 'wheelhouse'
+        ArtifactName: $(artifactName)
+      displayName: "Create Artifacts"
+
+- deployment: publishWheels
+  displayName: Make Github Release
+  dependsOn: Build
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  environment: 'pyxpdf-dev'
+  strategy: 
+    runOnce:
+      deploy:
+        pool: {vmImage: "ubuntu-latest"}
+        steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              downloadPath: 'wheelhouse'
+          - bash: ls wheelhouse
+          - task: GitHubRelease@1
+            inputs:
+              gitHubConnection: 'github.com_wrathdev'
+              repositoryName: '$(Build.Repository.Name)'
+              action: 'create'
+              target: '$(Build.SourceVersion)'
+              tagSource: 'gitTag'
+              tagPattern: 'v.+'
+              releaseNotesSource: 'inline'
+              assets: 'wheelhouse/**/*'
+              changeLogCompareToRelease: 'lastFullRelease'
+              changeLogType: 'commitBased'

@@ -10,16 +10,16 @@ class PTT_TestCase(InitGlobalTextCase):
     def setUp(self):
         super(PTT_TestCase, self).setUp()
         Config.text_eol = 'unix'
-        with open(self.mandarin_txt, 'rb') as fp:
+        with open(self.mandarin_txt, 'r', encoding="utf-8") as fp:
             self.text_raw = fp.read()
 
     def test_pdftotext_raw(self):
         text_raw = pdftotext_raw(self.mandarin_pdf, end=1)
-        self.assertEqual(text_raw, self.text_raw)
+        self.assertEqual(text_raw, self.text_raw.encode('utf-8'))
 
     def test_pdftotext(self):
         text_raw = pdftotext(self.mandarin_pdf, end=1)
-        self.assertEqual(text_raw, self.text_raw.decode('utf8'))
+        self.assertEqual(text_raw, self.text_raw)
 
 def test_suite():
     suite = unittest.TestSuite()
