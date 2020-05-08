@@ -17,6 +17,10 @@ cache:
   directories:
     - $HOME/.cache/pip
 
+env:
+  global:
+    - WITH_CYTHON="true"
+
 stages:
     # Do the style check and a single test job, don't proceed if it fails
     - name: Initial tests
@@ -28,25 +32,17 @@ jobs:
     # Do all python versions without environment variables set
     - stage: Initial tests
       python: 3.6
-      env: WITH_CYTHON=true
     - stage: Comprehensive tests
-      python: 3.5
-      env: WITH_CYTHON=true
-    - python: 3.7
-      env: WITH_CYTHON=true
-    - python: 3.8
-      env: WITH_CYTHON=true USE_WHEEL=true 
-    - python: 3.6
-      env: WITH_CYTHON=true USE_SDIST=true WITH_COVERAGE=true
+      python: 3.8
+      env: USE_SDIST=true WITH_COVERAGE=true
     - python: 2.7
-      env: WITH_CYTHON=true
   allow_failures:
     - python: 2.7
-      env: WITH_CYTHON=true
    
 
 before_install:
   - bash ./build_tools/travis_before_install.sh
+
 
 script:
   - bash ./build_tools/travis_test.sh
