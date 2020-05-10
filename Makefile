@@ -75,7 +75,7 @@ valtest: valgrind_test_inplace
 ftest: ftest_inplace
 
 clean:
-	find . ! -path ".venv" \( -name '*.o' -o -name '*.so' -o -name '*.py[cod]' -o -name '*.dll' \) -exec rm -f {} \;
+	find . -path ./venv -prune -o \( -name '*.o' -o -name '*.so' -o -name '*.py[cod]' -o -name '*.dll' \) -exec rm -f {} \;
 	rm -rf build
 
 realclean: clean 

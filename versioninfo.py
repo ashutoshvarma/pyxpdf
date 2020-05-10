@@ -56,4 +56,3 @@ def changes():
 def get_base_dir():
     return os.path.abspath(os.path.dirname(sys.argv[0]))
 
-print(changes())
