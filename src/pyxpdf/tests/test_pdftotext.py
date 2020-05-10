@@ -9,7 +9,6 @@ class PTT_TestCase(InitGlobalTextCase):
     mandarin_txt = file_in_test_dir('mandarin_first.txt')
     def setUp(self):
         super(PTT_TestCase, self).setUp()
-        Config.text_eol = 'unix'
         with open(self.mandarin_txt, 'r', encoding="utf-8") as fp:
             self.text_raw = fp.read()
 

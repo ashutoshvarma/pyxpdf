@@ -46,8 +46,6 @@ class PageTestCase(InitGlobalTextCase, PropertyTextCase):
 
     def setUp(self):
         super(PageTestCase, self).setUp()
-        Config.text_encoding = 'utf-8'
-        Config.text_eol = 'unix'
         self.doc = Document(self.mandarin_pdf)
 
     def test_page_properties(self):

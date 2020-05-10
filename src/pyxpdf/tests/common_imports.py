@@ -5,6 +5,8 @@ from pyxpdf.xpdf import Config, GlobalParamsConfig
 class InitGlobalTextCase(unittest.TestCase):
     def setUp(self):
         Config.reset()
+        Config.text_encoding = 'utf-8'
+        Config.text_eol = 'unix'
 
     def tearDown(self):
         Config.reset()
