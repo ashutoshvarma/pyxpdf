@@ -48,7 +48,7 @@ def changes():
                     break
             if lines:
                 lines.append(line)
-            elif line.startswith("### " + _version):
+            elif line.startswith("### {version} ".format(version=_version)):
                 lines.append(line)
     return ''.join(lines[:-1])
 
@@ -56,3 +56,4 @@ def changes():
 def get_base_dir():
     return os.path.abspath(os.path.dirname(sys.argv[0]))
 
+print(changes())
