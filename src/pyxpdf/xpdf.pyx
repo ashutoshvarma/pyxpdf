@@ -15,6 +15,8 @@ include "helper.pxi"
 
 include "pdferror.pxi"
 
+# Manage xpdf globalParams
+include "globalconfig.pxi"
 
 from os import linesep
 
@@ -37,8 +39,7 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None,
                     userpass=None, layout = "reading", double fixed_pitch=0,
                     double fixed_line_spacing=0, clip_text=False, discard_diagonal=False, 
                     insert_bom=False, double margin_left=0, double margin_right=0, 
-                    double margin_top=0, double margin_bottom=0, eol=None, nopgbrk=False, 
-                    quiet=False, cfg_file=None):
+                    double margin_top=0, double margin_bottom=0):
     cdef string ext_text
     cdef int err_code
     cdef unique_ptr[GString] ownerpassG  
@@ -46,10 +47,6 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None,
     cdef unique_ptr[PDFDoc] doc
     cdef unique_ptr[TextOutputDev] text_dev
     cdef unique_ptr[TextOutputControl] control 
-
-    if cfg_file is not None:
-        Config.load_file(cfg_file)
-    Config.text_encoding = "UTF-8"
 
     if ownerpass:
         ownerpassG = make_unique[GString](_chars(ownerpass))
@@ -106,11 +103,6 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None,
     return ext_text
 
 
-
-## Internal Xpdf Objects
-
-# Manage xpdf globalParams
-include "globalconfig.pxi"
 
 # Python Objects based on TextOutputDev.pxd
 include "textoutput.pxi"

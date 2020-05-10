@@ -8,8 +8,7 @@ def pdftotext(pdf_file, start = 0, end = 0, ownerpass=None,
               userpass=None, layout = "reading", fixed_pitch=0,
               fixed_line_spacing=0, clip_text=False, discard_diagonal=False, 
               insert_bom=False, margin_left=0, margin_right=0, 
-              margin_top=0, margin_bottom=0, eol=None, nopgbrk=False, 
-              quiet=False, cfg_file=None):
+              margin_top=0, margin_bottom=0):
     """
     Extract text from pdf
 
