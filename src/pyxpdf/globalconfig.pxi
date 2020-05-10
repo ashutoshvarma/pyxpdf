@@ -22,6 +22,8 @@ cdef class GlobalParamsConfig:
         if self._global == NULL:
             raise MemoryError("Cannot create GlobalParamsConfig object.")
 
+        # default text encoding 
+        self._global.setTextEncoding("UTF-8")
         globalParams = self._global
 
     def reset(self):
@@ -150,8 +152,6 @@ cdef class GlobalParamsConfig:
 
     
 Config = GlobalParamsConfig()
-# default text encoding 
-Config.text_encoding = 'utf-8'
 
     
 
