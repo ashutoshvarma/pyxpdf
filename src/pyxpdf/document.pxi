@@ -16,7 +16,9 @@ from pyxpdf.includes.PDFDoc cimport PDFDoc
 # Change import name as it was conflicting with cdef classes
 from pyxpdf.includes.Page cimport Page as XPage
 from pyxpdf.includes.OutputDev cimport OutputDev
-from pyxpdf.includes.TextOutputDev cimport TextOutputDev, TextPage, TextOutputControl
+from pyxpdf.includes.TextOutputDev cimport (
+    TextOutputDev, TextPage, TextOutputControl
+)
 from pyxpdf.includes.Catalog cimport Catalog
 
 

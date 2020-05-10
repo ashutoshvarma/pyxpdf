@@ -1,4 +1,9 @@
-from pyxpdf.includes.xpdf_error cimport ErrorCategory, setErrorCallback, ErrorCallback, errNone, errOpenFile, errBadCatalog, errDamaged, errEncrypted, errHighlightFile, errBadPrinter, errPrinting, errPermission, errBadPageNum, errFileIO
+from pyxpdf.includes.xpdf_error cimport ( 
+    ErrorCategory, setErrorCallback, ErrorCallback, 
+    errNone, errOpenFile, errBadCatalog, errDamaged, errEncrypted, 
+    errHighlightFile, errBadPrinter, errPrinting, errPermission, 
+    errBadPageNum, errFileIO
+)
 
 ErrorCodesDict = {
     errNone : "Error None",
