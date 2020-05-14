@@ -78,8 +78,8 @@ cdef dict Dict_to_pydict(Dict* xdict, dict pydict = {}):
         obj.free()
     return pydict
 
-cdef object TextString_to_unicode(TextString* text_str):
-    return GString_to_unicode(text_str.toPDFTextString())
+# cdef object TextString_to_unicode(TextString* text_str):
+#    return GString_to_unicode(text_str.toPDFTextString())
 
 cdef TextString* to_TextString(tstr):
     cdef TextString* text_string
