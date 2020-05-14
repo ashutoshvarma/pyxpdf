@@ -2,6 +2,10 @@ import os
 import unittest
 from pyxpdf.xpdf import Config, GlobalParamsConfig
 
+TEST_DIR = os.path.dirname(os.path.realpath(__file__))
+ROOT_DIR = os.sep.join(TEST_DIR.split(os.sep)[:-3])
+SAMPLE_DIR = os.path.join(ROOT_DIR, "samples")
+
 class InitGlobalTextCase(unittest.TestCase):
     def setUp(self):
         Config.reset()
@@ -28,6 +32,8 @@ class PropertyTextCase(unittest.TestCase):
 
 
 
-def file_in_test_dir(name):
-    _testdir = os.path.dirname(__file__)
-    return os.path.join(_testdir, name)
+def file_in_test_dir(*args):
+    return os.path.join(TEST_DIR, *args)
+
+def file_in_sample_dir(*args):
+    return os.path.join(SAMPLE_DIR, *args)

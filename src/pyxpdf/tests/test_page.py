@@ -1,12 +1,12 @@
 # coding: utf8
 
 import unittest
-from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir
+from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf.xpdf import Config, Document, Page
 
 
 class PageTestCase(InitGlobalTextCase, PropertyTextCase):
-    mandarin_pdf = "samples/nonfree/mandarin.pdf"
+    mandarin_pdf = file_in_sample_dir("nonfree", "mandarin.pdf")
     mandarin_prop = {
         'artbox': (0.0, 0.0, 612.0, 792.0),
         'bleedbox': (0.0, 0.0, 612.0, 792.0),

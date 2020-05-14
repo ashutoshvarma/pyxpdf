@@ -1,14 +1,14 @@
 import unittest
-from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir
+from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf.xpdf import Config, XPDFConfigError, Document
 
 # TODO: add tests for encodings
 
 
 class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
-    simple_file = "samples/simple1.pdf"
-    dmca_pdf = "samples/nonfree/dmca.pdf"
-    mandarin_pdf = 'samples/nonfree/mandarin.pdf'
+    simple_file = file_in_sample_dir("simple1.pdf")
+    dmca_pdf = file_in_sample_dir("nonfree", "dmca.pdf")
+    mandarin_pdf = file_in_sample_dir("nonfree", "mandarin.pdf")
     dmca_prop = {
         'num_pages': 18,
         'pdf_version': 1.4,

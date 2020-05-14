@@ -1,11 +1,10 @@
 import unittest
-from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir
+from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf import pdftotext, pdftotext_raw, Config
 
 
-
 class PTT_TestCase(InitGlobalTextCase):
-    mandarin_pdf = 'samples/nonfree/mandarin.pdf'
+    mandarin_pdf = file_in_sample_dir("nonfree", "mandarin.pdf")
     mandarin_txt = file_in_test_dir('mandarin_first.txt')
     def setUp(self):
         super(PTT_TestCase, self).setUp()
