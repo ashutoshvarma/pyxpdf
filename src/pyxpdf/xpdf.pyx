@@ -10,6 +10,16 @@ __all__ = [
     "XPDFNotInplementedError"
 ]
 
+from libcpp.string cimport string
+from libcpp.memory cimport unique_ptr, make_unique
+from libcpp.vector cimport vector
+
+cimport cython
+from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as inc, predecrement as dec
+
+from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
+
 # Helper functions (like conversions from str to chars)
 include "helper.pxi"
 

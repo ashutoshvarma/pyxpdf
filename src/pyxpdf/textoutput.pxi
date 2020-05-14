@@ -1,4 +1,3 @@
-from pyxpdf.includes.xpdf_types cimport GBool
 from pyxpdf.includes.TextOutputDev cimport TextOutputMode, TextOutputControl
 
 # TextPhysicalLayout = TextOutputMode.textOutPhysLayout

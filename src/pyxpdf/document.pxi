@@ -1,12 +1,4 @@
-from libcpp.string cimport string
-from libcpp.memory cimport unique_ptr, make_unique
-from libcpp.vector cimport vector
-
-from cpython cimport bool as PyBool
-from cython.operator cimport dereference as deref
-
 from pyxpdf.includes.xpdf_error cimport errEncrypted, errOpenFile
-from pyxpdf.includes.xpdf_types cimport GBool, GString, gFalse, gTrue
 from pyxpdf.includes.CharTypes cimport Unicode
 from pyxpdf.includes.TextString cimport TextString
 from pyxpdf.includes.Object cimport Object

@@ -1,8 +1,3 @@
-from cython.operator cimport dereference as deref
-from libcpp.string cimport string
-from libcpp.memory cimport unique_ptr, make_unique
-
-from pyxpdf.includes.xpdf_types cimport GString, gFalse, gTrue
 from pyxpdf.includes.PDFDoc cimport PDFDoc
 from pyxpdf.includes.TextOutputDev cimport (
     TextOutputDev, TextOutputMode, TextOutputControl

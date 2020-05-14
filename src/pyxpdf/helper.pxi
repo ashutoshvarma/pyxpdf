@@ -1,9 +1,3 @@
-from libcpp.vector cimport vector
-
-from cython.operator cimport dereference as deref
-from cpython cimport bool as PyBool
-
-from pyxpdf.includes.xpdf_types cimport GString, GBool, gTrue, gFalse
 from pyxpdf.includes.CharTypes cimport Unicode
 from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Page cimport PDFRectangle

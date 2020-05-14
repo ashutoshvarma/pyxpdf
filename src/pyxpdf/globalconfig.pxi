@@ -1,6 +1,3 @@
-from cython.operator cimport preincrement as inc, predecrement as dec
-
-from libcpp.string cimport string
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams, EndOfLineKind
 from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
