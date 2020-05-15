@@ -26,7 +26,7 @@ jobs:
   pool: { vmImage: $(imageName) }
   variables:
     WITH_CYTHON: true
-#     CIBW_TEST_COMMAND: "python3 {project}/runtests.py -v"
+    CIBW_TEST_COMMAND: "python {project}/runtests.py -v"
     CIBW_SKIP: "?p27* pp*"
     CIBW_BUILD_VERBOSITY: 1
   steps:
@@ -50,7 +50,7 @@ jobs:
       displayName: "Initial Build Tests"
       
     - bash: |
-        pip3 install cibuildwheel==1.4.1
+        pip install cibuildwheel==1.4.1
         cibuildwheel --output-dir wheelhouse .
       displayName: "Build Wheels"
         
