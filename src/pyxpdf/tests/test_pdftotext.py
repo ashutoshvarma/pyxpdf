@@ -1,4 +1,5 @@
 import unittest
+from io import open
 from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf import pdftotext, pdftotext_raw, Config
 

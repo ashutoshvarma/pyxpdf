@@ -1,6 +1,7 @@
 # coding: utf8
 
 import unittest
+from io import open
 from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf.xpdf import Config, Document, Page
 
@@ -23,7 +24,7 @@ class PageTestCase(InitGlobalTextCase, PropertyTextCase):
         'trimbox': (0.0, 0.0, 612.0, 792.0)
     }
 
-    find_char = "通"
+    find_char = u"通"
     find_result = [(
         122.69618999999997,
         149.79401400000003,

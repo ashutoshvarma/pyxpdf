@@ -1,4 +1,5 @@
 import unittest
+from io import open
 from .common_imports import InitGlobalTextCase, PropertyTextCase, file_in_test_dir, file_in_sample_dir
 from pyxpdf.xpdf import Config, XPDFConfigError, Document
 
@@ -64,9 +65,8 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
 
     def test_document_page_by_label(self):
         doc = Document(self.mandarin_pdf)
-        with self.subTest("Test get page by labels"):
-            for i in range(len(doc)):
-                self.assertEqual(doc[i].index, doc[str(i+1)].index)
+        for i in range(len(doc)):
+            self.assertEqual(doc[i].index, doc[str(i+1)].index)
 
     def test_document_text_raw(self):
         doc = Document(self.mandarin_pdf)
