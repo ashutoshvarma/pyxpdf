@@ -1,8 +1,10 @@
 from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams, EndOfLineKind
 from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
-
-cdef class GlobalParamsConfig:
+# NOTE: This class should be always a singleton
+# only one object of this class should exist i.e 
+# global variable `Config`
+cdef class _GlobalParamsConfig:
     cdef:
         object cfg_path
         GlobalParams* _global
@@ -164,7 +166,7 @@ cdef class GlobalParamsConfig:
         return self._global.defaultTextEncoding.decode('UTF-8')
 
 
-Config = GlobalParamsConfig()
+Config = _GlobalParamsConfig()
 
 
 
