@@ -151,14 +151,15 @@ def ext_modules(static_include_dirs, static_library_dirs,
                 runtime_library_dirs=None if is_py else runtime_library_dirs,
                 libraries=None if is_py else _libraries,
             ))
+
+    gdb = False
     if CYTHON_INSTALLED and OPTION_WITH_CYTHON_GDB:
-        for ext in result:
-            ext.cython_gdb = True
+        gdb = True
 
     if CYTHON_INSTALLED and use_cython:
         # build .cpp files right now and convert Extension() objects
         from Cython.Build import cythonize
-        result = cythonize(result, compiler_directives=cythonize_directives)
+        result = cythonize(result, compiler_directives=cythonize_directives, gdb_debug=gdb)
 
     return result
 
