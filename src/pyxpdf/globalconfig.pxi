@@ -3,7 +3,14 @@ from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
 
 cdef class GlobalParamsConfig:
-    cdef GlobalParams* _global
+    cdef:
+        object cfg_path
+        GlobalParams* _global
+
+    cdef _set_defaults(self):
+        # only call after initialising self._global
+        # default text encoding 
+        self._global.setTextEncoding("UTF-8")
 
     def load_file(self, cfg_path):
         global globalParams
@@ -18,16 +25,26 @@ cdef class GlobalParamsConfig:
 
         if self._global == NULL:
             raise MemoryError("Cannot create GlobalParamsConfig object.")
-
-        # default text encoding 
-        self._global.setTextEncoding("UTF-8")
+        self._set_defaults()
         globalParams = self._global
 
     def reset(self):
-        self.load_file(None)
+        self.load_file(self.cfg_path)
 
     def __cinit__(self, cfg_path=None):
-        self.load_file(cfg_path)
+        cdef object pyxpdf_data
+        if cfg_path == None:
+            try:
+                import pyxpdf_data
+                self.cfg_path = pyxpdf_data.get_xpdfrc()
+            except ImportError:
+                pass
+            else:
+                del pyxpdf_data
+        else:
+            self.cfg_path = None
+
+        self.load_file(self.cfg_path)
 
     def __dealloc__(self):
         global globalParams
@@ -41,7 +58,7 @@ cdef class GlobalParamsConfig:
     @property
     def base_dir(self):
         return GString_to_unicode(self._global.getBaseDir())
-    
+
     @base_dir.setter
     def base_dir(self, dir):
         self._global.setBaseDir(_chars(dir))
@@ -58,7 +75,7 @@ cdef class GlobalParamsConfig:
     @ps_paper_width.setter
     def ps_paper_width(self, int width):
         self._global.setPSPaperWidth(width)
-    
+
 
     @property
     def ps_paper_height(self):
@@ -145,12 +162,10 @@ cdef class GlobalParamsConfig:
     @property
     def default_text_encoding(self):
         return self._global.defaultTextEncoding.decode('UTF-8')
-        
 
-    
+
 Config = GlobalParamsConfig()
 
-    
 
 
 

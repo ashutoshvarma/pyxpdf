@@ -59,7 +59,8 @@ if 'setuptools' in sys.modules:
             f.close()
         extra_options['extras_require'] = {
             'source': deps,
-            "dev": ["cython",],
+            'dev': ['cython',],
+            'encodings' : ['pyxpdf_data']
         }
 
 extra_options['package_data'] = {
@@ -91,7 +92,7 @@ def setup_extra_options():
 
                 packages[package_name] = package_files
         return packages
-        
+
     # Copy Global Extra Options
     extra_opts = dict(extra_options)
 

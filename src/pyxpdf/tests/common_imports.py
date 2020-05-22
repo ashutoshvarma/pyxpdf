@@ -35,3 +35,11 @@ def file_in_test_dir(*args):
 
 def file_in_sample_dir(*args):
     return os.path.join(SAMPLE_DIR, *args)
+
+def has_pyxpdf_data():
+    try:
+        import pyxpdf_data
+    except ImportError:
+        return False
+    return True
+
