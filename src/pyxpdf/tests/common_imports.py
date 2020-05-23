@@ -1,6 +1,6 @@
 import os
 import unittest
-from pyxpdf.xpdf import Config, GlobalParamsConfig
+from pyxpdf.xpdf import Config
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.sep.join(TEST_DIR.split(os.sep)[:-3])

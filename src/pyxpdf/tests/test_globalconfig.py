@@ -3,7 +3,7 @@ import unittest
 from .common_imports import (
     InitGlobalTextCase, PropertyTextCase, has_pyxpdf_data
 )
-from pyxpdf.xpdf import Config, XPDFConfigError, GlobalParamsConfig
+from pyxpdf.xpdf import Config, XPDFConfigError
 
 class GlobalConfigTestCase(InitGlobalTextCase, PropertyTextCase):
 
