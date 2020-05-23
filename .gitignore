@@ -10,6 +10,8 @@ __pycache__
 *.pyc
 
 _test*.py
+_test*.pyx
+_test*.pyxbld
 
 libs
 *.so
@@ -19,6 +21,7 @@ libs
 *.prof
 
 src/*/*.html
+cython_debug/
 
 .coverage
 coverage/
