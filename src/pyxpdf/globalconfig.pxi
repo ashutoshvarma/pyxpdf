@@ -4,6 +4,10 @@ from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 # NOTE: This class should be always a singleton
 # only one object of this class should exist i.e 
 # global variable `Config`
+# This is beacuse xpdf `GlobalParams` class's destructor
+# frees global builtin font tables. So more that one
+# `_GlobalParamsConfig` class will lead to double free
+# or corruption error.
 cdef class _GlobalParamsConfig:
     cdef:
         object cfg_path
@@ -14,12 +18,20 @@ cdef class _GlobalParamsConfig:
         # default text encoding 
         self._global.setTextEncoding("UTF-8")
 
-    def load_file(self, cfg_path):
-        global globalParams
-        # delete if already init
-        if globalParams is not NULL:
-            del globalParams
+    cdef _get_default_xpdfrc(self):
+        cdef:
+            object pyxpdf_data
+            object cfg = None
+        try:
+            import pyxpdf_data
+            cfg = pyxpdf_data.get_xpdfrc()
+        except ImportError:
+            pass
+        else:
+            del pyxpdf_data
+        return cfg
 
+    def load_file(self, cfg_path=None):
         if cfg_path == None:
             self._global = new GlobalParams(<const char*>NULL)
         else:
@@ -28,24 +40,16 @@ cdef class _GlobalParamsConfig:
         if self._global == NULL:
             raise MemoryError("Cannot create GlobalParamsConfig object.")
         self._set_defaults()
+
+        global globalParams
         globalParams = self._global
 
     def reset(self):
         self.load_file(self.cfg_path)
 
-    def __cinit__(self, cfg_path=None):
-        cdef object pyxpdf_data
-        if cfg_path == None:
-            try:
-                import pyxpdf_data
-                self.cfg_path = pyxpdf_data.get_xpdfrc()
-            except ImportError:
-                pass
-            else:
-                del pyxpdf_data
-        else:
-            self.cfg_path = None
-
+    def __cinit__(self):
+        self._global = NULL
+        self.cfg_path = self._get_default_xpdfrc()
         self.load_file(self.cfg_path)
 
     def __dealloc__(self):
