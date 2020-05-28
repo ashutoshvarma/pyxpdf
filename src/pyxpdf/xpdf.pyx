@@ -13,6 +13,7 @@ __all__ = [
 from libcpp.string cimport string
 from libcpp.memory cimport unique_ptr, make_unique
 from libcpp.vector cimport vector
+from libcpp.utility cimport move
 
 cimport cython
 from cython.operator cimport dereference as deref

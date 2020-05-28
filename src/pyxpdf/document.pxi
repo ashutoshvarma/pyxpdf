@@ -17,8 +17,8 @@ from pyxpdf.includes.Catalog cimport Catalog
 cdef class Document:
     cdef:
         PDFDoc *doc
-        GString *ownerpass 
-        GString *userpass 
+        GString *ownerpass
+        GString *userpass
         # Using string to store char array
         bytes doc_data
         # for caching pages
@@ -28,26 +28,26 @@ cdef class Document:
     cdef Catalog *get_catalog(self):
         return self.doc.getCatalog()
 
-    cdef display_pages(self, OutputDev* out, int first, int end, 
-                        double hDPI = 72, double vDPI = 72, int rotate = 0, 
-                        GBool use_media_box = gFalse, GBool crop = gTrue, 
+    cdef display_pages(self, OutputDev* out, int first, int end,
+                        double hDPI = 72, double vDPI = 72, int rotate = 0,
+                        GBool use_media_box = gFalse, GBool crop = gTrue,
                         GBool printing = gFalse):
         if first < 0 or first >= self.num_pages:
             first = 0
         if end < 0 or end >= self.num_pages:
             end = self.num_pages - 1
-        self.doc.displayPages(out, first + 1, end + 1, hDPI, vDPI, rotate, 
+        self.doc.displayPages(out, first + 1, end + 1, hDPI, vDPI, rotate,
                             use_media_box, crop, printing)
 
     cdef dict get_info_dict(self):
-        cdef: 
-            Object info 
+        cdef:
+            Object info
             dict result = {}
         if self.doc.getDocInfo(&info).isDict() == gTrue:
             Dict_to_pydict(info.getDict(), result)
         info.free()
         return result
-        
+
     cdef get_metadata(self):
         cdef unique_ptr[GString] meta
         meta.reset(self.doc.readMetadata())
@@ -59,7 +59,7 @@ cdef class Document:
         self.doc = new PDFDoc(pdf, self.ownerpass, self.userpass)
         if self.doc == NULL:
             raise MemoryError("Cannot allocate memory for internal objects")
-        
+
     cdef _load_from_char_array(self, char *pdf, int data_length):
         cdef Object *obj_null = new Object()
         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
@@ -122,7 +122,7 @@ cdef class Document:
 
         # build empty cache
         self._pages_cache = [None] * self.num_pages
-    
+
     def __dealloc__(self):
         del self.doc
         del self.ownerpass
@@ -188,20 +188,20 @@ cdef class Document:
     @property
     def ok_to_print(self):
         return GBool_to_bool(self.doc.okToPrint(ignoreOwnerPW=gFalse))
-    
+
     @property
     def ok_to_change(self):
         return GBool_to_bool(self.doc.okToChange(ignoreOwnerPW=gFalse))
-    
+
     @property
     def ok_to_copy(self):
         return GBool_to_bool(self.doc.okToCopy(ignoreOwnerPW=gFalse))
-    
+
     @property
     def ok_to_add_notes(self):
         return GBool_to_bool(self.doc.okToAddNotes(ignoreOwnerPW=gFalse))
 
-    
+
     def info(self):
         return self.get_info_dict()
 
@@ -211,12 +211,13 @@ cdef class Document:
 
     cpdef text_raw(self, int start=0, int end=-1, TextControl control=None):
         cdef:
-            TextOutputControl text_control = control.control if control else TextOutputControl()
+            TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
             unique_ptr[string] out = make_unique[string]()
-            unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
+            unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string,
+                                                                            out.get(), &text_control)
 
         self.display_pages(text_dev.get(), start, end)
-        return deref(out) 
+        return deref(out)
 
     cpdef text(self, start=0, end=-1, control=None):
         return self.text_raw(start=start, end=end, control=control
@@ -253,24 +254,24 @@ cdef class Page:
     cdef readonly Document doc
 
 
-    cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt, 
-                        double hDPI = 72, double vDPI = 72, int rotate = 0, 
-                        GBool use_media_box = gFalse, GBool crop = gTrue, 
+    cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,
+                        double hDPI = 72, double vDPI = 72, int rotate = 0,
+                        GBool use_media_box = gFalse, GBool crop = gTrue,
                         GBool printing = gFalse):
-        self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop, 
+        self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop,
                                 x1, y1, hgt, wdt, printing)
 
     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,
-                        int rotate = 0, GBool use_media_box = gFalse, 
+                        int rotate = 0, GBool use_media_box = gFalse,
                         GBool crop = gTrue, GBool printing = gFalse):
-        self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate, 
+        self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate,
                             use_media_box, crop, printing)
 
     cdef _init_TextPage(self, int rotation):
-        cdef: 
+        cdef:
             unique_ptr[TextOutputControl] text_control
-            unique_ptr[TextOutputDev] td 
-        
+            unique_ptr[TextOutputDev] td
+
         text_control = make_unique[TextOutputControl]()
         td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
 
@@ -279,19 +280,19 @@ cdef class Page:
 
     cdef get_label(self):
         cdef:
-            unique_ptr[GString] glabel 
-            unique_ptr[TextString] txt_label 
+            unique_ptr[GString] glabel
+            unique_ptr[TextString] txt_label
 
         if self.doc.get_catalog().hasPageLabels() == gTrue:
-            txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))     
+            txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))
             if txt_label != NULL:
                 glabel.reset(deref(txt_label).toPDFTextString())
                 return GString_to_unicode(glabel.get())
             else:
-                return None       
+                return None
         return None
 
-    cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False, 
+    cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,
                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):
         cdef double x_min = 0
         cdef double y_min = 0
@@ -311,12 +312,12 @@ cdef class Page:
         if self.textpage.get() == NULL:
             self._init_TextPage(rotation)
 
-        cdef GBool res = deref(self.textpage).findText(u.data(), u.size(), to_GBool(start_at_top), 
-                                        to_GBool(stop_at_bottom), to_GBool(start_at_last), 
-                                        to_GBool(stop_at_last), to_GBool(case_sensitive), 
+        cdef GBool res = deref(self.textpage).findText(u.data(), u.size(), to_GBool(start_at_top),
+                                        to_GBool(stop_at_bottom), to_GBool(start_at_last),
+                                        to_GBool(stop_at_last), to_GBool(case_sensitive),
                                         to_GBool(backward), to_GBool(wholeword),
                                         &x_min, &y_min, &x_max, &y_max)
-        
+
         return (x_min, y_min, x_max, y_max) if res == gTrue else None
 
 
@@ -394,7 +395,7 @@ cdef class Page:
             result = self._find_text(text, search_box, False, True, True, False,
                                           case_sensitive, True, wholeword, rotation)
         return result
-    
+
 
     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,
                       rotation=0):
@@ -408,7 +409,7 @@ cdef class Page:
 
     def text_raw(self, search_box=None, TextControl control = None):
         cdef:
-            TextOutputControl text_control = control.control if control else TextOutputControl()
+            TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
             unique_ptr[string] out = make_unique[string]()
             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
 
@@ -416,7 +417,7 @@ cdef class Page:
             # Why crop=gTrue in displayPage?
             self.display(text_dev.get())
         else:
-            self.display_slice(text_dev.get(), search_box[0], search_box[1], 
+            self.display_slice(text_dev.get(), search_box[0], search_box[1],
                                 search_box[2], search_box[3])
 
         return deref(out)
@@ -426,9 +427,6 @@ cdef class Page:
         return self.text_raw(text_area, control).decode('UTF-8', errors='ignore')
 
 
-    
-
-    
 
 
 
