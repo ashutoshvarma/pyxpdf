@@ -212,6 +212,14 @@ def cflags(static_cflags):
     if OPTION_DEBUG_GCC:
         result.append('-g2')
 
+    if sys.platform in ('win32',):
+        # cython's warpper for std::move depends on __cplusplus macro
+        # for MSVC to report that correctly in 19.xx minor series
+        # we need this compiler flag.
+        # https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/
+        # https://github.com/cython/cython/blob/master/Cython/Includes/libcpp/utility.pxd
+        result.append('/Zc:__cplusplus')
+
     if not static_cflags:
         static_cflags = env_var('CFLAGS')
     result.extend(static_cflags)
