@@ -10,6 +10,7 @@ __all__ = [
     "XPDFNotInplementedError"
 ]
 
+from libc cimport math as cmath
 from libcpp.string cimport string
 from libcpp.memory cimport unique_ptr, make_unique
 from libcpp.vector cimport vector
@@ -35,6 +36,9 @@ include "pdftotext.pxi"
 
 # Python Objects based on TextOutputDev.pxd
 include "textoutput.pxi"
+
+# Python Objects based on SplashOutputDev.pxd
+include "imageoutput.pxi"
 
 # Pythonn Objects based on PDFDoc.pxd ,Page.pxd
 include "document.pxi"
