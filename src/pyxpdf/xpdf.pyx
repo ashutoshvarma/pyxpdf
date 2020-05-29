@@ -5,9 +5,9 @@ import cython
 
 __all__ = [
     "pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
-    "PDFError", 'XPDFError', "PDFSyntaxError", "XPDFConfigError",
-    "PDFIOError", "PDFPermissionError", "XPDFInternalError",
-    "XPDFNotInplementedError"
+    "RawImageOutput", "PDFError", 'XPDFError', "PDFSyntaxError",
+    "XPDFConfigError", "PDFIOError", "PDFPermissionError",
+    "XPDFInternalError","XPDFNotInplementedError"
 ]
 
 from libc cimport math as cmath

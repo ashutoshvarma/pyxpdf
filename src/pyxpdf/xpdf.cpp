@@ -15629,7 +15629,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_14RawImageOutput_get(struct __pyx_obj_6py
  *             double tmp
  *             double res_x = self.resolution_x             # <<<<<<<<<<<<<<
  *             double res_y = self.resolution_y
- *             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
+ *             int scale_x = scale_pixel_box[0] if scale_pixel_box != None else 0
  */
   __Pyx_TraceLine(125,0,__PYX_ERR(7, 125, __pyx_L1_error))
   __pyx_t_8 = __pyx_v_self->resolution_x;
@@ -15639,7 +15639,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_14RawImageOutput_get(struct __pyx_obj_6py
  *             double tmp
  *             double res_x = self.resolution_x
  *             double res_y = self.resolution_y             # <<<<<<<<<<<<<<
- *             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
+ *             int scale_x = scale_pixel_box[0] if scale_pixel_box != None else 0
  *             int scale_y = scale_pixel_box[1] if scale_pixel_box else 0
  */
   __Pyx_TraceLine(126,0,__PYX_ERR(7, 126, __pyx_L1_error))
@@ -15649,12 +15649,14 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_14RawImageOutput_get(struct __pyx_obj_6py
   /* "src/pyxpdf/imageoutput.pxi":127
  *             double res_x = self.resolution_x
  *             double res_y = self.resolution_y
- *             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0             # <<<<<<<<<<<<<<
+ *             int scale_x = scale_pixel_box[0] if scale_pixel_box != None else 0             # <<<<<<<<<<<<<<
  *             int scale_y = scale_pixel_box[1] if scale_pixel_box else 0
  *             SplashBitmap* bitmap
  */
   __Pyx_TraceLine(127,0,__PYX_ERR(7, 127, __pyx_L1_error))
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_scale_pixel_box); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(7, 127, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_scale_pixel_box, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 127, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(7, 127, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_9) {
     __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_scale_pixel_box, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -15668,7 +15670,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_14RawImageOutput_get(struct __pyx_obj_6py
 
   /* "src/pyxpdf/imageoutput.pxi":128
  *             double res_y = self.resolution_y
- *             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
+ *             int scale_x = scale_pixel_box[0] if scale_pixel_box != None else 0
  *             int scale_y = scale_pixel_box[1] if scale_pixel_box else 0             # <<<<<<<<<<<<<<
  *             SplashBitmap* bitmap
  * 
@@ -33041,10 +33043,10 @@ if (!__Pyx_RefNanny) {
  * 
  * __all__ = [             # <<<<<<<<<<<<<<
  *     "pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
- *     "PDFError", 'XPDFError', "PDFSyntaxError", "XPDFConfigError",
+ *     "RawImageOutput", "PDFError", 'XPDFError', "PDFSyntaxError",
  */
   __Pyx_TraceLine(6,0,__PYX_ERR(8, 6, __pyx_L1_error))
-  __pyx_t_1 = PyList_New(13); if (unlikely(!__pyx_t_1)) __PYX_ERR(8, 6, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(14); if (unlikely(!__pyx_t_1)) __PYX_ERR(8, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_pdftotext_raw);
   __Pyx_GIVEREF(__pyx_n_s_pdftotext_raw);
@@ -33061,30 +33063,33 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_TextControl);
   __Pyx_GIVEREF(__pyx_n_s_TextControl);
   PyList_SET_ITEM(__pyx_t_1, 4, __pyx_n_s_TextControl);
+  __Pyx_INCREF(__pyx_n_s_RawImageOutput);
+  __Pyx_GIVEREF(__pyx_n_s_RawImageOutput);
+  PyList_SET_ITEM(__pyx_t_1, 5, __pyx_n_s_RawImageOutput);
   __Pyx_INCREF(__pyx_n_s_PDFError);
   __Pyx_GIVEREF(__pyx_n_s_PDFError);
-  PyList_SET_ITEM(__pyx_t_1, 5, __pyx_n_s_PDFError);
+  PyList_SET_ITEM(__pyx_t_1, 6, __pyx_n_s_PDFError);
   __Pyx_INCREF(__pyx_n_s_XPDFError);
   __Pyx_GIVEREF(__pyx_n_s_XPDFError);
-  PyList_SET_ITEM(__pyx_t_1, 6, __pyx_n_s_XPDFError);
+  PyList_SET_ITEM(__pyx_t_1, 7, __pyx_n_s_XPDFError);
   __Pyx_INCREF(__pyx_n_s_PDFSyntaxError);
   __Pyx_GIVEREF(__pyx_n_s_PDFSyntaxError);
-  PyList_SET_ITEM(__pyx_t_1, 7, __pyx_n_s_PDFSyntaxError);
+  PyList_SET_ITEM(__pyx_t_1, 8, __pyx_n_s_PDFSyntaxError);
   __Pyx_INCREF(__pyx_n_s_XPDFConfigError);
   __Pyx_GIVEREF(__pyx_n_s_XPDFConfigError);
-  PyList_SET_ITEM(__pyx_t_1, 8, __pyx_n_s_XPDFConfigError);
+  PyList_SET_ITEM(__pyx_t_1, 9, __pyx_n_s_XPDFConfigError);
   __Pyx_INCREF(__pyx_n_s_PDFIOError);
   __Pyx_GIVEREF(__pyx_n_s_PDFIOError);
-  PyList_SET_ITEM(__pyx_t_1, 9, __pyx_n_s_PDFIOError);
+  PyList_SET_ITEM(__pyx_t_1, 10, __pyx_n_s_PDFIOError);
   __Pyx_INCREF(__pyx_n_s_PDFPermissionError);
   __Pyx_GIVEREF(__pyx_n_s_PDFPermissionError);
-  PyList_SET_ITEM(__pyx_t_1, 10, __pyx_n_s_PDFPermissionError);
+  PyList_SET_ITEM(__pyx_t_1, 11, __pyx_n_s_PDFPermissionError);
   __Pyx_INCREF(__pyx_n_s_XPDFInternalError);
   __Pyx_GIVEREF(__pyx_n_s_XPDFInternalError);
-  PyList_SET_ITEM(__pyx_t_1, 11, __pyx_n_s_XPDFInternalError);
+  PyList_SET_ITEM(__pyx_t_1, 12, __pyx_n_s_XPDFInternalError);
   __Pyx_INCREF(__pyx_n_s_XPDFNotInplementedError);
   __Pyx_GIVEREF(__pyx_n_s_XPDFNotInplementedError);
-  PyList_SET_ITEM(__pyx_t_1, 12, __pyx_n_s_XPDFNotInplementedError);
+  PyList_SET_ITEM(__pyx_t_1, 13, __pyx_n_s_XPDFNotInplementedError);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_1) < 0) __PYX_ERR(8, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 

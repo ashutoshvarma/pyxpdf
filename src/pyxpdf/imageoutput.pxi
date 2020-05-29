@@ -11,7 +11,6 @@ DEF BITMAP_ROW_PAD = 4
 DEF BITMAP_RESOLUTION = 150
 
 
-
 cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):
     cdef:
         int height = bitmap.getHeight()
@@ -35,8 +34,6 @@ cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):
         row += row_size
 
     return img
-
-
 
 
 cdef class RawImageControl:
@@ -64,7 +61,6 @@ cdef class RawImageOutput:
         if self.doc_started == False:
             self._c_splash_dev.get().startDoc(self.doc.doc.getXRef())
 
-        print(locals())
         if w == 0:
             w = <int>cmath.ceil(page_w)
         if h == 0:
@@ -72,7 +68,6 @@ cdef class RawImageOutput:
         w = <int>cmath.ceil(page_w - x) if x + w > page_w else w
         h = <int>cmath.ceil(page_h - y) if y + h > page_h else h
 
-        print(locals())
         page.display_slice(self._c_splash_dev.get(), x, y,
                                            w, h, res_x, res_y, 0,
                                            to_GBool(not self.use_cropbox),
@@ -142,8 +137,6 @@ cdef class RawImageOutput:
             page_w = self.doc.doc.getPageMediaWidth(page_no + 1)
 
 
-        print(locals())
-
         rotation = self.doc.doc.getPageRotate(page_no + 1)
         # swap height and width
         if self.scale_before_rotation and (rotation == 90 or rotation == 270):
@@ -172,7 +165,6 @@ cdef class RawImageOutput:
             page_h = page_w
             page_w = tmp
 
-        print(locals())
         bitmap = self._get_SplashBitmap(page_no, crop_box[0], crop_box[1],
                                         crop_box[2], crop_box[3], page_h,
                                         page_w, res_x, res_y)
