@@ -9,6 +9,7 @@ cdef extern from "SplashTypes.h" nogil:
                             # RGBRGB...
         splashModeBGR8		# 1 byte per component, 3 bytes per pixel:
                             # BGRBGR...
+        splashModeCMYK8
 
     cdef int splashMaxColorComps
     ctypedef Guchar SplashColor[4]

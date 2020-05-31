@@ -170,7 +170,7 @@ cdef dict IMAGE_MODES = {
     'L'     :   ('L',        SplashColorMode.splashModeMono8),
     'LA'    :   ('LA',       SplashColorMode.splashModeMono8),
     '1'     :   ('1',        SplashColorMode.splashModeMono1),
-    #'CMYK' :    ('CMYK',     SplashColorMode.splashModeCMYK8),
+    'CMYK' :    ('CMYK',     SplashColorMode.splashModeCMYK8),
 }
 
 
@@ -192,14 +192,14 @@ cdef class RawImageOutput:
 
     def __cinit__(self, Document doc not None,
                   object mode = "RGB",
-                  object paper_color = (0xff, 0xff, 0xff),
+                  object paper_color = (0xff, 0xff, 0xff, 0xff),
                   double resolution = BITMAP_RESOLUTION,
                   double resolution_x = BITMAP_RESOLUTION,
                   double resolution_y = BITMAP_RESOLUTION,
                   anti_alias=True, no_composite=False,
                   use_cropbox = False, scale_before_rotation = False):
-        if len(paper_color) != 3:
-            raise ValueError(f"'paper_color' must be 3 value (0-255) list/tuple.")
+        if len(paper_color) not in (3, 4):
+            raise ValueError(f"'paper_color' must be 3 (RGB) or 4 (CMYK) value (0-255) list/tuple.")
 
         cdef:
             SplashColor _c_paper_color
@@ -207,6 +207,8 @@ cdef class RawImageOutput:
         _c_paper_color[0] = paper_color[0]
         _c_paper_color[1] = paper_color[1]
         _c_paper_color[2] = paper_color[2]
+        if mode == 'CMYK':
+            _c_paper_color[3] = paper_color[3]
 
         if resolution != BITMAP_RESOLUTION:
             resolution_x = resolution
