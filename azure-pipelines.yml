@@ -43,7 +43,7 @@ jobs:
       condition: contains(variables['imageName'], 'macOS')
     - bash: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install -r requirements.txt
+        pip install -r test_requirements.txt
         python setup.py build_ext -i  -vv --warnings
         python runtests.py -vv || exit 1
         make clean 
