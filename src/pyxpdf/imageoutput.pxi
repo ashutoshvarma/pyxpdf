@@ -192,18 +192,24 @@ cdef class RawImageOutput:
 
     def __cinit__(self, Document doc not None,
                   object mode = "RGB",
-                  object paper_color = (0xff, 0xff, 0xff, 0xff),
+                  object paper_color = None,
                   double resolution = BITMAP_RESOLUTION,
                   double resolution_x = BITMAP_RESOLUTION,
                   double resolution_y = BITMAP_RESOLUTION,
                   anti_alias=True, no_composite=False,
                   use_cropbox = False, scale_before_rotation = False):
-        if len(paper_color) not in (3, 4):
+        if paper_color != None and len(paper_color) not in (3, 4):
             raise ValueError(f"'paper_color' must be 3 (RGB) or 4 (CMYK) value (0-255) list/tuple.")
 
         cdef:
             SplashColor _c_paper_color
 
+        if paper_color == None:
+            # default paper color is white
+            if mode == 'CMYK':
+                paper_color = (0,0,0,0)
+            else:
+                paper_color = (255,255,255)
         _c_paper_color[0] = paper_color[0]
         _c_paper_color[1] = paper_color[1]
         _c_paper_color[2] = paper_color[2]
