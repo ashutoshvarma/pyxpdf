@@ -63,7 +63,6 @@ cdef bytearray splash_bitmap_to_rgb(SplashBitmap *bitmap, bint alpha = False):
                 img[idx + 3] = ap
     return img
 
-#FIXME: R and B channels are interchanged.
 cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
     cdef:
         int idx, x, y
@@ -82,9 +81,9 @@ cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
         for x in range(width):
             p = &data[y * row_size + 3 * x]
             idx = (y * width * pixel_width) + (x * pixel_width)
-            img[idx + 0] = p[2]
+            img[idx + 0] = p[0]
             img[idx + 1] = p[1]
-            img[idx + 2] = p[0]
+            img[idx + 2] = p[2]
             if alpha == True:
                 ap = alpha_data[y * <size_t>width + x]
                 img[idx + 3] = ap
