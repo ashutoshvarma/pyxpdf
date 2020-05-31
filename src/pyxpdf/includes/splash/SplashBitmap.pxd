@@ -1,3 +1,4 @@
+from pyxpdf.includes.xpdf_types cimport Guchar
 from pyxpdf.includes.splash.SplashTypes cimport (
     SplashColorPtr
 )
@@ -11,4 +12,6 @@ cdef extern from "SplashBitmap.h" nogil:
         SplashBitmapRowSize getRowSize()
         SplashColorPtr getDataPtr()
         SplashColorPtr takeData()
+
+        Guchar *getAlphaPtr()
 

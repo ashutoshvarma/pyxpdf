@@ -48,22 +48,22 @@ cdef bytearray splash_bitmap_to_rgb(SplashBitmap *bitmap, bint alpha = False):
         Guchar *alpha_data = bitmap.getAlphaPtr()
         SplashColorPtr p
         Guchar ap
-        #FIX: can overflow for large values
+        #FIXME: can overflow for large values
         bytearray img = bytearray(height * width * pixel_width)
 
     for y in range(height):
         for x in range(width):
             p = &data[y * row_size + 3 * x]
-            ap = alpha_data[y * <size_t>width + x]
-            idx = y * width + (pixel_width * x)
+            idx = (y * width * pixel_width) + (x * pixel_width)
             img[idx + 0] = p[0]
             img[idx + 1] = p[1]
             img[idx + 2] = p[2]
             if alpha == True:
+                ap = alpha_data[y * <size_t>width + x]
                 img[idx + 3] = ap
     return img
 
-
+#FIXME: R and B channels are interchanged.
 cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
     cdef:
         int idx, x, y
@@ -75,25 +75,26 @@ cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
         Guchar *alpha_data = bitmap.getAlphaPtr()
         SplashColorPtr p
         Guchar ap
-        #FIX: can overflow for large values
+        #FIXME: can overflow for large values
         bytearray img = bytearray(height * width * pixel_width)
 
     for y in range(height):
         for x in range(width):
             p = &data[y * row_size + 3 * x]
-            ap = alpha_data[y * <size_t>width + x]
-            idx = y * width + (pixel_width * x)
+            idx = (y * width * pixel_width) + (x * pixel_width)
             img[idx + 0] = p[2]
             img[idx + 1] = p[1]
             img[idx + 2] = p[0]
             if alpha == True:
+                ap = alpha_data[y * <size_t>width + x]
                 img[idx + 3] = ap
     return img
 
 
+#FIXME: BROKEN, do not use untill fixed
 cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
     cdef:
-        int idx, x, y
+        int idx, x, y, i
         int height = bitmap.getHeight()
         int width = bitmap.getWidth()
         SplashBitmapRowSize row_size = bitmap.getRowSize()
@@ -102,32 +103,38 @@ cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
         bytearray img = bytearray(height * width)
 
     for y in range(height):
-        for x in range(width):
-            p = &data[y * row_size + (x >> 3)]
-            idx = y * width + x
-            if p[0] & (0x80 >> (x & 7)):
-                img[idx] = 0xff
-            else:
-                img[idx] = 0x00
+        i = 0
+        for x in range(0, width, 8):
+            print(i)
+            p = &data[y * row_size + x]
+            idx = y * row_size + i
+            img[idx] = p[0]
+            inc(i)
     return img
 
 
 
-cdef bytearray splash_bitmap_to_mono8(SplashBitmap *bitmap):
+cdef bytearray splash_bitmap_to_mono8(SplashBitmap *bitmap, bint alpha=False):
     cdef:
         int idx, x, y
+        int pixel_width = 2 if alpha else 1
         int height = bitmap.getHeight()
         int width = bitmap.getWidth()
         SplashBitmapRowSize row_size = bitmap.getRowSize()
         SplashColorPtr data = bitmap.getDataPtr()
+        Guchar *alpha_data = bitmap.getAlphaPtr()
         SplashColorPtr p
-        bytearray img = bytearray(height * width)
+        Guchar ap
+        bytearray img = bytearray(height * width * pixel_width)
 
     for y in range(height):
         for x in range(width):
-            p = &data[y * row_size + x ]
-            idx = y * width + x
-            img[idx] = p[0]
+            p = &data[y * row_size + x]
+            idx = (y * width * pixel_width) + (x * pixel_width)
+            img[idx + 0] = p[0]
+            if alpha == True:
+                ap = alpha_data[y * <size_t>width + x]
+                img[idx + 1] = ap
     return img
 
 
@@ -139,13 +146,13 @@ cdef bytearray splash_bitmap_to_cmyk(SplashBitmap *bitmap):
         SplashBitmapRowSize row_size = bitmap.getRowSize()
         SplashColorPtr data = bitmap.getDataPtr()
         SplashColorPtr p
-        #FIX: can overflow for large values
+        #FIXME: can overflow for large values
         bytearray img = bytearray(height * width * 4)
 
     for y in range(height):
         for x in range(width):
             p = &data[y * row_size + 4 * x]
-            idx = y * width + (4 * x)
+            idx = (y * width * 4) + (x * 4)
             img[idx + 0] = p[0]
             img[idx + 1] = p[1]
             img[idx + 2] = p[2]
