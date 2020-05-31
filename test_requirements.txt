@@ -1,2 +1,5 @@
 coverage==4.5.4
 Cython>=0.29.7
+
+# optional package
+pyxpdf_data>=1.0
