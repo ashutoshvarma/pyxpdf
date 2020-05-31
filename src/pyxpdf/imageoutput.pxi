@@ -154,6 +154,17 @@ cdef bytearray splash_bitmap_to_cmyk(SplashBitmap *bitmap):
 
 
 
+cdef dict IMAGE_MODES = {
+    #raw mode     mode       SplashColorMode
+    'RGB'   :   ('RGB',      SplashColorMode.splashModeRGB8),
+    'RGBA'  :   ('RGBA',     SplashColorMode.splashModeRGB8),
+    'BGR'   :   ('RGB',      SplashColorMode.splashModeBGR8),
+    'BGRA'  :   ('RGBA',     SplashColorMode.splashModeBGR8),
+    'L'     :   ('L',        SplashColorMode.splashModeMono8),
+    'LA'    :   ('LA',       SplashColorMode.splashModeMono8),
+    '1'     :   ('1',        SplashColorMode.splashModeMono1),
+    #'CMYK' :    ('CMYK',     SplashColorMode.splashModeCMYK8),
+}
 
 
 cdef class RawImageControl:
@@ -168,34 +179,12 @@ cdef class RawImageOutput:
         public bint scale_before_rotation
         public double resolution_y
         public double resolution_x
+        readonly object mode
         readonly Document doc
 
 
-    cdef SplashBitmap* _get_SplashBitmap(self, int page_no, int x, int y,
-                                         int w, int h, double page_h,
-                                         double page_w, double res_x,
-                                         double res_y):
-        cdef:
-            Page page = self.doc.get_page(page_no)
-
-        if self.doc_started == False:
-            self._c_splash_dev.get().startDoc(self.doc.doc.getXRef())
-
-        if w == 0:
-            w = <int>cmath.ceil(page_w)
-        if h == 0:
-            h = <int>cmath.ceil(page_h)
-        w = <int>cmath.ceil(page_w - x) if x + w > page_w else w
-        h = <int>cmath.ceil(page_h - y) if y + h > page_h else h
-
-        page.display_slice(self._c_splash_dev.get(), x, y,
-                                           w, h, res_x, res_y, 0,
-                                           to_GBool(not self.use_cropbox),
-                                           gFalse)
-        return self._c_splash_dev.get().getBitmap()
-
-
     def __cinit__(self, Document doc not None,
+                  object mode = "RGB",
                   object paper_color = (0xff, 0xff, 0xff),
                   double resolution = BITMAP_RESOLUTION,
                   double resolution_x = BITMAP_RESOLUTION,
@@ -218,19 +207,61 @@ cdef class RawImageOutput:
 
         self.doc = doc
         self.doc_started = False
+        self.mode = mode.upper()
         self.resolution_x = resolution_x
         self.resolution_y = resolution_y
         self.use_cropbox = use_cropbox
         self.scale_before_rotation = scale_before_rotation
-        self._c_splash_dev = make_unique[SplashOutputDev](SplashColorMode.splashModeBGR8,
-                                                          4, gFalse, _c_paper_color, gTrue,
-                                                          to_GBool(anti_alias))
+        #self._c_splash_dev = make_unique[SplashOutputDev](SplashColorMode.splashModeBGR8,
+        #                                                  4, gFalse, _c_paper_color, gTrue,
+        #                                                  to_GBool(anti_alias))
+        self._init_SplashOutputDev(mode, row_pad=4, paper_color=_c_paper_color,
+                                   bitmap_topdown = gTrue,
+                                   anti_alias = to_GBool(anti_alias))
         # set spashoutdev properties
         self._c_splash_dev.get().setNoComposite(to_GBool(no_composite))
 
 
+    cdef int _init_SplashOutputDev(self, object mode, int row_pad,
+                                   SplashColorPtr paper_color,
+                                   GBool bitmap_topdown, GBool anti_alias) except -1:
+        if mode not in IMAGE_MODES:
+            raise ValueError(f"{mode} is not supported.")
 
-    cpdef object get(self, int page_no, crop_box=(0,0,0,0), scale_pixel_box = None):
+        cdef SplashColorMode _c_mode = IMAGE_MODES[mode][1]
+
+        self._c_splash_dev = make_unique[SplashOutputDev](_c_mode, row_pad, gFalse,
+                                                         paper_color, bitmap_topdown,
+                                                         anti_alias)
+        return 0
+
+
+    cdef SplashBitmap* _get_SplashBitmap(self, int page_no, int x, int y,
+                                         int w, int h, double page_h,
+                                         double page_w, double res_x,
+                                         double res_y) except NULL:
+        cdef Page page = self.doc.get_page(page_no)
+
+        if self.doc_started == False:
+            self._c_splash_dev.get().startDoc(self.doc.doc.getXRef())
+
+        if w == 0:
+            w = <int>cmath.ceil(page_w)
+        if h == 0:
+            h = <int>cmath.ceil(page_h)
+        w = <int>cmath.ceil(page_w - x) if x + w > page_w else w
+        h = <int>cmath.ceil(page_h - y) if y + h > page_h else h
+
+        page.display_slice(self._c_splash_dev.get(), x, y,
+                                           w, h, res_x, res_y, 0,
+                                           to_GBool(not self.use_cropbox),
+                                           gFalse)
+        return self._c_splash_dev.get().getBitmap()
+
+
+    cdef SplashBitmap* _get_normalize_SplashBitmap(self, int page_no, int crop_x, int crop_y,
+                                                   int crop_h, int crop_w, double scale_x,
+                                                   double scale_y) except NULL:
         cdef:
             int rotation = 0
             int total_pages = self.doc.doc.getNumPages()
@@ -239,15 +270,7 @@ cdef class RawImageOutput:
             double tmp
             double res_x = self.resolution_x
             double res_y = self.resolution_y
-            int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
-            int scale_y = scale_pixel_box[1] if scale_pixel_box else 0
             SplashBitmap* bitmap
-
-
-        if page_no < 0:
-            page_no = 0
-        if page_no >= total_pages:
-            page_no = total_pages - 1
 
         if self.use_cropbox:
             page_h = self.doc.doc.getPageCropHeight(page_no + 1)
@@ -255,7 +278,6 @@ cdef class RawImageOutput:
         else:
             page_h = self.doc.doc.getPageMediaHeight(page_no + 1)
             page_w = self.doc.doc.getPageMediaWidth(page_no + 1)
-
 
         rotation = self.doc.doc.getPageRotate(page_no + 1)
         # swap height and width
@@ -285,9 +307,58 @@ cdef class RawImageOutput:
             page_h = page_w
             page_w = tmp
 
-        bitmap = self._get_SplashBitmap(page_no, crop_box[0], crop_box[1],
-                                        crop_box[2], crop_box[3], page_h,
-                                        page_w, res_x, res_y)
-        return splash_bitmap_to_pnm(bitmap)
+        return self._get_SplashBitmap(page_no, crop_x, crop_y,
+                                      crop_h, crop_w, page_h,
+                                      page_w, res_x, res_y)
+
+
+
+
+    cdef object pillow_image_from_buffer(self, object mode, int height, int width, object buffer):
+        if not ("PIL.Image" in available_deps):
+            raise PDFError("'Pillow' is not installed. Please install it.")
+
+        cdef object Image = available_deps['PIL.Image']
+        cdef bytes bbuff = bytes(buffer)
+        return Image.frombuffer(IMAGE_MODES[mode][0], (width, height), bbuff, 'raw', mode, 0, 1)
+
+
+    cpdef object get(self, int page_no, crop_box=(0,0,0,0), scale_pixel_box = None):
+        cdef:
+            int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
+            int scale_y = scale_pixel_box[1] if scale_pixel_box else 0
+            int total_pages = self.doc.doc.getNumPages()
+            SplashBitmap* bitmap
+            bytearray buff
+
+        if page_no < 0:
+            page_no = 0
+        if page_no >= total_pages:
+            page_no = total_pages - 1
+
+        bitmap = self._get_normalize_SplashBitmap(page_no, crop_box[0], crop_box[1],
+                                                  crop_box[2], crop_box[3], scale_x,
+                                                  scale_y)
+        if self.mode == 'RGB':
+            buff = splash_bitmap_to_rgb(bitmap)
+        elif self.mode == 'RGBA':
+            buff = splash_bitmap_to_rgb(bitmap, True)
+        elif self.mode == 'BGR':
+            buff = splash_bitmap_to_bgr(bitmap)
+        elif self.mode == 'BGRA':
+            buff = splash_bitmap_to_bgr(bitmap, True)
+        elif self.mode == 'CMYK':
+            buff = splash_bitmap_to_cmyk(bitmap)
+        elif self.mode == '1':
+            buff = splash_bitmap_to_mono(bitmap)
+        elif self.mode == 'L':
+            buff = splash_bitmap_to_mono8(bitmap)
+        elif self.mode == 'LA':
+            buff = splash_bitmap_to_mono8(bitmap, True)
+        else:
+            raise Exception("Invalid value of mode found")
+
+        return self.pillow_image_from_buffer(self.mode, bitmap.getHeight(), bitmap.getWidth(),
+                                             buff)
 
 
