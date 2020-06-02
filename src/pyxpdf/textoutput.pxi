@@ -50,26 +50,41 @@ cdef class TextControl:
 cdef class TextOutput:
     cdef:
         unique_ptr[TextOutputDev] _c_textdev
-        TextControl control
+        readonly TextControl control
         unique_ptr[string] _out_str
         public Document doc
         # caching resource
         list _cache_texts
         vector[unique_ptr[TextPage]] _c_text_pages
 
-    cdef list _get_text(self, int start=0, int end=-1):
-        if start < 0 or start >= self.doc.num_pages:
-            start = 0
-        if end < 0 or end >= self.doc.num_pages:
-            end = self.doc.num_pages - 1
-        if end < start:
-            end = start
+    def __cinit__(self, Document doc not None, TextControl control = None, **kargs):
+        if control == None:
+            control = TextControl(**kargs)
+        self.doc = doc
+        # keep a ref for TextOutput as TextOutputDev does not 
+        # copy TextOutputControl
+        self.control = control
+        self._c_textdev = make_unique[TextOutputDev](&append_to_cpp_string, self._out_str.get(),
+                                                     self.control.get_c_control())
+        if self._c_textdev.get() == NULL:
+            raise MemoryError("Cannot allocate memory for 'TextOutput' object.")
+        # sanity check
+        if self._c_textdev.get().isOk() == gFalse:
+            raise XPDFInternalError
+        # init caching
+        self._init_cache()
 
-        for i in range(start, end + 1):
-            if self._cache_texts[i] == None:
-                # load text
-                self._get_TextPage(i)
-        return self._cache_texts[start:end + 1]
+    def __repr__(self):
+        return f"<TextOutput[{self.doc.__repr__()}]>"
+
+
+    # PRIVATE METHODS
+
+    cdef bytes _get_bytes(self, int page_no):
+        if self._cache_texts[page_no] == None:
+            # load text
+            self._get_TextPage(page_no)
+        return self._cache_texts[page_no]
 
     cdef TextPage* _get_TextPage(self, page_no=0) except NULL:
         cdef:
@@ -104,31 +119,24 @@ cdef class TextOutput:
             self._c_text_pages.push_back(move(_tp))
 
 
-    def __cinit__(self, Document doc not None, TextControl control = None):
-        if control == None:
-            control = TextControl()
-        self.doc = doc
-        # keep a ref for TextOutput as TextOutputDev does not 
-        # copy TextOutputControl
-        self.control = control
-        self._c_textdev = make_unique[TextOutputDev](&append_to_cpp_string, self._out_str.get(),
-                                                     self.control.get_c_control())
-        if self._c_textdev.get() == NULL:
-            raise MemoryError("Cannot allocate memory for 'TextOutput' object.")
-        # sanity check
-        if self._c_textdev.get().isOk() == gFalse:
-            raise XPDFInternalError
-        # init caching
-        self._init_cache()
+    # PUBLIC METHODS
 
-    def __repr__(self):
-        return f"<TextOutput[{self.doc.__repr__()}]>"
+    cpdef bytes get_bytes(self, int page_no):
+        if page_no < 0 or page_no >= self.doc.doc.getNumPages():
+            raise ValueError(f"page_no should be within pdf page range.")
+        return self._get_bytes(page_no)
 
-    cpdef list get_bytes(self, int start=0, int end=-1):
-        return self._get_text(start, end)
+    cpdef object get(self, int page_no):
+        return self._get_bytes(page_no).decode('UTF-8', errors='ignore')
 
-    cpdef object get(self, int start=0, int end=-1):
-        return [txt.decode('UTF-8', errors='ignore') for txt in self._get_text(start, end)]
+    cpdef list get_all(self):
+        cdef:
+            int i
+            list txt_all = []
+
+        for i in range(self.doc.doc.getNumPages()):
+            txt_all.append(self._get_bytes(i).decode('UTF-8', errors='ignore'))
+        return txt_all
 
 
 
