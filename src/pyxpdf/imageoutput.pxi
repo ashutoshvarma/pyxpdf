@@ -90,7 +90,6 @@ cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
     return img
 
 
-#FIXME: BROKEN, do not use untill fixed
 cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
     cdef:
         int idx, x, y, i
@@ -104,8 +103,7 @@ cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
     for y in range(height):
         i = 0
         for x in range(0, width, 8):
-            print(i)
-            p = &data[y * row_size + x]
+            p = &data[y * row_size + i]
             idx = y * row_size + i
             img[idx] = p[0]
             inc(i)
