@@ -1,7 +1,6 @@
 # distutils: language=c++
 # cython: language_level=3
 # cython: profile=True
-# distutils: sources = src/pyxpdf/cpp/BitmapOutputDev.cc
 """XPDF objects warpper module
 
 This module is the core of `pyxpdf`, it provides warppers for low-level XPDF

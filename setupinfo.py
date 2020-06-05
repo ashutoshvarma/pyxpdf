@@ -16,7 +16,14 @@ try:
 except ImportError:
     CYTHON_INSTALLED = False
 
+SOURCE_PATH = "src"
+INCLUDE_PACKAGE_PATH = os.path.join(SOURCE_PATH, 'pyxpdf', 'includes')
+EXT_CXX_INCLUDE = os.path.join(SOURCE_PATH, "pyxpdf", "cpp")
+
 EXT_MODULES = ["pyxpdf.xpdf", ]
+EXT_MODULES_EXTRA_SRC = {
+    "pyxpdf.xpdf": [os.path.join(SOURCE_PATH, 'pyxpdf', 'cpp', 'BitmapOutputDev.cc'), ]
+}
 # COMPILED_MODULES = ['pyxpdf.pdf']
 COMPILED_MODULES = []
 HEADER_FILES = ['pyxpdf_defs.h', ]
@@ -26,9 +33,6 @@ if hasattr(sys, 'pypy_version_info') or (
     # disable Cython compilation of Python modules in PyPy and other non-CPythons
     del COMPILED_MODULES[:]
 
-SOURCE_PATH = "src"
-INCLUDE_PACKAGE_PATH = os.path.join(SOURCE_PATH, 'pyxpdf', 'includes')
-EXT_CXX_INCLUDE = os.path.join(SOURCE_PATH, "pyxpdf", "cpp")
 
 if sys.version_info[0] >= 3:
     _system_encoding = sys.getdefaultencoding()
@@ -142,7 +146,7 @@ def ext_modules(static_include_dirs, static_library_dirs,
         result.append(
             Extension(
                 module,
-                sources=[main_module_source],
+                sources=[main_module_source] + EXT_MODULES_EXTRA_SRC.get(module, []),
                 depends=find_dependencies(module),
                 extra_compile_args=_cflags,
                 extra_link_args=None if is_py else _ldflags,
