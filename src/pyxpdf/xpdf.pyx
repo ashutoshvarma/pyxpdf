@@ -17,6 +17,7 @@ __all__ = [
     # PDF Outputs
     "TextControl", "TextOutput",
     "RawImageOutput", "PDFImageOutput",
+    "page_iterator",
     # Errors
     "PDFError", 'XPDFError', "PDFSyntaxError",
     "XPDFConfigError", "PDFIOError", "PDFPermissionError",

@@ -429,5 +429,25 @@ cdef class Page:
 
 
 
+# Iterate over PDF Outputs by page
+cdef class page_iterator:
+    cdef:
+        object output
+        int index
+        dict kwargs
+
+    def __init__(self, output, **kwargs):
+        self.output = output
+        self.index = -1
+        self.kwargs = kwargs
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.index += 1
+        if self.index >= len(self.output.doc):
+            raise StopIteration()
+        return self.output.get(self.index, **self.kwargs)
 
 
