@@ -1,5 +1,5 @@
 # distutils: language=c++
-# cython: language_level=2
+# cython: language_level=3
 # cython: profile=True
 # distutils: sources = src/pyxpdf/cpp/BitmapOutputDev.cc
 """XPDF objects warpper module
