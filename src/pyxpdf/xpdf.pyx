@@ -1,10 +1,17 @@
 # distutils: language=c++
 # cython: language_level=2
 # cython: profile=True
+# distutils: sources = src/pyxpdf/cpp/BitmapOutputDev.cc
+"""XPDF objects warpper module
+
+This module is the core of `pyxpdf`, it provides warppers for low-level XPDF
+objects. It provides access to xpdf objects in a pythonic way.
+
+"""
 import cython
 
 __all__ = [
-    "pdftotext_raw", "XPDFDoc", "XPage", "Config", "TextControl",
+    "pdftotext_raw", "Document", "Page", "Config", "TextControl",
     "RawImageOutput", "PDFError", 'XPDFError', "PDFSyntaxError",
     "XPDFConfigError", "PDFIOError", "PDFPermissionError",
     "XPDFInternalError","XPDFNotInplementedError"
@@ -44,7 +51,7 @@ cdef int load_deps() except -1:
         int i
     for dep in optional_deps:
         if dep in sys.modules:
-            available_deps.append(dep)
+            available_deps[dep] = sys.modules[dep]
         else:
             # load deps starting from parent package
             # to child.
