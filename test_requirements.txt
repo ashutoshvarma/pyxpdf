@@ -3,3 +3,5 @@ Cython>=0.29.7
 
 # optional package
 pyxpdf_data>=1.0
+Pillow>=7.0.0
+
