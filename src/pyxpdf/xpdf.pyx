@@ -11,8 +11,15 @@ objects. It provides access to xpdf objects in a pythonic way.
 import cython
 
 __all__ = [
-    "pdftotext_raw", "Document", "Page", "Config", "TextControl",
-    "RawImageOutput", "PDFError", 'XPDFError', "PDFSyntaxError",
+    # PDF utils
+    "pdftotext_raw",
+    # PDF components
+    "Document", "Page", "Config",
+    # PDF Outputs
+    "TextControl", "TextOutput",
+    "RawImageOutput", "PDFImageOutput",
+    # Errors
+    "PDFError", 'XPDFError', "PDFSyntaxError",
     "XPDFConfigError", "PDFIOError", "PDFPermissionError",
     "XPDFInternalError","XPDFNotInplementedError"
 ]
