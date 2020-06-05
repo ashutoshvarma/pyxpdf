@@ -52,16 +52,16 @@ cdef int utf32_to_Unicode_vector(text, vector[Unicode]& vec) except -1:
     cdef char* ch = by
 
     cdef size_t l_bytes = len(by)
-    cdef size_t l_utf32 = (l_bytes/4) - 1
+    cdef size_t l_utf32 = (l_bytes//4) - 1
 
     vec.resize(l_utf32)  # Not including BOM
 
     # print(f"{l_bytes}")
     # print(f"Loop - {list(range(4, l_bytes, 4))}")
-    cdef int i 
+    cdef size_t i 
     for i in range(4, l_bytes, 4):
-        vec[(i/4) - 1] = deref(<Unicode*>(&ch[i]))
-        # print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
+        vec[(i//4) - 1] = deref(<Unicode*>(&ch[i]))
+        #print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
     return 0
 
 
