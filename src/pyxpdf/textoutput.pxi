@@ -52,7 +52,7 @@ cdef class TextOutput:
         unique_ptr[TextOutputDev] _c_textdev
         readonly TextControl control
         unique_ptr[string] _out_str
-        public Document doc
+        readonly Document doc
         # caching resource
         list _cache_texts
         vector[unique_ptr[TextPage]] _c_text_pages

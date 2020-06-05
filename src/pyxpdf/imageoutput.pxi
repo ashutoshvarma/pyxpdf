@@ -396,7 +396,7 @@ cdef class RawImageOutput:
 
 cdef class PDFImageOutput:
     cdef:
-        Document doc
+        readonly Document doc
 
 
     def __cinit__(self, Document doc not None):
