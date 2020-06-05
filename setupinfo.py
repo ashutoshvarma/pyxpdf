@@ -28,6 +28,7 @@ if hasattr(sys, 'pypy_version_info') or (
 
 SOURCE_PATH = "src"
 INCLUDE_PACKAGE_PATH = os.path.join(SOURCE_PATH, 'pyxpdf', 'includes')
+EXT_CXX_INCLUDE = os.path.join(SOURCE_PATH, "pyxpdf", "cpp")
 
 if sys.version_info[0] >= 3:
     _system_encoding = sys.getdefaultencoding()
@@ -103,6 +104,7 @@ def ext_modules(static_include_dirs, static_library_dirs,
         base_dir, include_dirs(static_include_dirs) + [
             SOURCE_PATH,
             INCLUDE_PACKAGE_PATH,
+            EXT_CXX_INCLUDE,
         ])
     _library_dirs = _prefer_reldirs(
         base_dir, library_dirs(static_library_dirs))

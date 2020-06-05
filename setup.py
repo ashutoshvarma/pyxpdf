@@ -79,7 +79,7 @@ extra_options['packages'] = [
 
 
 def setup_extra_options():
-    is_interesting_package = re.compile(r'.+[/\\](libxpdf).*').match
+    is_interesting_package = re.compile(r'.+[/\\](libxpdf|cpp).*').match
     def build_packages(directories):
         packages = {}
         for dir_path in directories:
@@ -88,8 +88,7 @@ def setup_extra_options():
                 package_files = []
                 dir_path = os.path.realpath(dir_path)
                 for root, _, files in os.walk(dir_path):
-                    package_files = [root, files]
-
+                    package_files = [root, [f for f in files if f.split('.')[-1] in ('h', 'hpp')]]
                 packages[package_name] = package_files
         return packages
 
