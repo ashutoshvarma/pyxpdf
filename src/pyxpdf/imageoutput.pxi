@@ -6,6 +6,7 @@ from pyxpdf.includes.splash.SplashTypes cimport (
 from pyxpdf.includes.splash.SplashBitmap cimport (
     SplashBitmap, SplashBitmapRowSize
 )
+from pyxpdf.includes.BitmapOutputDev cimport PDFImage, BitmapOutputDev
 
 DEF BITMAP_ROW_PAD = 4
 DEF BITMAP_RESOLUTION = 150
@@ -36,61 +37,8 @@ cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):
 
     return img
 
-
-cdef bytearray splash_bitmap_to_rgb(SplashBitmap *bitmap, bint alpha = False):
-    cdef:
-        int idx, x, y
-        int pixel_width = 4 if alpha else 3
-        int height = bitmap.getHeight()
-        int width = bitmap.getWidth()
-        SplashBitmapRowSize row_size = bitmap.getRowSize()
-        SplashColorPtr data = bitmap.getDataPtr()
-        Guchar *alpha_data = bitmap.getAlphaPtr()
-        SplashColorPtr p
-        Guchar ap
-        #FIXME: can overflow for large values
-        bytearray img = bytearray(height * width * pixel_width)
-
-    for y in range(height):
-        for x in range(width):
-            p = &data[y * row_size + 3 * x]
-            idx = (y * width * pixel_width) + (x * pixel_width)
-            img[idx + 0] = p[0]
-            img[idx + 1] = p[1]
-            img[idx + 2] = p[2]
-            if alpha == True:
-                ap = alpha_data[y * <size_t>width + x]
-                img[idx + 3] = ap
-    return img
-
-cdef bytearray splash_bitmap_to_bgr(SplashBitmap *bitmap, bint alpha = False):
-    cdef:
-        int idx, x, y
-        int pixel_width = 4 if alpha else 3
-        int height = bitmap.getHeight()
-        int width = bitmap.getWidth()
-        SplashBitmapRowSize row_size = bitmap.getRowSize()
-        SplashColorPtr data = bitmap.getDataPtr()
-        Guchar *alpha_data = bitmap.getAlphaPtr()
-        SplashColorPtr p
-        Guchar ap
-        #FIXME: can overflow for large values
-        bytearray img = bytearray(height * width * pixel_width)
-
-    for y in range(height):
-        for x in range(width):
-            p = &data[y * row_size + 3 * x]
-            idx = (y * width * pixel_width) + (x * pixel_width)
-            img[idx + 0] = p[0]
-            img[idx + 1] = p[1]
-            img[idx + 2] = p[2]
-            if alpha == True:
-                ap = alpha_data[y * <size_t>width + x]
-                img[idx + 3] = ap
-    return img
-
-
-cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
+#FIXME: buggy as hell, text does not render properly.
+cdef bytearray splash_bitmap_to_1bpc_1comp(SplashBitmap *bitmap):
     cdef:
         int idx, x, y, i
         int height = bitmap.getHeight()
@@ -110,11 +58,29 @@ cdef bytearray splash_bitmap_to_mono(SplashBitmap *bitmap):
     return img
 
 
-
-cdef bytearray splash_bitmap_to_mono8(SplashBitmap *bitmap, bint alpha=False):
+cdef bytearray splash_bitmap_to_8bpc_1comp(SplashBitmap *bitmap):
     cdef:
         int idx, x, y
-        int pixel_width = 2 if alpha else 1
+        int pixel_width = 1
+        int height = bitmap.getHeight()
+        int width = bitmap.getWidth()
+        SplashBitmapRowSize row_size = bitmap.getRowSize()
+        SplashColorPtr data = bitmap.getDataPtr()
+        SplashColorPtr p
+        bytearray img = bytearray(height * width * pixel_width)
+
+    for y in range(height):
+        for x in range(width):
+            p = &data[y * row_size + x]
+            idx = (y * width * pixel_width) + (x * pixel_width)
+            img[idx + 0] = p[0]
+    return img
+
+
+cdef bytearray splash_bitmap_to_8bpc_1comp_with_alpha(SplashBitmap *bitmap):
+    cdef:
+        int idx, x, y
+        int pixel_width = 2
         int height = bitmap.getHeight()
         int width = bitmap.getWidth()
         SplashBitmapRowSize row_size = bitmap.getRowSize()
@@ -127,15 +93,14 @@ cdef bytearray splash_bitmap_to_mono8(SplashBitmap *bitmap, bint alpha=False):
     for y in range(height):
         for x in range(width):
             p = &data[y * row_size + x]
+            ap = alpha_data[y * <size_t>width + x]
             idx = (y * width * pixel_width) + (x * pixel_width)
             img[idx + 0] = p[0]
-            if alpha == True:
-                ap = alpha_data[y * <size_t>width + x]
-                img[idx + 1] = ap
+            img[idx + 1] = ap
     return img
 
 
-cdef bytearray splash_bitmap_to_cmyk(SplashBitmap *bitmap):
+cdef bytearray splash_bitmap_to_8bpc_4comp(SplashBitmap *bitmap):
     cdef:
         int idx, x, y
         int height = bitmap.getHeight()
@@ -157,6 +122,54 @@ cdef bytearray splash_bitmap_to_cmyk(SplashBitmap *bitmap):
     return img
 
 
+cdef bytearray splash_bitmap_to_8bpc_3comp(SplashBitmap *bitmap):
+    cdef:
+        int idx, x, y
+        int pixel_width = 3
+        int height = bitmap.getHeight()
+        int width = bitmap.getWidth()
+        SplashBitmapRowSize row_size = bitmap.getRowSize()
+        SplashColorPtr data = bitmap.getDataPtr()
+        SplashColorPtr p
+        #FIXME: can overflow for large values
+        bytearray img = bytearray(height * width * pixel_width)
+
+    for y in range(height):
+        for x in range(width):
+            p = &data[y * row_size + 3 * x]
+            idx = (y * width * pixel_width) + (x * pixel_width)
+            img[idx + 0] = p[0]
+            img[idx + 1] = p[1]
+            img[idx + 2] = p[2]
+    return img
+
+
+cdef bytearray splash_bitmap_to_8bpc_3comp_with_alpha(SplashBitmap *bitmap):
+    cdef:
+        int idx, x, y
+        int pixel_width = 4
+        int height = bitmap.getHeight()
+        int width = bitmap.getWidth()
+        SplashBitmapRowSize row_size = bitmap.getRowSize()
+        SplashColorPtr data = bitmap.getDataPtr()
+        Guchar *alpha_data = bitmap.getAlphaPtr()
+        SplashColorPtr p
+        Guchar ap
+        #FIXME: can overflow for large values
+        bytearray img = bytearray(height * width * pixel_width)
+
+    for y in range(height):
+        for x in range(width):
+            p = &data[y * row_size + 3 * x]
+            ap = alpha_data[y * <size_t>width + x]
+            idx = (y * width * pixel_width) + (x * pixel_width)
+            img[idx + 0] = p[0]
+            img[idx + 1] = p[1]
+            img[idx + 2] = p[2]
+            img[idx + 3] = ap
+    return img
+
+
 
 cdef dict IMAGE_MODES = {
     #raw mode     mode       SplashColorMode
@@ -167,8 +180,39 @@ cdef dict IMAGE_MODES = {
     'L'     :   ('L',        SplashColorMode.splashModeMono8),
     'LA'    :   ('LA',       SplashColorMode.splashModeMono8),
     '1'     :   ('1',        SplashColorMode.splashModeMono1),
-    'CMYK' :    ('CMYK',     SplashColorMode.splashModeCMYK8),
+    'CMYK'  :   ('CMYK',     SplashColorMode.splashModeCMYK8),
 }
+
+cdef bytearray splash_bitmap_to_buffer(SplashBitmap *bitmap, mode):
+    if mode == "CMYK":
+        return splash_bitmap_to_8bpc_4comp(bitmap)
+    elif mode == "RGB":
+        return splash_bitmap_to_8bpc_3comp(bitmap)
+    elif mode == "RGBA":
+        return splash_bitmap_to_8bpc_3comp_with_alpha(bitmap)
+    elif mode == "BGR":
+        return splash_bitmap_to_8bpc_3comp(bitmap)
+    elif mode == "BGRA":
+        return splash_bitmap_to_8bpc_3comp_with_alpha(bitmap)
+    elif mode == "L":
+        return splash_bitmap_to_8bpc_1comp(bitmap)
+    elif mode == "LA":
+        return splash_bitmap_to_8bpc_1comp_with_alpha(bitmap)
+    elif mode == "1":
+        return splash_bitmap_to_1bpc_1comp(bitmap)
+    else:
+        raise Exception(f"'{mode}' color mode is not supported.")
+
+
+cdef object pillow_image_from_buffer(object mode, int height, int width, object buffer):
+    if not ("PIL.Image" in available_deps):
+        raise PDFError("'Pillow' is not installed. Please install it.")
+
+    cdef object Image = available_deps['PIL.Image']
+    cdef bytes bbuff = bytes(buffer)
+    return Image.frombuffer(IMAGE_MODES[mode][0], (width, height), bbuff, 'raw', mode, 0, 1)
+
+
 
 
 cdef class RawImageControl:
@@ -227,7 +271,7 @@ cdef class RawImageOutput:
         #self._c_splash_dev = make_unique[SplashOutputDev](SplashColorMode.splashModeBGR8,
         #                                                  4, gFalse, _c_paper_color, gTrue,
         #                                                  to_GBool(anti_alias))
-        self._init_SplashOutputDev(mode, row_pad=4, paper_color=_c_paper_color,
+        self._init_SplashOutputDev(mode, row_pad=BITMAP_ROW_PAD, paper_color=_c_paper_color,
                                    bitmap_topdown = gTrue,
                                    anti_alias = to_GBool(anti_alias))
         # set spashoutdev properties
@@ -326,15 +370,6 @@ cdef class RawImageOutput:
 
 
 
-    cdef object pillow_image_from_buffer(self, object mode, int height, int width, object buffer):
-        if not ("PIL.Image" in available_deps):
-            raise PDFError("'Pillow' is not installed. Please install it.")
-
-        cdef object Image = available_deps['PIL.Image']
-        cdef bytes bbuff = bytes(buffer)
-        return Image.frombuffer(IMAGE_MODES[mode][0], (width, height), bbuff, 'raw', mode, 0, 1)
-
-
     cpdef object get(self, int page_no, crop_box=(0,0,0,0), scale_pixel_box = None):
         cdef:
             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
@@ -351,26 +386,64 @@ cdef class RawImageOutput:
         bitmap = self._get_normalize_SplashBitmap(page_no, crop_box[0], crop_box[1],
                                                   crop_box[2], crop_box[3], scale_x,
                                                   scale_y)
-        if self.mode == 'RGB':
-            buff = splash_bitmap_to_rgb(bitmap)
-        elif self.mode == 'RGBA':
-            buff = splash_bitmap_to_rgb(bitmap, True)
-        elif self.mode == 'BGR':
-            buff = splash_bitmap_to_bgr(bitmap)
-        elif self.mode == 'BGRA':
-            buff = splash_bitmap_to_bgr(bitmap, True)
-        elif self.mode == 'CMYK':
-            buff = splash_bitmap_to_cmyk(bitmap)
-        elif self.mode == '1':
-            buff = splash_bitmap_to_mono(bitmap)
-        elif self.mode == 'L':
-            buff = splash_bitmap_to_mono8(bitmap)
-        elif self.mode == 'LA':
-            buff = splash_bitmap_to_mono8(bitmap, True)
-        else:
-            raise Exception("Invalid value of mode found")
+        buff = splash_bitmap_to_buffer(bitmap, self.mode)
 
-        return self.pillow_image_from_buffer(self.mode, bitmap.getHeight(), bitmap.getWidth(),
-                                             buff)
+        return pillow_image_from_buffer(self.mode, bitmap.getHeight(), bitmap.getWidth(),
+                                        buff)
+
+
+
+
+cdef class PDFImageOutput:
+    cdef:
+        Document doc
+
+
+    def __cinit__(self, Document doc not None):
+        self.doc = doc
+
+
+    cdef int _get_PDFImages(self, page_no, vector[PDFImage] *img_vec) except -1:
+        cdef:
+            unique_ptr[BitmapOutputDev] out = make_unique[BitmapOutputDev](img_vec)
+            Page page = self.doc.get_page(page_no)
+
+        page.display(out.get())
+
+
+    cdef list _get_pillow_images(self, page_no):
+        cdef:
+            vector[PDFImage] img_vec
+            SplashBitmap *bmap
+            size_t i
+            list images = []
+            object mode
+
+        self._get_PDFImages(page_no, &img_vec)
+        for i in range(img_vec.size()):
+            bmap = img_vec[i].bitmap.get()
+            if img_vec[i].mode == SplashColorMode.splashModeMono1:
+                mode = "1"
+            elif img_vec[i].mode == SplashColorMode.splashModeMono8:
+                mode = "L"
+            elif img_vec[i].mode == SplashColorMode.splashModeRGB8:
+                mode = "RGB"
+            buff = splash_bitmap_to_buffer(bmap, mode)
+            pillow_image = pillow_image_from_buffer(mode, bmap.getHeight(), bmap.getWidth(), buff)
+            images.append(pillow_image)
+
+        return images
+
+
+    cpdef list get(self, page_no):
+        return self._get_pillow_images(page_no)
+
+
+
+
+
+
+
+
 
 
