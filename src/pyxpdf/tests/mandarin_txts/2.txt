@@ -1,0 +1,33 @@
+说 明
+
+1．PCXR8是一种具有流量稳定应用广泛的采样器。它是适用于工业卫生研究和环境测试的一种理想的产品。 2．持久耐用的RFI屏蔽箱可以避免27-100MHZ无线射频干扰，提供有效的保护。 3．低流调节器（螺旋帽下）可使采样泵从高流量到低流量转换简便。 4．附加的配件，可以使对样品收集器提供有效的安全保护。 5．进气口装有微粒过滤膜可以对泵提供保护。 6．具有内置转子流量计（0.5-5L/min），在采样过程中可以核查采样流量的变化。 7．用来编程功能的触摸式键盘。 8．缩入式流量调节器，可从适用于1000ml/min至5000ml/min范围流量调借节。 9．强度外壳可有效防止采样泵变形。 10．数码液晶显示器，可以显示运行时间、设定时间、电池状态和错误信息。 11．可充电镍镉电池，单次充电可连续工作8小时以上。
+
+Rechargeable NiCad Battery provides continuous 8-hour operation on a single charge.
+Digital LCD shows run time, set times, battery check , and fault
+functions.
+
+Durable RFI-shielded Case provides protection from radio frequency interference between
+27 and 1000 MHz
+
+Low Flow Regulator (beneath cap screw) allows pump to be switched from high to low flow.
+
+Accessory Mounting Screws allows sampling accessories such as impinger holders to
+be secured to pump.
+
+Built-in Particulate Trap in see-through housing
+protects pump.
+
+Tamper-resistant Cover prevents changes to settings.
+
+Recessed Flow Adjustment adjusts flow rate between
+1000 and 5000 ml/min.
+
+On/Off Switch
+
+Built-in Rotameter provides a visible check of
+relative flow rate during sampling, from 0.5 to 5 L/min.
+Touch Keypad for programmable functions.
+
+PCXR8通用型泵
+
+

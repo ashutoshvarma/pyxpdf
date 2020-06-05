@@ -15,6 +15,9 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
         'pdf_version': 1.4,
         'is_linearized': True,
         'ok_to_copy': True,
+        'ok_to_print': True,
+        'ok_to_change': False,
+        'ok_to_add_notes': True,
         'info()': {'Creator': 'C:My DocumentsSUMMARY6.WPD',
                    'CreationDate': 'D:00000101000000Z',
                    'Title': 'The Digital Millennium Copyright Act of 1998',
@@ -33,17 +36,19 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
     def _test_doc_properties(self, doc):
         for prop, value in self.dmca_prop.items():
             if '()' in prop:
-                self.assertEqual(getattr(doc, prop.rstrip('()'))(), value)
+                self.assertEqual(getattr(doc, prop.rstrip('()'))(), value, "assertEqual {0}".format(prop))
             else:
-                self.assertEqual(getattr(doc, prop), value)
+                self.assertEqual(getattr(doc, prop), value, "assertEqual {0}".format(prop))
 
     def test_load_from_file_like(self):
         with open(self.dmca_pdf, 'rb') as fp:
             doc = Document(fp)
+            self.dmca_prop['filename'] = ''
             self._test_doc_properties(doc)
 
     def test_load_from_path(self):
         doc = Document(self.dmca_pdf)
+        self.dmca_prop['filename'] = self.dmca_pdf
         self._test_doc_properties(doc)
 
     def test_load_pdf_without_xref(self):

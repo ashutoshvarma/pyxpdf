@@ -1,0 +1,40 @@
+使用操作说明
+高流量应用（1000~5000ml/min）
+1 Setup — 设置 2 Flow and Battery Check Key — 流量和电池查看键 3 Start/Hold Key — 开始，保留键 4 Mode Key — 模式键 5 Set-up Key — 设置键 6 Digit Set/Pump Run Time Key — 数量设置，泵运行时间键 7 Digit Select/Total Elapsed Time Key — 数量选择，总运行时间键 8 On/Off Switch — 开关 11 Flow Adjust Screw — 流量调整螺母 12 Accessory Mounting Screws (2) — 附件固定螺母 13 Intake/Filter Housing — 进口，过滤罩 18 Cap Screw to Regulator — 用来调节的螺母帽 20 Battery Pack Screws (2) — 电池包螺母 22 Charging Jack — 充电插口
+Figure 1图1 PCXR8采样机的前，后，上视图，25和27页有更多图片
+
+1 设置 通过连接充电插头到采样泵的充电插座(图1,#22)给电池充电.保证电池是完全充满电。禁止在危险
+环境中充电；只有使用SKC认证的专用充电器才可以确保可靠的性能，并在SKC担保范围内。
+
+Charger and battery pack connected
+
+2 解除调节器的控制 设定高流量的方法：去除盖住调节器阀的螺钉(图1,#18)，顺时针旋转调节阀直到它停止,(不要太
+紧)，盖回螺钉。现在泵设定为高流量。
+
+3 设定或确证流量速度 使用1/4-寸聚乙烯管,把采样介质连接到采样泵入口(见图1,#13).
+
+For high flow, turn valve screw clockwise.
+
+移除抗干扰盖。按下泵开关。按下开始和停止。按下流量和电池检查按扭。使用调节螺母调整流量直到转数计
+
+达到2L每秒。液晶显示器显示电量OK在左上角（如果不是，再次充电）按下流量和电池检查按扭来使泵进入保持状
+
+态。 把一台流量计连接到收集器的入口.
+
+Sample media
+
+按下流量和电池检查键发动泵,使用流动调节螺钉设定
+
+流速(图1,#11). 当流动速度设定后,按下流量和电池检查按扭使泵处于 待机状态.断开流量计.
+
+Flow adjust screw
+
+On/Off switch
+
+Flowmeter
+
+Tubing
+
+Calibration train with filter cassette
+
+
