@@ -6,7 +6,7 @@ from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Stream cimport MemStream
 from pyxpdf.includes.PDFDoc cimport PDFDoc
 # Change import name as it was conflicting with cdef classes
-from pyxpdf.includes.Page cimport Page as XPage
+from pyxpdf.includes.Page cimport Page as c_Page
 from pyxpdf.includes.OutputDev cimport OutputDev
 from pyxpdf.includes.TextOutputDev cimport (
     TextOutputDev, TextPage, TextOutputControl
@@ -15,6 +15,10 @@ from pyxpdf.includes.Catalog cimport Catalog
 
 
 cdef class Document:
+    """This class represents a PDF Document.
+
+    """
+
     cdef:
         PDFDoc *doc
         GString *ownerpass
@@ -23,6 +27,72 @@ cdef class Document:
         bytes doc_data
         # for caching pages
         list _pages_cache
+
+    def __init__(self, pdf, ownerpass=None, userpass=None):
+        """
+        """
+
+    def __cinit__(self, pdf, ownerpass=None, userpass=None):
+        self.doc = NULL
+
+        # Type casting NULL to prebent MSVC/C14 errors
+        self.ownerpass = <GString*> NULL if ownerpass == None else to_GString(ownerpass)
+        self.userpass = <GString*> NULL if userpass == None else to_GString(userpass)
+
+        # pdf file path
+        if isinstance(pdf, basestring):
+            self._load_from_file(to_GString(pdf))
+        # file-like object
+        elif callable(getattr(pdf, 'read', None)):
+            # copy buffer
+            self.doc_data = pdf.read()
+            self._load_from_char_array(self.doc_data, len(self.doc_data))
+        else:
+            raise ValueError(f"pdf argument must be a string or a file-like object.")
+
+        # check PDFDoc
+        self.check()
+
+        # build empty cache
+        self._pages_cache = [None] * self.num_pages
+
+    def __dealloc__(self):
+        del self.doc
+        del self.ownerpass
+        del self.userpass
+
+
+    def __repr__(self):
+        fname = "Stream" if self.filename == "" else self.filename
+        return "<Document [{fname}]>".format(fname=fname)
+
+    def __str__(self):
+        fname = "Stream" if self.filename == "" else self.filename
+        return "<Document [{fname}] [{pages}]>".format(fname=fname, pages=self.num_pages)
+
+    def __len__(self):
+        return self.num_pages
+
+    def __getitem__(self, key):
+        if isinstance(key, str):
+            pgno = self.label_to_index(key)
+            if pgno == -1:
+                raise KeyError(
+                    "Could not find page with label '{key}'".format(key=key))
+            return self.get_page(pgno)
+        elif isinstance(key, int):
+            # handle neg key
+            if key < 0:
+                key += self.num_pages
+            return self.get_page(key)
+        elif isinstance(key, slice):
+            # Return the list of Pages
+            return [self[i] for i in range(*key.indices(self.num_pages))]
+        else:
+            raise TypeError("Invalid Key type")
+
+    def __iter__(self):
+        return DocumentPageIterator(self)
 
 
     cdef Catalog *get_catalog(self):
@@ -99,89 +169,50 @@ cdef class Document:
         return self._pages_cache[idx]
 
 
-    def __cinit__(self, pdf, ownerpass=None, userpass=None):
-        self.doc = NULL
-
-        # Type casting NULL to prebent MSVC/C14 errors
-        self.ownerpass = <GString*> NULL if ownerpass == None else to_GString(ownerpass)
-        self.userpass = <GString*> NULL if userpass == None else to_GString(userpass)
-
-        # pdf file path
-        if isinstance(pdf, basestring):
-            self._load_from_file(to_GString(pdf))
-        # file-like object
-        elif callable(getattr(pdf, 'read', None)):
-            # copy buffer
-            self.doc_data = pdf.read()
-            self._load_from_char_array(self.doc_data, len(self.doc_data))
-        else:
-            raise ValueError(f"pdf argument must be a string or a file-like object.")
-
-        # check PDFDoc
-        self.check()
-
-        # build empty cache
-        self._pages_cache = [None] * self.num_pages
-
-    def __dealloc__(self):
-        del self.doc
-        del self.ownerpass
-        del self.userpass
-
-    def __repr__(self):
-        fname = "Stream" if self.filename == "" else self.filename
-        return "<Document [{fname}]>".format(fname=fname)
-
-    def __str__(self):
-        fname = "Stream" if self.filename == "" else self.filename
-        return "<Document [{fname}] [{pages}]>".format(fname=fname, pages=self.num_pages)
-
-    def __len__(self):
-        return self.num_pages
-
-    def __getitem__(self, key):
-        if isinstance(key, str):
-            pgno = self.label_to_index(key)
-            if pgno == -1:
-                raise KeyError(
-                    "Could not find page with label '{key}'".format(key=key))
-            return self.get_page(pgno)
-        elif isinstance(key, int):
-            # handle neg key
-            if key < 0:
-                key += self.num_pages
-            return self.get_page(key)
-        elif isinstance(key, slice):
-            # Return the list of Pages
-            return [self[i] for i in range(*key.indices(self.num_pages))]
-        else:
-            raise TypeError("Invalid Key type")
-
-    def __iter__(self):
-        return PageIterator(self)
 
     @property
     def filename(self):
+        """str: name of the file from which pdf document was loaded.
+
+        If pdf was loaded from `file-like` object then it will be a
+        empty ``str``.
+        """
         return GString_to_unicode(self.doc.getFileName())
 
     @property
     def has_page_labels(self):
+        """bool: whether pdf has page labels or not.
+        """
         return GBool_to_bool(self.get_catalog().hasPageLabels())
 
     @property
     def num_pages(self):
+        """int: total pages in pdf.
+        """
         return self.doc.getNumPages()
 
     @property
     def pdf_version(self):
+        """:obj:`float`: version of PDF standard pdf comply with.
+        """
         return self.doc.getPDFVersion()
 
     @property
     def is_linearized(self):
+        """bool: whether pdf is lineralised or not.
+
+        Notes
+        -----
+        What is a Linearised PDF?
+
+        Blahh Blahh !
+        """
         return GBool_to_bool(self.doc.isLinearized())
 
     @property
     def is_encrypted(self):
+        """bool: whether pdf is encrypted or not.
+        """
         return GBool_to_bool(self.doc.isEncrypted())
 
     # PDF Permissions
@@ -203,12 +234,14 @@ cdef class Document:
 
 
     def info(self):
+        """
+        """
         return self.get_info_dict()
 
     def xmp_metadata(self):
         return self.get_metadata()
 
-
+ 
     cpdef text_raw(self, int start=0, int end=-1, TextControl control=None):
         cdef:
             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
@@ -225,7 +258,7 @@ cdef class Document:
 
 
 
-cdef class PageIterator:
+cdef class DocumentPageIterator:
     cdef:
         Document doc
         int index
@@ -247,7 +280,7 @@ cdef class PageIterator:
 
 cdef class Page:
     # No need to free Page* as it is own by PDFDoc
-    cdef XPage *page
+    cdef c_Page *page
     cdef unique_ptr[TextPage] textpage
     cdef public int index
     cdef public object label
