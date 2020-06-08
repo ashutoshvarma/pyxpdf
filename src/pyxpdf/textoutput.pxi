@@ -4,6 +4,96 @@ from pyxpdf.includes.TextOutputDev cimport (
 
 
 cdef class TextControl:
+    """Parameters for Text extraction and layout analysis
+
+    Text layout modes:
+        - **reading**
+            Keep the text in reading order. It 'undo' physical layout (columns,
+            hyphenation, etc.) and output the text in reading order.
+        - **physical**
+            Maintain (as best as possible) the original physical layout of
+            the text. If the `fixed_pitch` option is given, character spacing 
+            within each line will be determined by the specified character pitch.
+        - **table**
+            It is similar to `physical` layout mode, but optimized for
+            tabular data, with the goal of keeping rows and columns  aligned
+            (at the expense of inserting extra whitespace). If the `fixed_pitch`
+            option is given, character spacing  within  each  line  will  be
+            determined by the specified character pitch.
+        - **simple**
+            Similar to `physical` layout, but optimized for simple one-column
+            pages. This mode will do a better job of maintaining horizontal
+            spacing, but it will only work properly with a single column
+            of text.
+        - **lineprinter**
+            Line printer mode uses a strict fixed character pitch and height
+            layout. That is, the page is broken into a grid, and characters
+            are placed into that grid. If the grid spacing is too small for the
+            actual characters, the result is extra  whitespace. If the grid
+            spacing is too large, the result is missing whitespace.  The
+            grid spacing can be specified using the  `fixed_pitch` and
+            `fixed_line_spacing` options. If one or both are not given on the
+            xpdf will attempt to compute appropriate value(s).
+        - **raw**
+            Keep the text in content stream order. Depending on how the PDF
+            file was generated, this may or may not be useful.
+
+    Parameters
+    ----------
+    mode : {"reading", "table", "simple", "physical", "lineprinter", "raw"}
+        text analysis/extraction layout mode
+    fixed_pitch : float, optional
+        Specify the character pitch (character width), for
+        `physical` , `table` ,or `lineprinter` mode. This is ignored
+        in all other modes.
+        (default is 0, means approximate characters' pitch will be calculated)
+    fixed_line_spacing : float, optional
+        Specify the line spacing, in  points, for `lineprinter` mode.
+        This is ignored in all other modes.
+        (default is `0`, means approximate line spacing will be calculated)
+    enable_html : bool, optional
+        enable extra proccessing for html. (default is :obj:`False`)
+    clip_text : bool, optional
+        Text which is hidden because of clipping is removed before doing
+        layout, and then added back in. This can be helpful for tables
+        where clipped (invisible) text would overlap the next column.
+        (default is :obj:`False`)
+    discard_clipped : bool, optional
+        discard all clipped characters
+        (default is :obj:`False`)
+    discard_diagonal : bool, optional
+        Diagonal text, i.e., text that is not close to one of the 0, 90,
+        180, or 270 degree axes, is discarded. This is useful to skip
+        watermarks drawn on top of body text, etc.
+        (default is :obj:`False`)
+    discard_invisible : bool, optional
+        discard all invinsible characters
+        (default is :obj:`False`)
+    insert_bom : bool, optional
+        Insert a Unicode byte order marker (BOM) at the start of the
+        text output.
+    margin_left : float, optional
+        Specifies the left margin. Text in the left margin
+        (i.e., within that many points of the left edge of the page) is
+        discarded.
+        (default is `0`)
+    margin_right : float, optional
+        Specifies the right margin. Text in the right margin
+        (i.e., within that many points of the right edge of the page) is
+        discarded.
+        (default is `0`)
+    margin_top : float, optional
+        Specifies the top margin. Text in the top margin
+        (i.e., within that many points of the top edge of the page) is
+        discarded.
+        (default is `0`)
+    margin_bottom : float, optional
+        Specifies the bottom margin. Text in the bottom margin
+        (i.e., within that many points of the bottom edge of the page) is
+        discarded.
+        (default is `0`)
+
+    """
     cdef TextOutputControl _c_control
 
     def __cinit__(self, mode = "reading", double fixed_pitch = 0,
