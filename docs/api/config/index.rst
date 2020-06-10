@@ -11,8 +11,11 @@ For most use case settings available from :data:`~pyxpdf.xpdf.Config`
 will be sufficient, but if you want more you can load a `xpdfrc`
 file.
 
-See :doc:`xpdfrc` 
+See : 
 
+.. toctree::
+
+    xpdfrc
 
 Config 
 ------

@@ -16,7 +16,7 @@ import re
 import datetime
 
 
-sys.path.insert(0, os.path.abspath('../src'))
+sys.path.append(os.path.abspath('../src'))
 
 here = os.path.abspath(os.path.dirname(__file__))
 
