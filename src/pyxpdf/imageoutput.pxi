@@ -218,8 +218,65 @@ cdef object pillow_image_from_buffer(object mode, int height, int width, object 
 cdef class RawImageControl:
     pass
 
+# adapted from poppler's pdftoppm
+cdef class RawImageOutput(PDFOutputDevice):
+    """Render PDF page as `Image`.
 
-cdef class RawImageOutput:
+    Convert the PDF page to uncompressed raw image.
+
+    `paper_color` depends on the color mode of image, if
+    color mode is `RGB` or `RGBA` than `paper_color` should
+    be a 3 int(0-255) tuple of RGB values, similarly for `CMYK`
+    it should be 4 int(0-255) tuple of CMYK color values.
+
+    If you are using image mode with alpha channel and want transparent
+    background then set `no_composite` to `True`
+
+    Parameters
+    ----------
+    doc : Document
+        PDF Document for this output device
+    mode : {"RGB", "RGBA", "L", "LA", "1", "CMYK"}, optional
+        image modes for output rendered image,
+        equivalent to Pillow's image modes.
+        (default is 'RGB')
+    paper_color : tuple of int, optional
+        paper color for rendered pdf page
+        (default is :obj:`None`, means 'white' paper color)
+    resolution : float, optional
+        X and Y resolution of output image in DPI
+        (default is 150)
+    resolution_x : float, optional
+        X resolution in DPI
+        (default is 150)
+    resolution_y : float, optional
+        X resolution in DPI
+        (default is 150)
+    anti_alias : bool, optional
+        enable font anti-aliasing for rendering
+        (default is `True`)
+    no_composite : bool, optional
+        disables the final composite (with the opaque paper color),
+        resulting in transparent output.
+        (default is `False`)
+    use_cropbox : bool, optional
+        use the crop box rather than media box
+        (default is `False`)
+    scale_before_rotation : bool, optional
+        resize dimensions before rotation of rotated pdfs
+        (default is `False`)
+
+    Note
+    ----
+    Additionally you can enable :attr:`Config.vector_anti_alias` for better
+    anti-alias effect.
+
+    Warning
+    -------
+    Avoid '1' image mode, as of now its quite buggy and fonts are not rendered properly
+    in it. Instead use 'L' for black and white.
+
+    """
     cdef:
         unique_ptr[SplashOutputDev] _c_splash_dev
         bint doc_started
@@ -371,6 +428,27 @@ cdef class RawImageOutput:
 
 
     cpdef object get(self, int page_no, crop_box=(0,0,0,0), scale_pixel_box = None):
+        """Get the rendered :class:`~PIL.Image.Image` for `page_no` indexed page
+
+        Parameters
+        ----------
+        page_no : int
+            index of page to render
+        crop_box : tuple of float, optional
+            tuple of cordinates of :term:`BBox` to set the rendering area.
+            (default is (0,0,0,0), means the whole page area)
+        scale_pixel_box : tuple of int, optional
+            tuple of pair of int which scales the page to fix within x * y pixels
+
+        Return
+        ------
+        :class:`~PIL.Image.Image`
+            Rendered PDF Page
+
+        Note
+        ----
+        Requires Optional dependency ``Pillow`` module
+        """
         cdef:
             int scale_x = scale_pixel_box[0] if scale_pixel_box else 0
             int scale_y = scale_pixel_box[1] if scale_pixel_box else 0
@@ -395,6 +473,20 @@ cdef class RawImageOutput:
 
 
 cdef class PDFImageOutput:
+    """Extract the images from PDF Document
+
+    Extract and decode images inside a PDF and output them as
+    :class:`~PIL.Image.Image` object.
+
+    Parameters
+    ----------
+    doc : Document
+        PDF Document for this output device
+
+    Note
+    ----
+    Requires Optional dependency ``Pillow`` module
+    """
     cdef:
         readonly Document doc
 
@@ -436,6 +528,18 @@ cdef class PDFImageOutput:
 
 
     cpdef list get(self, page_no):
+        """Get all the images from `page_no` indexed page.
+
+        Parameters
+        ----------
+        page_no : int
+            index of page to render
+
+        Return
+        ------
+        list of :class:`~PIL.Image.Image`
+            All the images in PDF Page
+        """
         return self._get_pillow_images(page_no)
 
 
