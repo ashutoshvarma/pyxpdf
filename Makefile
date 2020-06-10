@@ -32,7 +32,7 @@ all: inplace
 
 # Build in-place
 inplace:
-	CFLAGS='$(CFLAGS)' $(PYTHON) setup.py $(SETUPFLAGS) build_ext -i $(PYTHON_WITH_CYTHON) --warnings --with-coverage $(PARALLEL)
+	CFLAGS='$(CFLAGS)' $(PYTHON) setup.py $(SETUPFLAGS) build_ext -i $(PYTHON_WITH_CYTHON) --warnings --with-signature --with-coverage $(PARALLEL)
 
 inplace2:
 	$(PYTHON2) setup.py $(SETUPFLAGS) build_ext -i $(PY2_WITH_CYTHON) --warnings --with-coverage $(PARALLEL2)
@@ -76,6 +76,14 @@ valgrind_test_inplace: inplace
 	export PYTHONMALLOC=malloc
 	valgrind --tool=memcheck --leak-check=full  --suppressions=valgrind-python.supp \
 		$(PYTHON) -E -tt test_x.py
+
+doc: inplace
+	$(MAKE) -C docs html
+
+cleandoc:
+	rm -fr docs/_build
+
+rebuild_doc: cleandoc doc
 
 test: test_inplace
 
