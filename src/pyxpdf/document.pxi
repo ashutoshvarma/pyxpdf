@@ -346,8 +346,8 @@ cdef class Document:
             index of first page to extract
         end : int
             index of last page to extract
-        control : :any:`TextControl`
-            An :any:`TextControl` object, use to control the format of
+        control : :class:`~pyxpdf.xpdf.TextControl`
+            An :class:`~pyxpdf.xpdf.TextControl` object, use to control the format of
             extacted text. (default is :obj:`None` which implies text
             will be extracted using default values from `TextOutput` class)
 
@@ -385,8 +385,8 @@ cdef class Document:
             index of first page to extract
         end : int
             index of last page to extract
-        control : :any:`TextControl`, optional
-            An :any:`TextControl` object, use to control the format of
+        control : :class:`~pyxpdf.xpdf.TextControl`, optional
+            An :class:`~pyxpdf.xpdf.TextControl` object, use to control the format of
             extacted text. (default is :obj:`None` which implies text
             will be extracted using default values from `TextControl` class)
 
@@ -750,8 +750,8 @@ cdef class Page:
             Only text which is inside provided `page_area` will be extracted.
             (default is :obj:`None`, means the whole page area)
 
-        control : :any:`TextControl`
-            An :any:`TextControl` object, use to control the format of
+        control : :class:`~pyxpdf.xpdf.TextControl`
+            An :class:`~pyxpdf.xpdf.TextControl` object, use to control the format of
             extacted text. (default is :obj:`None` which implies text
             will be extracted using default values from `TextOutput` class)
 
@@ -794,8 +794,8 @@ cdef class Page:
             Only text which is inside provided `page_area` will be extracted.
             (default is :obj:`None`, means the whole page area)
 
-        control : :any:`TextControl`, optional
-            An :any:`TextControl` object, use to control the format of
+        control : :class:`~pyxpdf.xpdf.TextControl`, optional
+            An :class:`~pyxpdf.xpdf.TextControl` object, use to control the format of
             extacted text. (default is :obj:`None` which implies text
             will be extracted using default values from `TextControl` class)
 
