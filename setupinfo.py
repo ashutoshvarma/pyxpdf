@@ -137,6 +137,8 @@ def ext_modules(static_include_dirs, static_library_dirs,
     }
     if OPTION_WITH_COVERAGE:
         cythonize_directives['linetrace'] = True
+    if OPTION_WITH_SIGNATURE:
+        cythonize_directives['embedsignature'] = True
 
     result = []
     for module, src_file in zip(modules, module_files):
@@ -309,6 +311,7 @@ OPTION_WITH_CYTHON_GDB = has_option('cython-gdb')
 OPTION_WITH_REFNANNY = has_option('with-refnanny')
 OPTION_WITH_COVERAGE = has_option('with-coverage')
 OPTION_WITH_CLINES = has_option('with-clines')
+OPTION_WITH_SIGNATURE = has_option('with-signature')
 if OPTION_WITHOUT_CYTHON:
     CYTHON_INSTALLED = False
 OPTION_DEBUG_GCC = has_option('debug-gcc')
