@@ -36,23 +36,6 @@ def dev_status():
         return 'Development Status :: 5 - Production/Stable'
 
 
-def changes():
-    """Extract part of changelog pertaining to version.
-    """
-    _version = version()
-    with io.open(os.path.join(get_base_dir(), "CHANGES.md"), 'r', encoding='utf8') as f:
-        lines = []
-        for line in f:
-            if line.startswith('### '):
-                if len(lines) > 1:
-                    break
-            if lines:
-                lines.append(line)
-            elif line.startswith("### {version} ".format(version=_version)):
-                lines.append(line)
-    return ''.join(lines[:-1])
-
-
 def get_base_dir():
     return os.path.abspath(os.path.dirname(sys.argv[0]))
 

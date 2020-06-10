@@ -124,7 +124,7 @@ def setup_extra_options():
     return extra_opts
 
 
-with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md',),  encoding='utf8') as f:
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.rst',),  encoding='utf8') as f:
     readme = f.read()
 
 
@@ -141,8 +141,8 @@ setup(
     description=(
         "Powerful and Pythonic PDF processing library based on xpdf-4.02"
     ),
-    long_description=versioninfo.changes() + readme,
-    long_description_content_type='text/markdown',
+    long_description=readme,
+    long_description_content_type='text/x-rst',
     keywords=[
         'pdf parser',
         'pdf converter',
