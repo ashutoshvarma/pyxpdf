@@ -77,9 +77,16 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 
 napoleon_numpy_docstring = True
-#napoleon_use_admonition_for_examples = False
-#napoleon_use_admonition_for_notes = False
-#napoleon_use_admonition_for_references = False
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+# theme options
+html_theme_options = {
+    #'logo': 'logo.png',
+    'github_user': 'ashutoshvarma',
+    'github_repo': 'pyxpdf',
+    'github_button' : 'true',
+    'description': 'The fastest PDF parser for python',
+    #'analytics_id' : 'xxxxxx',
+}
