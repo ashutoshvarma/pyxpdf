@@ -32,7 +32,7 @@ More Information
   - `Issues <https://github.com/ashutoshvarma/pyxpdf/issues>`_
   - `Pull requests <https://github.com/ashutoshvarma/pyxpdf/pulls>`_
 
-- `Changelog <https://github.com/ashutoshvarma/pyxpdf/blob/master/CHANGES.rst>`_
+- `Changelog <https://pyxpdf.readthedocs.io/en/latest/changelog.html>`_
 
 License
 -------

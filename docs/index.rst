@@ -31,6 +31,7 @@ Find the source on `Github <https://github.com/ashutoshvarma/pyxpdf/>`_.
    intro
    tutorial/index
    api/index
+   changelog
    keywords
 
 
