@@ -27,3 +27,5 @@ cython_debug/
 coverage/
 coverage.xml
 htmlcov/
+
+docs/_build
