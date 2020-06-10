@@ -19,7 +19,7 @@ cdef class Document:
 
     :class:`Page` objects can be accessed though indexing, slicing.
 
-    If `pdf` parameter is a file-like object then make sure that
+    If `pdf` parameter is a :term:`file-like` object then make sure that
     it is open in 'b' binary mode as `Document` does not check for it.
 
     Examples
@@ -58,8 +58,8 @@ cdef class Document:
 
     Parameters
     ----------
-    pdf : str or file-like
-        Path of pdf file to load or a file-like object.
+    pdf : str or :term:`file-like`
+        Path of pdf file to load or a :term:`file-like` object.
     ownerpass : str, optional
         Owner password of pdf file, if encrypted (default :obj:`None`)
     userpass : str, optional
@@ -438,9 +438,36 @@ cdef class DocumentPageIterator:
 cdef class Page:
     """Represents a PDF page
 
+    Examples
+    --------
+    >>> page1 = doc[1]
+
+    Page index and label (if any)
+
+    >>> page1.index
+    1
+    >>> page1.label
+    'Cover1'
+
+    Page BBox(s)
+
+    >>> page1.mediabox
+    (0.0, 0.0, 612.0, 792.0)
+    >>> page1.cropbox
+    (0.0, 0.0, 612.0, 792.0)
+    >>> page1.mediabox
+    (0.0, 0.0, 612.0, 792.0)
+
+    Find text location in Page
+
+    >>> page1.find_text("Hello")
+    (100.0, 74.768, 117.328, 96.968)
+
+
     Parameters
     ----------
     doc : Document
+        Parent pdf Document
     index : int
         index of pdf Page
 
@@ -464,6 +491,10 @@ cdef class Page:
     cdef readonly object label
     cdef readonly Document doc
 
+
+    def __init__(self, doc, index):
+        """
+        """
 
     def __cinit__(self, Document doc not None, int index):
         if index < 0 or index >= doc.num_pages:
@@ -587,31 +618,31 @@ cdef class Page:
 
     @property
     def mediabox(self):
-        """tuple, (x1, y1, x2, y2): Page's media box cordinates
+        """tuple of float, (x1, y1, x2, y2): Page's media box cordinates
         """
         return PDFRectangle_to_tuple(self.page.getMediaBox())
 
     @property
     def cropbox(self):
-        """tuple, (x1, y1, x2, y2): Page's crop box cordinates
+        """tuple of float, (x1, y1, x2, y2): Page's crop box cordinates
         """
         return PDFRectangle_to_tuple(self.page.getCropBox())
 
     @property
     def bleedbox(self):
-        """tuple, (x1, y1, x2, y2): Page's bleed box cordinates
+        """tuple of float, (x1, y1, x2, y2): Page's bleed box cordinates
         """
         return PDFRectangle_to_tuple(self.page.getBleedBox())
 
     @property
     def trimbox(self):
-        """tuple, (x1, y1, x2, y2): Page's trim box cordinates
+        """tuple of float, (x1, y1, x2, y2): Page's trim box cordinates
         """
         return PDFRectangle_to_tuple(self.page.getTrimBox())
 
     @property
     def artbox(self):
-        """tuple, (x1, y1, x2, y2): Page's art box cordinates
+        """tuple of float, (x1, y1, x2, y2): Page's art box cordinates
         """
         return PDFRectangle_to_tuple(self.page.getArtBox())
 
@@ -633,7 +664,7 @@ cdef class Page:
         ----------
         text : str
             Text to search in page
-        search_box : tuple, optional
+        search_box : tuple of float, optional
             tuple of cordinates of :term:`BBox` to set the search area.
             (default is :obj:`None`, means the whole page area)
         direction : {'top', 'next', 'previous'}
@@ -650,7 +681,7 @@ cdef class Page:
 
         Returns
         -------
-        tuple, None
+        tuple of float, None
             If match is found then tuple of cordinates(x1, y1, x2, y2) of :term:`BBox`
             of `text` in page else :obj:`None`
 
@@ -682,7 +713,7 @@ cdef class Page:
         ----------
         text : str
             Text to search in page
-        search_box : tuple, optional
+        search_box : tuple of float, optional
             tuple of cordinates of :term:`BBox` to set the search area.
             (default is :obj:`None`, means the whole page area)
         case_sensitive : bool, optional
@@ -705,7 +736,7 @@ cdef class Page:
 
 
     def text_bytes(self, page_area=None, TextControl control = None):
-        """Parse and extract text from current page.
+        """Parse and extract text bytes from current page.
 
         Extracted text can be adjusted using `control` parameter.
         This method should be use when text encoding (:attr:`Config.text_encoding`)
@@ -714,7 +745,7 @@ cdef class Page:
 
         Parameters
         ----------
-        page_area : tuple, optional
+        page_area : tuple of float, optional
             tuple of cordinates of :term:`BBox` to set the extraction area.
             Only text which is inside provided `page_area` will be extracted.
             (default is :obj:`None`, means the whole page area)
@@ -758,7 +789,7 @@ cdef class Page:
 
         Parameters
         ----------
-        page_area : tuple, optional
+        page_area : tuple of float, optional
             tuple of cordinates of :term:`BBox` to set the extraction area.
             Only text which is inside provided `page_area` will be extracted.
             (default is :obj:`None`, means the whole page area)
