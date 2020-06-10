@@ -93,6 +93,10 @@ cdef class TextControl:
         discarded.
         (default is `0`)
 
+    Raises
+    ------
+    ValueError
+        If `mode` invalid
     """
     cdef TextOutputControl _c_control
 
@@ -137,12 +141,43 @@ cdef class TextControl:
 
 
 
-cdef class TextOutput:
+cdef class TextOutput(PDFOutputDevice):
+    """Text extract/analysis PDF Output device
+
+    Extract text and do layout analysis on from PDF :class:`Document`
+    while caching results. Page texts are cached for faster access.
+    Page texts are lazy loaded, they are loaded only when you first
+    access them.
+
+    Parameters
+    ----------
+    doc : Document
+        PDF Document for this output device
+    control : TextControl, optional
+        An :class:`TextControl` object for settings to adjust TextControl
+        extraction/analysis.
+        (default is :obj:`None`)
+    kwargs
+        :class:`TextControl` parameters which will be used if `control` is
+        not provided.
+
+    Attributes
+    ----------
+    doc : Document, readonly
+        Parent PDF Document
+    control : TextControl
+        Layout settings for output device
+
+    Raises
+    ------
+    XPDFInternalError
+        If cannot initialize internal `xpdf` objects will settings provided
+    """
     cdef:
         unique_ptr[TextOutputDev] _c_textdev
-        readonly TextControl control
         unique_ptr[string] _out_str
         readonly Document doc
+        readonly TextControl control
         # caching resource
         list _cache_texts
         vector[unique_ptr[TextPage]] _c_text_pages
@@ -212,14 +247,52 @@ cdef class TextOutput:
     # PUBLIC METHODS
 
     cpdef bytes get_bytes(self, int page_no):
-        if page_no < 0 or page_no >= self.doc.doc.getNumPages():
-            raise ValueError(f"page_no should be within pdf page range.")
+        """Get the extracted text bytes from `page_no` indexed page
+
+        This method should be use when text encoding (:attr:`Config.text_encoding`)
+        is different than `UTF-8` or when you to control decoding of bytes
+        by yourself.
+
+        Parameters
+        ----------
+        page_no : int
+            index of page to extract text bytes from
+
+        Return
+        ------
+        bytes
+            extracted text bytes
+        """
         return self._get_bytes(page_no)
 
     cpdef object get(self, int page_no):
+        """Get the extracted `UTF-8` decoded :any:`str` from `page_no` indexed
+        page
+
+        This method is almost similar to :meth:`get_bytes`, the only difference
+        is that it decodes the extracted bytes in `UTF-8` with '`ignore`'
+        (:func:`codecs.ignore_errors`) decoding error handler.
+
+        Parameters
+        ----------
+        page_no : int
+            index of page to extract text bytes from
+
+        Return
+        ------
+        str
+            extracted `UTF-8` decoded text
+        """
         return self._get_bytes(page_no).decode('UTF-8', errors='ignore')
 
     cpdef list get_all(self):
+        """Get the extracted `UTF-8` decoded text from all pages
+
+        Return
+        ------
+        :any:`list` of str
+            list of `UTF-8` decoded text from all the pages
+        """
         cdef:
             int i
             list txt_all = []
