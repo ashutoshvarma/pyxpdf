@@ -1,7 +1,7 @@
-from pyxpdf.includes.xpdf_error cimport ( 
-    ErrorCategory, setErrorCallback, ErrorCallback, 
-    errNone, errOpenFile, errBadCatalog, errDamaged, errEncrypted, 
-    errHighlightFile, errBadPrinter, errPrinting, errPermission, 
+from pyxpdf.includes.xpdf_error cimport (
+    ErrorCategory, setErrorCallback, ErrorCallback,
+    errNone, errOpenFile, errBadCatalog, errDamaged, errEncrypted,
+    errHighlightFile, errBadPrinter, errPrinting, errPermission,
     errBadPageNum, errFileIO
 )
 
@@ -41,9 +41,11 @@ cdef class PDFError(Exception):
     """
     def __init__(self, message):
         super().__init__(message)
-        
+
 
 cdef class XPDFError(PDFError):
+    """Base exception class for all ``xpdf`` errors.
+    """
     def __init__(self, message = None):
         if message:
             super().__init__(message)
@@ -55,21 +57,33 @@ cdef class XPDFError(PDFError):
             super().__init__(default_msg)
 
 cdef class PDFSyntaxError(XPDFError):
+    """Problem in parsing PDF file.
+    """
     pass
 
 cdef class XPDFConfigError(XPDFError):
+    """Wrong or unsupported ``xpdf`` configuration setting.
+    """
     pass
 
 cdef class PDFIOError(XPDFError):
+    """Error r/w file
+    """
     pass
 
 cdef class PDFPermissionError(XPDFError):
+    """PDF does not have required permissions or is encrypted.
+    """
     pass
 
 cdef class XPDFInternalError(XPDFError):
+    """``xpdf`` inernal errors.
+    """
     pass
 
 cdef class XPDFNotInplementedError(XPDFError):
+    """NotImplemented in ``xpdf`` sources
+    """
     pass
 
 
