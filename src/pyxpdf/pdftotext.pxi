@@ -4,18 +4,18 @@ from pyxpdf.includes.TextOutputDev cimport (
 )
 
 
-cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None, 
+cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None,
                     userpass=None, layout = "reading", double fixed_pitch=0,
-                    double fixed_line_spacing=0, clip_text=False, discard_diagonal=False, 
-                    insert_bom=False, double margin_left=0, double margin_right=0, 
+                    double fixed_line_spacing=0, discard_clipped=False, discard_diagonal=False,
+                    insert_bom=False, double margin_left=0, double margin_right=0,
                     double margin_top=0, double margin_bottom=0):
     cdef string ext_text
     cdef int err_code
-    cdef unique_ptr[GString] ownerpassG  
-    cdef unique_ptr[GString] userpassG 
+    cdef unique_ptr[GString] ownerpassG
+    cdef unique_ptr[GString] userpassG
     cdef unique_ptr[PDFDoc] doc
     cdef unique_ptr[TextOutputDev] text_dev
-    cdef unique_ptr[TextOutputControl] control 
+    cdef unique_ptr[TextOutputControl] control
 
     if ownerpass:
         ownerpassG = make_unique[GString](_chars(ownerpass))
@@ -40,7 +40,7 @@ cpdef pdftotext_raw(pdf_file, int start = 0, int end = 0, ownerpass=None,
     deref(control).fixedPitch = fixed_pitch
     deref(control).fixedLineSpacing = fixed_line_spacing
 
-    deref(control).clipText = to_GBool(clip_text)
+    deref(control).discardClippedText = to_GBool(discard_clipped)
     deref(control).discardDiagonalText = to_GBool(discard_diagonal)
     deref(control).insertBOM = to_GBool(insert_bom)
 
