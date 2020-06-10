@@ -15,6 +15,7 @@ __all__ = [
     # PDF components
     "Document", "Page", "Config",
     # PDF Outputs
+    "PDFOutputDevice",
     "TextControl", "TextOutput",
     "RawImageOutput", "PDFImageOutput",
     "page_iterator",
@@ -90,6 +91,8 @@ include "globalconfig.pxi"
 # pdftotext
 include "pdftotext.pxi"
 
+# pdf output device base class
+include "pdfoutput.pxi"
 
 # Python Objects based on TextOutputDev.pxd
 include "textoutput.pxi"
