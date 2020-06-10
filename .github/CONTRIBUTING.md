@@ -1,6 +1,6 @@
 # Contributing to pyxpdf
 
-Bug fixes, feature additions, tests, documentation and more can be contributed via [issues](https://github.com/ashutoshvarma/pyxpdf/issues) and/or [pull requests]((https://github.com/ashutoshvarma/pyxpdf/pulls). All contributions are welcome.
+Bug fixes, feature additions, tests, documentation and more can be contributed via [issues](https://github.com/ashutoshvarma/pyxpdf/issues) and/or [pull requests](https://github.com/ashutoshvarma/pyxpdf/pulls). All contributions are welcome.
 
 ## Bug fixes, feature additions, etc.
 
