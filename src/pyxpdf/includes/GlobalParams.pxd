@@ -27,9 +27,9 @@ cdef extern from "GlobalParams.h" nogil:
 
         PSFontParam16(GString *nameA, int wModeA,
                 GString *psFontNameA, GString *encodingA)
-        
 
-    
+
+
     ctypedef enum PSLevel:
         psLevel1
         psLevel1Sep
@@ -41,7 +41,7 @@ cdef extern from "GlobalParams.h" nogil:
         psLevel3Sep
 
 
-    ctypedef enum EndOfLineKind: 
+    ctypedef enum EndOfLineKind:
         eolUnix			# LF
         eolDOS			# CR+LF
         eolMac			# CR
@@ -120,13 +120,13 @@ cdef extern from "GlobalParams.h" nogil:
         GBool getEnablePathSimplification()
         GBool getDrawAnnotations()
         GBool getDrawFormFields()
-        GBool getOverprintPreview() 
+        GBool getOverprintPreview()
         GString *getPaperColor()
         GString *getMatteColor()
         GString *getFullScreenMatteColor()
         GBool getReverseVideoInvertImages()
-        GString *getLaunchCommand() 
-        GString *getMovieCommand() 
+        GString *getLaunchCommand()
+        GString *getMovieCommand()
         GBool getMapNumericCharNames()
         GBool getMapUnknownCharNames()
         GBool getMapExtTrueTypeFontsViaUnicode()
@@ -191,5 +191,5 @@ cdef extern from "GlobalParams.h" nogil:
         void setErrQuiet(GBool errQuietA)
 
         const char *defaultTextEncoding
-        
+
     cdef GlobalParams *globalParams
