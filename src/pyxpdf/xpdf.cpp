@@ -105,7 +105,6 @@
             "src/pyxpdf/textoutput.pxi"
         ],
         "extra_compile_args": [
-            "-w",
             "-O0"
         ],
         "include_dirs": [

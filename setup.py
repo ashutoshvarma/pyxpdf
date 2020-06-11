@@ -9,8 +9,8 @@ import os.path
 # for command line options and supported environment variables, please
 # see the end of 'setupinfo.py'
 
-if (2, 7) != sys.version_info[:2] < (3, 5):
-    print("This pyxpdf version requires Python 2.7, 3.5 or later.")
+if sys.version_info[:2] < (3, 5):
+    print("This pyxpdf version requires Python 3.5 or later.")
     sys.exit(1)
 
 if sys.version_info[0] < 3:
@@ -45,7 +45,7 @@ if 'setuptools' in sys.modules:
     extra_options['zip_safe'] = False
     extra_options['python_requires'] = (
         # NOTE: keep in sync with Trove classifier list below.
-        '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*')
+        '!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*')
 
     try:
         import pkg_resources
@@ -157,8 +157,6 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Cython',
         # NOTE: keep in sync with 'python_requires' list above.
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
