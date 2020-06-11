@@ -9,7 +9,6 @@ SAMPLE_DIR = os.path.join(ROOT_DIR, "samples")
 class InitGlobalTextCase(unittest.TestCase):
     def setUp(self):
         Config.reset()
-        Config.text_encoding = 'utf-8'
         Config.text_eol = 'unix'
 
     def tearDown(self):

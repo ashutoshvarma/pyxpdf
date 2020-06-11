@@ -128,7 +128,7 @@ cdef class _GlobalParamsConfig:
     @text_encoding.setter
     def text_encoding(self, encoding):
         cdef UnicodeMap* umap
-        self._global.setTextEncoding(_chars(encoding.upper()))
+        self._global.setTextEncoding(_chars(encoding))
         umap = self._global.getTextEncoding()
         if umap == NULL:
             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")

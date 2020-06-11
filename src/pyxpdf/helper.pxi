@@ -3,7 +3,7 @@ from pyxpdf.includes.Dict cimport Dict
 from pyxpdf.includes.Page cimport PDFRectangle
 from pyxpdf.includes.TextString cimport TextString
 
-cdef inline char* _chars(object s):
+cdef inline bytes _chars(object s):
     if isinstance(s, unicode):
         # encode to the specific encoding used inside of the module
         s = (<unicode>s).encode('UTF-8')
