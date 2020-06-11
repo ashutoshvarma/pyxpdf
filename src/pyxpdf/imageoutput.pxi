@@ -12,30 +12,30 @@ DEF BITMAP_ROW_PAD = 4
 DEF BITMAP_RESOLUTION = 150
 
 
-cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):
-    cdef:
-        int x,y
-        int height = bitmap.getHeight()
-        int width = bitmap.getWidth()
-        SplashBitmapRowSize row_size = bitmap.getRowSize()
-        bytes ppm_header
-        bytearray img = bytearray()
-        SplashColorPtr row, p
-
-    ppm_header = b'P6\n%d %d\n255\n' % (width, height)
-    img.extend(ppm_header)
-
-    row = bitmap.getDataPtr()
-    for y in range(height):
-        p = row
-        for x in range(width):
-            img.append(splashBGR8R(p))
-            img.append(splashBGR8G(p))
-            img.append(splashBGR8B(p))
-            p += 3
-        row += row_size
-
-    return img
+#cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):
+#    cdef:
+#        int x,y
+#        int height = bitmap.getHeight()
+#        int width = bitmap.getWidth()
+#        SplashBitmapRowSize row_size = bitmap.getRowSize()
+#        bytes ppm_header
+#        bytearray img = bytearray()
+#       SplashColorPtr row, p
+#
+#    ppm_header = b'P6\n%d %d\n255\n' % (width, height)
+#    img.extend(ppm_header)
+#
+#    row = bitmap.getDataPtr()
+#    for y in range(height):
+#        p = row
+#        for x in range(width):
+#            img.append(splashBGR8R(p))
+#            img.append(splashBGR8G(p))
+#            img.append(splashBGR8B(p))
+#            p += 3
+#        row += row_size
+#
+#    return img
 
 #FIXME: buggy as hell, text does not render properly.
 cdef bytearray splash_bitmap_to_1bpc_1comp(SplashBitmap *bitmap):

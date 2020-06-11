@@ -33,6 +33,10 @@ cdef class _GlobalParamsConfig:
         return cfg
 
     def load_file(self, cfg_path=None):
+        global globalParams
+        if globalParams != NULL:
+            del globalParams
+
         if cfg_path == None:
             self._global = new GlobalParams(<const char*>NULL)
         else:
@@ -42,7 +46,6 @@ cdef class _GlobalParamsConfig:
             raise MemoryError("Cannot create GlobalParamsConfig object.")
         self._set_defaults()
 
-        global globalParams
         globalParams = self._global
 
     def reset(self):
@@ -123,7 +126,11 @@ cdef class _GlobalParamsConfig:
 
     @property
     def text_encoding(self):
-        return GString_to_unicode(self._global.getTextEncodingName())
+        cdef:
+            unique_ptr[GString] gstr
+        gstr.reset(self._global.getTextEncodingName())
+        return GString_to_unicode(gstr.get())
+
 
     @text_encoding.setter
     def text_encoding(self, encoding):
@@ -132,6 +139,8 @@ cdef class _GlobalParamsConfig:
         umap = self._global.getTextEncoding()
         if umap == NULL:
             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
+        else:
+            umap.decRefCnt()
 
 
     @property

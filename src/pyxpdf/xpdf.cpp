@@ -105,6 +105,7 @@
             "src/pyxpdf/textoutput.pxi"
         ],
         "extra_compile_args": [
+            "-g2",
             "-O0"
         ],
         "include_dirs": [
@@ -1155,7 +1156,7 @@ struct __pyx_opt_args_6pyxpdf_4xpdf_8Document_display_pages {
   GBool printing;
 };
 
-/* "src/pyxpdf/document.pxi":335
+/* "src/pyxpdf/document.pxi":342
  * 
  * 
  *     cpdef text_bytes(self, int start=0, int end=-1, TextControl control=None):             # <<<<<<<<<<<<<<
@@ -1169,7 +1170,7 @@ struct __pyx_opt_args_6pyxpdf_4xpdf_8Document_text_bytes {
   struct __pyx_obj_6pyxpdf_4xpdf_TextControl *control;
 };
 
-/* "src/pyxpdf/document.pxi":377
+/* "src/pyxpdf/document.pxi":384
  *         return deref(out)
  * 
  *     cpdef text(self, start=0, end=-1, control=None):             # <<<<<<<<<<<<<<
@@ -1183,7 +1184,7 @@ struct __pyx_opt_args_6pyxpdf_4xpdf_8Document_text {
   PyObject *control;
 };
 
-/* "src/pyxpdf/document.pxi":515
+/* "src/pyxpdf/document.pxi":522
  * 
  * 
  *     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,             # <<<<<<<<<<<<<<
@@ -1200,7 +1201,7 @@ struct __pyx_opt_args_6pyxpdf_4xpdf_4Page_display_slice {
   GBool printing;
 };
 
-/* "src/pyxpdf/document.pxi":522
+/* "src/pyxpdf/document.pxi":529
  *                                 x1, y1, hgt, wdt, printing)
  * 
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,             # <<<<<<<<<<<<<<
@@ -1217,7 +1218,7 @@ struct __pyx_opt_args_6pyxpdf_4xpdf_4Page_display {
   GBool printing;
 };
 
-/* "src/pyxpdf/document.pxi":553
+/* "src/pyxpdf/document.pxi":560
  *         return None
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,             # <<<<<<<<<<<<<<
@@ -1459,7 +1460,7 @@ struct __pyx_obj_6pyxpdf_4xpdf_Document {
 };
 
 
-/* "src/pyxpdf/document.pxi":418
+/* "src/pyxpdf/document.pxi":425
  * 
  * 
  * cdef class DocumentPageIterator:             # <<<<<<<<<<<<<<
@@ -1473,7 +1474,7 @@ struct __pyx_obj_6pyxpdf_4xpdf_DocumentPageIterator {
 };
 
 
-/* "src/pyxpdf/document.pxi":438
+/* "src/pyxpdf/document.pxi":445
  * 
  * 
  * cdef class Page:             # <<<<<<<<<<<<<<
@@ -1491,7 +1492,7 @@ struct __pyx_obj_6pyxpdf_4xpdf_Page {
 };
 
 
-/* "src/pyxpdf/document.pxi":824
+/* "src/pyxpdf/document.pxi":831
  * 
  * 
  * cdef class page_iterator:             # <<<<<<<<<<<<<<
@@ -1506,7 +1507,7 @@ struct __pyx_obj_6pyxpdf_4xpdf_page_iterator {
 };
 
 
-/* "src/pyxpdf/document.pxi":706
+/* "src/pyxpdf/document.pxi":713
  * 
  * 
  *     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,             # <<<<<<<<<<<<<<
@@ -1631,7 +1632,7 @@ struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document {
 static struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *__pyx_vtabptr_6pyxpdf_4xpdf_Document;
 
 
-/* "src/pyxpdf/document.pxi":438
+/* "src/pyxpdf/document.pxi":445
  * 
  * 
  * cdef class Page:             # <<<<<<<<<<<<<<
@@ -2299,29 +2300,6 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
 #define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
 
-/* UnpackUnboundCMethod.proto */
-typedef struct {
-    PyObject *type;
-    PyObject **method_name;
-    PyCFunction func;
-    PyObject *method;
-    int flag;
-} __Pyx_CachedCFunction;
-
-/* CallUnboundCMethod1.proto */
-static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
-#else
-#define __Pyx_CallUnboundCMethod1(cfunc, self, arg)  __Pyx__CallUnboundCMethod1(cfunc, self, arg)
-#endif
-
-/* PyObjectCallMethod1.proto */
-static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg);
-
-/* ByteArrayAppend.proto */
-static CYTHON_INLINE int __Pyx_PyByteArray_Append(PyObject* bytearray, int value);
-
 /* SetItemIntByteArray.proto */
 #define __Pyx_SetItemInt_ByteArray(o, i, v, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
     (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
@@ -2580,9 +2558,6 @@ static void __Pyx_CppExn2PyErr() {
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_Unicode(Unicode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_Guchar(Guchar value);
-
-/* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
@@ -2620,6 +2595,9 @@ static CYTHON_INLINE void __Pyx__ExceptionSwap(PyThreadState *tstate, PyObject *
 #else
 static CYTHON_INLINE void __Pyx_ExceptionSwap(PyObject **type, PyObject **value, PyObject **tb);
 #endif
+
+/* PyObjectCallMethod1.proto */
+static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg);
 
 /* CoroutineBase.proto */
 typedef PyObject *(*__pyx_coroutine_body_t)(PyObject *, PyThreadState *, PyObject *);
@@ -2967,11 +2945,9 @@ static const char __pyx_k_throw[] = "throw";
 static const char __pyx_k_upper[] = "upper";
 static const char __pyx_k_Config[] = "Config";
 static const char __pyx_k_Stream[] = "Stream";
-static const char __pyx_k_append[] = "append";
 static const char __pyx_k_decode[] = "decode";
 static const char __pyx_k_dict_2[] = "_dict";
 static const char __pyx_k_errors[] = "errors";
-static const char __pyx_k_extend[] = "extend";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_ignore[] = "ignore";
 static const char __pyx_k_import[] = "__import__";
@@ -3025,7 +3001,6 @@ static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_wholeword[] = "wholeword";
 static const char __pyx_k_Error_None[] = "Error None";
 static const char __pyx_k_IndexError[] = "IndexError";
-static const char __pyx_k_P6_d_d_255[] = "P6\n%d %d\n255\n";
 static const char __pyx_k_PDFIOError[] = "PDFIOError";
 static const char __pyx_k_Page_index[] = "<Page[{index}]>";
 static const char __pyx_k_TextOutput[] = "<TextOutput[";
@@ -3274,7 +3249,6 @@ static PyObject *__pyx_n_u_LA;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_u_No_UnicodeMap_file_associated_wi;
 static PyObject *__pyx_n_s_NotImplementedError;
-static PyObject *__pyx_kp_b_P6_d_d_255;
 static PyObject *__pyx_n_s_PDFError;
 static PyObject *__pyx_n_u_PDFError;
 static PyObject *__pyx_n_s_PDFError___reduce_cython;
@@ -3367,7 +3341,6 @@ static PyObject *__pyx_kp_u__43;
 static PyObject *__pyx_kp_u__51;
 static PyObject *__pyx_n_s_all;
 static PyObject *__pyx_n_s_anti_alias;
-static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_args;
 static PyObject *__pyx_n_s_case_sensitive;
 static PyObject *__pyx_n_s_cfg_path;
@@ -3393,7 +3366,6 @@ static PyObject *__pyx_n_s_enable_html;
 static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_errors;
 static PyObject *__pyx_n_s_exec_module;
-static PyObject *__pyx_n_s_extend;
 static PyObject *__pyx_n_s_filename;
 static PyObject *__pyx_n_s_find_all_text;
 static PyObject *__pyx_n_s_find_spec;
@@ -3719,7 +3691,6 @@ static PyObject *__pyx_tp_new_6pyxpdf_4xpdf_DocumentPageIterator(PyTypeObject *t
 static PyObject *__pyx_tp_new_6pyxpdf_4xpdf_Page(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6pyxpdf_4xpdf_page_iterator(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6pyxpdf_4xpdf___pyx_scope_struct__find_all_text(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static __Pyx_CachedCFunction __pyx_umethod_PyByteArray_Type_extend = {0, &__pyx_n_s_extend, 0, 0, 0};
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_255;
@@ -5221,7 +5192,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
  *     if xdict != NULL:
  *         for i in range(xdict.getLength()):             # <<<<<<<<<<<<<<
  *             key = xdict.getKey(i)
- *             if xdict.lookup(key, &obj).isString() == gTrue:
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:
  */
     __Pyx_TraceLine(72,0,__PYX_ERR(1, 72, __pyx_L1_error))
     __pyx_t_2 = __pyx_v_xdict->getLength();
@@ -5233,7 +5204,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
  *     if xdict != NULL:
  *         for i in range(xdict.getLength()):
  *             key = xdict.getKey(i)             # <<<<<<<<<<<<<<
- *             if xdict.lookup(key, &obj).isString() == gTrue:
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
  */
       __Pyx_TraceLine(73,0,__PYX_ERR(1, 73, __pyx_L1_error))
@@ -5242,19 +5213,19 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
       /* "src/pyxpdf/helper.pxi":74
  *         for i in range(xdict.getLength()):
  *             key = xdict.getKey(i)
- *             if xdict.lookup(key, &obj).isString() == gTrue:             # <<<<<<<<<<<<<<
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:             # <<<<<<<<<<<<<<
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
  */
       __Pyx_TraceLine(74,0,__PYX_ERR(1, 74, __pyx_L1_error))
-      __pyx_t_1 = ((__pyx_v_xdict->lookup(__pyx_v_key, (&__pyx_v_obj), NULL)->isString() == gTrue) != 0);
+      __pyx_t_1 = ((__pyx_v_xdict->lookup(__pyx_v_key, (&__pyx_v_obj), 0)->isString() == gTrue) != 0);
       if (__pyx_t_1) {
 
         /* "src/pyxpdf/helper.pxi":75
  *             key = xdict.getKey(i)
- *             if xdict.lookup(key, &obj).isString() == gTrue:
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())             # <<<<<<<<<<<<<<
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
  *                 pydict[key.decode('UTF-8')] = obj.getNum()
  */
         __Pyx_TraceLine(75,0,__PYX_ERR(1, 75, __pyx_L1_error))
@@ -5273,29 +5244,29 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
         /* "src/pyxpdf/helper.pxi":74
  *         for i in range(xdict.getLength()):
  *             key = xdict.getKey(i)
- *             if xdict.lookup(key, &obj).isString() == gTrue:             # <<<<<<<<<<<<<<
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:             # <<<<<<<<<<<<<<
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
  */
         goto __pyx_L6;
       }
 
       /* "src/pyxpdf/helper.pxi":76
- *             if xdict.lookup(key, &obj).isString() == gTrue:
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:             # <<<<<<<<<<<<<<
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:             # <<<<<<<<<<<<<<
  *                 pydict[key.decode('UTF-8')] = obj.getNum()
- *         obj.free()
+ *             obj.free()
  */
       __Pyx_TraceLine(76,0,__PYX_ERR(1, 76, __pyx_L1_error))
-      __pyx_t_1 = ((__pyx_v_xdict->lookup(__pyx_v_key, (&__pyx_v_obj), NULL)->isNum() == gTrue) != 0);
+      __pyx_t_1 = ((__pyx_v_xdict->lookup(__pyx_v_key, (&__pyx_v_obj), 0)->isNum() == gTrue) != 0);
       if (__pyx_t_1) {
 
         /* "src/pyxpdf/helper.pxi":77
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
  *                 pydict[key.decode('UTF-8')] = obj.getNum()             # <<<<<<<<<<<<<<
- *         obj.free()
+ *             obj.free()
  *     return pydict
  */
         __Pyx_TraceLine(77,0,__PYX_ERR(1, 77, __pyx_L1_error))
@@ -5312,25 +5283,25 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
         /* "src/pyxpdf/helper.pxi":76
- *             if xdict.lookup(key, &obj).isString() == gTrue:
+ *             if xdict.lookup(key, &obj, 0).isString() == gTrue:
  *                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:             # <<<<<<<<<<<<<<
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:             # <<<<<<<<<<<<<<
  *                 pydict[key.decode('UTF-8')] = obj.getNum()
- *         obj.free()
+ *             obj.free()
  */
       }
       __pyx_L6:;
-    }
 
-    /* "src/pyxpdf/helper.pxi":78
- *             elif xdict.lookup(key, &obj).isNum() == gTrue:
+      /* "src/pyxpdf/helper.pxi":78
+ *             elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
  *                 pydict[key.decode('UTF-8')] = obj.getNum()
- *         obj.free()             # <<<<<<<<<<<<<<
+ *             obj.free()             # <<<<<<<<<<<<<<
  *     return pydict
  * 
  */
-    __Pyx_TraceLine(78,0,__PYX_ERR(1, 78, __pyx_L1_error))
-    __pyx_v_obj.free();
+      __Pyx_TraceLine(78,0,__PYX_ERR(1, 78, __pyx_L1_error))
+      __pyx_v_obj.free();
+    }
 
     /* "src/pyxpdf/helper.pxi":71
  *     cdef Object obj
@@ -5343,7 +5314,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
 
   /* "src/pyxpdf/helper.pxi":79
  *                 pydict[key.decode('UTF-8')] = obj.getNum()
- *         obj.free()
+ *             obj.free()
  *     return pydict             # <<<<<<<<<<<<<<
  * 
  * # cdef object TextString_to_unicode(TextString* text_str):
@@ -5379,11 +5350,12 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_Dict_to_pydict(Dict *__pyx_v_xdict, struc
  * #    return GString_to_unicode(text_str.toPDFTextString())
  * 
  * cdef TextString* to_TextString(tstr):             # <<<<<<<<<<<<<<
- *     cdef TextString* text_string
- *     text_string = new TextString(to_GString(tstr))
+ *     cdef:
+ *         unique_ptr[GString] gstr
  */
 
 static TextString *__pyx_f_6pyxpdf_4xpdf_to_TextString(PyObject *__pyx_v_tstr) {
+  std::unique_ptr<GString>  __pyx_v_gstr;
   TextString *__pyx_v_text_string;
   TextString *__pyx_r;
   __Pyx_TraceDeclarations
@@ -5394,24 +5366,34 @@ static TextString *__pyx_f_6pyxpdf_4xpdf_to_TextString(PyObject *__pyx_v_tstr) {
   __Pyx_RefNannySetupContext("to_TextString", 0);
   __Pyx_TraceCall("to_TextString", __pyx_f[1], 84, 0, __PYX_ERR(1, 84, __pyx_L1_error));
 
-  /* "src/pyxpdf/helper.pxi":86
- * cdef TextString* to_TextString(tstr):
- *     cdef TextString* text_string
- *     text_string = new TextString(to_GString(tstr))             # <<<<<<<<<<<<<<
+  /* "src/pyxpdf/helper.pxi":88
+ *         unique_ptr[GString] gstr
+ *         TextString* text_string
+ *     gstr.reset(to_GString(tstr))             # <<<<<<<<<<<<<<
+ *     text_string = new TextString(gstr.get())
+ *     return text_string
+ */
+  __Pyx_TraceLine(88,0,__PYX_ERR(1, 88, __pyx_L1_error))
+  __pyx_v_gstr.reset(__pyx_f_6pyxpdf_4xpdf_to_GString(__pyx_v_tstr));
+
+  /* "src/pyxpdf/helper.pxi":89
+ *         TextString* text_string
+ *     gstr.reset(to_GString(tstr))
+ *     text_string = new TextString(gstr.get())             # <<<<<<<<<<<<<<
  *     return text_string
  * 
  */
-  __Pyx_TraceLine(86,0,__PYX_ERR(1, 86, __pyx_L1_error))
-  __pyx_v_text_string = new TextString(__pyx_f_6pyxpdf_4xpdf_to_GString(__pyx_v_tstr));
+  __Pyx_TraceLine(89,0,__PYX_ERR(1, 89, __pyx_L1_error))
+  __pyx_v_text_string = new TextString(__pyx_v_gstr.get());
 
-  /* "src/pyxpdf/helper.pxi":87
- *     cdef TextString* text_string
- *     text_string = new TextString(to_GString(tstr))
+  /* "src/pyxpdf/helper.pxi":90
+ *     gstr.reset(to_GString(tstr))
+ *     text_string = new TextString(gstr.get())
  *     return text_string             # <<<<<<<<<<<<<<
  * 
  * cdef void append_to_cpp_string(void *stream, const char *text, int length):
  */
-  __Pyx_TraceLine(87,0,__PYX_ERR(1, 87, __pyx_L1_error))
+  __Pyx_TraceLine(90,0,__PYX_ERR(1, 90, __pyx_L1_error))
   __pyx_r = __pyx_v_text_string;
   goto __pyx_L0;
 
@@ -5419,8 +5401,8 @@ static TextString *__pyx_f_6pyxpdf_4xpdf_to_TextString(PyObject *__pyx_v_tstr) {
  * #    return GString_to_unicode(text_str.toPDFTextString())
  * 
  * cdef TextString* to_TextString(tstr):             # <<<<<<<<<<<<<<
- *     cdef TextString* text_string
- *     text_string = new TextString(to_GString(tstr))
+ *     cdef:
+ *         unique_ptr[GString] gstr
  */
 
   /* function exit code */
@@ -5433,7 +5415,7 @@ static TextString *__pyx_f_6pyxpdf_4xpdf_to_TextString(PyObject *__pyx_v_tstr) {
   return __pyx_r;
 }
 
-/* "src/pyxpdf/helper.pxi":89
+/* "src/pyxpdf/helper.pxi":92
  *     return text_string
  * 
  * cdef void append_to_cpp_string(void *stream, const char *text, int length):             # <<<<<<<<<<<<<<
@@ -5448,23 +5430,23 @@ static void __pyx_f_6pyxpdf_4xpdf_append_to_cpp_string(void *__pyx_v_stream, cha
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("append_to_cpp_string", 0);
-  __Pyx_TraceCall("append_to_cpp_string", __pyx_f[1], 89, 0, __PYX_ERR(1, 89, __pyx_L1_error));
+  __Pyx_TraceCall("append_to_cpp_string", __pyx_f[1], 92, 0, __PYX_ERR(1, 92, __pyx_L1_error));
 
-  /* "src/pyxpdf/helper.pxi":90
+  /* "src/pyxpdf/helper.pxi":93
  * 
  * cdef void append_to_cpp_string(void *stream, const char *text, int length):
  *     (<string*>stream)[0] += string(text, length)             # <<<<<<<<<<<<<<
  */
-  __Pyx_TraceLine(90,0,__PYX_ERR(1, 90, __pyx_L1_error))
+  __Pyx_TraceLine(93,0,__PYX_ERR(1, 93, __pyx_L1_error))
   try {
     __pyx_t_1 = std::string(__pyx_v_text, __pyx_v_length);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 90, __pyx_L1_error)
+    __PYX_ERR(1, 93, __pyx_L1_error)
   }
   (((std::string *)__pyx_v_stream)[0]) += __pyx_t_1;
 
-  /* "src/pyxpdf/helper.pxi":89
+  /* "src/pyxpdf/helper.pxi":92
  *     return text_string
  * 
  * cdef void append_to_cpp_string(void *stream, const char *text, int length):             # <<<<<<<<<<<<<<
@@ -8639,8 +8621,8 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_19_GlobalParamsConfig__get_default_xpdfrc
  *         return cfg
  * 
  *     def load_file(self, cfg_path=None):             # <<<<<<<<<<<<<<
- *         if cfg_path == None:
- *             self._global = new GlobalParams(<const char*>NULL)
+ *         global globalParams
+ *         if globalParams != NULL:
  */
 
 /* Python wrapper */
@@ -8708,8 +8690,8 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_load_file(struct _
   PyObject *__pyx_r = NULL;
   __Pyx_TraceDeclarations
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_t_2;
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   char const *__pyx_t_3;
   GlobalParams *__pyx_t_4;
   int __pyx_lineno = 0;
@@ -8719,86 +8701,116 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_load_file(struct _
   __Pyx_RefNannySetupContext("load_file", 0);
   __Pyx_TraceCall("load_file", __pyx_f[3], 35, 0, __PYX_ERR(3, 35, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":36
- * 
+  /* "src/pyxpdf/globalconfig.pxi":37
  *     def load_file(self, cfg_path=None):
+ *         global globalParams
+ *         if globalParams != NULL:             # <<<<<<<<<<<<<<
+ *             del globalParams
+ * 
+ */
+  __Pyx_TraceLine(37,0,__PYX_ERR(3, 37, __pyx_L1_error))
+  __pyx_t_1 = ((globalParams != NULL) != 0);
+  if (__pyx_t_1) {
+
+    /* "src/pyxpdf/globalconfig.pxi":38
+ *         global globalParams
+ *         if globalParams != NULL:
+ *             del globalParams             # <<<<<<<<<<<<<<
+ * 
+ *         if cfg_path == None:
+ */
+    __Pyx_TraceLine(38,0,__PYX_ERR(3, 38, __pyx_L1_error))
+    delete globalParams;
+
+    /* "src/pyxpdf/globalconfig.pxi":37
+ *     def load_file(self, cfg_path=None):
+ *         global globalParams
+ *         if globalParams != NULL:             # <<<<<<<<<<<<<<
+ *             del globalParams
+ * 
+ */
+  }
+
+  /* "src/pyxpdf/globalconfig.pxi":40
+ *             del globalParams
+ * 
  *         if cfg_path == None:             # <<<<<<<<<<<<<<
  *             self._global = new GlobalParams(<const char*>NULL)
  *         else:
  */
-  __Pyx_TraceLine(36,0,__PYX_ERR(3, 36, __pyx_L1_error))
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_cfg_path, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 36, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(3, 36, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_2) {
+  __Pyx_TraceLine(40,0,__PYX_ERR(3, 40, __pyx_L1_error))
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_cfg_path, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 40, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_1) {
 
-    /* "src/pyxpdf/globalconfig.pxi":37
- *     def load_file(self, cfg_path=None):
+    /* "src/pyxpdf/globalconfig.pxi":41
+ * 
  *         if cfg_path == None:
  *             self._global = new GlobalParams(<const char*>NULL)             # <<<<<<<<<<<<<<
  *         else:
  *             self._global = new GlobalParams(_chars(cfg_path))
  */
-    __Pyx_TraceLine(37,0,__PYX_ERR(3, 37, __pyx_L1_error))
+    __Pyx_TraceLine(41,0,__PYX_ERR(3, 41, __pyx_L1_error))
     __pyx_v_self->_global = new GlobalParams(((char const *)NULL));
 
-    /* "src/pyxpdf/globalconfig.pxi":36
+    /* "src/pyxpdf/globalconfig.pxi":40
+ *             del globalParams
  * 
- *     def load_file(self, cfg_path=None):
  *         if cfg_path == None:             # <<<<<<<<<<<<<<
  *             self._global = new GlobalParams(<const char*>NULL)
  *         else:
  */
-    goto __pyx_L3;
+    goto __pyx_L4;
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":39
+  /* "src/pyxpdf/globalconfig.pxi":43
  *             self._global = new GlobalParams(<const char*>NULL)
  *         else:
  *             self._global = new GlobalParams(_chars(cfg_path))             # <<<<<<<<<<<<<<
  * 
  *         if self._global == NULL:
  */
-  __Pyx_TraceLine(39,0,__PYX_ERR(3, 39, __pyx_L1_error))
+  __Pyx_TraceLine(43,0,__PYX_ERR(3, 43, __pyx_L1_error))
   /*else*/ {
-    __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_cfg_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 39, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(__pyx_t_1 == Py_None)) {
+    __pyx_t_2 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_cfg_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 43, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (unlikely(__pyx_t_2 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-      __PYX_ERR(3, 39, __pyx_L1_error)
+      __PYX_ERR(3, 43, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_3) && PyErr_Occurred())) __PYX_ERR(3, 39, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyBytes_AsString(__pyx_t_2); if (unlikely((!__pyx_t_3) && PyErr_Occurred())) __PYX_ERR(3, 43, __pyx_L1_error)
     __pyx_v_self->_global = new GlobalParams(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_L3:;
+  __pyx_L4:;
 
-  /* "src/pyxpdf/globalconfig.pxi":41
+  /* "src/pyxpdf/globalconfig.pxi":45
  *             self._global = new GlobalParams(_chars(cfg_path))
  * 
  *         if self._global == NULL:             # <<<<<<<<<<<<<<
  *             raise MemoryError("Cannot create GlobalParamsConfig object.")
  *         self._set_defaults()
  */
-  __Pyx_TraceLine(41,0,__PYX_ERR(3, 41, __pyx_L1_error))
-  __pyx_t_2 = ((__pyx_v_self->_global == NULL) != 0);
-  if (unlikely(__pyx_t_2)) {
+  __Pyx_TraceLine(45,0,__PYX_ERR(3, 45, __pyx_L1_error))
+  __pyx_t_1 = ((__pyx_v_self->_global == NULL) != 0);
+  if (unlikely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/globalconfig.pxi":42
+    /* "src/pyxpdf/globalconfig.pxi":46
  * 
  *         if self._global == NULL:
  *             raise MemoryError("Cannot create GlobalParamsConfig object.")             # <<<<<<<<<<<<<<
  *         self._set_defaults()
  * 
  */
-    __Pyx_TraceLine(42,0,__PYX_ERR(3, 42, __pyx_L1_error))
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 42, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(3, 42, __pyx_L1_error)
+    __Pyx_TraceLine(46,0,__PYX_ERR(3, 46, __pyx_L1_error))
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 46, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(3, 46, __pyx_L1_error)
 
-    /* "src/pyxpdf/globalconfig.pxi":41
+    /* "src/pyxpdf/globalconfig.pxi":45
  *             self._global = new GlobalParams(_chars(cfg_path))
  * 
  *         if self._global == NULL:             # <<<<<<<<<<<<<<
@@ -8807,26 +8819,26 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_load_file(struct _
  */
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":43
+  /* "src/pyxpdf/globalconfig.pxi":47
  *         if self._global == NULL:
  *             raise MemoryError("Cannot create GlobalParamsConfig object.")
  *         self._set_defaults()             # <<<<<<<<<<<<<<
  * 
- *         global globalParams
+ *         globalParams = self._global
  */
-  __Pyx_TraceLine(43,0,__PYX_ERR(3, 43, __pyx_L1_error))
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf__GlobalParamsConfig *)__pyx_v_self->__pyx_vtab)->_set_defaults(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_TraceLine(47,0,__PYX_ERR(3, 47, __pyx_L1_error))
+  __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf__GlobalParamsConfig *)__pyx_v_self->__pyx_vtab)->_set_defaults(__pyx_v_self); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 47, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":46
+  /* "src/pyxpdf/globalconfig.pxi":49
+ *         self._set_defaults()
  * 
- *         global globalParams
  *         globalParams = self._global             # <<<<<<<<<<<<<<
  * 
  *     def reset(self):
  */
-  __Pyx_TraceLine(46,0,__PYX_ERR(3, 46, __pyx_L1_error))
+  __Pyx_TraceLine(49,0,__PYX_ERR(3, 49, __pyx_L1_error))
   __pyx_t_4 = __pyx_v_self->_global;
   globalParams = __pyx_t_4;
 
@@ -8834,15 +8846,15 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_load_file(struct _
  *         return cfg
  * 
  *     def load_file(self, cfg_path=None):             # <<<<<<<<<<<<<<
- *         if cfg_path == None:
- *             self._global = new GlobalParams(<const char*>NULL)
+ *         global globalParams
+ *         if globalParams != NULL:
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("pyxpdf.xpdf._GlobalParamsConfig.load_file", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -8852,7 +8864,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_load_file(struct _
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":48
+/* "src/pyxpdf/globalconfig.pxi":51
  *         globalParams = self._global
  * 
  *     def reset(self):             # <<<<<<<<<<<<<<
@@ -8887,17 +8899,17 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_2reset(struct __py
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__24)
   __Pyx_RefNannySetupContext("reset", 0);
-  __Pyx_TraceCall("reset", __pyx_f[3], 48, 0, __PYX_ERR(3, 48, __pyx_L1_error));
+  __Pyx_TraceCall("reset", __pyx_f[3], 51, 0, __PYX_ERR(3, 51, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":49
+  /* "src/pyxpdf/globalconfig.pxi":52
  * 
  *     def reset(self):
  *         self.load_file(self.cfg_path)             # <<<<<<<<<<<<<<
  * 
  *     def __cinit__(self):
  */
-  __Pyx_TraceLine(49,0,__PYX_ERR(3, 49, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_load_file); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 49, __pyx_L1_error)
+  __Pyx_TraceLine(52,0,__PYX_ERR(3, 52, __pyx_L1_error))
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_load_file); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -8911,12 +8923,12 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_2reset(struct __py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_self->cfg_path) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->cfg_path);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 49, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":48
+  /* "src/pyxpdf/globalconfig.pxi":51
  *         globalParams = self._global
  * 
  *     def reset(self):             # <<<<<<<<<<<<<<
@@ -8940,7 +8952,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_2reset(struct __py
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":51
+/* "src/pyxpdf/globalconfig.pxi":54
  *         self.load_file(self.cfg_path)
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -8975,27 +8987,27 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_4__cinit__(struct __pyx_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
-  __Pyx_TraceCall("__cinit__", __pyx_f[3], 51, 0, __PYX_ERR(3, 51, __pyx_L1_error));
+  __Pyx_TraceCall("__cinit__", __pyx_f[3], 54, 0, __PYX_ERR(3, 54, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":52
+  /* "src/pyxpdf/globalconfig.pxi":55
  * 
  *     def __cinit__(self):
  *         self._global = NULL             # <<<<<<<<<<<<<<
  *         self.cfg_path = self._get_default_xpdfrc()
  *         self.load_file(self.cfg_path)
  */
-  __Pyx_TraceLine(52,0,__PYX_ERR(3, 52, __pyx_L1_error))
+  __Pyx_TraceLine(55,0,__PYX_ERR(3, 55, __pyx_L1_error))
   __pyx_v_self->_global = NULL;
 
-  /* "src/pyxpdf/globalconfig.pxi":53
+  /* "src/pyxpdf/globalconfig.pxi":56
  *     def __cinit__(self):
  *         self._global = NULL
  *         self.cfg_path = self._get_default_xpdfrc()             # <<<<<<<<<<<<<<
  *         self.load_file(self.cfg_path)
  * 
  */
-  __Pyx_TraceLine(53,0,__PYX_ERR(3, 53, __pyx_L1_error))
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf__GlobalParamsConfig *)__pyx_v_self->__pyx_vtab)->_get_default_xpdfrc(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 53, __pyx_L1_error)
+  __Pyx_TraceLine(56,0,__PYX_ERR(3, 56, __pyx_L1_error))
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf__GlobalParamsConfig *)__pyx_v_self->__pyx_vtab)->_get_default_xpdfrc(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->cfg_path);
@@ -9003,15 +9015,15 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_4__cinit__(struct __pyx_
   __pyx_v_self->cfg_path = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":54
+  /* "src/pyxpdf/globalconfig.pxi":57
  *         self._global = NULL
  *         self.cfg_path = self._get_default_xpdfrc()
  *         self.load_file(self.cfg_path)             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __Pyx_TraceLine(54,0,__PYX_ERR(3, 54, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_load_file); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 54, __pyx_L1_error)
+  __Pyx_TraceLine(57,0,__PYX_ERR(3, 57, __pyx_L1_error))
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_load_file); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -9025,12 +9037,12 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_4__cinit__(struct __pyx_
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_self->cfg_path) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->cfg_path);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 54, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":51
+  /* "src/pyxpdf/globalconfig.pxi":54
  *         self.load_file(self.cfg_path)
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -9053,7 +9065,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_4__cinit__(struct __pyx_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":56
+/* "src/pyxpdf/globalconfig.pxi":59
  *         self.load_file(self.cfg_path)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -9079,29 +9091,29 @@ static void __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_6__dealloc__(struct __p
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
-  __Pyx_TraceCall("__dealloc__", __pyx_f[3], 56, 0, __PYX_ERR(3, 56, __pyx_L1_error));
+  __Pyx_TraceCall("__dealloc__", __pyx_f[3], 59, 0, __PYX_ERR(3, 59, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":58
+  /* "src/pyxpdf/globalconfig.pxi":61
  *     def __dealloc__(self):
  *         global globalParams
  *         globalParams = NULL             # <<<<<<<<<<<<<<
  *         del self._global
  * 
  */
-  __Pyx_TraceLine(58,0,__PYX_ERR(3, 58, __pyx_L1_error))
+  __Pyx_TraceLine(61,0,__PYX_ERR(3, 61, __pyx_L1_error))
   globalParams = NULL;
 
-  /* "src/pyxpdf/globalconfig.pxi":59
+  /* "src/pyxpdf/globalconfig.pxi":62
  *         global globalParams
  *         globalParams = NULL
  *         del self._global             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(59,0,__PYX_ERR(3, 59, __pyx_L1_error))
+  __Pyx_TraceLine(62,0,__PYX_ERR(3, 62, __pyx_L1_error))
   delete __pyx_v_self->_global;
 
-  /* "src/pyxpdf/globalconfig.pxi":56
+  /* "src/pyxpdf/globalconfig.pxi":59
  *         self.load_file(self.cfg_path)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -9118,7 +9130,7 @@ static void __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_6__dealloc__(struct __p
   __Pyx_RefNannyFinishContext();
 }
 
-/* "src/pyxpdf/globalconfig.pxi":62
+/* "src/pyxpdf/globalconfig.pxi":65
  * 
  * 
  *     def setup_base_fonts(self, dir):             # <<<<<<<<<<<<<<
@@ -9152,27 +9164,27 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8setup_base_fonts(
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__25)
   __Pyx_RefNannySetupContext("setup_base_fonts", 0);
-  __Pyx_TraceCall("setup_base_fonts", __pyx_f[3], 62, 0, __PYX_ERR(3, 62, __pyx_L1_error));
+  __Pyx_TraceCall("setup_base_fonts", __pyx_f[3], 65, 0, __PYX_ERR(3, 65, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":63
+  /* "src/pyxpdf/globalconfig.pxi":66
  * 
  *     def setup_base_fonts(self, dir):
  *         self._global.setupBaseFonts(_chars(dir))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(63,0,__PYX_ERR(3, 63, __pyx_L1_error))
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 63, __pyx_L1_error)
+  __Pyx_TraceLine(66,0,__PYX_ERR(3, 66, __pyx_L1_error))
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(3, 63, __pyx_L1_error)
+    __PYX_ERR(3, 66, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 66, __pyx_L1_error)
   __pyx_v_self->_global->setupBaseFonts(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":62
+  /* "src/pyxpdf/globalconfig.pxi":65
  * 
  * 
  *     def setup_base_fonts(self, dir):             # <<<<<<<<<<<<<<
@@ -9194,7 +9206,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8setup_base_fonts(
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":67
+/* "src/pyxpdf/globalconfig.pxi":70
  * 
  *     @property
  *     def base_dir(self):             # <<<<<<<<<<<<<<
@@ -9224,24 +9236,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8base_dir___get__(
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 67, 0, __PYX_ERR(3, 67, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 70, 0, __PYX_ERR(3, 70, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":68
+  /* "src/pyxpdf/globalconfig.pxi":71
  *     @property
  *     def base_dir(self):
  *         return GString_to_unicode(self._global.getBaseDir())             # <<<<<<<<<<<<<<
  * 
  *     @base_dir.setter
  */
-  __Pyx_TraceLine(68,0,__PYX_ERR(3, 68, __pyx_L1_error))
+  __Pyx_TraceLine(71,0,__PYX_ERR(3, 71, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_self->_global->getBaseDir()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 68, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_self->_global->getBaseDir()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":67
+  /* "src/pyxpdf/globalconfig.pxi":70
  * 
  *     @property
  *     def base_dir(self):             # <<<<<<<<<<<<<<
@@ -9261,7 +9273,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8base_dir___get__(
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":71
+/* "src/pyxpdf/globalconfig.pxi":74
  * 
  *     @base_dir.setter
  *     def base_dir(self, dir):             # <<<<<<<<<<<<<<
@@ -9292,27 +9304,27 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8base_dir_2__set__(struc
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 71, 0, __PYX_ERR(3, 71, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 74, 0, __PYX_ERR(3, 74, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":72
+  /* "src/pyxpdf/globalconfig.pxi":75
  *     @base_dir.setter
  *     def base_dir(self, dir):
  *         self._global.setBaseDir(_chars(dir))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(72,0,__PYX_ERR(3, 72, __pyx_L1_error))
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 72, __pyx_L1_error)
+  __Pyx_TraceLine(75,0,__PYX_ERR(3, 75, __pyx_L1_error))
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(3, 72, __pyx_L1_error)
+    __PYX_ERR(3, 75, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 72, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 75, __pyx_L1_error)
   __pyx_v_self->_global->setBaseDir(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":71
+  /* "src/pyxpdf/globalconfig.pxi":74
  * 
  *     @base_dir.setter
  *     def base_dir(self, dir):             # <<<<<<<<<<<<<<
@@ -9333,7 +9345,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8base_dir_2__set__(struc
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":75
+/* "src/pyxpdf/globalconfig.pxi":78
  * 
  * 
  *     def map_name_to_unicode(self, char_name):             # <<<<<<<<<<<<<<
@@ -9368,32 +9380,32 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10map_name_to_unic
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__26)
   __Pyx_RefNannySetupContext("map_name_to_unicode", 0);
-  __Pyx_TraceCall("map_name_to_unicode", __pyx_f[3], 75, 0, __PYX_ERR(3, 75, __pyx_L1_error));
+  __Pyx_TraceCall("map_name_to_unicode", __pyx_f[3], 78, 0, __PYX_ERR(3, 78, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":76
+  /* "src/pyxpdf/globalconfig.pxi":79
  * 
  *     def map_name_to_unicode(self, char_name):
  *         return self._global.mapNameToUnicode(_chars(char_name))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(76,0,__PYX_ERR(3, 76, __pyx_L1_error))
+  __Pyx_TraceLine(79,0,__PYX_ERR(3, 79, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_char_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_char_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(3, 76, __pyx_L1_error)
+    __PYX_ERR(3, 79, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 76, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyInt_From_Unicode(__pyx_v_self->_global->mapNameToUnicode(__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_Unicode(__pyx_v_self->_global->mapNameToUnicode(__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":75
+  /* "src/pyxpdf/globalconfig.pxi":78
  * 
  * 
  *     def map_name_to_unicode(self, char_name):             # <<<<<<<<<<<<<<
@@ -9414,7 +9426,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10map_name_to_unic
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":80
+/* "src/pyxpdf/globalconfig.pxi":83
  * 
  *     @property
  *     def ps_paper_width(self):             # <<<<<<<<<<<<<<
@@ -9444,24 +9456,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14ps_paper_width__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 80, 0, __PYX_ERR(3, 80, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 83, 0, __PYX_ERR(3, 83, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":81
+  /* "src/pyxpdf/globalconfig.pxi":84
  *     @property
  *     def ps_paper_width(self):
  *         return self._global.getPSPaperWidth()             # <<<<<<<<<<<<<<
  * 
  *     @ps_paper_width.setter
  */
-  __Pyx_TraceLine(81,0,__PYX_ERR(3, 81, __pyx_L1_error))
+  __Pyx_TraceLine(84,0,__PYX_ERR(3, 84, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_global->getPSPaperWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 81, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_global->getPSPaperWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":80
+  /* "src/pyxpdf/globalconfig.pxi":83
  * 
  *     @property
  *     def ps_paper_width(self):             # <<<<<<<<<<<<<<
@@ -9481,7 +9493,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14ps_paper_width__
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":84
+/* "src/pyxpdf/globalconfig.pxi":87
  * 
  *     @ps_paper_width.setter
  *     def ps_paper_width(self, int width):             # <<<<<<<<<<<<<<
@@ -9500,7 +9512,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_19_GlobalParamsConfig_14ps_paper_width_3__set_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_width); {
-    __pyx_v_width = __Pyx_PyInt_As_int(__pyx_arg_width); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 84, __pyx_L3_error)
+    __pyx_v_width = __Pyx_PyInt_As_int(__pyx_arg_width); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 87, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9523,19 +9535,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14ps_paper_width_2__set_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 84, 0, __PYX_ERR(3, 84, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 87, 0, __PYX_ERR(3, 87, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":85
+  /* "src/pyxpdf/globalconfig.pxi":88
  *     @ps_paper_width.setter
  *     def ps_paper_width(self, int width):
  *         self._global.setPSPaperWidth(width)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(85,0,__PYX_ERR(3, 85, __pyx_L1_error))
+  __Pyx_TraceLine(88,0,__PYX_ERR(3, 88, __pyx_L1_error))
   __pyx_v_self->_global->setPSPaperWidth(__pyx_v_width);
 
-  /* "src/pyxpdf/globalconfig.pxi":84
+  /* "src/pyxpdf/globalconfig.pxi":87
  * 
  *     @ps_paper_width.setter
  *     def ps_paper_width(self, int width):             # <<<<<<<<<<<<<<
@@ -9555,7 +9567,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14ps_paper_width_2__set_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":89
+/* "src/pyxpdf/globalconfig.pxi":92
  * 
  *     @property
  *     def ps_paper_height(self):             # <<<<<<<<<<<<<<
@@ -9585,24 +9597,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15ps_paper_height_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 89, 0, __PYX_ERR(3, 89, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 92, 0, __PYX_ERR(3, 92, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":90
+  /* "src/pyxpdf/globalconfig.pxi":93
  *     @property
  *     def ps_paper_height(self):
  *         return self._global.getPSPaperHeight()             # <<<<<<<<<<<<<<
  * 
  *     @ps_paper_height.setter
  */
-  __Pyx_TraceLine(90,0,__PYX_ERR(3, 90, __pyx_L1_error))
+  __Pyx_TraceLine(93,0,__PYX_ERR(3, 93, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_global->getPSPaperHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_global->getPSPaperHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":89
+  /* "src/pyxpdf/globalconfig.pxi":92
  * 
  *     @property
  *     def ps_paper_height(self):             # <<<<<<<<<<<<<<
@@ -9622,7 +9634,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15ps_paper_height_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":93
+/* "src/pyxpdf/globalconfig.pxi":96
  * 
  *     @ps_paper_height.setter
  *     def ps_paper_height(self, int height):             # <<<<<<<<<<<<<<
@@ -9641,7 +9653,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_19_GlobalParamsConfig_15ps_paper_height_3__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_height); {
-    __pyx_v_height = __Pyx_PyInt_As_int(__pyx_arg_height); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 93, __pyx_L3_error)
+    __pyx_v_height = __Pyx_PyInt_As_int(__pyx_arg_height); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 96, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9664,19 +9676,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15ps_paper_height_2__set
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 93, 0, __PYX_ERR(3, 93, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 96, 0, __PYX_ERR(3, 96, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":94
+  /* "src/pyxpdf/globalconfig.pxi":97
  *     @ps_paper_height.setter
  *     def ps_paper_height(self, int height):
  *         self._global.setPSPaperHeight(height)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(94,0,__PYX_ERR(3, 94, __pyx_L1_error))
+  __Pyx_TraceLine(97,0,__PYX_ERR(3, 97, __pyx_L1_error))
   __pyx_v_self->_global->setPSPaperHeight(__pyx_v_height);
 
-  /* "src/pyxpdf/globalconfig.pxi":93
+  /* "src/pyxpdf/globalconfig.pxi":96
  * 
  *     @ps_paper_height.setter
  *     def ps_paper_height(self, int height):             # <<<<<<<<<<<<<<
@@ -9696,7 +9708,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15ps_paper_height_2__set
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":98
+/* "src/pyxpdf/globalconfig.pxi":101
  * 
  *     @property
  *     def enable_freetype(self):             # <<<<<<<<<<<<<<
@@ -9726,24 +9738,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15enable_freetype_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 98, 0, __PYX_ERR(3, 98, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 101, 0, __PYX_ERR(3, 101, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":99
+  /* "src/pyxpdf/globalconfig.pxi":102
  *     @property
  *     def enable_freetype(self):
  *         return GBool_to_bool(self._global.getEnableFreeType())             # <<<<<<<<<<<<<<
  * 
  *     @enable_freetype.setter
  */
-  __Pyx_TraceLine(99,0,__PYX_ERR(3, 99, __pyx_L1_error))
+  __Pyx_TraceLine(102,0,__PYX_ERR(3, 102, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getEnableFreeType()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 99, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getEnableFreeType()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":98
+  /* "src/pyxpdf/globalconfig.pxi":101
  * 
  *     @property
  *     def enable_freetype(self):             # <<<<<<<<<<<<<<
@@ -9763,7 +9775,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15enable_freetype_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":102
+/* "src/pyxpdf/globalconfig.pxi":105
  * 
  *     @enable_freetype.setter
  *     def enable_freetype(self, enable):             # <<<<<<<<<<<<<<
@@ -9795,18 +9807,18 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15enable_freetype_2__set
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 102, 0, __PYX_ERR(3, 102, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 105, 0, __PYX_ERR(3, 105, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":103
+  /* "src/pyxpdf/globalconfig.pxi":106
  *     @enable_freetype.setter
  *     def enable_freetype(self, enable):
  *         self._global.setEnableFreeType('yes' if enable == True else 'no')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(103,0,__PYX_ERR(3, 103, __pyx_L1_error))
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 103, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 103, __pyx_L1_error)
+  __Pyx_TraceLine(106,0,__PYX_ERR(3, 106, __pyx_L1_error))
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 106, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
     __pyx_t_1 = ((char *)"yes");
@@ -9815,7 +9827,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15enable_freetype_2__set
   }
   (void)(__pyx_v_self->_global->setEnableFreeType(__pyx_t_1));
 
-  /* "src/pyxpdf/globalconfig.pxi":102
+  /* "src/pyxpdf/globalconfig.pxi":105
  * 
  *     @enable_freetype.setter
  *     def enable_freetype(self, enable):             # <<<<<<<<<<<<<<
@@ -9836,7 +9848,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_15enable_freetype_2__set
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":107
+/* "src/pyxpdf/globalconfig.pxi":110
  * 
  *     @property
  *     def anti_alias(self):             # <<<<<<<<<<<<<<
@@ -9866,24 +9878,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10anti_alias___get
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 107, 0, __PYX_ERR(3, 107, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 110, 0, __PYX_ERR(3, 110, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":108
+  /* "src/pyxpdf/globalconfig.pxi":111
  *     @property
  *     def anti_alias(self):
  *         return GBool_to_bool(self._global.getAntialias())             # <<<<<<<<<<<<<<
  * 
  *     @anti_alias.setter
  */
-  __Pyx_TraceLine(108,0,__PYX_ERR(3, 108, __pyx_L1_error))
+  __Pyx_TraceLine(111,0,__PYX_ERR(3, 111, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getAntialias()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 108, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getAntialias()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":107
+  /* "src/pyxpdf/globalconfig.pxi":110
  * 
  *     @property
  *     def anti_alias(self):             # <<<<<<<<<<<<<<
@@ -9903,7 +9915,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10anti_alias___get
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":111
+/* "src/pyxpdf/globalconfig.pxi":114
  * 
  *     @anti_alias.setter
  *     def anti_alias(self, enable):             # <<<<<<<<<<<<<<
@@ -9935,18 +9947,18 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10anti_alias_2__set__(st
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 111, 0, __PYX_ERR(3, 111, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 114, 0, __PYX_ERR(3, 114, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":112
+  /* "src/pyxpdf/globalconfig.pxi":115
  *     @anti_alias.setter
  *     def anti_alias(self, enable):
  *         self._global.setAntialias('yes' if enable == True else 'no')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(112,0,__PYX_ERR(3, 112, __pyx_L1_error))
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 112, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 112, __pyx_L1_error)
+  __Pyx_TraceLine(115,0,__PYX_ERR(3, 115, __pyx_L1_error))
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 115, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 115, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
     __pyx_t_1 = ((char *)"yes");
@@ -9955,7 +9967,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10anti_alias_2__set__(st
   }
   (void)(__pyx_v_self->_global->setAntialias(__pyx_t_1));
 
-  /* "src/pyxpdf/globalconfig.pxi":111
+  /* "src/pyxpdf/globalconfig.pxi":114
  * 
  *     @anti_alias.setter
  *     def anti_alias(self, enable):             # <<<<<<<<<<<<<<
@@ -9976,7 +9988,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_10anti_alias_2__set__(st
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":116
+/* "src/pyxpdf/globalconfig.pxi":119
  * 
  *     @property
  *     def vector_anti_alias(self):             # <<<<<<<<<<<<<<
@@ -10006,24 +10018,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_17vector_anti_alia
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 116, 0, __PYX_ERR(3, 116, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 119, 0, __PYX_ERR(3, 119, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":117
+  /* "src/pyxpdf/globalconfig.pxi":120
  *     @property
  *     def vector_anti_alias(self):
  *         return GBool_to_bool(self._global.getVectorAntialias())             # <<<<<<<<<<<<<<
  * 
  *     @vector_anti_alias.setter
  */
-  __Pyx_TraceLine(117,0,__PYX_ERR(3, 117, __pyx_L1_error))
+  __Pyx_TraceLine(120,0,__PYX_ERR(3, 120, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getVectorAntialias()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 117, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getVectorAntialias()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":116
+  /* "src/pyxpdf/globalconfig.pxi":119
  * 
  *     @property
  *     def vector_anti_alias(self):             # <<<<<<<<<<<<<<
@@ -10043,7 +10055,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_17vector_anti_alia
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":120
+/* "src/pyxpdf/globalconfig.pxi":123
  * 
  *     @vector_anti_alias.setter
  *     def vector_anti_alias(self, enable):             # <<<<<<<<<<<<<<
@@ -10075,18 +10087,18 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_17vector_anti_alias_2__s
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 120, 0, __PYX_ERR(3, 120, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 123, 0, __PYX_ERR(3, 123, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":121
+  /* "src/pyxpdf/globalconfig.pxi":124
  *     @vector_anti_alias.setter
  *     def vector_anti_alias(self, enable):
  *         self._global.setVectorAntialias('yes' if enable == True else 'no')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(121,0,__PYX_ERR(3, 121, __pyx_L1_error))
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 121, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 121, __pyx_L1_error)
+  __Pyx_TraceLine(124,0,__PYX_ERR(3, 124, __pyx_L1_error))
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enable, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 124, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(3, 124, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
     __pyx_t_1 = ((char *)"yes");
@@ -10095,7 +10107,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_17vector_anti_alias_2__s
   }
   (void)(__pyx_v_self->_global->setVectorAntialias(__pyx_t_1));
 
-  /* "src/pyxpdf/globalconfig.pxi":120
+  /* "src/pyxpdf/globalconfig.pxi":123
  * 
  *     @vector_anti_alias.setter
  *     def vector_anti_alias(self, enable):             # <<<<<<<<<<<<<<
@@ -10116,12 +10128,12 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_17vector_anti_alias_2__s
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":125
+/* "src/pyxpdf/globalconfig.pxi":128
  * 
  *     @property
  *     def text_encoding(self):             # <<<<<<<<<<<<<<
- *         return GString_to_unicode(self._global.getTextEncodingName())
- * 
+ *         cdef:
+ *             unique_ptr[GString] gstr
  */
 
 /* Python wrapper */
@@ -10138,6 +10150,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding_1_
 }
 
 static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding___get__(struct __pyx_obj_6pyxpdf_4xpdf__GlobalParamsConfig *__pyx_v_self) {
+  std::unique_ptr<GString>  __pyx_v_gstr;
   PyObject *__pyx_r = NULL;
   __Pyx_TraceDeclarations
   __Pyx_RefNannyDeclarations
@@ -10146,29 +10159,39 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding___
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 125, 0, __PYX_ERR(3, 125, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 128, 0, __PYX_ERR(3, 128, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":126
- *     @property
- *     def text_encoding(self):
- *         return GString_to_unicode(self._global.getTextEncodingName())             # <<<<<<<<<<<<<<
+  /* "src/pyxpdf/globalconfig.pxi":131
+ *         cdef:
+ *             unique_ptr[GString] gstr
+ *         gstr.reset(self._global.getTextEncodingName())             # <<<<<<<<<<<<<<
+ *         return GString_to_unicode(gstr.get())
  * 
- *     @text_encoding.setter
  */
-  __Pyx_TraceLine(126,0,__PYX_ERR(3, 126, __pyx_L1_error))
+  __Pyx_TraceLine(131,0,__PYX_ERR(3, 131, __pyx_L1_error))
+  __pyx_v_gstr.reset(__pyx_v_self->_global->getTextEncodingName());
+
+  /* "src/pyxpdf/globalconfig.pxi":132
+ *             unique_ptr[GString] gstr
+ *         gstr.reset(self._global.getTextEncodingName())
+ *         return GString_to_unicode(gstr.get())             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_TraceLine(132,0,__PYX_ERR(3, 132, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_self->_global->getTextEncodingName()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 126, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_gstr.get()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":125
+  /* "src/pyxpdf/globalconfig.pxi":128
  * 
  *     @property
  *     def text_encoding(self):             # <<<<<<<<<<<<<<
- *         return GString_to_unicode(self._global.getTextEncodingName())
- * 
+ *         cdef:
+ *             unique_ptr[GString] gstr
  */
 
   /* function exit code */
@@ -10183,7 +10206,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding___
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":129
+/* "src/pyxpdf/globalconfig.pxi":136
  * 
  *     @text_encoding.setter
  *     def text_encoding(self, encoding):             # <<<<<<<<<<<<<<
@@ -10219,56 +10242,56 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding_2__set__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 129, 0, __PYX_ERR(3, 129, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 136, 0, __PYX_ERR(3, 136, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":131
+  /* "src/pyxpdf/globalconfig.pxi":138
  *     def text_encoding(self, encoding):
  *         cdef UnicodeMap* umap
  *         self._global.setTextEncoding(_chars(encoding))             # <<<<<<<<<<<<<<
  *         umap = self._global.getTextEncoding()
  *         if umap == NULL:
  */
-  __Pyx_TraceLine(131,0,__PYX_ERR(3, 131, __pyx_L1_error))
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 131, __pyx_L1_error)
+  __Pyx_TraceLine(138,0,__PYX_ERR(3, 138, __pyx_L1_error))
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(3, 131, __pyx_L1_error)
+    __PYX_ERR(3, 138, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 131, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(3, 138, __pyx_L1_error)
   __pyx_v_self->_global->setTextEncoding(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":132
+  /* "src/pyxpdf/globalconfig.pxi":139
  *         cdef UnicodeMap* umap
  *         self._global.setTextEncoding(_chars(encoding))
  *         umap = self._global.getTextEncoding()             # <<<<<<<<<<<<<<
  *         if umap == NULL:
  *             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
  */
-  __Pyx_TraceLine(132,0,__PYX_ERR(3, 132, __pyx_L1_error))
+  __Pyx_TraceLine(139,0,__PYX_ERR(3, 139, __pyx_L1_error))
   __pyx_v_umap = __pyx_v_self->_global->getTextEncoding();
 
-  /* "src/pyxpdf/globalconfig.pxi":133
+  /* "src/pyxpdf/globalconfig.pxi":140
  *         self._global.setTextEncoding(_chars(encoding))
  *         umap = self._global.getTextEncoding()
  *         if umap == NULL:             # <<<<<<<<<<<<<<
  *             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
- * 
+ *         else:
  */
-  __Pyx_TraceLine(133,0,__PYX_ERR(3, 133, __pyx_L1_error))
+  __Pyx_TraceLine(140,0,__PYX_ERR(3, 140, __pyx_L1_error))
   __pyx_t_3 = ((__pyx_v_umap == NULL) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "src/pyxpdf/globalconfig.pxi":134
+    /* "src/pyxpdf/globalconfig.pxi":141
  *         umap = self._global.getTextEncoding()
  *         if umap == NULL:
  *             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")             # <<<<<<<<<<<<<<
- * 
- * 
+ *         else:
+ *             umap.decRefCnt()
  */
-    __Pyx_TraceLine(134,0,__PYX_ERR(3, 134, __pyx_L1_error))
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 134, __pyx_L1_error)
+    __Pyx_TraceLine(141,0,__PYX_ERR(3, 141, __pyx_L1_error))
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_4 = 0;
     __pyx_t_5 = 127;
@@ -10276,7 +10299,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding_2__set__
     __pyx_t_4 += 35;
     __Pyx_GIVEREF(__pyx_kp_u_No_UnicodeMap_file_associated_wi);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_No_UnicodeMap_file_associated_wi);
-    __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_v_encoding, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 134, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_v_encoding, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_5) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_5;
     __pyx_t_4 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
@@ -10287,26 +10310,38 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding_2__set__
     __pyx_t_4 += 7;
     __Pyx_GIVEREF(__pyx_kp_u_found);
     PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u_found);
-    __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 134, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_XPDFConfigError), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 134, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_XPDFConfigError), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(3, 134, __pyx_L1_error)
+    __PYX_ERR(3, 141, __pyx_L1_error)
 
-    /* "src/pyxpdf/globalconfig.pxi":133
+    /* "src/pyxpdf/globalconfig.pxi":140
  *         self._global.setTextEncoding(_chars(encoding))
  *         umap = self._global.getTextEncoding()
  *         if umap == NULL:             # <<<<<<<<<<<<<<
  *             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
- * 
+ *         else:
  */
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":129
+  /* "src/pyxpdf/globalconfig.pxi":143
+ *             raise XPDFConfigError(f"No UnicodeMap file associated with {encoding} found.")
+ *         else:
+ *             umap.decRefCnt()             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_TraceLine(143,0,__PYX_ERR(3, 143, __pyx_L1_error))
+  /*else*/ {
+    __pyx_v_umap->decRefCnt();
+  }
+
+  /* "src/pyxpdf/globalconfig.pxi":136
  * 
  *     @text_encoding.setter
  *     def text_encoding(self, encoding):             # <<<<<<<<<<<<<<
@@ -10328,7 +10363,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_13text_encoding_2__set__
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":138
+/* "src/pyxpdf/globalconfig.pxi":147
  * 
  *     @property
  *     def text_eol(self):             # <<<<<<<<<<<<<<
@@ -10358,43 +10393,43 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol___get__(
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 138, 0, __PYX_ERR(3, 138, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 147, 0, __PYX_ERR(3, 147, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":139
+  /* "src/pyxpdf/globalconfig.pxi":148
  *     @property
  *     def text_eol(self):
  *         cdef EndOfLineKind eol = self._global.getTextEOL()             # <<<<<<<<<<<<<<
  *         if eol == EndOfLineKind.eolUnix:
  *             return "unix"
  */
-  __Pyx_TraceLine(139,0,__PYX_ERR(3, 139, __pyx_L1_error))
+  __Pyx_TraceLine(148,0,__PYX_ERR(3, 148, __pyx_L1_error))
   __pyx_v_eol = __pyx_v_self->_global->getTextEOL();
 
-  /* "src/pyxpdf/globalconfig.pxi":140
+  /* "src/pyxpdf/globalconfig.pxi":149
  *     def text_eol(self):
  *         cdef EndOfLineKind eol = self._global.getTextEOL()
  *         if eol == EndOfLineKind.eolUnix:             # <<<<<<<<<<<<<<
  *             return "unix"
  *         elif eol == EndOfLineKind.eolDOS:
  */
-  __Pyx_TraceLine(140,0,__PYX_ERR(3, 140, __pyx_L1_error))
+  __Pyx_TraceLine(149,0,__PYX_ERR(3, 149, __pyx_L1_error))
   switch (__pyx_v_eol) {
     case eolUnix:
 
-    /* "src/pyxpdf/globalconfig.pxi":141
+    /* "src/pyxpdf/globalconfig.pxi":150
  *         cdef EndOfLineKind eol = self._global.getTextEOL()
  *         if eol == EndOfLineKind.eolUnix:
  *             return "unix"             # <<<<<<<<<<<<<<
  *         elif eol == EndOfLineKind.eolDOS:
  *             return "dos"
  */
-    __Pyx_TraceLine(141,0,__PYX_ERR(3, 141, __pyx_L1_error))
+    __Pyx_TraceLine(150,0,__PYX_ERR(3, 150, __pyx_L1_error))
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_n_u_unix);
     __pyx_r = __pyx_n_u_unix;
     goto __pyx_L0;
 
-    /* "src/pyxpdf/globalconfig.pxi":140
+    /* "src/pyxpdf/globalconfig.pxi":149
  *     def text_eol(self):
  *         cdef EndOfLineKind eol = self._global.getTextEOL()
  *         if eol == EndOfLineKind.eolUnix:             # <<<<<<<<<<<<<<
@@ -10404,20 +10439,20 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol___get__(
     break;
     case eolDOS:
 
-    /* "src/pyxpdf/globalconfig.pxi":143
+    /* "src/pyxpdf/globalconfig.pxi":152
  *             return "unix"
  *         elif eol == EndOfLineKind.eolDOS:
  *             return "dos"             # <<<<<<<<<<<<<<
  *         else:
  *             return "mac"
  */
-    __Pyx_TraceLine(143,0,__PYX_ERR(3, 143, __pyx_L1_error))
+    __Pyx_TraceLine(152,0,__PYX_ERR(3, 152, __pyx_L1_error))
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_n_u_dos);
     __pyx_r = __pyx_n_u_dos;
     goto __pyx_L0;
 
-    /* "src/pyxpdf/globalconfig.pxi":142
+    /* "src/pyxpdf/globalconfig.pxi":151
  *         if eol == EndOfLineKind.eolUnix:
  *             return "unix"
  *         elif eol == EndOfLineKind.eolDOS:             # <<<<<<<<<<<<<<
@@ -10427,14 +10462,14 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol___get__(
     break;
     default:
 
-    /* "src/pyxpdf/globalconfig.pxi":145
+    /* "src/pyxpdf/globalconfig.pxi":154
  *             return "dos"
  *         else:
  *             return "mac"             # <<<<<<<<<<<<<<
  * 
  *     @text_eol.setter
  */
-    __Pyx_TraceLine(145,0,__PYX_ERR(3, 145, __pyx_L1_error))
+    __Pyx_TraceLine(154,0,__PYX_ERR(3, 154, __pyx_L1_error))
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_n_u_mac);
     __pyx_r = __pyx_n_u_mac;
@@ -10442,7 +10477,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol___get__(
     break;
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":138
+  /* "src/pyxpdf/globalconfig.pxi":147
  * 
  *     @property
  *     def text_eol(self):             # <<<<<<<<<<<<<<
@@ -10461,7 +10496,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol___get__(
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":148
+/* "src/pyxpdf/globalconfig.pxi":157
  * 
  *     @text_eol.setter
  *     def text_eol(self, eol):             # <<<<<<<<<<<<<<
@@ -10497,30 +10532,30 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 148, 0, __PYX_ERR(3, 148, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 157, 0, __PYX_ERR(3, 157, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":150
+  /* "src/pyxpdf/globalconfig.pxi":159
  *     def text_eol(self, eol):
  *         cdef EndOfLineKind c_eol
  *         if eol == "unix":             # <<<<<<<<<<<<<<
  *             c_eol = EndOfLineKind.eolUnix
  *         elif eol == "dos":
  */
-  __Pyx_TraceLine(150,0,__PYX_ERR(3, 150, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_unix, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 150, __pyx_L1_error)
+  __Pyx_TraceLine(159,0,__PYX_ERR(3, 159, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_unix, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 159, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/globalconfig.pxi":151
+    /* "src/pyxpdf/globalconfig.pxi":160
  *         cdef EndOfLineKind c_eol
  *         if eol == "unix":
  *             c_eol = EndOfLineKind.eolUnix             # <<<<<<<<<<<<<<
  *         elif eol == "dos":
  *             c_eol = EndOfLineKind.eolDOS
  */
-    __Pyx_TraceLine(151,0,__PYX_ERR(3, 151, __pyx_L1_error))
+    __Pyx_TraceLine(160,0,__PYX_ERR(3, 160, __pyx_L1_error))
     __pyx_v_c_eol = eolUnix;
 
-    /* "src/pyxpdf/globalconfig.pxi":150
+    /* "src/pyxpdf/globalconfig.pxi":159
  *     def text_eol(self, eol):
  *         cdef EndOfLineKind c_eol
  *         if eol == "unix":             # <<<<<<<<<<<<<<
@@ -10530,28 +10565,28 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
     goto __pyx_L3;
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":152
+  /* "src/pyxpdf/globalconfig.pxi":161
  *         if eol == "unix":
  *             c_eol = EndOfLineKind.eolUnix
  *         elif eol == "dos":             # <<<<<<<<<<<<<<
  *             c_eol = EndOfLineKind.eolDOS
  *         elif eol == 'mac':
  */
-  __Pyx_TraceLine(152,0,__PYX_ERR(3, 152, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_dos, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 152, __pyx_L1_error)
+  __Pyx_TraceLine(161,0,__PYX_ERR(3, 161, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_dos, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 161, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/globalconfig.pxi":153
+    /* "src/pyxpdf/globalconfig.pxi":162
  *             c_eol = EndOfLineKind.eolUnix
  *         elif eol == "dos":
  *             c_eol = EndOfLineKind.eolDOS             # <<<<<<<<<<<<<<
  *         elif eol == 'mac':
  *             c_eol = EndOfLineKind.eolMac
  */
-    __Pyx_TraceLine(153,0,__PYX_ERR(3, 153, __pyx_L1_error))
+    __Pyx_TraceLine(162,0,__PYX_ERR(3, 162, __pyx_L1_error))
     __pyx_v_c_eol = eolDOS;
 
-    /* "src/pyxpdf/globalconfig.pxi":152
+    /* "src/pyxpdf/globalconfig.pxi":161
  *         if eol == "unix":
  *             c_eol = EndOfLineKind.eolUnix
  *         elif eol == "dos":             # <<<<<<<<<<<<<<
@@ -10561,28 +10596,28 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
     goto __pyx_L3;
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":154
+  /* "src/pyxpdf/globalconfig.pxi":163
  *         elif eol == "dos":
  *             c_eol = EndOfLineKind.eolDOS
  *         elif eol == 'mac':             # <<<<<<<<<<<<<<
  *             c_eol = EndOfLineKind.eolMac
  *         else:
  */
-  __Pyx_TraceLine(154,0,__PYX_ERR(3, 154, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_mac, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 154, __pyx_L1_error)
+  __Pyx_TraceLine(163,0,__PYX_ERR(3, 163, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_eol, __pyx_n_u_mac, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 163, __pyx_L1_error)
   if (likely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/globalconfig.pxi":155
+    /* "src/pyxpdf/globalconfig.pxi":164
  *             c_eol = EndOfLineKind.eolDOS
  *         elif eol == 'mac':
  *             c_eol = EndOfLineKind.eolMac             # <<<<<<<<<<<<<<
  *         else:
  *             raise XPDFConfigError(f"Invalid EOL type - {eol}.")
  */
-    __Pyx_TraceLine(155,0,__PYX_ERR(3, 155, __pyx_L1_error))
+    __Pyx_TraceLine(164,0,__PYX_ERR(3, 164, __pyx_L1_error))
     __pyx_v_c_eol = eolMac;
 
-    /* "src/pyxpdf/globalconfig.pxi":154
+    /* "src/pyxpdf/globalconfig.pxi":163
  *         elif eol == "dos":
  *             c_eol = EndOfLineKind.eolDOS
  *         elif eol == 'mac':             # <<<<<<<<<<<<<<
@@ -10592,16 +10627,16 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
     goto __pyx_L3;
   }
 
-  /* "src/pyxpdf/globalconfig.pxi":157
+  /* "src/pyxpdf/globalconfig.pxi":166
  *             c_eol = EndOfLineKind.eolMac
  *         else:
  *             raise XPDFConfigError(f"Invalid EOL type - {eol}.")             # <<<<<<<<<<<<<<
  *         self._global.setTextEOL(_chars(eol))
  * 
  */
-  __Pyx_TraceLine(157,0,__PYX_ERR(3, 157, __pyx_L1_error))
+  __Pyx_TraceLine(166,0,__PYX_ERR(3, 166, __pyx_L1_error))
   /*else*/ {
-    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 157, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = 0;
     __pyx_t_4 = 127;
@@ -10609,7 +10644,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
     __pyx_t_3 += 19;
     __Pyx_GIVEREF(__pyx_kp_u_Invalid_EOL_type);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_Invalid_EOL_type);
-    __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_v_eol, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(3, 157, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_v_eol, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(3, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_4 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_4) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_4;
     __pyx_t_3 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5);
@@ -10620,37 +10655,37 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
     __pyx_t_3 += 1;
     __Pyx_GIVEREF(__pyx_kp_u_);
     PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_);
-    __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(3, 157, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(3, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_XPDFConfigError), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 157, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_XPDFConfigError), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(3, 157, __pyx_L1_error)
+    __PYX_ERR(3, 166, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "src/pyxpdf/globalconfig.pxi":158
+  /* "src/pyxpdf/globalconfig.pxi":167
  *         else:
  *             raise XPDFConfigError(f"Invalid EOL type - {eol}.")
  *         self._global.setTextEOL(_chars(eol))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(158,0,__PYX_ERR(3, 158, __pyx_L1_error))
-  __pyx_t_2 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_eol); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 158, __pyx_L1_error)
+  __Pyx_TraceLine(167,0,__PYX_ERR(3, 167, __pyx_L1_error))
+  __pyx_t_2 = __pyx_f_6pyxpdf_4xpdf__chars(__pyx_v_eol); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_t_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(3, 158, __pyx_L1_error)
+    __PYX_ERR(3, 167, __pyx_L1_error)
   }
-  __pyx_t_6 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(3, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(3, 167, __pyx_L1_error)
   (void)(__pyx_v_self->_global->setTextEOL(__pyx_t_6));
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":148
+  /* "src/pyxpdf/globalconfig.pxi":157
  * 
  *     @text_eol.setter
  *     def text_eol(self, eol):             # <<<<<<<<<<<<<<
@@ -10672,7 +10707,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_8text_eol_2__set__(struc
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":162
+/* "src/pyxpdf/globalconfig.pxi":171
  * 
  *     @property
  *     def text_page_breaks(self):             # <<<<<<<<<<<<<<
@@ -10702,24 +10737,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_16text_page_breaks
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 162, 0, __PYX_ERR(3, 162, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 171, 0, __PYX_ERR(3, 171, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":163
+  /* "src/pyxpdf/globalconfig.pxi":172
  *     @property
  *     def text_page_breaks(self):
  *         return GBool_to_bool(self._global.getTextPageBreaks())             # <<<<<<<<<<<<<<
  * 
  *     @text_page_breaks.setter
  */
-  __Pyx_TraceLine(163,0,__PYX_ERR(3, 163, __pyx_L1_error))
+  __Pyx_TraceLine(172,0,__PYX_ERR(3, 172, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getTextPageBreaks()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 163, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getTextPageBreaks()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":162
+  /* "src/pyxpdf/globalconfig.pxi":171
  * 
  *     @property
  *     def text_page_breaks(self):             # <<<<<<<<<<<<<<
@@ -10739,7 +10774,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_16text_page_breaks
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":166
+/* "src/pyxpdf/globalconfig.pxi":175
  * 
  *     @text_page_breaks.setter
  *     def text_page_breaks(self, breaks):             # <<<<<<<<<<<<<<
@@ -10768,19 +10803,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_16text_page_breaks_2__se
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 166, 0, __PYX_ERR(3, 166, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 175, 0, __PYX_ERR(3, 175, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":167
+  /* "src/pyxpdf/globalconfig.pxi":176
  *     @text_page_breaks.setter
  *     def text_page_breaks(self, breaks):
  *         self._global.setTextPageBreaks(to_GBool(breaks))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(167,0,__PYX_ERR(3, 167, __pyx_L1_error))
+  __Pyx_TraceLine(176,0,__PYX_ERR(3, 176, __pyx_L1_error))
   __pyx_v_self->_global->setTextPageBreaks(__pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_breaks));
 
-  /* "src/pyxpdf/globalconfig.pxi":166
+  /* "src/pyxpdf/globalconfig.pxi":175
  * 
  *     @text_page_breaks.setter
  *     def text_page_breaks(self, breaks):             # <<<<<<<<<<<<<<
@@ -10800,7 +10835,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_16text_page_breaks_2__se
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":171
+/* "src/pyxpdf/globalconfig.pxi":180
  * 
  *     @property
  *     def text_keep_tiny(self):             # <<<<<<<<<<<<<<
@@ -10830,24 +10865,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14text_keep_tiny__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 171, 0, __PYX_ERR(3, 171, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 180, 0, __PYX_ERR(3, 180, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":172
+  /* "src/pyxpdf/globalconfig.pxi":181
  *     @property
  *     def text_keep_tiny(self):
  *         return GBool_to_bool(self._global.getTextKeepTinyChars())             # <<<<<<<<<<<<<<
  * 
  *     @text_keep_tiny.setter
  */
-  __Pyx_TraceLine(172,0,__PYX_ERR(3, 172, __pyx_L1_error))
+  __Pyx_TraceLine(181,0,__PYX_ERR(3, 181, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getTextKeepTinyChars()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 172, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getTextKeepTinyChars()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":171
+  /* "src/pyxpdf/globalconfig.pxi":180
  * 
  *     @property
  *     def text_keep_tiny(self):             # <<<<<<<<<<<<<<
@@ -10867,7 +10902,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14text_keep_tiny__
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":175
+/* "src/pyxpdf/globalconfig.pxi":184
  * 
  *     @text_keep_tiny.setter
  *     def text_keep_tiny(self, keep):             # <<<<<<<<<<<<<<
@@ -10896,19 +10931,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14text_keep_tiny_2__set_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 175, 0, __PYX_ERR(3, 175, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 184, 0, __PYX_ERR(3, 184, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":176
+  /* "src/pyxpdf/globalconfig.pxi":185
  *     @text_keep_tiny.setter
  *     def text_keep_tiny(self, keep):
  *         self._global.setTextKeepTinyChars(to_GBool(keep))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(176,0,__PYX_ERR(3, 176, __pyx_L1_error))
+  __Pyx_TraceLine(185,0,__PYX_ERR(3, 185, __pyx_L1_error))
   __pyx_v_self->_global->setTextKeepTinyChars(__pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_keep));
 
-  /* "src/pyxpdf/globalconfig.pxi":175
+  /* "src/pyxpdf/globalconfig.pxi":184
  * 
  *     @text_keep_tiny.setter
  *     def text_keep_tiny(self, keep):             # <<<<<<<<<<<<<<
@@ -10928,7 +10963,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14text_keep_tiny_2__set_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":180
+/* "src/pyxpdf/globalconfig.pxi":189
  * 
  *     @property
  *     def print_commands(self):             # <<<<<<<<<<<<<<
@@ -10958,24 +10993,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14print_commands__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 180, 0, __PYX_ERR(3, 180, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 189, 0, __PYX_ERR(3, 189, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":181
+  /* "src/pyxpdf/globalconfig.pxi":190
  *     @property
  *     def print_commands(self):
  *         return GBool_to_bool(self._global.getPrintCommands())             # <<<<<<<<<<<<<<
  * 
  *     @print_commands.setter
  */
-  __Pyx_TraceLine(181,0,__PYX_ERR(3, 181, __pyx_L1_error))
+  __Pyx_TraceLine(190,0,__PYX_ERR(3, 190, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getPrintCommands()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 181, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getPrintCommands()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":180
+  /* "src/pyxpdf/globalconfig.pxi":189
  * 
  *     @property
  *     def print_commands(self):             # <<<<<<<<<<<<<<
@@ -10995,7 +11030,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14print_commands__
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":184
+/* "src/pyxpdf/globalconfig.pxi":193
  * 
  *     @print_commands.setter
  *     def print_commands(self, print_cmd):             # <<<<<<<<<<<<<<
@@ -11024,19 +11059,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14print_commands_2__set_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 184, 0, __PYX_ERR(3, 184, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 193, 0, __PYX_ERR(3, 193, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":185
+  /* "src/pyxpdf/globalconfig.pxi":194
  *     @print_commands.setter
  *     def print_commands(self, print_cmd):
  *         self._global.setPrintCommands(to_GBool(print_cmd))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(185,0,__PYX_ERR(3, 185, __pyx_L1_error))
+  __Pyx_TraceLine(194,0,__PYX_ERR(3, 194, __pyx_L1_error))
   __pyx_v_self->_global->setPrintCommands(__pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_print_cmd));
 
-  /* "src/pyxpdf/globalconfig.pxi":184
+  /* "src/pyxpdf/globalconfig.pxi":193
  * 
  *     @print_commands.setter
  *     def print_commands(self, print_cmd):             # <<<<<<<<<<<<<<
@@ -11056,7 +11091,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_14print_commands_2__set_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":189
+/* "src/pyxpdf/globalconfig.pxi":198
  * 
  *     @property
  *     def error_quiet(self):             # <<<<<<<<<<<<<<
@@ -11086,24 +11121,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_11error_quiet___ge
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 189, 0, __PYX_ERR(3, 189, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 198, 0, __PYX_ERR(3, 198, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":190
+  /* "src/pyxpdf/globalconfig.pxi":199
  *     @property
  *     def error_quiet(self):
  *         return GBool_to_bool(self._global.getErrQuiet())             # <<<<<<<<<<<<<<
  * 
  *     @error_quiet.setter
  */
-  __Pyx_TraceLine(190,0,__PYX_ERR(3, 190, __pyx_L1_error))
+  __Pyx_TraceLine(199,0,__PYX_ERR(3, 199, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getErrQuiet()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 190, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->_global->getErrQuiet()); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":189
+  /* "src/pyxpdf/globalconfig.pxi":198
  * 
  *     @property
  *     def error_quiet(self):             # <<<<<<<<<<<<<<
@@ -11123,7 +11158,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_11error_quiet___ge
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":193
+/* "src/pyxpdf/globalconfig.pxi":202
  * 
  *     @error_quiet.setter
  *     def error_quiet(self, quiet):             # <<<<<<<<<<<<<<
@@ -11152,19 +11187,19 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_11error_quiet_2__set__(s
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_TraceCall("__set__", __pyx_f[3], 193, 0, __PYX_ERR(3, 193, __pyx_L1_error));
+  __Pyx_TraceCall("__set__", __pyx_f[3], 202, 0, __PYX_ERR(3, 202, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":194
+  /* "src/pyxpdf/globalconfig.pxi":203
  *     @error_quiet.setter
  *     def error_quiet(self, quiet):
  *         self._global.setErrQuiet(to_GBool(quiet))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(194,0,__PYX_ERR(3, 194, __pyx_L1_error))
+  __Pyx_TraceLine(203,0,__PYX_ERR(3, 203, __pyx_L1_error))
   __pyx_v_self->_global->setErrQuiet(__pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_quiet));
 
-  /* "src/pyxpdf/globalconfig.pxi":193
+  /* "src/pyxpdf/globalconfig.pxi":202
  * 
  *     @error_quiet.setter
  *     def error_quiet(self, quiet):             # <<<<<<<<<<<<<<
@@ -11184,7 +11219,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_11error_quiet_2__set__(s
   return __pyx_r;
 }
 
-/* "src/pyxpdf/globalconfig.pxi":198
+/* "src/pyxpdf/globalconfig.pxi":207
  * 
  *     @property
  *     def default_text_encoding(self):             # <<<<<<<<<<<<<<
@@ -11215,26 +11250,26 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_19_GlobalParamsConfig_21default_text_enc
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[3], 198, 0, __PYX_ERR(3, 198, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[3], 207, 0, __PYX_ERR(3, 207, __pyx_L1_error));
 
-  /* "src/pyxpdf/globalconfig.pxi":199
+  /* "src/pyxpdf/globalconfig.pxi":208
  *     @property
  *     def default_text_encoding(self):
  *         return self._global.defaultTextEncoding.decode('UTF-8')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(199,0,__PYX_ERR(3, 199, __pyx_L1_error))
+  __Pyx_TraceLine(208,0,__PYX_ERR(3, 208, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __pyx_v_self->_global->defaultTextEncoding;
-  __pyx_t_2 = __Pyx_decode_c_string(__pyx_t_1, 0, strlen(__pyx_t_1), NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 199, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_c_string(__pyx_t_1, 0, strlen(__pyx_t_1), NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/globalconfig.pxi":198
+  /* "src/pyxpdf/globalconfig.pxi":207
  * 
  *     @property
  *     def default_text_encoding(self):             # <<<<<<<<<<<<<<
@@ -15476,259 +15511,6 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_10TextOutput_12__setstate_cython__(CYTHO
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("pyxpdf.xpdf.TextOutput.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_TraceReturn(__pyx_r, 0);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "src/pyxpdf/imageoutput.pxi":15
- * 
- * 
- * cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):             # <<<<<<<<<<<<<<
- *     cdef:
- *         int x,y
- */
-
-static PyObject *__pyx_f_6pyxpdf_4xpdf_splash_bitmap_to_pnm(SplashBitmap *__pyx_v_bitmap) {
-  CYTHON_UNUSED int __pyx_v_x;
-  CYTHON_UNUSED int __pyx_v_y;
-  int __pyx_v_height;
-  int __pyx_v_width;
-  SplashBitmapRowSize __pyx_v_row_size;
-  PyObject *__pyx_v_ppm_header = 0;
-  PyObject *__pyx_v_img = 0;
-  SplashColorPtr __pyx_v_row;
-  SplashColorPtr __pyx_v_p;
-  PyObject *__pyx_r = NULL;
-  __Pyx_TraceDeclarations
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  int __pyx_t_5;
-  int __pyx_t_6;
-  int __pyx_t_7;
-  int __pyx_t_8;
-  int __pyx_t_9;
-  int __pyx_t_10;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("splash_bitmap_to_pnm", 0);
-  __Pyx_TraceCall("splash_bitmap_to_pnm", __pyx_f[9], 15, 0, __PYX_ERR(9, 15, __pyx_L1_error));
-
-  /* "src/pyxpdf/imageoutput.pxi":18
- *     cdef:
- *         int x,y
- *         int height = bitmap.getHeight()             # <<<<<<<<<<<<<<
- *         int width = bitmap.getWidth()
- *         SplashBitmapRowSize row_size = bitmap.getRowSize()
- */
-  __Pyx_TraceLine(18,0,__PYX_ERR(9, 18, __pyx_L1_error))
-  __pyx_v_height = __pyx_v_bitmap->getHeight();
-
-  /* "src/pyxpdf/imageoutput.pxi":19
- *         int x,y
- *         int height = bitmap.getHeight()
- *         int width = bitmap.getWidth()             # <<<<<<<<<<<<<<
- *         SplashBitmapRowSize row_size = bitmap.getRowSize()
- *         bytes ppm_header
- */
-  __Pyx_TraceLine(19,0,__PYX_ERR(9, 19, __pyx_L1_error))
-  __pyx_v_width = __pyx_v_bitmap->getWidth();
-
-  /* "src/pyxpdf/imageoutput.pxi":20
- *         int height = bitmap.getHeight()
- *         int width = bitmap.getWidth()
- *         SplashBitmapRowSize row_size = bitmap.getRowSize()             # <<<<<<<<<<<<<<
- *         bytes ppm_header
- *         bytearray img = bytearray()
- */
-  __Pyx_TraceLine(20,0,__PYX_ERR(9, 20, __pyx_L1_error))
-  __pyx_v_row_size = __pyx_v_bitmap->getRowSize();
-
-  /* "src/pyxpdf/imageoutput.pxi":22
- *         SplashBitmapRowSize row_size = bitmap.getRowSize()
- *         bytes ppm_header
- *         bytearray img = bytearray()             # <<<<<<<<<<<<<<
- *         SplashColorPtr row, p
- * 
- */
-  __Pyx_TraceLine(22,0,__PYX_ERR(9, 22, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)(&PyByteArray_Type))); if (unlikely(!__pyx_t_1)) __PYX_ERR(9, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_img = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-
-  /* "src/pyxpdf/imageoutput.pxi":25
- *         SplashColorPtr row, p
- * 
- *     ppm_header = b'P6\n%d %d\n255\n' % (width, height)             # <<<<<<<<<<<<<<
- *     img.extend(ppm_header)
- * 
- */
-  __Pyx_TraceLine(25,0,__PYX_ERR(9, 25, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_width); if (unlikely(!__pyx_t_1)) __PYX_ERR(9, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_height); if (unlikely(!__pyx_t_2)) __PYX_ERR(9, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(9, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Remainder(__pyx_kp_b_P6_d_d_255, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(9, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_ppm_header = ((PyObject*)__pyx_t_2);
-  __pyx_t_2 = 0;
-
-  /* "src/pyxpdf/imageoutput.pxi":26
- * 
- *     ppm_header = b'P6\n%d %d\n255\n' % (width, height)
- *     img.extend(ppm_header)             # <<<<<<<<<<<<<<
- * 
- *     row = bitmap.getDataPtr()
- */
-  __Pyx_TraceLine(26,0,__PYX_ERR(9, 26, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyByteArray_Type_extend, __pyx_v_img, __pyx_v_ppm_header); if (unlikely(!__pyx_t_2)) __PYX_ERR(9, 26, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "src/pyxpdf/imageoutput.pxi":28
- *     img.extend(ppm_header)
- * 
- *     row = bitmap.getDataPtr()             # <<<<<<<<<<<<<<
- *     for y in range(height):
- *         p = row
- */
-  __Pyx_TraceLine(28,0,__PYX_ERR(9, 28, __pyx_L1_error))
-  __pyx_v_row = __pyx_v_bitmap->getDataPtr();
-
-  /* "src/pyxpdf/imageoutput.pxi":29
- * 
- *     row = bitmap.getDataPtr()
- *     for y in range(height):             # <<<<<<<<<<<<<<
- *         p = row
- *         for x in range(width):
- */
-  __Pyx_TraceLine(29,0,__PYX_ERR(9, 29, __pyx_L1_error))
-  __pyx_t_4 = __pyx_v_height;
-  __pyx_t_5 = __pyx_t_4;
-  for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
-    __pyx_v_y = __pyx_t_6;
-
-    /* "src/pyxpdf/imageoutput.pxi":30
- *     row = bitmap.getDataPtr()
- *     for y in range(height):
- *         p = row             # <<<<<<<<<<<<<<
- *         for x in range(width):
- *             img.append(splashBGR8R(p))
- */
-    __Pyx_TraceLine(30,0,__PYX_ERR(9, 30, __pyx_L1_error))
-    __pyx_v_p = __pyx_v_row;
-
-    /* "src/pyxpdf/imageoutput.pxi":31
- *     for y in range(height):
- *         p = row
- *         for x in range(width):             # <<<<<<<<<<<<<<
- *             img.append(splashBGR8R(p))
- *             img.append(splashBGR8G(p))
- */
-    __Pyx_TraceLine(31,0,__PYX_ERR(9, 31, __pyx_L1_error))
-    __pyx_t_7 = __pyx_v_width;
-    __pyx_t_8 = __pyx_t_7;
-    for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
-      __pyx_v_x = __pyx_t_9;
-
-      /* "src/pyxpdf/imageoutput.pxi":32
- *         p = row
- *         for x in range(width):
- *             img.append(splashBGR8R(p))             # <<<<<<<<<<<<<<
- *             img.append(splashBGR8G(p))
- *             img.append(splashBGR8B(p))
- */
-      __Pyx_TraceLine(32,0,__PYX_ERR(9, 32, __pyx_L1_error))
-      __pyx_t_10 = __Pyx_PyByteArray_Append(__pyx_v_img, splashBGR8R(__pyx_v_p)); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(9, 32, __pyx_L1_error)
-
-      /* "src/pyxpdf/imageoutput.pxi":33
- *         for x in range(width):
- *             img.append(splashBGR8R(p))
- *             img.append(splashBGR8G(p))             # <<<<<<<<<<<<<<
- *             img.append(splashBGR8B(p))
- *             p += 3
- */
-      __Pyx_TraceLine(33,0,__PYX_ERR(9, 33, __pyx_L1_error))
-      __pyx_t_10 = __Pyx_PyByteArray_Append(__pyx_v_img, splashBGR8G(__pyx_v_p)); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(9, 33, __pyx_L1_error)
-
-      /* "src/pyxpdf/imageoutput.pxi":34
- *             img.append(splashBGR8R(p))
- *             img.append(splashBGR8G(p))
- *             img.append(splashBGR8B(p))             # <<<<<<<<<<<<<<
- *             p += 3
- *         row += row_size
- */
-      __Pyx_TraceLine(34,0,__PYX_ERR(9, 34, __pyx_L1_error))
-      __pyx_t_10 = __Pyx_PyByteArray_Append(__pyx_v_img, splashBGR8B(__pyx_v_p)); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(9, 34, __pyx_L1_error)
-
-      /* "src/pyxpdf/imageoutput.pxi":35
- *             img.append(splashBGR8G(p))
- *             img.append(splashBGR8B(p))
- *             p += 3             # <<<<<<<<<<<<<<
- *         row += row_size
- * 
- */
-      __Pyx_TraceLine(35,0,__PYX_ERR(9, 35, __pyx_L1_error))
-      __pyx_v_p = (__pyx_v_p + 3);
-    }
-
-    /* "src/pyxpdf/imageoutput.pxi":36
- *             img.append(splashBGR8B(p))
- *             p += 3
- *         row += row_size             # <<<<<<<<<<<<<<
- * 
- *     return img
- */
-    __Pyx_TraceLine(36,0,__PYX_ERR(9, 36, __pyx_L1_error))
-    __pyx_v_row = (__pyx_v_row + __pyx_v_row_size);
-  }
-
-  /* "src/pyxpdf/imageoutput.pxi":38
- *         row += row_size
- * 
- *     return img             # <<<<<<<<<<<<<<
- * 
- * #FIXME: buggy as hell, text does not render properly.
- */
-  __Pyx_TraceLine(38,0,__PYX_ERR(9, 38, __pyx_L1_error))
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_img);
-  __pyx_r = __pyx_v_img;
-  goto __pyx_L0;
-
-  /* "src/pyxpdf/imageoutput.pxi":15
- * 
- * 
- * cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):             # <<<<<<<<<<<<<<
- *     cdef:
- *         int x,y
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("pyxpdf.xpdf.splash_bitmap_to_pnm", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = 0;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_ppm_header);
-  __Pyx_XDECREF(__pyx_v_img);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_TraceReturn(__pyx_r, 0);
   __Pyx_RefNannyFinishContext();
@@ -23061,8 +22843,8 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document__load_from_file(struct __pyx_ob
  *             raise MemoryError("Cannot allocate memory for internal objects")
  * 
  *     cdef _load_from_char_array(self, char *pdf, int data_length):             # <<<<<<<<<<<<<<
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ *         cdef:
+ *             Object *obj_null
  */
 
 static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document__load_from_char_array(struct __pyx_obj_6pyxpdf_4xpdf_Document *__pyx_v_self, char *__pyx_v_pdf, int __pyx_v_data_length) {
@@ -23079,76 +22861,86 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document__load_from_char_array(struct __
   __Pyx_RefNannySetupContext("_load_from_char_array", 0);
   __Pyx_TraceCall("_load_from_char_array", __pyx_f[6], 187, 0, __PYX_ERR(6, 187, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":188
+  /* "src/pyxpdf/document.pxi":192
+ *             MemStream *mem_stream
  * 
- *     cdef _load_from_char_array(self, char *pdf, int data_length):
- *         cdef Object *obj_null = new Object()             # <<<<<<<<<<<<<<
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
- *         if mem_stream == NULL:
+ *         obj_null = new Object()             # <<<<<<<<<<<<<<
+ *         mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ * 
  */
-  __Pyx_TraceLine(188,0,__PYX_ERR(6, 188, __pyx_L1_error))
+  __Pyx_TraceLine(192,0,__PYX_ERR(6, 192, __pyx_L1_error))
   __pyx_v_obj_null = new Object();
 
-  /* "src/pyxpdf/document.pxi":189
- *     cdef _load_from_char_array(self, char *pdf, int data_length):
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())             # <<<<<<<<<<<<<<
+  /* "src/pyxpdf/document.pxi":193
+ * 
+ *         obj_null = new Object()
+ *         mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())             # <<<<<<<<<<<<<<
+ * 
  *         if mem_stream == NULL:
- *             raise MemoryError("Cannot allocate memory for internal objects")
  */
-  __Pyx_TraceLine(189,0,__PYX_ERR(6, 189, __pyx_L1_error))
+  __Pyx_TraceLine(193,0,__PYX_ERR(6, 193, __pyx_L1_error))
   __pyx_v_mem_stream = new MemStream(__pyx_v_pdf, 0, __pyx_v_data_length, __pyx_v_obj_null->initNull());
 
-  /* "src/pyxpdf/document.pxi":190
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+  /* "src/pyxpdf/document.pxi":195
+ *         mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ * 
  *         if mem_stream == NULL:             # <<<<<<<<<<<<<<
  *             raise MemoryError("Cannot allocate memory for internal objects")
  *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
  */
-  __Pyx_TraceLine(190,0,__PYX_ERR(6, 190, __pyx_L1_error))
+  __Pyx_TraceLine(195,0,__PYX_ERR(6, 195, __pyx_L1_error))
   __pyx_t_1 = ((__pyx_v_mem_stream == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/document.pxi":191
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+    /* "src/pyxpdf/document.pxi":196
+ * 
  *         if mem_stream == NULL:
  *             raise MemoryError("Cannot allocate memory for internal objects")             # <<<<<<<<<<<<<<
  *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
  * 
  */
-    __Pyx_TraceLine(191,0,__PYX_ERR(6, 191, __pyx_L1_error))
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__73, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 191, __pyx_L1_error)
+    __Pyx_TraceLine(196,0,__PYX_ERR(6, 196, __pyx_L1_error))
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__73, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 196, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(6, 191, __pyx_L1_error)
+    __PYX_ERR(6, 196, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":190
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+    /* "src/pyxpdf/document.pxi":195
+ *         mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ * 
  *         if mem_stream == NULL:             # <<<<<<<<<<<<<<
  *             raise MemoryError("Cannot allocate memory for internal objects")
  *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
  */
   }
 
-  /* "src/pyxpdf/document.pxi":192
+  /* "src/pyxpdf/document.pxi":197
  *         if mem_stream == NULL:
  *             raise MemoryError("Cannot allocate memory for internal objects")
  *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)             # <<<<<<<<<<<<<<
  * 
+ *         del obj_null
+ */
+  __Pyx_TraceLine(197,0,__PYX_ERR(6, 197, __pyx_L1_error))
+  __pyx_v_self->doc = new PDFDoc(__pyx_v_mem_stream, __pyx_v_self->ownerpass, __pyx_v_self->userpass);
+
+  /* "src/pyxpdf/document.pxi":199
+ *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
+ * 
+ *         del obj_null             # <<<<<<<<<<<<<<
+ * 
  *     cdef check(self):
  */
-  __Pyx_TraceLine(192,0,__PYX_ERR(6, 192, __pyx_L1_error))
-  __pyx_v_self->doc = new PDFDoc(__pyx_v_mem_stream, __pyx_v_self->ownerpass, __pyx_v_self->userpass);
+  __Pyx_TraceLine(199,0,__PYX_ERR(6, 199, __pyx_L1_error))
+  delete __pyx_v_obj_null;
 
   /* "src/pyxpdf/document.pxi":187
  *             raise MemoryError("Cannot allocate memory for internal objects")
  * 
  *     cdef _load_from_char_array(self, char *pdf, int data_length):             # <<<<<<<<<<<<<<
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ *         cdef:
+ *             Object *obj_null
  */
 
   /* function exit code */
@@ -23165,8 +22957,8 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document__load_from_char_array(struct __
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":194
- *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
+/* "src/pyxpdf/document.pxi":201
+ *         del obj_null
  * 
  *     cdef check(self):             # <<<<<<<<<<<<<<
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
@@ -23186,16 +22978,16 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("check", 0);
-  __Pyx_TraceCall("check", __pyx_f[6], 194, 0, __PYX_ERR(6, 194, __pyx_L1_error));
+  __Pyx_TraceCall("check", __pyx_f[6], 201, 0, __PYX_ERR(6, 201, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":195
+  /* "src/pyxpdf/document.pxi":202
  * 
  *     cdef check(self):
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:             # <<<<<<<<<<<<<<
  *             if self.doc.getErrorCode() == errEncrypted:
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
  */
-  __Pyx_TraceLine(195,0,__PYX_ERR(6, 195, __pyx_L1_error))
+  __Pyx_TraceLine(202,0,__PYX_ERR(6, 202, __pyx_L1_error))
   __pyx_t_2 = ((__pyx_v_self->doc->isOk() == gTrue) != 0);
   if (!__pyx_t_2) {
   } else {
@@ -23207,32 +22999,32 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":196
+    /* "src/pyxpdf/document.pxi":203
  *     cdef check(self):
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
  *             if self.doc.getErrorCode() == errEncrypted:             # <<<<<<<<<<<<<<
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
  *         elif self.doc.getErrorCode() == errOpenFile:
  */
-    __Pyx_TraceLine(196,0,__PYX_ERR(6, 196, __pyx_L1_error))
+    __Pyx_TraceLine(203,0,__PYX_ERR(6, 203, __pyx_L1_error))
     __pyx_t_1 = ((__pyx_v_self->doc->getErrorCode() == errEncrypted) != 0);
     if (unlikely(__pyx_t_1)) {
 
-      /* "src/pyxpdf/document.pxi":197
+      /* "src/pyxpdf/document.pxi":204
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
  *             if self.doc.getErrorCode() == errEncrypted:
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")             # <<<<<<<<<<<<<<
  *         elif self.doc.getErrorCode() == errOpenFile:
  *             raise PDFIOError(f"Failed to load {self.filename}")
  */
-      __Pyx_TraceLine(197,0,__PYX_ERR(6, 197, __pyx_L1_error))
-      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_PDFPermissionError), __pyx_tuple__74, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 197, __pyx_L1_error)
+      __Pyx_TraceLine(204,0,__PYX_ERR(6, 204, __pyx_L1_error))
+      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_PDFPermissionError), __pyx_tuple__74, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 204, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(6, 197, __pyx_L1_error)
+      __PYX_ERR(6, 204, __pyx_L1_error)
 
-      /* "src/pyxpdf/document.pxi":196
+      /* "src/pyxpdf/document.pxi":203
  *     cdef check(self):
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
  *             if self.doc.getErrorCode() == errEncrypted:             # <<<<<<<<<<<<<<
@@ -23241,7 +23033,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
  */
     }
 
-    /* "src/pyxpdf/document.pxi":195
+    /* "src/pyxpdf/document.pxi":202
  * 
  *     cdef check(self):
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:             # <<<<<<<<<<<<<<
@@ -23251,41 +23043,41 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
     goto __pyx_L3;
   }
 
-  /* "src/pyxpdf/document.pxi":198
+  /* "src/pyxpdf/document.pxi":205
  *             if self.doc.getErrorCode() == errEncrypted:
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
  *         elif self.doc.getErrorCode() == errOpenFile:             # <<<<<<<<<<<<<<
  *             raise PDFIOError(f"Failed to load {self.filename}")
  *         else:
  */
-  __Pyx_TraceLine(198,0,__PYX_ERR(6, 198, __pyx_L1_error))
+  __Pyx_TraceLine(205,0,__PYX_ERR(6, 205, __pyx_L1_error))
   __pyx_t_1 = ((__pyx_v_self->doc->getErrorCode() == errOpenFile) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/document.pxi":199
+    /* "src/pyxpdf/document.pxi":206
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
  *         elif self.doc.getErrorCode() == errOpenFile:
  *             raise PDFIOError(f"Failed to load {self.filename}")             # <<<<<<<<<<<<<<
  *         else:
  *             err_code = self.doc.getErrorCode()
  */
-    __Pyx_TraceLine(199,0,__PYX_ERR(6, 199, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 199, __pyx_L1_error)
+    __Pyx_TraceLine(206,0,__PYX_ERR(6, 206, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_3, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 199, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_3, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Failed_to_load, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 199, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Failed_to_load, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_PDFIOError), __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 199, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_PDFIOError), __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(6, 199, __pyx_L1_error)
+    __PYX_ERR(6, 206, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":198
+    /* "src/pyxpdf/document.pxi":205
  *             if self.doc.getErrorCode() == errEncrypted:
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")
  *         elif self.doc.getErrorCode() == errOpenFile:             # <<<<<<<<<<<<<<
@@ -23294,38 +23086,38 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
  */
   }
 
-  /* "src/pyxpdf/document.pxi":201
+  /* "src/pyxpdf/document.pxi":208
  *             raise PDFIOError(f"Failed to load {self.filename}")
  *         else:
  *             err_code = self.doc.getErrorCode()             # <<<<<<<<<<<<<<
  *             raise ErrorCodeMapping[err_code]
  * 
  */
-  __Pyx_TraceLine(201,0,__PYX_ERR(6, 201, __pyx_L1_error))
+  __Pyx_TraceLine(208,0,__PYX_ERR(6, 208, __pyx_L1_error))
   /*else*/ {
     __pyx_v_err_code = __pyx_v_self->doc->getErrorCode();
 
-    /* "src/pyxpdf/document.pxi":202
+    /* "src/pyxpdf/document.pxi":209
  *         else:
  *             err_code = self.doc.getErrorCode()
  *             raise ErrorCodeMapping[err_code]             # <<<<<<<<<<<<<<
  * 
  *     cdef int label_to_index(self, label):
  */
-    __Pyx_TraceLine(202,0,__PYX_ERR(6, 202, __pyx_L1_error))
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErrorCodeMapping); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 202, __pyx_L1_error)
+    __Pyx_TraceLine(209,0,__PYX_ERR(6, 209, __pyx_L1_error))
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErrorCodeMapping); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_err_code, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 202, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_err_code, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(6, 202, __pyx_L1_error)
+    __PYX_ERR(6, 209, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "src/pyxpdf/document.pxi":194
- *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
+  /* "src/pyxpdf/document.pxi":201
+ *         del obj_null
  * 
  *     cdef check(self):             # <<<<<<<<<<<<<<
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
@@ -23347,7 +23139,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_check(struct __pyx_obj_6pyxpdf_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":204
+/* "src/pyxpdf/document.pxi":211
  *             raise ErrorCodeMapping[err_code]
  * 
  *     cdef int label_to_index(self, label):             # <<<<<<<<<<<<<<
@@ -23366,50 +23158,50 @@ static int __pyx_f_6pyxpdf_4xpdf_8Document_label_to_index(struct __pyx_obj_6pyxp
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("label_to_index", 0);
-  __Pyx_TraceCall("label_to_index", __pyx_f[6], 204, 0, __PYX_ERR(6, 204, __pyx_L1_error));
+  __Pyx_TraceCall("label_to_index", __pyx_f[6], 211, 0, __PYX_ERR(6, 211, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":209
+  /* "src/pyxpdf/document.pxi":216
  *             unique_ptr[TextString] tstr
  * 
  *         tstr.reset(to_TextString(label))             # <<<<<<<<<<<<<<
  *         pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
  *         # xpdf page index start from 1 not 0
  */
-  __Pyx_TraceLine(209,0,__PYX_ERR(6, 209, __pyx_L1_error))
+  __Pyx_TraceLine(216,0,__PYX_ERR(6, 216, __pyx_L1_error))
   __pyx_v_tstr.reset(__pyx_f_6pyxpdf_4xpdf_to_TextString(__pyx_v_label));
 
-  /* "src/pyxpdf/document.pxi":210
+  /* "src/pyxpdf/document.pxi":217
  * 
  *         tstr.reset(to_TextString(label))
  *         pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())             # <<<<<<<<<<<<<<
  *         # xpdf page index start from 1 not 0
  *         if pgno != -1:
  */
-  __Pyx_TraceLine(210,0,__PYX_ERR(6, 210, __pyx_L1_error))
+  __Pyx_TraceLine(217,0,__PYX_ERR(6, 217, __pyx_L1_error))
   __pyx_v_pgno = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_catalog(__pyx_v_self)->getPageNumFromPageLabel(__pyx_v_tstr.get());
 
-  /* "src/pyxpdf/document.pxi":212
+  /* "src/pyxpdf/document.pxi":219
  *         pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
  *         # xpdf page index start from 1 not 0
  *         if pgno != -1:             # <<<<<<<<<<<<<<
  *             pgno = pgno - 1
  *         return pgno
  */
-  __Pyx_TraceLine(212,0,__PYX_ERR(6, 212, __pyx_L1_error))
+  __Pyx_TraceLine(219,0,__PYX_ERR(6, 219, __pyx_L1_error))
   __pyx_t_1 = ((__pyx_v_pgno != -1L) != 0);
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":213
+    /* "src/pyxpdf/document.pxi":220
  *         # xpdf page index start from 1 not 0
  *         if pgno != -1:
  *             pgno = pgno - 1             # <<<<<<<<<<<<<<
  *         return pgno
  * 
  */
-    __Pyx_TraceLine(213,0,__PYX_ERR(6, 213, __pyx_L1_error))
+    __Pyx_TraceLine(220,0,__PYX_ERR(6, 220, __pyx_L1_error))
     __pyx_v_pgno = (__pyx_v_pgno - 1);
 
-    /* "src/pyxpdf/document.pxi":212
+    /* "src/pyxpdf/document.pxi":219
  *         pgno = self.get_catalog().getPageNumFromPageLabel(tstr.get())
  *         # xpdf page index start from 1 not 0
  *         if pgno != -1:             # <<<<<<<<<<<<<<
@@ -23418,18 +23210,18 @@ static int __pyx_f_6pyxpdf_4xpdf_8Document_label_to_index(struct __pyx_obj_6pyxp
  */
   }
 
-  /* "src/pyxpdf/document.pxi":214
+  /* "src/pyxpdf/document.pxi":221
  *         if pgno != -1:
  *             pgno = pgno - 1
  *         return pgno             # <<<<<<<<<<<<<<
  * 
  *     cdef get_page(self, int idx):
  */
-  __Pyx_TraceLine(214,0,__PYX_ERR(6, 214, __pyx_L1_error))
+  __Pyx_TraceLine(221,0,__PYX_ERR(6, 221, __pyx_L1_error))
   __pyx_r = __pyx_v_pgno;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":204
+  /* "src/pyxpdf/document.pxi":211
  *             raise ErrorCodeMapping[err_code]
  * 
  *     cdef int label_to_index(self, label):             # <<<<<<<<<<<<<<
@@ -23447,7 +23239,7 @@ static int __pyx_f_6pyxpdf_4xpdf_8Document_label_to_index(struct __pyx_obj_6pyxp
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":216
+/* "src/pyxpdf/document.pxi":223
  *         return pgno
  * 
  *     cdef get_page(self, int idx):             # <<<<<<<<<<<<<<
@@ -23468,72 +23260,72 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_get_page(struct __pyx_obj_6pyxp
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_page", 0);
-  __Pyx_TraceCall("get_page", __pyx_f[6], 216, 0, __PYX_ERR(6, 216, __pyx_L1_error));
+  __Pyx_TraceCall("get_page", __pyx_f[6], 223, 0, __PYX_ERR(6, 223, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":217
+  /* "src/pyxpdf/document.pxi":224
  * 
  *     cdef get_page(self, int idx):
  *         if idx < 0 or idx >= self.num_pages:             # <<<<<<<<<<<<<<
  *             raise IndexError(
  *                 "The index {idx} is out of page range".format(idx=idx))
  */
-  __Pyx_TraceLine(217,0,__PYX_ERR(6, 217, __pyx_L1_error))
+  __Pyx_TraceLine(224,0,__PYX_ERR(6, 224, __pyx_L1_error))
   __pyx_t_2 = ((__pyx_v_idx < 0) != 0);
   if (!__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 217, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_pages); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 217, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_pages); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 217, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 224, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 217, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 224, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (unlikely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/document.pxi":219
+    /* "src/pyxpdf/document.pxi":226
  *         if idx < 0 or idx >= self.num_pages:
  *             raise IndexError(
  *                 "The index {idx} is out of page range".format(idx=idx))             # <<<<<<<<<<<<<<
  *         # load page in cache if not present
  *         if self._pages_cache[idx] == None:
  */
-    __Pyx_TraceLine(219,0,__PYX_ERR(6, 219, __pyx_L1_error))
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_The_index_idx_is_out_of_page_ran, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 219, __pyx_L1_error)
+    __Pyx_TraceLine(226,0,__PYX_ERR(6, 226, __pyx_L1_error))
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_The_index_idx_is_out_of_page_ran, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 219, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 219, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_idx, __pyx_t_3) < 0) __PYX_ERR(6, 219, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_idx, __pyx_t_3) < 0) __PYX_ERR(6, 226, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 219, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "src/pyxpdf/document.pxi":218
+    /* "src/pyxpdf/document.pxi":225
  *     cdef get_page(self, int idx):
  *         if idx < 0 or idx >= self.num_pages:
  *             raise IndexError(             # <<<<<<<<<<<<<<
  *                 "The index {idx} is out of page range".format(idx=idx))
  *         # load page in cache if not present
  */
-    __Pyx_TraceLine(218,0,__PYX_ERR(6, 218, __pyx_L1_error))
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 218, __pyx_L1_error)
+    __Pyx_TraceLine(225,0,__PYX_ERR(6, 225, __pyx_L1_error))
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(6, 218, __pyx_L1_error)
+    __PYX_ERR(6, 225, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":217
+    /* "src/pyxpdf/document.pxi":224
  * 
  *     cdef get_page(self, int idx):
  *         if idx < 0 or idx >= self.num_pages:             # <<<<<<<<<<<<<<
@@ -23542,37 +23334,37 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_get_page(struct __pyx_obj_6pyxp
  */
   }
 
-  /* "src/pyxpdf/document.pxi":221
+  /* "src/pyxpdf/document.pxi":228
  *                 "The index {idx} is out of page range".format(idx=idx))
  *         # load page in cache if not present
  *         if self._pages_cache[idx] == None:             # <<<<<<<<<<<<<<
  *             self._pages_cache[idx] = Page(self, idx)
  *         return self._pages_cache[idx]
  */
-  __Pyx_TraceLine(221,0,__PYX_ERR(6, 221, __pyx_L1_error))
+  __Pyx_TraceLine(228,0,__PYX_ERR(6, 228, __pyx_L1_error))
   if (unlikely(__pyx_v_self->_pages_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(6, 221, __pyx_L1_error)
+    __PYX_ERR(6, 228, __pyx_L1_error)
   }
-  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_self->_pages_cache, __pyx_v_idx, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 221, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_self->_pages_cache, __pyx_v_idx, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_4, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 221, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_4, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 228, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 221, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 228, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":222
+    /* "src/pyxpdf/document.pxi":229
  *         # load page in cache if not present
  *         if self._pages_cache[idx] == None:
  *             self._pages_cache[idx] = Page(self, idx)             # <<<<<<<<<<<<<<
  *         return self._pages_cache[idx]
  * 
  */
-    __Pyx_TraceLine(222,0,__PYX_ERR(6, 222, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 222, __pyx_L1_error)
+    __Pyx_TraceLine(229,0,__PYX_ERR(6, 229, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 222, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(((PyObject *)__pyx_v_self));
     __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
@@ -23580,17 +23372,17 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_get_page(struct __pyx_obj_6pyxp
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page), __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 222, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page), __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (unlikely(__pyx_v_self->_pages_cache == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(6, 222, __pyx_L1_error)
+      __PYX_ERR(6, 229, __pyx_L1_error)
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_self->_pages_cache, __pyx_v_idx, __pyx_t_3, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(6, 222, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_self->_pages_cache, __pyx_v_idx, __pyx_t_3, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(6, 229, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/pyxpdf/document.pxi":221
+    /* "src/pyxpdf/document.pxi":228
  *                 "The index {idx} is out of page range".format(idx=idx))
  *         # load page in cache if not present
  *         if self._pages_cache[idx] == None:             # <<<<<<<<<<<<<<
@@ -23599,26 +23391,26 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_get_page(struct __pyx_obj_6pyxp
  */
   }
 
-  /* "src/pyxpdf/document.pxi":223
+  /* "src/pyxpdf/document.pxi":230
  *         if self._pages_cache[idx] == None:
  *             self._pages_cache[idx] = Page(self, idx)
  *         return self._pages_cache[idx]             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(223,0,__PYX_ERR(6, 223, __pyx_L1_error))
+  __Pyx_TraceLine(230,0,__PYX_ERR(6, 230, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_self->_pages_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(6, 223, __pyx_L1_error)
+    __PYX_ERR(6, 230, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_self->_pages_cache, __pyx_v_idx, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 223, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_self->_pages_cache, __pyx_v_idx, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":216
+  /* "src/pyxpdf/document.pxi":223
  *         return pgno
  * 
  *     cdef get_page(self, int idx):             # <<<<<<<<<<<<<<
@@ -23640,7 +23432,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_get_page(struct __pyx_obj_6pyxp
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":228
+/* "src/pyxpdf/document.pxi":235
  * 
  *     @property
  *     def filename(self):             # <<<<<<<<<<<<<<
@@ -23670,24 +23462,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_8filename___get__(struct __pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 228, 0, __PYX_ERR(6, 228, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 235, 0, __PYX_ERR(6, 235, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":234
+  /* "src/pyxpdf/document.pxi":241
  *         empty `str`.
  *         """
  *         return GString_to_unicode(self.doc.getFileName())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(234,0,__PYX_ERR(6, 234, __pyx_L1_error))
+  __Pyx_TraceLine(241,0,__PYX_ERR(6, 241, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_self->doc->getFileName()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 234, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_self->doc->getFileName()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":228
+  /* "src/pyxpdf/document.pxi":235
  * 
  *     @property
  *     def filename(self):             # <<<<<<<<<<<<<<
@@ -23707,7 +23499,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_8filename___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":237
+/* "src/pyxpdf/document.pxi":244
  * 
  *     @property
  *     def has_page_labels(self):             # <<<<<<<<<<<<<<
@@ -23737,24 +23529,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_15has_page_labels___get__(stru
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 237, 0, __PYX_ERR(6, 237, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 244, 0, __PYX_ERR(6, 244, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":240
+  /* "src/pyxpdf/document.pxi":247
  *         """bool: whether pdf has page labels or not
  *         """
  *         return GBool_to_bool(self.get_catalog().hasPageLabels())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(240,0,__PYX_ERR(6, 240, __pyx_L1_error))
+  __Pyx_TraceLine(247,0,__PYX_ERR(6, 247, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_catalog(__pyx_v_self)->hasPageLabels()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 240, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_catalog(__pyx_v_self)->hasPageLabels()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":237
+  /* "src/pyxpdf/document.pxi":244
  * 
  *     @property
  *     def has_page_labels(self):             # <<<<<<<<<<<<<<
@@ -23774,7 +23566,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_15has_page_labels___get__(stru
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":243
+/* "src/pyxpdf/document.pxi":250
  * 
  *     @property
  *     def num_pages(self):             # <<<<<<<<<<<<<<
@@ -23804,24 +23596,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_9num_pages___get__(struct __py
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 243, 0, __PYX_ERR(6, 243, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 250, 0, __PYX_ERR(6, 250, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":246
+  /* "src/pyxpdf/document.pxi":253
  *         """int: total pages in pdf
  *         """
  *         return self.doc.getNumPages()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(246,0,__PYX_ERR(6, 246, __pyx_L1_error))
+  __Pyx_TraceLine(253,0,__PYX_ERR(6, 253, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->doc->getNumPages()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 246, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->doc->getNumPages()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":243
+  /* "src/pyxpdf/document.pxi":250
  * 
  *     @property
  *     def num_pages(self):             # <<<<<<<<<<<<<<
@@ -23841,7 +23633,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_9num_pages___get__(struct __py
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":249
+/* "src/pyxpdf/document.pxi":256
  * 
  *     @property
  *     def pdf_version(self):             # <<<<<<<<<<<<<<
@@ -23871,24 +23663,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_11pdf_version___get__(struct _
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 249, 0, __PYX_ERR(6, 249, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 256, 0, __PYX_ERR(6, 256, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":252
+  /* "src/pyxpdf/document.pxi":259
  *         """float: version of PDF standard pdf comply with
  *         """
  *         return self.doc.getPDFVersion()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(252,0,__PYX_ERR(6, 252, __pyx_L1_error))
+  __Pyx_TraceLine(259,0,__PYX_ERR(6, 259, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->doc->getPDFVersion()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 252, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->doc->getPDFVersion()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":249
+  /* "src/pyxpdf/document.pxi":256
  * 
  *     @property
  *     def pdf_version(self):             # <<<<<<<<<<<<<<
@@ -23908,7 +23700,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_11pdf_version___get__(struct _
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":255
+/* "src/pyxpdf/document.pxi":262
  * 
  *     @property
  *     def is_linearized(self):             # <<<<<<<<<<<<<<
@@ -23938,24 +23730,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_13is_linearized___get__(struct
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 255, 0, __PYX_ERR(6, 255, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 262, 0, __PYX_ERR(6, 262, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":258
+  /* "src/pyxpdf/document.pxi":265
  *         """bool: whether pdf is lineralised or not
  *         """
  *         return GBool_to_bool(self.doc.isLinearized())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(258,0,__PYX_ERR(6, 258, __pyx_L1_error))
+  __Pyx_TraceLine(265,0,__PYX_ERR(6, 265, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->isLinearized()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 258, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->isLinearized()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":255
+  /* "src/pyxpdf/document.pxi":262
  * 
  *     @property
  *     def is_linearized(self):             # <<<<<<<<<<<<<<
@@ -23975,7 +23767,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_13is_linearized___get__(struct
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":261
+/* "src/pyxpdf/document.pxi":268
  * 
  *     @property
  *     def is_encrypted(self):             # <<<<<<<<<<<<<<
@@ -24005,24 +23797,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_12is_encrypted___get__(struct 
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 261, 0, __PYX_ERR(6, 261, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 268, 0, __PYX_ERR(6, 268, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":269
+  /* "src/pyxpdf/document.pxi":276
  *         PDF documents return :obj:`True`
  *         """
  *         return GBool_to_bool(self.doc.isEncrypted())             # <<<<<<<<<<<<<<
  * 
  *     # PDF Permissions
  */
-  __Pyx_TraceLine(269,0,__PYX_ERR(6, 269, __pyx_L1_error))
+  __Pyx_TraceLine(276,0,__PYX_ERR(6, 276, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->isEncrypted()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 269, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->isEncrypted()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":261
+  /* "src/pyxpdf/document.pxi":268
  * 
  *     @property
  *     def is_encrypted(self):             # <<<<<<<<<<<<<<
@@ -24042,7 +23834,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_12is_encrypted___get__(struct 
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":273
+/* "src/pyxpdf/document.pxi":280
  *     # PDF Permissions
  *     @property
  *     def ok_to_print(self):             # <<<<<<<<<<<<<<
@@ -24072,24 +23864,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_11ok_to_print___get__(struct _
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 273, 0, __PYX_ERR(6, 273, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 280, 0, __PYX_ERR(6, 280, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":278
+  /* "src/pyxpdf/document.pxi":285
  *         Whether document can be printed or not.
  *         """
  *         return GBool_to_bool(self.doc.okToPrint(ignoreOwnerPW=gFalse))             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(278,0,__PYX_ERR(6, 278, __pyx_L1_error))
+  __Pyx_TraceLine(285,0,__PYX_ERR(6, 285, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToPrint(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 278, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToPrint(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":273
+  /* "src/pyxpdf/document.pxi":280
  *     # PDF Permissions
  *     @property
  *     def ok_to_print(self):             # <<<<<<<<<<<<<<
@@ -24109,7 +23901,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_11ok_to_print___get__(struct _
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":281
+/* "src/pyxpdf/document.pxi":288
  * 
  *     @property
  *     def ok_to_change(self):             # <<<<<<<<<<<<<<
@@ -24139,24 +23931,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_12ok_to_change___get__(struct 
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 281, 0, __PYX_ERR(6, 281, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 288, 0, __PYX_ERR(6, 288, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":290
+  /* "src/pyxpdf/document.pxi":297
  * 
  *         """
  *         return GBool_to_bool(self.doc.okToChange(ignoreOwnerPW=gFalse))             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(290,0,__PYX_ERR(6, 290, __pyx_L1_error))
+  __Pyx_TraceLine(297,0,__PYX_ERR(6, 297, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToChange(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 290, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToChange(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":281
+  /* "src/pyxpdf/document.pxi":288
  * 
  *     @property
  *     def ok_to_change(self):             # <<<<<<<<<<<<<<
@@ -24176,7 +23968,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_12ok_to_change___get__(struct 
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":293
+/* "src/pyxpdf/document.pxi":300
  * 
  *     @property
  *     def ok_to_copy(self):             # <<<<<<<<<<<<<<
@@ -24206,24 +23998,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_10ok_to_copy___get__(struct __
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 293, 0, __PYX_ERR(6, 293, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 300, 0, __PYX_ERR(6, 300, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":303
+  /* "src/pyxpdf/document.pxi":310
  *         from document.
  *         """
  *         return GBool_to_bool(self.doc.okToCopy(ignoreOwnerPW=gFalse))             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(303,0,__PYX_ERR(6, 303, __pyx_L1_error))
+  __Pyx_TraceLine(310,0,__PYX_ERR(6, 310, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToCopy(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 303, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToCopy(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":293
+  /* "src/pyxpdf/document.pxi":300
  * 
  *     @property
  *     def ok_to_copy(self):             # <<<<<<<<<<<<<<
@@ -24243,7 +24035,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_10ok_to_copy___get__(struct __
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":306
+/* "src/pyxpdf/document.pxi":313
  * 
  *     @property
  *     def ok_to_add_notes(self):             # <<<<<<<<<<<<<<
@@ -24273,24 +24065,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_15ok_to_add_notes___get__(stru
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 306, 0, __PYX_ERR(6, 306, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 313, 0, __PYX_ERR(6, 313, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":309
+  /* "src/pyxpdf/document.pxi":316
  *         """bool: PDF add notes permission
  *         """
  *         return GBool_to_bool(self.doc.okToAddNotes(ignoreOwnerPW=gFalse))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(309,0,__PYX_ERR(6, 309, __pyx_L1_error))
+  __Pyx_TraceLine(316,0,__PYX_ERR(6, 316, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToAddNotes(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 309, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->doc->okToAddNotes(gFalse)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":306
+  /* "src/pyxpdf/document.pxi":313
  * 
  *     @property
  *     def ok_to_add_notes(self):             # <<<<<<<<<<<<<<
@@ -24310,7 +24102,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_15ok_to_add_notes___get__(stru
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":312
+/* "src/pyxpdf/document.pxi":319
  * 
  * 
  *     def info(self):             # <<<<<<<<<<<<<<
@@ -24343,24 +24135,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_16info(struct __pyx_obj_6pyxpd
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__75)
   __Pyx_RefNannySetupContext("info", 0);
-  __Pyx_TraceCall("info", __pyx_f[6], 312, 0, __PYX_ERR(6, 312, __pyx_L1_error));
+  __Pyx_TraceCall("info", __pyx_f[6], 319, 0, __PYX_ERR(6, 319, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":323
+  /* "src/pyxpdf/document.pxi":330
  *             PDf's information dictionary.
  *         """
  *         return self.get_info_dict()             # <<<<<<<<<<<<<<
  * 
  *     def xmp_metadata(self):
  */
-  __Pyx_TraceLine(323,0,__PYX_ERR(6, 323, __pyx_L1_error))
+  __Pyx_TraceLine(330,0,__PYX_ERR(6, 330, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_info_dict(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 323, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_info_dict(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 330, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":312
+  /* "src/pyxpdf/document.pxi":319
  * 
  * 
  *     def info(self):             # <<<<<<<<<<<<<<
@@ -24380,7 +24172,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_16info(struct __pyx_obj_6pyxpd
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":325
+/* "src/pyxpdf/document.pxi":332
  *         return self.get_info_dict()
  * 
  *     def xmp_metadata(self):             # <<<<<<<<<<<<<<
@@ -24413,24 +24205,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_18xmp_metadata(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__76)
   __Pyx_RefNannySetupContext("xmp_metadata", 0);
-  __Pyx_TraceCall("xmp_metadata", __pyx_f[6], 325, 0, __PYX_ERR(6, 325, __pyx_L1_error));
+  __Pyx_TraceCall("xmp_metadata", __pyx_f[6], 332, 0, __PYX_ERR(6, 332, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":332
+  /* "src/pyxpdf/document.pxi":339
  *         str
  *         """
  *         return self.get_metadata()             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(332,0,__PYX_ERR(6, 332, __pyx_L1_error))
+  __Pyx_TraceLine(339,0,__PYX_ERR(6, 339, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_metadata(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 332, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->get_metadata(__pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":325
+  /* "src/pyxpdf/document.pxi":332
  *         return self.get_info_dict()
  * 
  *     def xmp_metadata(self):             # <<<<<<<<<<<<<<
@@ -24450,7 +24242,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_18xmp_metadata(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":335
+/* "src/pyxpdf/document.pxi":342
  * 
  * 
  *     cpdef text_bytes(self, int start=0, int end=-1, TextControl control=None):             # <<<<<<<<<<<<<<
@@ -24484,7 +24276,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__77)
   __Pyx_RefNannySetupContext("text_bytes", 0);
-  __Pyx_TraceCall("text_bytes", __pyx_f[6], 335, 0, __PYX_ERR(6, 335, __pyx_L1_error));
+  __Pyx_TraceCall("text_bytes", __pyx_f[6], 342, 0, __PYX_ERR(6, 342, __pyx_L1_error));
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_start = __pyx_optional_args->start;
@@ -24505,13 +24297,13 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 335, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_6pyxpdf_4xpdf_8Document_21text_bytes)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 335, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 342, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_end); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 335, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_end); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 342, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
@@ -24529,7 +24321,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_5)) {
           PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_control)};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 335, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 342, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -24539,7 +24331,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
           PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_control)};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 335, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 342, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -24547,7 +24339,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
         } else
         #endif
         {
-          __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(6, 335, __pyx_L1_error)
+          __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(6, 342, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           if (__pyx_t_6) {
             __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -24561,7 +24353,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
           PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, ((PyObject *)__pyx_v_control));
           __pyx_t_3 = 0;
           __pyx_t_4 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 335, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 342, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
@@ -24584,15 +24376,15 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
     #endif
   }
 
-  /* "src/pyxpdf/document.pxi":369
+  /* "src/pyxpdf/document.pxi":376
  * 
  *         cdef:
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()             # <<<<<<<<<<<<<<
  *             unique_ptr[string] out = make_unique[string]()
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string,
  */
-  __Pyx_TraceLine(369,0,__PYX_ERR(6, 369, __pyx_L1_error))
-  __pyx_t_10 = __Pyx_PyObject_IsTrue(((PyObject *)__pyx_v_control)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(6, 369, __pyx_L1_error)
+  __Pyx_TraceLine(376,0,__PYX_ERR(6, 376, __pyx_L1_error))
+  __pyx_t_10 = __Pyx_PyObject_IsTrue(((PyObject *)__pyx_v_control)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(6, 376, __pyx_L1_error)
   if (__pyx_t_10) {
     __pyx_t_9 = (*((struct __pyx_vtabstruct_6pyxpdf_4xpdf_TextControl *)__pyx_v_control->__pyx_vtab)->get_c_control(__pyx_v_control));
   } else {
@@ -24600,54 +24392,54 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text_bytes(struct __pyx_obj_6py
   }
   __pyx_v_text_control = __pyx_t_9;
 
-  /* "src/pyxpdf/document.pxi":370
+  /* "src/pyxpdf/document.pxi":377
  *         cdef:
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
  *             unique_ptr[string] out = make_unique[string]()             # <<<<<<<<<<<<<<
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string,
  *                                                                             out.get(), &text_control)
  */
-  __Pyx_TraceLine(370,0,__PYX_ERR(6, 370, __pyx_L1_error))
+  __Pyx_TraceLine(377,0,__PYX_ERR(6, 377, __pyx_L1_error))
   __pyx_v_out = std::make_unique<std::string>();
 
-  /* "src/pyxpdf/document.pxi":371
+  /* "src/pyxpdf/document.pxi":378
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
  *             unique_ptr[string] out = make_unique[string]()
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string,             # <<<<<<<<<<<<<<
  *                                                                             out.get(), &text_control)
  * 
  */
-  __Pyx_TraceLine(371,0,__PYX_ERR(6, 371, __pyx_L1_error))
+  __Pyx_TraceLine(378,0,__PYX_ERR(6, 378, __pyx_L1_error))
   __pyx_v_text_dev = std::make_unique<TextOutputDev>((&__pyx_f_6pyxpdf_4xpdf_append_to_cpp_string), __pyx_v_out.get(), (&__pyx_v_text_control));
 
-  /* "src/pyxpdf/document.pxi":374
+  /* "src/pyxpdf/document.pxi":381
  *                                                                             out.get(), &text_control)
  * 
  *         self.display_pages(text_dev.get(), start, end)             # <<<<<<<<<<<<<<
  *         return deref(out)
  * 
  */
-  __Pyx_TraceLine(374,0,__PYX_ERR(6, 374, __pyx_L1_error))
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->display_pages(__pyx_v_self, __pyx_v_text_dev.get(), __pyx_v_start, __pyx_v_end, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 374, __pyx_L1_error)
+  __Pyx_TraceLine(381,0,__PYX_ERR(6, 381, __pyx_L1_error))
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->display_pages(__pyx_v_self, __pyx_v_text_dev.get(), __pyx_v_start, __pyx_v_end, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 381, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/document.pxi":375
+  /* "src/pyxpdf/document.pxi":382
  * 
  *         self.display_pages(text_dev.get(), start, end)
  *         return deref(out)             # <<<<<<<<<<<<<<
  * 
  *     cpdef text(self, start=0, end=-1, control=None):
  */
-  __Pyx_TraceLine(375,0,__PYX_ERR(6, 375, __pyx_L1_error))
+  __Pyx_TraceLine(382,0,__PYX_ERR(6, 382, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string((*__pyx_v_out)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 375, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string((*__pyx_v_out)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 382, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":335
+  /* "src/pyxpdf/document.pxi":342
  * 
  * 
  *     cpdef text_bytes(self, int start=0, int end=-1, TextControl control=None):             # <<<<<<<<<<<<<<
@@ -24725,7 +24517,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_8Document_21text_bytes(PyObject *__pyx_v
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text_bytes") < 0)) __PYX_ERR(6, 335, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text_bytes") < 0)) __PYX_ERR(6, 342, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -24740,12 +24532,12 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_8Document_21text_bytes(PyObject *__pyx_v
       }
     }
     if (values[0]) {
-      __pyx_v_start = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_start == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 335, __pyx_L3_error)
+      __pyx_v_start = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_start == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 342, __pyx_L3_error)
     } else {
       __pyx_v_start = ((int)0);
     }
     if (values[1]) {
-      __pyx_v_end = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_end == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 335, __pyx_L3_error)
+      __pyx_v_end = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_end == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 342, __pyx_L3_error)
     } else {
       __pyx_v_end = ((int)-1);
     }
@@ -24753,13 +24545,13 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_8Document_21text_bytes(PyObject *__pyx_v
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("text_bytes", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 335, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("text_bytes", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 342, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Document.text_bytes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_control), __pyx_ptype_6pyxpdf_4xpdf_TextControl, 1, "control", 0))) __PYX_ERR(6, 335, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_control), __pyx_ptype_6pyxpdf_4xpdf_TextControl, 1, "control", 0))) __PYX_ERR(6, 342, __pyx_L1_error)
   __pyx_r = __pyx_pf_6pyxpdf_4xpdf_8Document_20text_bytes(((struct __pyx_obj_6pyxpdf_4xpdf_Document *)__pyx_v_self), __pyx_v_start, __pyx_v_end, __pyx_v_control);
 
   /* function exit code */
@@ -24782,13 +24574,13 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_20text_bytes(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__77)
   __Pyx_RefNannySetupContext("text_bytes", 0);
-  __Pyx_TraceCall("text_bytes (wrapper)", __pyx_f[6], 335, 0, __PYX_ERR(6, 335, __pyx_L1_error));
+  __Pyx_TraceCall("text_bytes (wrapper)", __pyx_f[6], 342, 0, __PYX_ERR(6, 342, __pyx_L1_error));
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 3;
   __pyx_t_2.start = __pyx_v_start;
   __pyx_t_2.end = __pyx_v_end;
   __pyx_t_2.control = __pyx_v_control;
-  __pyx_t_1 = __pyx_vtabptr_6pyxpdf_4xpdf_Document->text_bytes(__pyx_v_self, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 335, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_6pyxpdf_4xpdf_Document->text_bytes(__pyx_v_self, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -24806,7 +24598,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_20text_bytes(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":377
+/* "src/pyxpdf/document.pxi":384
  *         return deref(out)
  * 
  *     cpdef text(self, start=0, end=-1, control=None):             # <<<<<<<<<<<<<<
@@ -24835,7 +24627,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__78)
   __Pyx_RefNannySetupContext("text", 0);
-  __Pyx_TraceCall("text", __pyx_f[6], 377, 0, __PYX_ERR(6, 377, __pyx_L1_error));
+  __Pyx_TraceCall("text", __pyx_f[6], 384, 0, __PYX_ERR(6, 384, __pyx_L1_error));
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_start = __pyx_optional_args->start;
@@ -24856,7 +24648,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 377, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 384, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_6pyxpdf_4xpdf_8Document_23text)) {
         __Pyx_XDECREF(__pyx_r);
@@ -24876,7 +24668,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_v_start, __pyx_v_end, __pyx_v_control};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 377, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 384, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
@@ -24884,13 +24676,13 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_v_start, __pyx_v_end, __pyx_v_control};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 377, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 384, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
         #endif
         {
-          __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(6, 377, __pyx_L1_error)
+          __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(6, 384, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
           if (__pyx_t_4) {
             __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -24904,7 +24696,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
           __Pyx_INCREF(__pyx_v_control);
           __Pyx_GIVEREF(__pyx_v_control);
           PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_control);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 377, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 384, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
@@ -24927,40 +24719,40 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
     #endif
   }
 
-  /* "src/pyxpdf/document.pxi":413
+  /* "src/pyxpdf/document.pxi":420
  * 
  * 
  *         return self.text_bytes(start=start, end=end, control=control             # <<<<<<<<<<<<<<
  *                                   ).decode('UTF-8', errors='ignore')
  * 
  */
-  __Pyx_TraceLine(413,0,__PYX_ERR(6, 413, __pyx_L1_error))
+  __Pyx_TraceLine(420,0,__PYX_ERR(6, 420, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_start); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 413, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_end); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 413, __pyx_L1_error)
-  if (!(likely(((__pyx_v_control) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_control, __pyx_ptype_6pyxpdf_4xpdf_TextControl))))) __PYX_ERR(6, 413, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_start); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 420, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_end); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 420, __pyx_L1_error)
+  if (!(likely(((__pyx_v_control) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_control, __pyx_ptype_6pyxpdf_4xpdf_TextControl))))) __PYX_ERR(6, 420, __pyx_L1_error)
   __pyx_t_8.__pyx_n = 3;
   __pyx_t_8.start = __pyx_t_5;
   __pyx_t_8.end = __pyx_t_7;
   __pyx_t_8.control = ((struct __pyx_obj_6pyxpdf_4xpdf_TextControl *)__pyx_v_control);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->text_bytes(__pyx_v_self, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 413, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->__pyx_vtab)->text_bytes(__pyx_v_self, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 420, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "src/pyxpdf/document.pxi":414
+  /* "src/pyxpdf/document.pxi":421
  * 
  *         return self.text_bytes(start=start, end=end, control=control
  *                                   ).decode('UTF-8', errors='ignore')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(414,0,__PYX_ERR(6, 414, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_decode); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 414, __pyx_L1_error)
+  __Pyx_TraceLine(421,0,__PYX_ERR(6, 421, __pyx_L1_error))
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_decode); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 421, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 414, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 421, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_errors, __pyx_n_u_ignore) < 0) __PYX_ERR(6, 414, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_errors, __pyx_n_u_ignore) < 0) __PYX_ERR(6, 421, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 421, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -24968,7 +24760,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_8Document_text(struct __pyx_obj_6pyxpdf_4
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":377
+  /* "src/pyxpdf/document.pxi":384
  *         return deref(out)
  * 
  *     cpdef text(self, start=0, end=-1, control=None):             # <<<<<<<<<<<<<<
@@ -25046,7 +24838,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_8Document_23text(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text") < 0)) __PYX_ERR(6, 377, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text") < 0)) __PYX_ERR(6, 384, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -25066,7 +24858,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_8Document_23text(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("text", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 377, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("text", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 384, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Document.text", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -25090,13 +24882,13 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_22text(struct __pyx_obj_6pyxpd
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__78)
   __Pyx_RefNannySetupContext("text", 0);
-  __Pyx_TraceCall("text (wrapper)", __pyx_f[6], 377, 0, __PYX_ERR(6, 377, __pyx_L1_error));
+  __Pyx_TraceCall("text (wrapper)", __pyx_f[6], 384, 0, __PYX_ERR(6, 384, __pyx_L1_error));
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 3;
   __pyx_t_2.start = __pyx_v_start;
   __pyx_t_2.end = __pyx_v_end;
   __pyx_t_2.control = __pyx_v_control;
-  __pyx_t_1 = __pyx_vtabptr_6pyxpdf_4xpdf_Document->text(__pyx_v_self, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_6pyxpdf_4xpdf_Document->text(__pyx_v_self, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -25241,7 +25033,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_8Document_26__setstate_cython__(CYTHON_U
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":423
+/* "src/pyxpdf/document.pxi":430
  *         int index
  * 
  *     def __init__(self, doc):             # <<<<<<<<<<<<<<
@@ -25278,7 +25070,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_20DocumentPageIterator_1__init__(PyObject *__p
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 423, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 430, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -25289,7 +25081,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_20DocumentPageIterator_1__init__(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 423, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 430, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.DocumentPageIterator.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -25311,17 +25103,17 @@ static int __pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator___init__(struct __pyx_o
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
-  __Pyx_TraceCall("__init__", __pyx_f[6], 423, 0, __PYX_ERR(6, 423, __pyx_L1_error));
+  __Pyx_TraceCall("__init__", __pyx_f[6], 430, 0, __PYX_ERR(6, 430, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":424
+  /* "src/pyxpdf/document.pxi":431
  * 
  *     def __init__(self, doc):
  *         self.doc = doc             # <<<<<<<<<<<<<<
  *         self.index = -1
  * 
  */
-  __Pyx_TraceLine(424,0,__PYX_ERR(6, 424, __pyx_L1_error))
-  if (!(likely(((__pyx_v_doc) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_doc, __pyx_ptype_6pyxpdf_4xpdf_Document))))) __PYX_ERR(6, 424, __pyx_L1_error)
+  __Pyx_TraceLine(431,0,__PYX_ERR(6, 431, __pyx_L1_error))
+  if (!(likely(((__pyx_v_doc) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_doc, __pyx_ptype_6pyxpdf_4xpdf_Document))))) __PYX_ERR(6, 431, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_doc;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -25330,17 +25122,17 @@ static int __pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator___init__(struct __pyx_o
   __pyx_v_self->doc = ((struct __pyx_obj_6pyxpdf_4xpdf_Document *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/document.pxi":425
+  /* "src/pyxpdf/document.pxi":432
  *     def __init__(self, doc):
  *         self.doc = doc
  *         self.index = -1             # <<<<<<<<<<<<<<
  * 
  *     def __iter__(self):
  */
-  __Pyx_TraceLine(425,0,__PYX_ERR(6, 425, __pyx_L1_error))
+  __Pyx_TraceLine(432,0,__PYX_ERR(6, 432, __pyx_L1_error))
   __pyx_v_self->index = -1;
 
-  /* "src/pyxpdf/document.pxi":423
+  /* "src/pyxpdf/document.pxi":430
  *         int index
  * 
  *     def __init__(self, doc):             # <<<<<<<<<<<<<<
@@ -25361,7 +25153,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator___init__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":427
+/* "src/pyxpdf/document.pxi":434
  *         self.index = -1
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -25390,22 +25182,22 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator_2__iter__(struct 
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__iter__", 0);
-  __Pyx_TraceCall("__iter__", __pyx_f[6], 427, 0, __PYX_ERR(6, 427, __pyx_L1_error));
+  __Pyx_TraceCall("__iter__", __pyx_f[6], 434, 0, __PYX_ERR(6, 434, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":428
+  /* "src/pyxpdf/document.pxi":435
  * 
  *     def __iter__(self):
  *         return self             # <<<<<<<<<<<<<<
  * 
  *     def __next__(self):
  */
-  __Pyx_TraceLine(428,0,__PYX_ERR(6, 428, __pyx_L1_error))
+  __Pyx_TraceLine(435,0,__PYX_ERR(6, 435, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":427
+  /* "src/pyxpdf/document.pxi":434
  *         self.index = -1
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -25424,7 +25216,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator_2__iter__(struct 
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":430
+/* "src/pyxpdf/document.pxi":437
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -25456,48 +25248,48 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator_4__next__(struct 
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__next__", 0);
-  __Pyx_TraceCall("__next__", __pyx_f[6], 430, 0, __PYX_ERR(6, 430, __pyx_L1_error));
+  __Pyx_TraceCall("__next__", __pyx_f[6], 437, 0, __PYX_ERR(6, 437, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":431
+  /* "src/pyxpdf/document.pxi":438
  * 
  *     def __next__(self):
  *         self.index += 1             # <<<<<<<<<<<<<<
  *         if self.index >= len(self.doc):
  *             raise StopIteration()
  */
-  __Pyx_TraceLine(431,0,__PYX_ERR(6, 431, __pyx_L1_error))
+  __Pyx_TraceLine(438,0,__PYX_ERR(6, 438, __pyx_L1_error))
   __pyx_v_self->index = (__pyx_v_self->index + 1);
 
-  /* "src/pyxpdf/document.pxi":432
+  /* "src/pyxpdf/document.pxi":439
  *     def __next__(self):
  *         self.index += 1
  *         if self.index >= len(self.doc):             # <<<<<<<<<<<<<<
  *             raise StopIteration()
  *         return self.doc[self.index]
  */
-  __Pyx_TraceLine(432,0,__PYX_ERR(6, 432, __pyx_L1_error))
+  __Pyx_TraceLine(439,0,__PYX_ERR(6, 439, __pyx_L1_error))
   __pyx_t_1 = ((PyObject *)__pyx_v_self->doc);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(6, 432, __pyx_L1_error)
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(6, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((__pyx_v_self->index >= __pyx_t_2) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "src/pyxpdf/document.pxi":433
+    /* "src/pyxpdf/document.pxi":440
  *         self.index += 1
  *         if self.index >= len(self.doc):
  *             raise StopIteration()             # <<<<<<<<<<<<<<
  *         return self.doc[self.index]
  * 
  */
-    __Pyx_TraceLine(433,0,__PYX_ERR(6, 433, __pyx_L1_error))
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_StopIteration); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 433, __pyx_L1_error)
+    __Pyx_TraceLine(440,0,__PYX_ERR(6, 440, __pyx_L1_error))
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_StopIteration); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 440, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(6, 433, __pyx_L1_error)
+    __PYX_ERR(6, 440, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":432
+    /* "src/pyxpdf/document.pxi":439
  *     def __next__(self):
  *         self.index += 1
  *         if self.index >= len(self.doc):             # <<<<<<<<<<<<<<
@@ -25506,22 +25298,22 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator_4__next__(struct 
  */
   }
 
-  /* "src/pyxpdf/document.pxi":434
+  /* "src/pyxpdf/document.pxi":441
  *         if self.index >= len(self.doc):
  *             raise StopIteration()
  *         return self.doc[self.index]             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(434,0,__PYX_ERR(6, 434, __pyx_L1_error))
+  __Pyx_TraceLine(441,0,__PYX_ERR(6, 441, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self->doc), __pyx_v_self->index, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 434, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self->doc), __pyx_v_self->index, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 441, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":430
+  /* "src/pyxpdf/document.pxi":437
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -25861,7 +25653,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_20DocumentPageIterator_8__setstate_cytho
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":495
+/* "src/pyxpdf/document.pxi":502
  * 
  * 
  *     def __init__(self, doc, index):             # <<<<<<<<<<<<<<
@@ -25907,11 +25699,11 @@ static int __pyx_pw_6pyxpdf_4xpdf_4Page_1__init__(PyObject *__pyx_v_self, PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(6, 495, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(6, 502, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 495, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 502, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -25924,7 +25716,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_4Page_1__init__(PyObject *__pyx_v_self, PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 495, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 502, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -25945,7 +25737,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page___init__(CYTHON_UNUSED struct __pyx_obj_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
-  __Pyx_TraceCall("__init__", __pyx_f[6], 495, 0, __PYX_ERR(6, 495, __pyx_L1_error));
+  __Pyx_TraceCall("__init__", __pyx_f[6], 502, 0, __PYX_ERR(6, 502, __pyx_L1_error));
 
   /* function exit code */
   __pyx_r = 0;
@@ -25959,7 +25751,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page___init__(CYTHON_UNUSED struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":499
+/* "src/pyxpdf/document.pxi":506
  *         """
  * 
  *     def __cinit__(self, Document doc not None, int index):             # <<<<<<<<<<<<<<
@@ -26001,11 +25793,11 @@ static int __pyx_pw_6pyxpdf_4xpdf_4Page_3__cinit__(PyObject *__pyx_v_self, PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(6, 499, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(6, 506, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(6, 499, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(6, 506, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -26014,17 +25806,17 @@ static int __pyx_pw_6pyxpdf_4xpdf_4Page_3__cinit__(PyObject *__pyx_v_self, PyObj
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_doc = ((struct __pyx_obj_6pyxpdf_4xpdf_Document *)values[0]);
-    __pyx_v_index = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_index == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 499, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_index == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 506, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 499, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 506, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_doc), __pyx_ptype_6pyxpdf_4xpdf_Document, 0, "doc", 0))) __PYX_ERR(6, 499, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_doc), __pyx_ptype_6pyxpdf_4xpdf_Document, 0, "doc", 0))) __PYX_ERR(6, 506, __pyx_L1_error)
   __pyx_r = __pyx_pf_6pyxpdf_4xpdf_4Page_2__cinit__(((struct __pyx_obj_6pyxpdf_4xpdf_Page *)__pyx_v_self), __pyx_v_doc, __pyx_v_index);
 
   /* function exit code */
@@ -26049,50 +25841,50 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page_2__cinit__(struct __pyx_obj_6pyxpdf_4xpd
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
-  __Pyx_TraceCall("__cinit__", __pyx_f[6], 499, 0, __PYX_ERR(6, 499, __pyx_L1_error));
+  __Pyx_TraceCall("__cinit__", __pyx_f[6], 506, 0, __PYX_ERR(6, 506, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":500
+  /* "src/pyxpdf/document.pxi":507
  * 
  *     def __cinit__(self, Document doc not None, int index):
  *         if index < 0 or index >= doc.num_pages:             # <<<<<<<<<<<<<<
  *             raise IndexError("Page index must be positive integer less than total pages")
  *         self.page = doc.get_catalog().getPage(index + 1)
  */
-  __Pyx_TraceLine(500,0,__PYX_ERR(6, 500, __pyx_L1_error))
+  __Pyx_TraceLine(507,0,__PYX_ERR(6, 507, __pyx_L1_error))
   __pyx_t_2 = ((__pyx_v_index < 0) != 0);
   if (!__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 500, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 507, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_doc), __pyx_n_s_num_pages); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 500, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_doc), __pyx_n_s_num_pages); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 507, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 500, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 507, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 500, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 507, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (unlikely(__pyx_t_1)) {
 
-    /* "src/pyxpdf/document.pxi":501
+    /* "src/pyxpdf/document.pxi":508
  *     def __cinit__(self, Document doc not None, int index):
  *         if index < 0 or index >= doc.num_pages:
  *             raise IndexError("Page index must be positive integer less than total pages")             # <<<<<<<<<<<<<<
  *         self.page = doc.get_catalog().getPage(index + 1)
  *         # self.textpage.reset()
  */
-    __Pyx_TraceLine(501,0,__PYX_ERR(6, 501, __pyx_L1_error))
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 501, __pyx_L1_error)
+    __Pyx_TraceLine(508,0,__PYX_ERR(6, 508, __pyx_L1_error))
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 508, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __PYX_ERR(6, 501, __pyx_L1_error)
+    __PYX_ERR(6, 508, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":500
+    /* "src/pyxpdf/document.pxi":507
  * 
  *     def __cinit__(self, Document doc not None, int index):
  *         if index < 0 or index >= doc.num_pages:             # <<<<<<<<<<<<<<
@@ -26101,49 +25893,49 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page_2__cinit__(struct __pyx_obj_6pyxpdf_4xpd
  */
   }
 
-  /* "src/pyxpdf/document.pxi":502
+  /* "src/pyxpdf/document.pxi":509
  *         if index < 0 or index >= doc.num_pages:
  *             raise IndexError("Page index must be positive integer less than total pages")
  *         self.page = doc.get_catalog().getPage(index + 1)             # <<<<<<<<<<<<<<
  *         # self.textpage.reset()
  *         self.doc = doc
  */
-  __Pyx_TraceLine(502,0,__PYX_ERR(6, 502, __pyx_L1_error))
+  __Pyx_TraceLine(509,0,__PYX_ERR(6, 509, __pyx_L1_error))
   __pyx_v_self->page = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_doc->__pyx_vtab)->get_catalog(__pyx_v_doc)->getPage((__pyx_v_index + 1));
 
-  /* "src/pyxpdf/document.pxi":504
+  /* "src/pyxpdf/document.pxi":511
  *         self.page = doc.get_catalog().getPage(index + 1)
  *         # self.textpage.reset()
  *         self.doc = doc             # <<<<<<<<<<<<<<
  *         self.index = index
  *         self.label = self.get_label()
  */
-  __Pyx_TraceLine(504,0,__PYX_ERR(6, 504, __pyx_L1_error))
+  __Pyx_TraceLine(511,0,__PYX_ERR(6, 511, __pyx_L1_error))
   __Pyx_INCREF(((PyObject *)__pyx_v_doc));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_doc));
   __Pyx_GOTREF(__pyx_v_self->doc);
   __Pyx_DECREF(((PyObject *)__pyx_v_self->doc));
   __pyx_v_self->doc = __pyx_v_doc;
 
-  /* "src/pyxpdf/document.pxi":505
+  /* "src/pyxpdf/document.pxi":512
  *         # self.textpage.reset()
  *         self.doc = doc
  *         self.index = index             # <<<<<<<<<<<<<<
  *         self.label = self.get_label()
  * 
  */
-  __Pyx_TraceLine(505,0,__PYX_ERR(6, 505, __pyx_L1_error))
+  __Pyx_TraceLine(512,0,__PYX_ERR(6, 512, __pyx_L1_error))
   __pyx_v_self->index = __pyx_v_index;
 
-  /* "src/pyxpdf/document.pxi":506
+  /* "src/pyxpdf/document.pxi":513
  *         self.doc = doc
  *         self.index = index
  *         self.label = self.get_label()             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __Pyx_TraceLine(506,0,__PYX_ERR(6, 506, __pyx_L1_error))
-  __pyx_t_5 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->get_label(__pyx_v_self); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 506, __pyx_L1_error)
+  __Pyx_TraceLine(513,0,__PYX_ERR(6, 513, __pyx_L1_error))
+  __pyx_t_5 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->get_label(__pyx_v_self); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_5);
   __Pyx_GOTREF(__pyx_v_self->label);
@@ -26151,7 +25943,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page_2__cinit__(struct __pyx_obj_6pyxpdf_4xpd
   __pyx_v_self->label = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "src/pyxpdf/document.pxi":499
+  /* "src/pyxpdf/document.pxi":506
  *         """
  * 
  *     def __cinit__(self, Document doc not None, int index):             # <<<<<<<<<<<<<<
@@ -26174,7 +25966,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_4Page_2__cinit__(struct __pyx_obj_6pyxpdf_4xpd
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":508
+/* "src/pyxpdf/document.pxi":515
  *         self.label = self.get_label()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -26207,39 +25999,39 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_4__repr__(struct __pyx_obj_6pyxpdf
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__repr__", 0);
-  __Pyx_TraceCall("__repr__", __pyx_f[6], 508, 0, __PYX_ERR(6, 508, __pyx_L1_error));
+  __Pyx_TraceCall("__repr__", __pyx_f[6], 515, 0, __PYX_ERR(6, 515, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":509
+  /* "src/pyxpdf/document.pxi":516
  * 
  *     def __repr__(self):
  *         if self.label == None:             # <<<<<<<<<<<<<<
  *             return "<Page[{index}]>".format(index=self.index)
  *         else:
  */
-  __Pyx_TraceLine(509,0,__PYX_ERR(6, 509, __pyx_L1_error))
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_self->label, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 509, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 509, __pyx_L1_error)
+  __Pyx_TraceLine(516,0,__PYX_ERR(6, 516, __pyx_L1_error))
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_self->label, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 516, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 516, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "src/pyxpdf/document.pxi":510
+    /* "src/pyxpdf/document.pxi":517
  *     def __repr__(self):
  *         if self.label == None:
  *             return "<Page[{index}]>".format(index=self.index)             # <<<<<<<<<<<<<<
  *         else:
  *             return "<Page[{index}](label='{label}')>".format(index=self.index, label=self.label)
  */
-    __Pyx_TraceLine(510,0,__PYX_ERR(6, 510, __pyx_L1_error))
+    __Pyx_TraceLine(517,0,__PYX_ERR(6, 517, __pyx_L1_error))
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_Page_index, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 510, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_Page_index, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 517, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 510, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 517, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 510, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 517, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_t_4) < 0) __PYX_ERR(6, 510, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_t_4) < 0) __PYX_ERR(6, 517, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 510, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 517, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -26247,7 +26039,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_4__repr__(struct __pyx_obj_6pyxpdf
     __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "src/pyxpdf/document.pxi":509
+    /* "src/pyxpdf/document.pxi":516
  * 
  *     def __repr__(self):
  *         if self.label == None:             # <<<<<<<<<<<<<<
@@ -26256,26 +26048,26 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_4__repr__(struct __pyx_obj_6pyxpdf
  */
   }
 
-  /* "src/pyxpdf/document.pxi":512
+  /* "src/pyxpdf/document.pxi":519
  *             return "<Page[{index}]>".format(index=self.index)
  *         else:
  *             return "<Page[{index}](label='{label}')>".format(index=self.index, label=self.label)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(512,0,__PYX_ERR(6, 512, __pyx_L1_error))
+  __Pyx_TraceLine(519,0,__PYX_ERR(6, 519, __pyx_L1_error))
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_Page_index_label_label, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 512, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_Page_index_label_label, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 512, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 512, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_t_1) < 0) __PYX_ERR(6, 512, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_t_1) < 0) __PYX_ERR(6, 519, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_label, __pyx_v_self->label) < 0) __PYX_ERR(6, 512, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 512, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_label, __pyx_v_self->label) < 0) __PYX_ERR(6, 519, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -26284,7 +26076,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_4__repr__(struct __pyx_obj_6pyxpdf
     goto __pyx_L0;
   }
 
-  /* "src/pyxpdf/document.pxi":508
+  /* "src/pyxpdf/document.pxi":515
  *         self.label = self.get_label()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -26306,7 +26098,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_4__repr__(struct __pyx_obj_6pyxpdf
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":515
+/* "src/pyxpdf/document.pxi":522
  * 
  * 
  *     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,             # <<<<<<<<<<<<<<
@@ -26328,7 +26120,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display_slice(struct __pyx_obj_6pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("display_slice", 0);
-  __Pyx_TraceCall("display_slice", __pyx_f[6], 515, 0, __PYX_ERR(6, 515, __pyx_L1_error));
+  __Pyx_TraceCall("display_slice", __pyx_f[6], 522, 0, __PYX_ERR(6, 522, __pyx_L1_error));
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_hDPI = __pyx_optional_args->hDPI;
@@ -26350,17 +26142,17 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display_slice(struct __pyx_obj_6pyx
     }
   }
 
-  /* "src/pyxpdf/document.pxi":519
+  /* "src/pyxpdf/document.pxi":526
  *                         GBool use_media_box = gFalse, GBool crop = gTrue,
  *                         GBool printing = gFalse):
  *         self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop,             # <<<<<<<<<<<<<<
  *                                 x1, y1, hgt, wdt, printing)
  * 
  */
-  __Pyx_TraceLine(519,0,__PYX_ERR(6, 519, __pyx_L1_error))
+  __Pyx_TraceLine(526,0,__PYX_ERR(6, 526, __pyx_L1_error))
   __pyx_v_self->page->displaySlice(__pyx_v_out, __pyx_v_hDPI, __pyx_v_vDPI, __pyx_v_rotate, __pyx_v_use_media_box, __pyx_v_crop, __pyx_v_x1, __pyx_v_y1, __pyx_v_hgt, __pyx_v_wdt, __pyx_v_printing, NULL);
 
-  /* "src/pyxpdf/document.pxi":515
+  /* "src/pyxpdf/document.pxi":522
  * 
  * 
  *     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,             # <<<<<<<<<<<<<<
@@ -26381,7 +26173,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display_slice(struct __pyx_obj_6pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":522
+/* "src/pyxpdf/document.pxi":529
  *                                 x1, y1, hgt, wdt, printing)
  * 
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,             # <<<<<<<<<<<<<<
@@ -26405,7 +26197,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display(struct __pyx_obj_6pyxpdf_4x
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("display", 0);
-  __Pyx_TraceCall("display", __pyx_f[6], 522, 0, __PYX_ERR(6, 522, __pyx_L1_error));
+  __Pyx_TraceCall("display", __pyx_f[6], 529, 0, __PYX_ERR(6, 529, __pyx_L1_error));
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_hDPI = __pyx_optional_args->hDPI;
@@ -26427,14 +26219,14 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display(struct __pyx_obj_6pyxpdf_4x
     }
   }
 
-  /* "src/pyxpdf/document.pxi":525
+  /* "src/pyxpdf/document.pxi":532
  *                         int rotate = 0, GBool use_media_box = gFalse,
  *                         GBool crop = gTrue, GBool printing = gFalse):
  *         self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate,             # <<<<<<<<<<<<<<
  *                             use_media_box, crop, printing)
  * 
  */
-  __Pyx_TraceLine(525,0,__PYX_ERR(6, 525, __pyx_L1_error))
+  __Pyx_TraceLine(532,0,__PYX_ERR(6, 532, __pyx_L1_error))
   __pyx_t_2.__pyx_n = 6;
   __pyx_t_2.hDPI = __pyx_v_hDPI;
   __pyx_t_2.vDPI = __pyx_v_vDPI;
@@ -26442,11 +26234,11 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display(struct __pyx_obj_6pyxpdf_4x
   __pyx_t_2.use_media_box = __pyx_v_use_media_box;
   __pyx_t_2.crop = __pyx_v_crop;
   __pyx_t_2.printing = __pyx_v_printing;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display_slice(__pyx_v_self, __pyx_v_out, -1, -1, -1, -1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 525, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display_slice(__pyx_v_self, __pyx_v_out, -1, -1, -1, -1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/document.pxi":522
+  /* "src/pyxpdf/document.pxi":529
  *                                 x1, y1, hgt, wdt, printing)
  * 
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,             # <<<<<<<<<<<<<<
@@ -26468,7 +26260,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_display(struct __pyx_obj_6pyxpdf_4x
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":528
+/* "src/pyxpdf/document.pxi":535
  *                             use_media_box, crop, printing)
  * 
  *     cdef _init_TextPage(self, int rotation):             # <<<<<<<<<<<<<<
@@ -26488,55 +26280,55 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__init_TextPage(struct __pyx_obj_6py
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_init_TextPage", 0);
-  __Pyx_TraceCall("_init_TextPage", __pyx_f[6], 528, 0, __PYX_ERR(6, 528, __pyx_L1_error));
+  __Pyx_TraceCall("_init_TextPage", __pyx_f[6], 535, 0, __PYX_ERR(6, 535, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":533
+  /* "src/pyxpdf/document.pxi":540
  *             unique_ptr[TextOutputDev] td
  * 
  *         text_control = make_unique[TextOutputControl]()             # <<<<<<<<<<<<<<
  *         td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
  * 
  */
-  __Pyx_TraceLine(533,0,__PYX_ERR(6, 533, __pyx_L1_error))
+  __Pyx_TraceLine(540,0,__PYX_ERR(6, 540, __pyx_L1_error))
   __pyx_v_text_control = std::make_unique<TextOutputControl>();
 
-  /* "src/pyxpdf/document.pxi":534
+  /* "src/pyxpdf/document.pxi":541
  * 
  *         text_control = make_unique[TextOutputControl]()
  *         td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)             # <<<<<<<<<<<<<<
  * 
  *         self.display(td.get(), 72, 72, rotation)
  */
-  __Pyx_TraceLine(534,0,__PYX_ERR(6, 534, __pyx_L1_error))
+  __Pyx_TraceLine(541,0,__PYX_ERR(6, 541, __pyx_L1_error))
   __pyx_v_td = std::make_unique<TextOutputDev>(((char *)NULL), __pyx_v_text_control.get(), gFalse);
 
-  /* "src/pyxpdf/document.pxi":536
+  /* "src/pyxpdf/document.pxi":543
  *         td = make_unique[TextOutputDev](<char*>NULL, text_control.get(), gFalse)
  * 
  *         self.display(td.get(), 72, 72, rotation)             # <<<<<<<<<<<<<<
  *         self.textpage.reset(deref(td).takeText())
  * 
  */
-  __Pyx_TraceLine(536,0,__PYX_ERR(6, 536, __pyx_L1_error))
+  __Pyx_TraceLine(543,0,__PYX_ERR(6, 543, __pyx_L1_error))
   __pyx_t_2.__pyx_n = 3;
   __pyx_t_2.hDPI = 72.0;
   __pyx_t_2.vDPI = 72.0;
   __pyx_t_2.rotate = __pyx_v_rotation;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display(__pyx_v_self, __pyx_v_td.get(), &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 536, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display(__pyx_v_self, __pyx_v_td.get(), &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 543, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/document.pxi":537
+  /* "src/pyxpdf/document.pxi":544
  * 
  *         self.display(td.get(), 72, 72, rotation)
  *         self.textpage.reset(deref(td).takeText())             # <<<<<<<<<<<<<<
  * 
  *     cdef get_label(self):
  */
-  __Pyx_TraceLine(537,0,__PYX_ERR(6, 537, __pyx_L1_error))
+  __Pyx_TraceLine(544,0,__PYX_ERR(6, 544, __pyx_L1_error))
   __pyx_v_self->textpage.reset((*__pyx_v_td).takeText());
 
-  /* "src/pyxpdf/document.pxi":528
+  /* "src/pyxpdf/document.pxi":535
  *                             use_media_box, crop, printing)
  * 
  *     cdef _init_TextPage(self, int rotation):             # <<<<<<<<<<<<<<
@@ -26558,7 +26350,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__init_TextPage(struct __pyx_obj_6py
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":539
+/* "src/pyxpdf/document.pxi":546
  *         self.textpage.reset(deref(td).takeText())
  * 
  *     cdef get_label(self):             # <<<<<<<<<<<<<<
@@ -26578,66 +26370,66 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_get_label(struct __pyx_obj_6pyxpdf_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_label", 0);
-  __Pyx_TraceCall("get_label", __pyx_f[6], 539, 0, __PYX_ERR(6, 539, __pyx_L1_error));
+  __Pyx_TraceCall("get_label", __pyx_f[6], 546, 0, __PYX_ERR(6, 546, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":544
+  /* "src/pyxpdf/document.pxi":551
  *             unique_ptr[TextString] txt_label
  * 
  *         if self.doc.get_catalog().hasPageLabels() == gTrue:             # <<<<<<<<<<<<<<
  *             txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))
  *             if txt_label != NULL:
  */
-  __Pyx_TraceLine(544,0,__PYX_ERR(6, 544, __pyx_L1_error))
+  __Pyx_TraceLine(551,0,__PYX_ERR(6, 551, __pyx_L1_error))
   __pyx_t_1 = ((((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->doc->__pyx_vtab)->get_catalog(__pyx_v_self->doc)->hasPageLabels() == gTrue) != 0);
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":545
+    /* "src/pyxpdf/document.pxi":552
  * 
  *         if self.doc.get_catalog().hasPageLabels() == gTrue:
  *             txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))             # <<<<<<<<<<<<<<
  *             if txt_label != NULL:
  *                 glabel.reset(deref(txt_label).toPDFTextString())
  */
-    __Pyx_TraceLine(545,0,__PYX_ERR(6, 545, __pyx_L1_error))
+    __Pyx_TraceLine(552,0,__PYX_ERR(6, 552, __pyx_L1_error))
     __pyx_v_txt_label.reset(((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Document *)__pyx_v_self->doc->__pyx_vtab)->get_catalog(__pyx_v_self->doc)->getPageLabel((__pyx_v_self->index + 1)));
 
-    /* "src/pyxpdf/document.pxi":546
+    /* "src/pyxpdf/document.pxi":553
  *         if self.doc.get_catalog().hasPageLabels() == gTrue:
  *             txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))
  *             if txt_label != NULL:             # <<<<<<<<<<<<<<
  *                 glabel.reset(deref(txt_label).toPDFTextString())
  *                 return GString_to_unicode(glabel.get())
  */
-    __Pyx_TraceLine(546,0,__PYX_ERR(6, 546, __pyx_L1_error))
+    __Pyx_TraceLine(553,0,__PYX_ERR(6, 553, __pyx_L1_error))
     __pyx_t_1 = ((__pyx_v_txt_label != NULL) != 0);
     if (__pyx_t_1) {
 
-      /* "src/pyxpdf/document.pxi":547
+      /* "src/pyxpdf/document.pxi":554
  *             txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))
  *             if txt_label != NULL:
  *                 glabel.reset(deref(txt_label).toPDFTextString())             # <<<<<<<<<<<<<<
  *                 return GString_to_unicode(glabel.get())
  *             else:
  */
-      __Pyx_TraceLine(547,0,__PYX_ERR(6, 547, __pyx_L1_error))
+      __Pyx_TraceLine(554,0,__PYX_ERR(6, 554, __pyx_L1_error))
       __pyx_v_glabel.reset((*__pyx_v_txt_label).toPDFTextString());
 
-      /* "src/pyxpdf/document.pxi":548
+      /* "src/pyxpdf/document.pxi":555
  *             if txt_label != NULL:
  *                 glabel.reset(deref(txt_label).toPDFTextString())
  *                 return GString_to_unicode(glabel.get())             # <<<<<<<<<<<<<<
  *             else:
  *                 return None
  */
-      __Pyx_TraceLine(548,0,__PYX_ERR(6, 548, __pyx_L1_error))
+      __Pyx_TraceLine(555,0,__PYX_ERR(6, 555, __pyx_L1_error))
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_2 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_glabel.get()); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 548, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_6pyxpdf_4xpdf_GString_to_unicode(__pyx_v_glabel.get()); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 555, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "src/pyxpdf/document.pxi":546
+      /* "src/pyxpdf/document.pxi":553
  *         if self.doc.get_catalog().hasPageLabels() == gTrue:
  *             txt_label.reset(self.doc.get_catalog().getPageLabel(self.index + 1))
  *             if txt_label != NULL:             # <<<<<<<<<<<<<<
@@ -26646,21 +26438,21 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_get_label(struct __pyx_obj_6pyxpdf_
  */
     }
 
-    /* "src/pyxpdf/document.pxi":550
+    /* "src/pyxpdf/document.pxi":557
  *                 return GString_to_unicode(glabel.get())
  *             else:
  *                 return None             # <<<<<<<<<<<<<<
  *         return None
  * 
  */
-    __Pyx_TraceLine(550,0,__PYX_ERR(6, 550, __pyx_L1_error))
+    __Pyx_TraceLine(557,0,__PYX_ERR(6, 557, __pyx_L1_error))
     /*else*/ {
       __Pyx_XDECREF(__pyx_r);
       __pyx_r = Py_None; __Pyx_INCREF(Py_None);
       goto __pyx_L0;
     }
 
-    /* "src/pyxpdf/document.pxi":544
+    /* "src/pyxpdf/document.pxi":551
  *             unique_ptr[TextString] txt_label
  * 
  *         if self.doc.get_catalog().hasPageLabels() == gTrue:             # <<<<<<<<<<<<<<
@@ -26669,19 +26461,19 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_get_label(struct __pyx_obj_6pyxpdf_
  */
   }
 
-  /* "src/pyxpdf/document.pxi":551
+  /* "src/pyxpdf/document.pxi":558
  *             else:
  *                 return None
  *         return None             # <<<<<<<<<<<<<<
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,
  */
-  __Pyx_TraceLine(551,0,__PYX_ERR(6, 551, __pyx_L1_error))
+  __Pyx_TraceLine(558,0,__PYX_ERR(6, 558, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":539
+  /* "src/pyxpdf/document.pxi":546
  *         self.textpage.reset(deref(td).takeText())
  * 
  *     cdef get_label(self):             # <<<<<<<<<<<<<<
@@ -26701,7 +26493,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page_get_label(struct __pyx_obj_6pyxpdf_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":553
+/* "src/pyxpdf/document.pxi":560
  *         return None
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,             # <<<<<<<<<<<<<<
@@ -26715,7 +26507,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
   PyObject *__pyx_v_stop_at_bottom = ((PyObject *)Py_True);
   PyObject *__pyx_v_start_at_last = ((PyObject *)Py_False);
 
-  /* "src/pyxpdf/document.pxi":554
+  /* "src/pyxpdf/document.pxi":561
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,
  *                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):             # <<<<<<<<<<<<<<
@@ -26750,7 +26542,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_find_text", 0);
-  __Pyx_TraceCall("_find_text", __pyx_f[6], 553, 0, __PYX_ERR(6, 553, __pyx_L1_error));
+  __Pyx_TraceCall("_find_text", __pyx_f[6], 560, 0, __PYX_ERR(6, 560, __pyx_L1_error));
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_search_box = __pyx_optional_args->search_box;
@@ -26781,72 +26573,72 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
     }
   }
 
-  /* "src/pyxpdf/document.pxi":555
+  /* "src/pyxpdf/document.pxi":562
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,
  *                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):
  *         cdef double x_min = 0             # <<<<<<<<<<<<<<
  *         cdef double y_min = 0
  *         cdef double x_max = 0
  */
-  __Pyx_TraceLine(555,0,__PYX_ERR(6, 555, __pyx_L1_error))
+  __Pyx_TraceLine(562,0,__PYX_ERR(6, 562, __pyx_L1_error))
   __pyx_v_x_min = 0.0;
 
-  /* "src/pyxpdf/document.pxi":556
+  /* "src/pyxpdf/document.pxi":563
  *                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):
  *         cdef double x_min = 0
  *         cdef double y_min = 0             # <<<<<<<<<<<<<<
  *         cdef double x_max = 0
  *         cdef double y_max = 0
  */
-  __Pyx_TraceLine(556,0,__PYX_ERR(6, 556, __pyx_L1_error))
+  __Pyx_TraceLine(563,0,__PYX_ERR(6, 563, __pyx_L1_error))
   __pyx_v_y_min = 0.0;
 
-  /* "src/pyxpdf/document.pxi":557
+  /* "src/pyxpdf/document.pxi":564
  *         cdef double x_min = 0
  *         cdef double y_min = 0
  *         cdef double x_max = 0             # <<<<<<<<<<<<<<
  *         cdef double y_max = 0
  *         if search_box:
  */
-  __Pyx_TraceLine(557,0,__PYX_ERR(6, 557, __pyx_L1_error))
+  __Pyx_TraceLine(564,0,__PYX_ERR(6, 564, __pyx_L1_error))
   __pyx_v_x_max = 0.0;
 
-  /* "src/pyxpdf/document.pxi":558
+  /* "src/pyxpdf/document.pxi":565
  *         cdef double y_min = 0
  *         cdef double x_max = 0
  *         cdef double y_max = 0             # <<<<<<<<<<<<<<
  *         if search_box:
  *             x_min = search_box[0] or 0
  */
-  __Pyx_TraceLine(558,0,__PYX_ERR(6, 558, __pyx_L1_error))
+  __Pyx_TraceLine(565,0,__PYX_ERR(6, 565, __pyx_L1_error))
   __pyx_v_y_max = 0.0;
 
-  /* "src/pyxpdf/document.pxi":559
+  /* "src/pyxpdf/document.pxi":566
  *         cdef double x_max = 0
  *         cdef double y_max = 0
  *         if search_box:             # <<<<<<<<<<<<<<
  *             x_min = search_box[0] or 0
  *             y_min = search_box[1] or 0
  */
-  __Pyx_TraceLine(559,0,__PYX_ERR(6, 559, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_search_box); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 559, __pyx_L1_error)
+  __Pyx_TraceLine(566,0,__PYX_ERR(6, 566, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_search_box); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 566, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":560
+    /* "src/pyxpdf/document.pxi":567
  *         cdef double y_max = 0
  *         if search_box:
  *             x_min = search_box[0] or 0             # <<<<<<<<<<<<<<
  *             y_min = search_box[1] or 0
  *             x_max = search_box[2] or 0
  */
-    __Pyx_TraceLine(560,0,__PYX_ERR(6, 560, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 560, __pyx_L1_error)
+    __Pyx_TraceLine(567,0,__PYX_ERR(6, 567, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 567, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 560, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 567, __pyx_L1_error)
     if (!__pyx_t_1) {
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 560, __pyx_L1_error)
+      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 567, __pyx_L1_error)
       __pyx_t_2 = __pyx_t_4;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L4_bool_binop_done;
@@ -26855,21 +26647,21 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
     __pyx_L4_bool_binop_done:;
     __pyx_v_x_min = __pyx_t_2;
 
-    /* "src/pyxpdf/document.pxi":561
+    /* "src/pyxpdf/document.pxi":568
  *         if search_box:
  *             x_min = search_box[0] or 0
  *             y_min = search_box[1] or 0             # <<<<<<<<<<<<<<
  *             x_max = search_box[2] or 0
  *             y_max = search_box[3] or 0
  */
-    __Pyx_TraceLine(561,0,__PYX_ERR(6, 561, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 561, __pyx_L1_error)
+    __Pyx_TraceLine(568,0,__PYX_ERR(6, 568, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 568, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 561, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 568, __pyx_L1_error)
     if (!__pyx_t_1) {
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 561, __pyx_L1_error)
+      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 568, __pyx_L1_error)
       __pyx_t_2 = __pyx_t_4;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L6_bool_binop_done;
@@ -26878,21 +26670,21 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
     __pyx_L6_bool_binop_done:;
     __pyx_v_y_min = __pyx_t_2;
 
-    /* "src/pyxpdf/document.pxi":562
+    /* "src/pyxpdf/document.pxi":569
  *             x_min = search_box[0] or 0
  *             y_min = search_box[1] or 0
  *             x_max = search_box[2] or 0             # <<<<<<<<<<<<<<
  *             y_max = search_box[3] or 0
  * 
  */
-    __Pyx_TraceLine(562,0,__PYX_ERR(6, 562, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 562, __pyx_L1_error)
+    __Pyx_TraceLine(569,0,__PYX_ERR(6, 569, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 569, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 562, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 569, __pyx_L1_error)
     if (!__pyx_t_1) {
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 562, __pyx_L1_error)
+      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 569, __pyx_L1_error)
       __pyx_t_2 = __pyx_t_4;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L8_bool_binop_done;
@@ -26901,21 +26693,21 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
     __pyx_L8_bool_binop_done:;
     __pyx_v_x_max = __pyx_t_2;
 
-    /* "src/pyxpdf/document.pxi":563
+    /* "src/pyxpdf/document.pxi":570
  *             y_min = search_box[1] or 0
  *             x_max = search_box[2] or 0
  *             y_max = search_box[3] or 0             # <<<<<<<<<<<<<<
  * 
  *         # Convert python str to xpdf Unicode
  */
-    __Pyx_TraceLine(563,0,__PYX_ERR(6, 563, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 563, __pyx_L1_error)
+    __Pyx_TraceLine(570,0,__PYX_ERR(6, 570, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_search_box, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 570, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 563, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 570, __pyx_L1_error)
     if (!__pyx_t_1) {
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 563, __pyx_L1_error)
+      __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(6, 570, __pyx_L1_error)
       __pyx_t_2 = __pyx_t_4;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L10_bool_binop_done;
@@ -26924,7 +26716,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
     __pyx_L10_bool_binop_done:;
     __pyx_v_y_max = __pyx_t_2;
 
-    /* "src/pyxpdf/document.pxi":559
+    /* "src/pyxpdf/document.pxi":566
  *         cdef double x_max = 0
  *         cdef double y_max = 0
  *         if search_box:             # <<<<<<<<<<<<<<
@@ -26933,41 +26725,41 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
  */
   }
 
-  /* "src/pyxpdf/document.pxi":567
+  /* "src/pyxpdf/document.pxi":574
  *         # Convert python str to xpdf Unicode
  *         cdef vector[Unicode] u
  *         utf32_to_Unicode_vector(text, u)             # <<<<<<<<<<<<<<
  * 
  *         # Lazy load TextPage
  */
-  __Pyx_TraceLine(567,0,__PYX_ERR(6, 567, __pyx_L1_error))
-  __pyx_t_5 = __pyx_f_6pyxpdf_4xpdf_utf32_to_Unicode_vector(__pyx_v_text, __pyx_v_u); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(6, 567, __pyx_L1_error)
+  __Pyx_TraceLine(574,0,__PYX_ERR(6, 574, __pyx_L1_error))
+  __pyx_t_5 = __pyx_f_6pyxpdf_4xpdf_utf32_to_Unicode_vector(__pyx_v_text, __pyx_v_u); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(6, 574, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":570
+  /* "src/pyxpdf/document.pxi":577
  * 
  *         # Lazy load TextPage
  *         if self.textpage.get() == NULL:             # <<<<<<<<<<<<<<
  *             self._init_TextPage(rotation)
  * 
  */
-  __Pyx_TraceLine(570,0,__PYX_ERR(6, 570, __pyx_L1_error))
+  __Pyx_TraceLine(577,0,__PYX_ERR(6, 577, __pyx_L1_error))
   __pyx_t_1 = ((__pyx_v_self->textpage.get() == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":571
+    /* "src/pyxpdf/document.pxi":578
  *         # Lazy load TextPage
  *         if self.textpage.get() == NULL:
  *             self._init_TextPage(rotation)             # <<<<<<<<<<<<<<
  * 
  *         cdef GBool res = deref(self.textpage).findText(u.data(), u.size(), to_GBool(start_at_top),
  */
-    __Pyx_TraceLine(571,0,__PYX_ERR(6, 571, __pyx_L1_error))
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_rotation); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 571, __pyx_L1_error)
-    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_init_TextPage(__pyx_v_self, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 571, __pyx_L1_error)
+    __Pyx_TraceLine(578,0,__PYX_ERR(6, 578, __pyx_L1_error))
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_rotation); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 578, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_init_TextPage(__pyx_v_self, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 578, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/pyxpdf/document.pxi":570
+    /* "src/pyxpdf/document.pxi":577
  * 
  *         # Lazy load TextPage
  *         if self.textpage.get() == NULL:             # <<<<<<<<<<<<<<
@@ -26976,35 +26768,35 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
  */
   }
 
-  /* "src/pyxpdf/document.pxi":573
+  /* "src/pyxpdf/document.pxi":580
  *             self._init_TextPage(rotation)
  * 
  *         cdef GBool res = deref(self.textpage).findText(u.data(), u.size(), to_GBool(start_at_top),             # <<<<<<<<<<<<<<
  *                                         to_GBool(stop_at_bottom), to_GBool(start_at_last),
  *                                         to_GBool(stop_at_last), to_GBool(case_sensitive),
  */
-  __Pyx_TraceLine(573,0,__PYX_ERR(6, 573, __pyx_L1_error))
+  __Pyx_TraceLine(580,0,__PYX_ERR(6, 580, __pyx_L1_error))
   __pyx_v_res = (*__pyx_v_self->textpage).findText(__pyx_v_u.data(), __pyx_v_u.size(), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_start_at_top), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_stop_at_bottom), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_start_at_last), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_stop_at_last), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_case_sensitive), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_backward), __pyx_f_6pyxpdf_4xpdf_to_GBool(__pyx_v_wholeword), (&__pyx_v_x_min), (&__pyx_v_y_min), (&__pyx_v_x_max), (&__pyx_v_y_max));
 
-  /* "src/pyxpdf/document.pxi":579
+  /* "src/pyxpdf/document.pxi":586
  *                                         &x_min, &y_min, &x_max, &y_max)
  * 
  *         return (x_min, y_min, x_max, y_max) if res == gTrue else None             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(579,0,__PYX_ERR(6, 579, __pyx_L1_error))
+  __Pyx_TraceLine(586,0,__PYX_ERR(6, 586, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   if (((__pyx_v_res == gTrue) != 0)) {
-    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_x_min); if (unlikely(!__pyx_t_6)) __PYX_ERR(6, 579, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_x_min); if (unlikely(!__pyx_t_6)) __PYX_ERR(6, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_y_min); if (unlikely(!__pyx_t_7)) __PYX_ERR(6, 579, __pyx_L1_error)
+    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_y_min); if (unlikely(!__pyx_t_7)) __PYX_ERR(6, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_x_max); if (unlikely(!__pyx_t_8)) __PYX_ERR(6, 579, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_x_max); if (unlikely(!__pyx_t_8)) __PYX_ERR(6, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_y_max); if (unlikely(!__pyx_t_9)) __PYX_ERR(6, 579, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_y_max); if (unlikely(!__pyx_t_9)) __PYX_ERR(6, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = PyTuple_New(4); if (unlikely(!__pyx_t_10)) __PYX_ERR(6, 579, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(4); if (unlikely(!__pyx_t_10)) __PYX_ERR(6, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GIVEREF(__pyx_t_6);
     PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6);
@@ -27028,7 +26820,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":553
+  /* "src/pyxpdf/document.pxi":560
  *         return None
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,             # <<<<<<<<<<<<<<
@@ -27053,7 +26845,7 @@ static PyObject *__pyx_f_6pyxpdf_4xpdf_4Page__find_text(struct __pyx_obj_6pyxpdf
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":584
+/* "src/pyxpdf/document.pxi":591
  * 
  *     @property
  *     def rotation(self):             # <<<<<<<<<<<<<<
@@ -27083,24 +26875,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8rotation___get__(struct __pyx_obj
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 584, 0, __PYX_ERR(6, 584, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 591, 0, __PYX_ERR(6, 591, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":587
+  /* "src/pyxpdf/document.pxi":594
  *         """int: page rotation in degrees
  *         """
  *         return self.page.getRotate()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(587,0,__PYX_ERR(6, 587, __pyx_L1_error))
+  __Pyx_TraceLine(594,0,__PYX_ERR(6, 594, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->page->getRotate()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 587, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->page->getRotate()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 594, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":584
+  /* "src/pyxpdf/document.pxi":591
  * 
  *     @property
  *     def rotation(self):             # <<<<<<<<<<<<<<
@@ -27120,7 +26912,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8rotation___get__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":590
+/* "src/pyxpdf/document.pxi":597
  * 
  *     @property
  *     def is_cropped(self):             # <<<<<<<<<<<<<<
@@ -27150,24 +26942,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_10is_cropped___get__(struct __pyx_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 590, 0, __PYX_ERR(6, 590, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 597, 0, __PYX_ERR(6, 597, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":593
+  /* "src/pyxpdf/document.pxi":600
  *         """bool: whether page is cropped or not
  *         """
  *         return GBool_to_bool(self.page.isCropped())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(593,0,__PYX_ERR(6, 593, __pyx_L1_error))
+  __Pyx_TraceLine(600,0,__PYX_ERR(6, 600, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->page->isCropped()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 593, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_GBool_to_bool(__pyx_v_self->page->isCropped()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 600, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":590
+  /* "src/pyxpdf/document.pxi":597
  * 
  *     @property
  *     def is_cropped(self):             # <<<<<<<<<<<<<<
@@ -27187,7 +26979,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_10is_cropped___get__(struct __pyx_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":596
+/* "src/pyxpdf/document.pxi":603
  * 
  *     @property
  *     def media_height(self):             # <<<<<<<<<<<<<<
@@ -27217,24 +27009,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_12media_height___get__(struct __py
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 596, 0, __PYX_ERR(6, 596, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 603, 0, __PYX_ERR(6, 603, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":599
+  /* "src/pyxpdf/document.pxi":606
  *         """float: page mediabox height
  *         """
  *         return self.page.getMediaHeight()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(599,0,__PYX_ERR(6, 599, __pyx_L1_error))
+  __Pyx_TraceLine(606,0,__PYX_ERR(6, 606, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getMediaHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 599, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getMediaHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 606, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":596
+  /* "src/pyxpdf/document.pxi":603
  * 
  *     @property
  *     def media_height(self):             # <<<<<<<<<<<<<<
@@ -27254,7 +27046,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_12media_height___get__(struct __py
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":602
+/* "src/pyxpdf/document.pxi":609
  * 
  *     @property
  *     def media_width(self):             # <<<<<<<<<<<<<<
@@ -27284,24 +27076,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11media_width___get__(struct __pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 602, 0, __PYX_ERR(6, 602, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 609, 0, __PYX_ERR(6, 609, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":605
+  /* "src/pyxpdf/document.pxi":612
  *         """float: page mediabox width
  *         """
  *         return self.page.getMediaWidth()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(605,0,__PYX_ERR(6, 605, __pyx_L1_error))
+  __Pyx_TraceLine(612,0,__PYX_ERR(6, 612, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getMediaWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 605, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getMediaWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 612, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":602
+  /* "src/pyxpdf/document.pxi":609
  * 
  *     @property
  *     def media_width(self):             # <<<<<<<<<<<<<<
@@ -27321,7 +27113,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11media_width___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":608
+/* "src/pyxpdf/document.pxi":615
  * 
  *     @property
  *     def crop_height(self):             # <<<<<<<<<<<<<<
@@ -27351,24 +27143,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11crop_height___get__(struct __pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 608, 0, __PYX_ERR(6, 608, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 615, 0, __PYX_ERR(6, 615, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":611
+  /* "src/pyxpdf/document.pxi":618
  *         """float: page cropbox width
  *         """
  *         return self.page.getCropHeight()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(611,0,__PYX_ERR(6, 611, __pyx_L1_error))
+  __Pyx_TraceLine(618,0,__PYX_ERR(6, 618, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getCropHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 611, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getCropHeight()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 618, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":608
+  /* "src/pyxpdf/document.pxi":615
  * 
  *     @property
  *     def crop_height(self):             # <<<<<<<<<<<<<<
@@ -27388,7 +27180,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11crop_height___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":614
+/* "src/pyxpdf/document.pxi":621
  * 
  *     @property
  *     def crop_width(self):             # <<<<<<<<<<<<<<
@@ -27418,24 +27210,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_10crop_width___get__(struct __pyx_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 614, 0, __PYX_ERR(6, 614, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 621, 0, __PYX_ERR(6, 621, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":617
+  /* "src/pyxpdf/document.pxi":624
  *         """float: page cropbox width
  *         """
  *         return self.page.getCropWidth()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(617,0,__PYX_ERR(6, 617, __pyx_L1_error))
+  __Pyx_TraceLine(624,0,__PYX_ERR(6, 624, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getCropWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 617, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->page->getCropWidth()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 624, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":614
+  /* "src/pyxpdf/document.pxi":621
  * 
  *     @property
  *     def crop_width(self):             # <<<<<<<<<<<<<<
@@ -27455,7 +27247,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_10crop_width___get__(struct __pyx_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":620
+/* "src/pyxpdf/document.pxi":627
  * 
  *     @property
  *     def mediabox(self):             # <<<<<<<<<<<<<<
@@ -27485,24 +27277,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8mediabox___get__(struct __pyx_obj
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 620, 0, __PYX_ERR(6, 620, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 627, 0, __PYX_ERR(6, 627, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":623
+  /* "src/pyxpdf/document.pxi":630
  *         """tuple of float, (x1, y1, x2, y2): Page's media box cordinates
  *         """
  *         return PDFRectangle_to_tuple(self.page.getMediaBox())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(623,0,__PYX_ERR(6, 623, __pyx_L1_error))
+  __Pyx_TraceLine(630,0,__PYX_ERR(6, 630, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getMediaBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 623, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getMediaBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 630, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":620
+  /* "src/pyxpdf/document.pxi":627
  * 
  *     @property
  *     def mediabox(self):             # <<<<<<<<<<<<<<
@@ -27522,7 +27314,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8mediabox___get__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":626
+/* "src/pyxpdf/document.pxi":633
  * 
  *     @property
  *     def cropbox(self):             # <<<<<<<<<<<<<<
@@ -27552,24 +27344,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_7cropbox___get__(struct __pyx_obj_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 626, 0, __PYX_ERR(6, 626, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 633, 0, __PYX_ERR(6, 633, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":629
+  /* "src/pyxpdf/document.pxi":636
  *         """tuple of float, (x1, y1, x2, y2): Page's crop box cordinates
  *         """
  *         return PDFRectangle_to_tuple(self.page.getCropBox())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(629,0,__PYX_ERR(6, 629, __pyx_L1_error))
+  __Pyx_TraceLine(636,0,__PYX_ERR(6, 636, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getCropBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 629, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getCropBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 636, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":626
+  /* "src/pyxpdf/document.pxi":633
  * 
  *     @property
  *     def cropbox(self):             # <<<<<<<<<<<<<<
@@ -27589,7 +27381,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_7cropbox___get__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":632
+/* "src/pyxpdf/document.pxi":639
  * 
  *     @property
  *     def bleedbox(self):             # <<<<<<<<<<<<<<
@@ -27619,24 +27411,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8bleedbox___get__(struct __pyx_obj
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 632, 0, __PYX_ERR(6, 632, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 639, 0, __PYX_ERR(6, 639, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":635
+  /* "src/pyxpdf/document.pxi":642
  *         """tuple of float, (x1, y1, x2, y2): Page's bleed box cordinates
  *         """
  *         return PDFRectangle_to_tuple(self.page.getBleedBox())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(635,0,__PYX_ERR(6, 635, __pyx_L1_error))
+  __Pyx_TraceLine(642,0,__PYX_ERR(6, 642, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getBleedBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 635, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getBleedBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 642, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":632
+  /* "src/pyxpdf/document.pxi":639
  * 
  *     @property
  *     def bleedbox(self):             # <<<<<<<<<<<<<<
@@ -27656,7 +27448,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8bleedbox___get__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":638
+/* "src/pyxpdf/document.pxi":645
  * 
  *     @property
  *     def trimbox(self):             # <<<<<<<<<<<<<<
@@ -27686,24 +27478,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_7trimbox___get__(struct __pyx_obj_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 638, 0, __PYX_ERR(6, 638, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 645, 0, __PYX_ERR(6, 645, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":641
+  /* "src/pyxpdf/document.pxi":648
  *         """tuple of float, (x1, y1, x2, y2): Page's trim box cordinates
  *         """
  *         return PDFRectangle_to_tuple(self.page.getTrimBox())             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __Pyx_TraceLine(641,0,__PYX_ERR(6, 641, __pyx_L1_error))
+  __Pyx_TraceLine(648,0,__PYX_ERR(6, 648, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getTrimBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 641, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getTrimBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 648, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":638
+  /* "src/pyxpdf/document.pxi":645
  * 
  *     @property
  *     def trimbox(self):             # <<<<<<<<<<<<<<
@@ -27723,7 +27515,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_7trimbox___get__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":644
+/* "src/pyxpdf/document.pxi":651
  * 
  *     @property
  *     def artbox(self):             # <<<<<<<<<<<<<<
@@ -27753,24 +27545,24 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6artbox___get__(struct __pyx_obj_6
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 644, 0, __PYX_ERR(6, 644, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 651, 0, __PYX_ERR(6, 651, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":647
+  /* "src/pyxpdf/document.pxi":654
  *         """tuple of float, (x1, y1, x2, y2): Page's art box cordinates
  *         """
  *         return PDFRectangle_to_tuple(self.page.getArtBox())             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(647,0,__PYX_ERR(6, 647, __pyx_L1_error))
+  __Pyx_TraceLine(654,0,__PYX_ERR(6, 654, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getArtBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 647, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6pyxpdf_4xpdf_PDFRectangle_to_tuple(__pyx_v_self->page->getArtBox()); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 654, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":644
+  /* "src/pyxpdf/document.pxi":651
  * 
  *     @property
  *     def artbox(self):             # <<<<<<<<<<<<<<
@@ -27790,7 +27582,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6artbox___get__(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":650
+/* "src/pyxpdf/document.pxi":657
  * 
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,             # <<<<<<<<<<<<<<
@@ -27822,7 +27614,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_7find_text(PyObject *__pyx_v_self,
     values[2] = ((PyObject *)__pyx_n_u_top);
     values[3] = ((PyObject *)Py_False);
 
-    /* "src/pyxpdf/document.pxi":651
+    /* "src/pyxpdf/document.pxi":658
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,
  *                   wholeword=False, rotation=0):             # <<<<<<<<<<<<<<
@@ -27887,7 +27679,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_7find_text(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_text") < 0)) __PYX_ERR(6, 650, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_text") < 0)) __PYX_ERR(6, 657, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -27915,7 +27707,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_7find_text(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_text", 0, 1, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 650, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_text", 0, 1, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 657, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.find_text", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -27923,7 +27715,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_7find_text(PyObject *__pyx_v_self,
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(((struct __pyx_obj_6pyxpdf_4xpdf_Page *)__pyx_v_self), __pyx_v_text, __pyx_v_search_box, __pyx_v_direction, __pyx_v_case_sensitive, __pyx_v_wholeword, __pyx_v_rotation);
 
-  /* "src/pyxpdf/document.pxi":650
+  /* "src/pyxpdf/document.pxi":657
  * 
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,             # <<<<<<<<<<<<<<
@@ -27949,38 +27741,38 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__92)
   __Pyx_RefNannySetupContext("find_text", 0);
-  __Pyx_TraceCall("find_text", __pyx_f[6], 650, 0, __PYX_ERR(6, 650, __pyx_L1_error));
+  __Pyx_TraceCall("find_text", __pyx_f[6], 657, 0, __PYX_ERR(6, 657, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":693
+  /* "src/pyxpdf/document.pxi":700
  *         """
  * 
  *         result = None             # <<<<<<<<<<<<<<
  *         if direction == "top":
  *             result = self._find_text(text, search_box, True, True, False, False,
  */
-  __Pyx_TraceLine(693,0,__PYX_ERR(6, 693, __pyx_L1_error))
+  __Pyx_TraceLine(700,0,__PYX_ERR(6, 700, __pyx_L1_error))
   __Pyx_INCREF(Py_None);
   __pyx_v_result = Py_None;
 
-  /* "src/pyxpdf/document.pxi":694
+  /* "src/pyxpdf/document.pxi":701
  * 
  *         result = None
  *         if direction == "top":             # <<<<<<<<<<<<<<
  *             result = self._find_text(text, search_box, True, True, False, False,
  *                                           case_sensitive, False, wholeword, rotation)
  */
-  __Pyx_TraceLine(694,0,__PYX_ERR(6, 694, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_top, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 694, __pyx_L1_error)
+  __Pyx_TraceLine(701,0,__PYX_ERR(6, 701, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_top, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 701, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":695
+    /* "src/pyxpdf/document.pxi":702
  *         result = None
  *         if direction == "top":
  *             result = self._find_text(text, search_box, True, True, False, False,             # <<<<<<<<<<<<<<
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "next":
  */
-    __Pyx_TraceLine(695,0,__PYX_ERR(6, 695, __pyx_L1_error))
+    __Pyx_TraceLine(702,0,__PYX_ERR(6, 702, __pyx_L1_error))
     __pyx_t_3.__pyx_n = 9;
     __pyx_t_3.search_box = __pyx_v_search_box;
     __pyx_t_3.start_at_top = Py_True;
@@ -27991,12 +27783,12 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
     __pyx_t_3.backward = Py_False;
     __pyx_t_3.wholeword = __pyx_v_wholeword;
     __pyx_t_3.rotation = __pyx_v_rotation;
-    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 695, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 702, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "src/pyxpdf/document.pxi":694
+    /* "src/pyxpdf/document.pxi":701
  * 
  *         result = None
  *         if direction == "top":             # <<<<<<<<<<<<<<
@@ -28005,25 +27797,25 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
  */
   }
 
-  /* "src/pyxpdf/document.pxi":697
+  /* "src/pyxpdf/document.pxi":704
  *             result = self._find_text(text, search_box, True, True, False, False,
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "next":             # <<<<<<<<<<<<<<
  *             result = self._find_text(text, search_box, False, True, True, False,
  *                                           case_sensitive, False, wholeword, rotation)
  */
-  __Pyx_TraceLine(697,0,__PYX_ERR(6, 697, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_next, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 697, __pyx_L1_error)
+  __Pyx_TraceLine(704,0,__PYX_ERR(6, 704, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_next, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 704, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":698
+    /* "src/pyxpdf/document.pxi":705
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "next":
  *             result = self._find_text(text, search_box, False, True, True, False,             # <<<<<<<<<<<<<<
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "previous":
  */
-    __Pyx_TraceLine(698,0,__PYX_ERR(6, 698, __pyx_L1_error))
+    __Pyx_TraceLine(705,0,__PYX_ERR(6, 705, __pyx_L1_error))
     __pyx_t_3.__pyx_n = 9;
     __pyx_t_3.search_box = __pyx_v_search_box;
     __pyx_t_3.start_at_top = Py_False;
@@ -28034,12 +27826,12 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
     __pyx_t_3.backward = Py_False;
     __pyx_t_3.wholeword = __pyx_v_wholeword;
     __pyx_t_3.rotation = __pyx_v_rotation;
-    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 698, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 705, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "src/pyxpdf/document.pxi":697
+    /* "src/pyxpdf/document.pxi":704
  *             result = self._find_text(text, search_box, True, True, False, False,
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "next":             # <<<<<<<<<<<<<<
@@ -28048,25 +27840,25 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
  */
   }
 
-  /* "src/pyxpdf/document.pxi":700
+  /* "src/pyxpdf/document.pxi":707
  *             result = self._find_text(text, search_box, False, True, True, False,
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "previous":             # <<<<<<<<<<<<<<
  *             result = self._find_text(text, search_box, False, True, True, False,
  *                                           case_sensitive, True, wholeword, rotation)
  */
-  __Pyx_TraceLine(700,0,__PYX_ERR(6, 700, __pyx_L1_error))
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_previous, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 700, __pyx_L1_error)
+  __Pyx_TraceLine(707,0,__PYX_ERR(6, 707, __pyx_L1_error))
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_previous, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(6, 707, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "src/pyxpdf/document.pxi":701
+    /* "src/pyxpdf/document.pxi":708
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "previous":
  *             result = self._find_text(text, search_box, False, True, True, False,             # <<<<<<<<<<<<<<
  *                                           case_sensitive, True, wholeword, rotation)
  *         return result
  */
-    __Pyx_TraceLine(701,0,__PYX_ERR(6, 701, __pyx_L1_error))
+    __Pyx_TraceLine(708,0,__PYX_ERR(6, 708, __pyx_L1_error))
     __pyx_t_3.__pyx_n = 9;
     __pyx_t_3.search_box = __pyx_v_search_box;
     __pyx_t_3.start_at_top = Py_False;
@@ -28077,12 +27869,12 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
     __pyx_t_3.backward = Py_True;
     __pyx_t_3.wholeword = __pyx_v_wholeword;
     __pyx_t_3.rotation = __pyx_v_rotation;
-    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 701, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->_find_text(__pyx_v_self, __pyx_v_text, &__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 708, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "src/pyxpdf/document.pxi":700
+    /* "src/pyxpdf/document.pxi":707
  *             result = self._find_text(text, search_box, False, True, True, False,
  *                                           case_sensitive, False, wholeword, rotation)
  *         if direction == "previous":             # <<<<<<<<<<<<<<
@@ -28091,20 +27883,20 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
  */
   }
 
-  /* "src/pyxpdf/document.pxi":703
+  /* "src/pyxpdf/document.pxi":710
  *             result = self._find_text(text, search_box, False, True, True, False,
  *                                           case_sensitive, True, wholeword, rotation)
  *         return result             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(703,0,__PYX_ERR(6, 703, __pyx_L1_error))
+  __Pyx_TraceLine(710,0,__PYX_ERR(6, 710, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_result);
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":650
+  /* "src/pyxpdf/document.pxi":657
  * 
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,             # <<<<<<<<<<<<<<
@@ -28126,7 +27918,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_6find_text(struct __pyx_obj_6pyxpd
 }
 static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "src/pyxpdf/document.pxi":706
+/* "src/pyxpdf/document.pxi":713
  * 
  * 
  *     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,             # <<<<<<<<<<<<<<
@@ -28205,7 +27997,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_9find_all_text(PyObject *__pyx_v_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_all_text") < 0)) __PYX_ERR(6, 706, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_all_text") < 0)) __PYX_ERR(6, 713, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -28230,7 +28022,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_9find_all_text(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_all_text", 0, 1, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 706, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_all_text", 0, 1, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 713, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.find_all_text", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -28255,7 +28047,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8find_all_text(struct __pyx_obj_6p
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6pyxpdf_4xpdf___pyx_scope_struct__find_all_text *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(6, 706, __pyx_L1_error)
+    __PYX_ERR(6, 713, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -28278,7 +28070,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_8find_all_text(struct __pyx_obj_6p
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_rotation);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_rotation);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6pyxpdf_4xpdf_4Page_10generator, __pyx_codeobj__93, (PyObject *) __pyx_cur_scope, __pyx_n_s_find_all_text, __pyx_n_s_Page_find_all_text, __pyx_n_s_pyxpdf_xpdf); if (unlikely(!gen)) __PYX_ERR(6, 706, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6pyxpdf_4xpdf_4Page_10generator, __pyx_codeobj__93, (PyObject *) __pyx_cur_scope, __pyx_n_s_find_all_text, __pyx_n_s_Page_find_all_text, __pyx_n_s_pyxpdf_xpdf); if (unlikely(!gen)) __PYX_ERR(6, 713, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -28311,7 +28103,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("find_all_text", 0);
   __Pyx_TraceFrameInit(__pyx_codeobj__93)
-  __Pyx_TraceCall("find_all_text", __pyx_f[6], 706, 0, __PYX_ERR(6, 706, __pyx_L1_error));
+  __Pyx_TraceCall("find_all_text", __pyx_f[6], 713, 0, __PYX_ERR(6, 713, __pyx_L1_error));
   switch (__pyx_generator->resume_label) {
     case 0: goto __pyx_L3_first_run;
     case 1: goto __pyx_L6_resume_from_yield;
@@ -28321,27 +28113,27 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(6, 706, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(6, 713, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":730
+  /* "src/pyxpdf/document.pxi":737
  * 
  *         """
  *         res = self.find_text(text, search_box, "top",             # <<<<<<<<<<<<<<
  *                              case_sensitive, wholeword)
  *         while res:
  */
-  __Pyx_TraceLine(730,0,__PYX_ERR(6, 730, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_find_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 730, __pyx_L1_error)
+  __Pyx_TraceLine(737,0,__PYX_ERR(6, 737, __pyx_L1_error))
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_find_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 737, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "src/pyxpdf/document.pxi":731
+  /* "src/pyxpdf/document.pxi":738
  *         """
  *         res = self.find_text(text, search_box, "top",
  *                              case_sensitive, wholeword)             # <<<<<<<<<<<<<<
  *         while res:
  *             yield res
  */
-  __Pyx_TraceLine(731,0,__PYX_ERR(6, 731, __pyx_L1_error))
+  __Pyx_TraceLine(738,0,__PYX_ERR(6, 738, __pyx_L1_error))
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -28357,7 +28149,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[6] = {__pyx_t_3, __pyx_cur_scope->__pyx_v_text, __pyx_cur_scope->__pyx_v_search_box, __pyx_n_u_top, __pyx_cur_scope->__pyx_v_case_sensitive, __pyx_cur_scope->__pyx_v_wholeword};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 730, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 737, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -28365,13 +28157,13 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[6] = {__pyx_t_3, __pyx_cur_scope->__pyx_v_text, __pyx_cur_scope->__pyx_v_search_box, __pyx_n_u_top, __pyx_cur_scope->__pyx_v_case_sensitive, __pyx_cur_scope->__pyx_v_wholeword};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 730, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 737, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(5+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 730, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(5+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 737, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -28391,7 +28183,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
     __Pyx_INCREF(__pyx_cur_scope->__pyx_v_wholeword);
     __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_wholeword);
     PyTuple_SET_ITEM(__pyx_t_5, 4+__pyx_t_4, __pyx_cur_scope->__pyx_v_wholeword);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 730, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 737, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -28400,26 +28192,26 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   __pyx_cur_scope->__pyx_v_res = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/document.pxi":732
+  /* "src/pyxpdf/document.pxi":739
  *         res = self.find_text(text, search_box, "top",
  *                              case_sensitive, wholeword)
  *         while res:             # <<<<<<<<<<<<<<
  *             yield res
  *             res = self.find_text(text, search_box, "next",
  */
-  __Pyx_TraceLine(732,0,__PYX_ERR(6, 732, __pyx_L1_error))
+  __Pyx_TraceLine(739,0,__PYX_ERR(6, 739, __pyx_L1_error))
   while (1) {
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_res); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(6, 732, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_res); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(6, 739, __pyx_L1_error)
     if (!__pyx_t_6) break;
 
-    /* "src/pyxpdf/document.pxi":733
+    /* "src/pyxpdf/document.pxi":740
  *                              case_sensitive, wholeword)
  *         while res:
  *             yield res             # <<<<<<<<<<<<<<
  *             res = self.find_text(text, search_box, "next",
  *                                  case_sensitive, wholeword)
  */
-    __Pyx_TraceLine(733,0,__PYX_ERR(6, 733, __pyx_L1_error))
+    __Pyx_TraceLine(740,0,__PYX_ERR(6, 740, __pyx_L1_error))
     __Pyx_INCREF(__pyx_cur_scope->__pyx_v_res);
     __pyx_r = __pyx_cur_scope->__pyx_v_res;
     __Pyx_XGIVEREF(__pyx_r);
@@ -28430,27 +28222,27 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L6_resume_from_yield:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(6, 733, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(6, 740, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":734
+    /* "src/pyxpdf/document.pxi":741
  *         while res:
  *             yield res
  *             res = self.find_text(text, search_box, "next",             # <<<<<<<<<<<<<<
  *                                  case_sensitive, wholeword)
  * 
  */
-    __Pyx_TraceLine(734,0,__PYX_ERR(6, 734, __pyx_L1_error))
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_find_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 734, __pyx_L1_error)
+    __Pyx_TraceLine(741,0,__PYX_ERR(6, 741, __pyx_L1_error))
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_find_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 741, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "src/pyxpdf/document.pxi":735
+    /* "src/pyxpdf/document.pxi":742
  *             yield res
  *             res = self.find_text(text, search_box, "next",
  *                                  case_sensitive, wholeword)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __Pyx_TraceLine(735,0,__PYX_ERR(6, 735, __pyx_L1_error))
+    __Pyx_TraceLine(742,0,__PYX_ERR(6, 742, __pyx_L1_error))
     __pyx_t_5 = NULL;
     __pyx_t_4 = 0;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -28466,7 +28258,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, __pyx_cur_scope->__pyx_v_text, __pyx_cur_scope->__pyx_v_search_box, __pyx_n_u_next, __pyx_cur_scope->__pyx_v_case_sensitive, __pyx_cur_scope->__pyx_v_wholeword};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 734, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 741, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -28474,13 +28266,13 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, __pyx_cur_scope->__pyx_v_text, __pyx_cur_scope->__pyx_v_search_box, __pyx_n_u_next, __pyx_cur_scope->__pyx_v_case_sensitive, __pyx_cur_scope->__pyx_v_wholeword};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 734, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 5+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 741, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_3 = PyTuple_New(5+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 734, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(5+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 741, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -28500,7 +28292,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
       __Pyx_INCREF(__pyx_cur_scope->__pyx_v_wholeword);
       __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_wholeword);
       PyTuple_SET_ITEM(__pyx_t_3, 4+__pyx_t_4, __pyx_cur_scope->__pyx_v_wholeword);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 734, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 741, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
@@ -28512,7 +28304,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "src/pyxpdf/document.pxi":706
+  /* "src/pyxpdf/document.pxi":713
  * 
  * 
  *     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,             # <<<<<<<<<<<<<<
@@ -28541,7 +28333,7 @@ static PyObject *__pyx_gb_6pyxpdf_4xpdf_4Page_10generator(__pyx_CoroutineObject 
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":738
+/* "src/pyxpdf/document.pxi":745
  * 
  * 
  *     def text_bytes(self, page_area=None, TextControl control = None):             # <<<<<<<<<<<<<<
@@ -28593,7 +28385,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_12text_bytes(PyObject *__pyx_v_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text_bytes") < 0)) __PYX_ERR(6, 738, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text_bytes") < 0)) __PYX_ERR(6, 745, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -28610,13 +28402,13 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_12text_bytes(PyObject *__pyx_v_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("text_bytes", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 738, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("text_bytes", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 745, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.text_bytes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_control), __pyx_ptype_6pyxpdf_4xpdf_TextControl, 1, "control", 0))) __PYX_ERR(6, 738, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_control), __pyx_ptype_6pyxpdf_4xpdf_TextControl, 1, "control", 0))) __PYX_ERR(6, 745, __pyx_L1_error)
   __pyx_r = __pyx_pf_6pyxpdf_4xpdf_4Page_11text_bytes(((struct __pyx_obj_6pyxpdf_4xpdf_Page *)__pyx_v_self), __pyx_v_page_area, __pyx_v_control);
 
   /* function exit code */
@@ -28647,17 +28439,17 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11text_bytes(struct __pyx_obj_6pyx
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__94)
   __Pyx_RefNannySetupContext("text_bytes", 0);
-  __Pyx_TraceCall("text_bytes", __pyx_f[6], 738, 0, __PYX_ERR(6, 738, __pyx_L1_error));
+  __Pyx_TraceCall("text_bytes", __pyx_f[6], 745, 0, __PYX_ERR(6, 745, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":771
+  /* "src/pyxpdf/document.pxi":778
  *         """
  *         cdef:
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()             # <<<<<<<<<<<<<<
  *             unique_ptr[string] out = make_unique[string]()
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
  */
-  __Pyx_TraceLine(771,0,__PYX_ERR(6, 771, __pyx_L1_error))
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(((PyObject *)__pyx_v_control)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 771, __pyx_L1_error)
+  __Pyx_TraceLine(778,0,__PYX_ERR(6, 778, __pyx_L1_error))
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(((PyObject *)__pyx_v_control)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 778, __pyx_L1_error)
   if (__pyx_t_2) {
     __pyx_t_1 = (*((struct __pyx_vtabstruct_6pyxpdf_4xpdf_TextControl *)__pyx_v_control->__pyx_vtab)->get_c_control(__pyx_v_control));
   } else {
@@ -28665,52 +28457,52 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11text_bytes(struct __pyx_obj_6pyx
   }
   __pyx_v_text_control = __pyx_t_1;
 
-  /* "src/pyxpdf/document.pxi":772
+  /* "src/pyxpdf/document.pxi":779
  *         cdef:
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
  *             unique_ptr[string] out = make_unique[string]()             # <<<<<<<<<<<<<<
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
  * 
  */
-  __Pyx_TraceLine(772,0,__PYX_ERR(6, 772, __pyx_L1_error))
+  __Pyx_TraceLine(779,0,__PYX_ERR(6, 779, __pyx_L1_error))
   __pyx_v_out = std::make_unique<std::string>();
 
-  /* "src/pyxpdf/document.pxi":773
+  /* "src/pyxpdf/document.pxi":780
  *             TextOutputControl text_control = deref(control.get_c_control()) if control else TextOutputControl()
  *             unique_ptr[string] out = make_unique[string]()
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)             # <<<<<<<<<<<<<<
  * 
  *         if page_area == None:
  */
-  __Pyx_TraceLine(773,0,__PYX_ERR(6, 773, __pyx_L1_error))
+  __Pyx_TraceLine(780,0,__PYX_ERR(6, 780, __pyx_L1_error))
   __pyx_v_text_dev = std::make_unique<TextOutputDev>((&__pyx_f_6pyxpdf_4xpdf_append_to_cpp_string), __pyx_v_out.get(), (&__pyx_v_text_control));
 
-  /* "src/pyxpdf/document.pxi":775
+  /* "src/pyxpdf/document.pxi":782
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
  * 
  *         if page_area == None:             # <<<<<<<<<<<<<<
  *             # Why crop=gTrue in displayPage?
  *             self.display(text_dev.get())
  */
-  __Pyx_TraceLine(775,0,__PYX_ERR(6, 775, __pyx_L1_error))
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_page_area, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 775, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 775, __pyx_L1_error)
+  __Pyx_TraceLine(782,0,__PYX_ERR(6, 782, __pyx_L1_error))
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_page_area, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 782, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(6, 782, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_2) {
 
-    /* "src/pyxpdf/document.pxi":777
+    /* "src/pyxpdf/document.pxi":784
  *         if page_area == None:
  *             # Why crop=gTrue in displayPage?
  *             self.display(text_dev.get())             # <<<<<<<<<<<<<<
  *         else:
  *             self.display_slice(text_dev.get(), page_area[0], page_area[1],
  */
-    __Pyx_TraceLine(777,0,__PYX_ERR(6, 777, __pyx_L1_error))
-    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display(__pyx_v_self, __pyx_v_text_dev.get(), NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 777, __pyx_L1_error)
+    __Pyx_TraceLine(784,0,__PYX_ERR(6, 784, __pyx_L1_error))
+    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display(__pyx_v_self, __pyx_v_text_dev.get(), NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 784, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/pyxpdf/document.pxi":775
+    /* "src/pyxpdf/document.pxi":782
  *             unique_ptr[TextOutputDev] text_dev = make_unique[TextOutputDev](&append_to_cpp_string, out.get(), &text_control)
  * 
  *         if page_area == None:             # <<<<<<<<<<<<<<
@@ -28720,71 +28512,71 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11text_bytes(struct __pyx_obj_6pyx
     goto __pyx_L3;
   }
 
-  /* "src/pyxpdf/document.pxi":779
+  /* "src/pyxpdf/document.pxi":786
  *             self.display(text_dev.get())
  *         else:
  *             self.display_slice(text_dev.get(), page_area[0], page_area[1],             # <<<<<<<<<<<<<<
  *                                 page_area[2], page_area[3])
  * 
  */
-  __Pyx_TraceLine(779,0,__PYX_ERR(6, 779, __pyx_L1_error))
+  __Pyx_TraceLine(786,0,__PYX_ERR(6, 786, __pyx_L1_error))
   /*else*/ {
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 779, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 786, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 779, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 786, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 779, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 786, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 779, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 786, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/pyxpdf/document.pxi":780
+    /* "src/pyxpdf/document.pxi":787
  *         else:
  *             self.display_slice(text_dev.get(), page_area[0], page_area[1],
  *                                 page_area[2], page_area[3])             # <<<<<<<<<<<<<<
  * 
  *         return deref(out)
  */
-    __Pyx_TraceLine(780,0,__PYX_ERR(6, 780, __pyx_L1_error))
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 780, __pyx_L1_error)
+    __Pyx_TraceLine(787,0,__PYX_ERR(6, 787, __pyx_L1_error))
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 787, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 780, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 787, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 780, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_page_area, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 787, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 780, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(6, 787, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/pyxpdf/document.pxi":779
+    /* "src/pyxpdf/document.pxi":786
  *             self.display(text_dev.get())
  *         else:
  *             self.display_slice(text_dev.get(), page_area[0], page_area[1],             # <<<<<<<<<<<<<<
  *                                 page_area[2], page_area[3])
  * 
  */
-    __Pyx_TraceLine(779,0,__PYX_ERR(6, 779, __pyx_L1_error))
-    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display_slice(__pyx_v_self, __pyx_v_text_dev.get(), __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 779, __pyx_L1_error)
+    __Pyx_TraceLine(786,0,__PYX_ERR(6, 786, __pyx_L1_error))
+    __pyx_t_3 = ((struct __pyx_vtabstruct_6pyxpdf_4xpdf_Page *)__pyx_v_self->__pyx_vtab)->display_slice(__pyx_v_self, __pyx_v_text_dev.get(), __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 786, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_L3:;
 
-  /* "src/pyxpdf/document.pxi":782
+  /* "src/pyxpdf/document.pxi":789
  *                                 page_area[2], page_area[3])
  * 
  *         return deref(out)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(782,0,__PYX_ERR(6, 782, __pyx_L1_error))
+  __Pyx_TraceLine(789,0,__PYX_ERR(6, 789, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __pyx_convert_PyBytes_string_to_py_std__in_string((*__pyx_v_out)); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 782, __pyx_L1_error)
+  __pyx_t_3 = __pyx_convert_PyBytes_string_to_py_std__in_string((*__pyx_v_out)); if (unlikely(!__pyx_t_3)) __PYX_ERR(6, 789, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":738
+  /* "src/pyxpdf/document.pxi":745
  * 
  * 
  *     def text_bytes(self, page_area=None, TextControl control = None):             # <<<<<<<<<<<<<<
@@ -28804,7 +28596,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_11text_bytes(struct __pyx_obj_6pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":785
+/* "src/pyxpdf/document.pxi":792
  * 
  * 
  *     def text(self, page_area=None, control=None):             # <<<<<<<<<<<<<<
@@ -28856,7 +28648,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_14text(PyObject *__pyx_v_self, PyO
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text") < 0)) __PYX_ERR(6, 785, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "text") < 0)) __PYX_ERR(6, 792, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -28873,7 +28665,7 @@ static PyObject *__pyx_pw_6pyxpdf_4xpdf_4Page_14text(PyObject *__pyx_v_self, PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("text", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 785, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("text", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 792, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyxpdf.xpdf.Page.text", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -28900,18 +28692,18 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
   int __pyx_clineno = 0;
   __Pyx_TraceFrameInit(__pyx_codeobj__95)
   __Pyx_RefNannySetupContext("text", 0);
-  __Pyx_TraceCall("text", __pyx_f[6], 785, 0, __PYX_ERR(6, 785, __pyx_L1_error));
+  __Pyx_TraceCall("text", __pyx_f[6], 792, 0, __PYX_ERR(6, 792, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":819
+  /* "src/pyxpdf/document.pxi":826
  * 
  *         """
  *         return self.text_bytes(page_area, control).decode('UTF-8', errors='ignore')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(819,0,__PYX_ERR(6, 819, __pyx_L1_error))
+  __Pyx_TraceLine(826,0,__PYX_ERR(6, 826, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 819, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_text_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 826, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -28928,7 +28720,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_page_area, __pyx_v_control};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 819, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 826, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -28936,13 +28728,13 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_page_area, __pyx_v_control};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 819, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 826, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 819, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 826, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -28953,18 +28745,18 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
     __Pyx_INCREF(__pyx_v_control);
     __Pyx_GIVEREF(__pyx_v_control);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_control);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 819, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 826, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_decode); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 819, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_decode); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 826, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 819, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 826, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_errors, __pyx_n_u_ignore) < 0) __PYX_ERR(6, 819, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 819, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_errors, __pyx_n_u_ignore) < 0) __PYX_ERR(6, 826, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 826, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -28972,7 +28764,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":785
+  /* "src/pyxpdf/document.pxi":792
  * 
  * 
  *     def text(self, page_area=None, control=None):             # <<<<<<<<<<<<<<
@@ -28995,7 +28787,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_13text(struct __pyx_obj_6pyxpdf_4x
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":490
+/* "src/pyxpdf/document.pxi":497
  *     cdef c_Page *page
  *     cdef unique_ptr[TextPage] textpage
  *     cdef readonly int index             # <<<<<<<<<<<<<<
@@ -29025,9 +28817,9 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_5index___get__(struct __pyx_obj_6p
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 490, 0, __PYX_ERR(6, 490, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 497, 0, __PYX_ERR(6, 497, __pyx_L1_error));
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 490, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -29045,7 +28837,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_5index___get__(struct __pyx_obj_6p
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":491
+/* "src/pyxpdf/document.pxi":498
  *     cdef unique_ptr[TextPage] textpage
  *     cdef readonly int index
  *     cdef readonly object label             # <<<<<<<<<<<<<<
@@ -29074,7 +28866,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_5label___get__(struct __pyx_obj_6p
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 491, 0, __PYX_ERR(6, 491, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 498, 0, __PYX_ERR(6, 498, __pyx_L1_error));
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_self->label);
   __pyx_r = __pyx_v_self->label;
@@ -29091,7 +28883,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_5label___get__(struct __pyx_obj_6p
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":492
+/* "src/pyxpdf/document.pxi":499
  *     cdef readonly int index
  *     cdef readonly object label
  *     cdef readonly Document doc             # <<<<<<<<<<<<<<
@@ -29120,7 +28912,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_3doc___get__(struct __pyx_obj_6pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_TraceCall("__get__", __pyx_f[6], 492, 0, __PYX_ERR(6, 492, __pyx_L1_error));
+  __Pyx_TraceCall("__get__", __pyx_f[6], 499, 0, __PYX_ERR(6, 499, __pyx_L1_error));
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_self->doc));
   __pyx_r = ((PyObject *)__pyx_v_self->doc);
@@ -29264,7 +29056,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_4Page_17__setstate_cython__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":854
+/* "src/pyxpdf/document.pxi":861
  *         dict kwargs
  * 
  *     def __init__(self, output, **kwargs):             # <<<<<<<<<<<<<<
@@ -29304,7 +29096,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_13page_iterator_1__init__(PyObject *__pyx_v_se
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 854, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "__init__") < 0)) __PYX_ERR(6, 861, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -29315,7 +29107,7 @@ static int __pyx_pw_6pyxpdf_4xpdf_13page_iterator_1__init__(PyObject *__pyx_v_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 854, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(6, 861, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("pyxpdf.xpdf.page_iterator.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -29338,47 +29130,47 @@ static int __pyx_pf_6pyxpdf_4xpdf_13page_iterator___init__(struct __pyx_obj_6pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
-  __Pyx_TraceCall("__init__", __pyx_f[6], 854, 0, __PYX_ERR(6, 854, __pyx_L1_error));
+  __Pyx_TraceCall("__init__", __pyx_f[6], 861, 0, __PYX_ERR(6, 861, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":855
+  /* "src/pyxpdf/document.pxi":862
  * 
  *     def __init__(self, output, **kwargs):
  *         self.output = output             # <<<<<<<<<<<<<<
  *         self.index = -1
  *         self.kwargs = kwargs
  */
-  __Pyx_TraceLine(855,0,__PYX_ERR(6, 855, __pyx_L1_error))
+  __Pyx_TraceLine(862,0,__PYX_ERR(6, 862, __pyx_L1_error))
   __Pyx_INCREF(__pyx_v_output);
   __Pyx_GIVEREF(__pyx_v_output);
   __Pyx_GOTREF(__pyx_v_self->output);
   __Pyx_DECREF(__pyx_v_self->output);
   __pyx_v_self->output = __pyx_v_output;
 
-  /* "src/pyxpdf/document.pxi":856
+  /* "src/pyxpdf/document.pxi":863
  *     def __init__(self, output, **kwargs):
  *         self.output = output
  *         self.index = -1             # <<<<<<<<<<<<<<
  *         self.kwargs = kwargs
  * 
  */
-  __Pyx_TraceLine(856,0,__PYX_ERR(6, 856, __pyx_L1_error))
+  __Pyx_TraceLine(863,0,__PYX_ERR(6, 863, __pyx_L1_error))
   __pyx_v_self->index = -1;
 
-  /* "src/pyxpdf/document.pxi":857
+  /* "src/pyxpdf/document.pxi":864
  *         self.output = output
  *         self.index = -1
  *         self.kwargs = kwargs             # <<<<<<<<<<<<<<
  * 
  *     def __iter__(self):
  */
-  __Pyx_TraceLine(857,0,__PYX_ERR(6, 857, __pyx_L1_error))
+  __Pyx_TraceLine(864,0,__PYX_ERR(6, 864, __pyx_L1_error))
   __Pyx_INCREF(__pyx_v_kwargs);
   __Pyx_GIVEREF(__pyx_v_kwargs);
   __Pyx_GOTREF(__pyx_v_self->kwargs);
   __Pyx_DECREF(__pyx_v_self->kwargs);
   __pyx_v_self->kwargs = __pyx_v_kwargs;
 
-  /* "src/pyxpdf/document.pxi":854
+  /* "src/pyxpdf/document.pxi":861
  *         dict kwargs
  * 
  *     def __init__(self, output, **kwargs):             # <<<<<<<<<<<<<<
@@ -29398,7 +29190,7 @@ static int __pyx_pf_6pyxpdf_4xpdf_13page_iterator___init__(struct __pyx_obj_6pyx
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":859
+/* "src/pyxpdf/document.pxi":866
  *         self.kwargs = kwargs
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -29427,22 +29219,22 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_13page_iterator_2__iter__(struct __pyx_o
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__iter__", 0);
-  __Pyx_TraceCall("__iter__", __pyx_f[6], 859, 0, __PYX_ERR(6, 859, __pyx_L1_error));
+  __Pyx_TraceCall("__iter__", __pyx_f[6], 866, 0, __PYX_ERR(6, 866, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":860
+  /* "src/pyxpdf/document.pxi":867
  * 
  *     def __iter__(self):
  *         return self             # <<<<<<<<<<<<<<
  * 
  *     def __next__(self):
  */
-  __Pyx_TraceLine(860,0,__PYX_ERR(6, 860, __pyx_L1_error))
+  __Pyx_TraceLine(867,0,__PYX_ERR(6, 867, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":859
+  /* "src/pyxpdf/document.pxi":866
  *         self.kwargs = kwargs
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -29461,7 +29253,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_13page_iterator_2__iter__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "src/pyxpdf/document.pxi":862
+/* "src/pyxpdf/document.pxi":869
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -29495,48 +29287,48 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_13page_iterator_4__next__(struct __pyx_o
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__next__", 0);
-  __Pyx_TraceCall("__next__", __pyx_f[6], 862, 0, __PYX_ERR(6, 862, __pyx_L1_error));
+  __Pyx_TraceCall("__next__", __pyx_f[6], 869, 0, __PYX_ERR(6, 869, __pyx_L1_error));
 
-  /* "src/pyxpdf/document.pxi":863
+  /* "src/pyxpdf/document.pxi":870
  * 
  *     def __next__(self):
  *         self.index += 1             # <<<<<<<<<<<<<<
  *         if self.index >= len(self.output.doc):
  *             raise StopIteration()
  */
-  __Pyx_TraceLine(863,0,__PYX_ERR(6, 863, __pyx_L1_error))
+  __Pyx_TraceLine(870,0,__PYX_ERR(6, 870, __pyx_L1_error))
   __pyx_v_self->index = (__pyx_v_self->index + 1);
 
-  /* "src/pyxpdf/document.pxi":864
+  /* "src/pyxpdf/document.pxi":871
  *     def __next__(self):
  *         self.index += 1
  *         if self.index >= len(self.output.doc):             # <<<<<<<<<<<<<<
  *             raise StopIteration()
  *         return self.output.get(self.index, **self.kwargs)
  */
-  __Pyx_TraceLine(864,0,__PYX_ERR(6, 864, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->output, __pyx_n_s_doc); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 864, __pyx_L1_error)
+  __Pyx_TraceLine(871,0,__PYX_ERR(6, 871, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->output, __pyx_n_s_doc); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(6, 864, __pyx_L1_error)
+  __pyx_t_2 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(6, 871, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((__pyx_v_self->index >= __pyx_t_2) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "src/pyxpdf/document.pxi":865
+    /* "src/pyxpdf/document.pxi":872
  *         self.index += 1
  *         if self.index >= len(self.output.doc):
  *             raise StopIteration()             # <<<<<<<<<<<<<<
  *         return self.output.get(self.index, **self.kwargs)
  * 
  */
-    __Pyx_TraceLine(865,0,__PYX_ERR(6, 865, __pyx_L1_error))
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_StopIteration); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 865, __pyx_L1_error)
+    __Pyx_TraceLine(872,0,__PYX_ERR(6, 872, __pyx_L1_error))
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_StopIteration); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 872, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(6, 865, __pyx_L1_error)
+    __PYX_ERR(6, 872, __pyx_L1_error)
 
-    /* "src/pyxpdf/document.pxi":864
+    /* "src/pyxpdf/document.pxi":871
  *     def __next__(self):
  *         self.index += 1
  *         if self.index >= len(self.output.doc):             # <<<<<<<<<<<<<<
@@ -29545,29 +29337,29 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_13page_iterator_4__next__(struct __pyx_o
  */
   }
 
-  /* "src/pyxpdf/document.pxi":866
+  /* "src/pyxpdf/document.pxi":873
  *         if self.index >= len(self.output.doc):
  *             raise StopIteration()
  *         return self.output.get(self.index, **self.kwargs)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_TraceLine(866,0,__PYX_ERR(6, 866, __pyx_L1_error))
+  __Pyx_TraceLine(873,0,__PYX_ERR(6, 873, __pyx_L1_error))
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->output, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 866, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->output, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 866, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 866, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(6, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
   __pyx_t_4 = 0;
   if (unlikely(__pyx_v_self->kwargs == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-    __PYX_ERR(6, 866, __pyx_L1_error)
+    __PYX_ERR(6, 873, __pyx_L1_error)
   }
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_v_self->kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 866, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_v_self->kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(6, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -29575,7 +29367,7 @@ static PyObject *__pyx_pf_6pyxpdf_4xpdf_13page_iterator_4__next__(struct __pyx_o
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "src/pyxpdf/document.pxi":862
+  /* "src/pyxpdf/document.pxi":869
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -37743,7 +37535,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_u_No_UnicodeMap_file_associated_wi, __pyx_k_No_UnicodeMap_file_associated_wi, sizeof(__pyx_k_No_UnicodeMap_file_associated_wi), 0, 1, 0, 0},
   {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
-  {&__pyx_kp_b_P6_d_d_255, __pyx_k_P6_d_d_255, sizeof(__pyx_k_P6_d_d_255), 0, 0, 0, 0},
   {&__pyx_n_s_PDFError, __pyx_k_PDFError, sizeof(__pyx_k_PDFError), 0, 0, 1, 1},
   {&__pyx_n_u_PDFError, __pyx_k_PDFError, sizeof(__pyx_k_PDFError), 0, 1, 0, 1},
   {&__pyx_n_s_PDFError___reduce_cython, __pyx_k_PDFError___reduce_cython, sizeof(__pyx_k_PDFError___reduce_cython), 0, 0, 1, 1},
@@ -37836,7 +37627,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u__51, __pyx_k__51, sizeof(__pyx_k__51), 0, 1, 0, 0},
   {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
   {&__pyx_n_s_anti_alias, __pyx_k_anti_alias, sizeof(__pyx_k_anti_alias), 0, 0, 1, 1},
-  {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
   {&__pyx_n_s_case_sensitive, __pyx_k_case_sensitive, sizeof(__pyx_k_case_sensitive), 0, 0, 1, 1},
   {&__pyx_n_s_cfg_path, __pyx_k_cfg_path, sizeof(__pyx_k_cfg_path), 0, 0, 1, 1},
@@ -37862,7 +37652,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_errors, __pyx_k_errors, sizeof(__pyx_k_errors), 0, 0, 1, 1},
   {&__pyx_n_s_exec_module, __pyx_k_exec_module, sizeof(__pyx_k_exec_module), 0, 0, 1, 1},
-  {&__pyx_n_s_extend, __pyx_k_extend, sizeof(__pyx_k_extend), 0, 0, 1, 1},
   {&__pyx_n_s_filename, __pyx_k_filename, sizeof(__pyx_k_filename), 0, 0, 1, 1},
   {&__pyx_n_s_find_all_text, __pyx_k_find_all_text, sizeof(__pyx_k_find_all_text), 0, 0, 1, 1},
   {&__pyx_n_s_find_spec, __pyx_k_find_spec, sizeof(__pyx_k_find_spec), 0, 0, 1, 1},
@@ -38015,12 +37804,12 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 26, __pyx_L1_error)
   __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(2, 43, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(3, 29, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(3, 42, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(3, 46, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(4, 65, __pyx_L1_error)
   __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(5, 11, __pyx_L1_error)
   __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(6, 134, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(6, 218, __pyx_L1_error)
-  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(6, 433, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(6, 225, __pyx_L1_error)
+  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(6, 440, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -38052,14 +37841,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "src/pyxpdf/globalconfig.pxi":42
+  /* "src/pyxpdf/globalconfig.pxi":46
  * 
  *         if self._global == NULL:
  *             raise MemoryError("Cannot create GlobalParamsConfig object.")             # <<<<<<<<<<<<<<
  *         self._set_defaults()
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_u_Cannot_create_GlobalParamsConfig); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(3, 42, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_u_Cannot_create_GlobalParamsConfig); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(3, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
@@ -38279,14 +38068,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__73);
   __Pyx_GIVEREF(__pyx_tuple__73);
 
-  /* "src/pyxpdf/document.pxi":197
+  /* "src/pyxpdf/document.pxi":204
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
  *             if self.doc.getErrorCode() == errEncrypted:
  *                 raise PDFPermissionError("PDF cannot be decrypted please provide correct passwords.")             # <<<<<<<<<<<<<<
  *         elif self.doc.getErrorCode() == errOpenFile:
  *             raise PDFIOError(f"Failed to load {self.filename}")
  */
-  __pyx_tuple__74 = PyTuple_Pack(1, __pyx_kp_u_PDF_cannot_be_decrypted_please_p); if (unlikely(!__pyx_tuple__74)) __PYX_ERR(6, 197, __pyx_L1_error)
+  __pyx_tuple__74 = PyTuple_Pack(1, __pyx_kp_u_PDF_cannot_be_decrypted_please_p); if (unlikely(!__pyx_tuple__74)) __PYX_ERR(6, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__74);
   __Pyx_GIVEREF(__pyx_tuple__74);
 
@@ -38309,14 +38098,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__82);
   __Pyx_GIVEREF(__pyx_tuple__82);
 
-  /* "src/pyxpdf/document.pxi":501
+  /* "src/pyxpdf/document.pxi":508
  *     def __cinit__(self, Document doc not None, int index):
  *         if index < 0 or index >= doc.num_pages:
  *             raise IndexError("Page index must be positive integer less than total pages")             # <<<<<<<<<<<<<<
  *         self.page = doc.get_catalog().getPage(index + 1)
  *         # self.textpage.reset()
  */
-  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_kp_u_Page_index_must_be_positive_inte); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(6, 501, __pyx_L1_error)
+  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_kp_u_Page_index_must_be_positive_inte); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(6, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__85);
   __Pyx_GIVEREF(__pyx_tuple__85);
 
@@ -38522,49 +38311,49 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         return cfg
  * 
  *     def load_file(self, cfg_path=None):             # <<<<<<<<<<<<<<
- *         if cfg_path == None:
- *             self._global = new GlobalParams(<const char*>NULL)
+ *         global globalParams
+ *         if globalParams != NULL:
  */
   __pyx_tuple__131 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_cfg_path); if (unlikely(!__pyx_tuple__131)) __PYX_ERR(3, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__131);
   __Pyx_GIVEREF(__pyx_tuple__131);
   __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__131, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_load_file, 35, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(3, 35, __pyx_L1_error)
 
-  /* "src/pyxpdf/globalconfig.pxi":48
+  /* "src/pyxpdf/globalconfig.pxi":51
  *         globalParams = self._global
  * 
  *     def reset(self):             # <<<<<<<<<<<<<<
  *         self.load_file(self.cfg_path)
  * 
  */
-  __pyx_tuple__132 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__132)) __PYX_ERR(3, 48, __pyx_L1_error)
+  __pyx_tuple__132 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__132)) __PYX_ERR(3, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__132);
   __Pyx_GIVEREF(__pyx_tuple__132);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__132, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_reset, 48, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(3, 48, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__132, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_reset, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(3, 51, __pyx_L1_error)
 
-  /* "src/pyxpdf/globalconfig.pxi":62
+  /* "src/pyxpdf/globalconfig.pxi":65
  * 
  * 
  *     def setup_base_fonts(self, dir):             # <<<<<<<<<<<<<<
  *         self._global.setupBaseFonts(_chars(dir))
  * 
  */
-  __pyx_tuple__133 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_dir); if (unlikely(!__pyx_tuple__133)) __PYX_ERR(3, 62, __pyx_L1_error)
+  __pyx_tuple__133 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_dir); if (unlikely(!__pyx_tuple__133)) __PYX_ERR(3, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__133);
   __Pyx_GIVEREF(__pyx_tuple__133);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__133, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_setup_base_fonts, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(3, 62, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__133, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_setup_base_fonts, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(3, 65, __pyx_L1_error)
 
-  /* "src/pyxpdf/globalconfig.pxi":75
+  /* "src/pyxpdf/globalconfig.pxi":78
  * 
  * 
  *     def map_name_to_unicode(self, char_name):             # <<<<<<<<<<<<<<
  *         return self._global.mapNameToUnicode(_chars(char_name))
  * 
  */
-  __pyx_tuple__134 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_char_name); if (unlikely(!__pyx_tuple__134)) __PYX_ERR(3, 75, __pyx_L1_error)
+  __pyx_tuple__134 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_char_name); if (unlikely(!__pyx_tuple__134)) __PYX_ERR(3, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__134);
   __Pyx_GIVEREF(__pyx_tuple__134);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__134, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_map_name_to_unicode, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(3, 75, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__134, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_globalconfig_pxi, __pyx_n_s_map_name_to_unicode, 78, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(3, 78, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -38797,53 +38586,53 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__155);
   __pyx_codeobj__66 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__155, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__66)) __PYX_ERR(7, 3, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":312
+  /* "src/pyxpdf/document.pxi":319
  * 
  * 
  *     def info(self):             # <<<<<<<<<<<<<<
  *         """Get the PDF's info dictionary.
  * 
  */
-  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__156)) __PYX_ERR(6, 312, __pyx_L1_error)
+  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__156)) __PYX_ERR(6, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__156);
   __Pyx_GIVEREF(__pyx_tuple__156);
-  __pyx_codeobj__75 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__156, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_info, 312, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__75)) __PYX_ERR(6, 312, __pyx_L1_error)
+  __pyx_codeobj__75 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__156, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_info, 319, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__75)) __PYX_ERR(6, 319, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":325
+  /* "src/pyxpdf/document.pxi":332
  *         return self.get_info_dict()
  * 
  *     def xmp_metadata(self):             # <<<<<<<<<<<<<<
  *         """Get the PDF's xmp metadata.
  * 
  */
-  __pyx_tuple__157 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__157)) __PYX_ERR(6, 325, __pyx_L1_error)
+  __pyx_tuple__157 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__157)) __PYX_ERR(6, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__157);
   __Pyx_GIVEREF(__pyx_tuple__157);
-  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__157, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_xmp_metadata, 325, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) __PYX_ERR(6, 325, __pyx_L1_error)
+  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__157, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_xmp_metadata, 332, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) __PYX_ERR(6, 332, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":335
+  /* "src/pyxpdf/document.pxi":342
  * 
  * 
  *     cpdef text_bytes(self, int start=0, int end=-1, TextControl control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract text from given page range.
  * 
  */
-  __pyx_tuple__158 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_start, __pyx_n_s_end, __pyx_n_s_control); if (unlikely(!__pyx_tuple__158)) __PYX_ERR(6, 335, __pyx_L1_error)
+  __pyx_tuple__158 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_start, __pyx_n_s_end, __pyx_n_s_control); if (unlikely(!__pyx_tuple__158)) __PYX_ERR(6, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__158);
   __Pyx_GIVEREF(__pyx_tuple__158);
-  __pyx_codeobj__77 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__158, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text_bytes, 335, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__77)) __PYX_ERR(6, 335, __pyx_L1_error)
+  __pyx_codeobj__77 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__158, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text_bytes, 342, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__77)) __PYX_ERR(6, 342, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":377
+  /* "src/pyxpdf/document.pxi":384
  *         return deref(out)
  * 
  *     cpdef text(self, start=0, end=-1, control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract UTF-8 decoded text from given page range.
  * 
  */
-  __pyx_tuple__159 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_start, __pyx_n_s_end, __pyx_n_s_control); if (unlikely(!__pyx_tuple__159)) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_tuple__159 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_start, __pyx_n_s_end, __pyx_n_s_control); if (unlikely(!__pyx_tuple__159)) __PYX_ERR(6, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__159);
   __Pyx_GIVEREF(__pyx_tuple__159);
-  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__159, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text, 377, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__159, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text, 384, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) __PYX_ERR(6, 384, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -38887,53 +38676,53 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__163);
   __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__163, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) __PYX_ERR(7, 16, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":650
+  /* "src/pyxpdf/document.pxi":657
  * 
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,             # <<<<<<<<<<<<<<
  *                   wholeword=False, rotation=0):
  *         """Find the text in Page.
  */
-  __pyx_tuple__164 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_text, __pyx_n_s_search_box, __pyx_n_s_direction, __pyx_n_s_case_sensitive, __pyx_n_s_wholeword, __pyx_n_s_rotation, __pyx_n_s_result); if (unlikely(!__pyx_tuple__164)) __PYX_ERR(6, 650, __pyx_L1_error)
+  __pyx_tuple__164 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_text, __pyx_n_s_search_box, __pyx_n_s_direction, __pyx_n_s_case_sensitive, __pyx_n_s_wholeword, __pyx_n_s_rotation, __pyx_n_s_result); if (unlikely(!__pyx_tuple__164)) __PYX_ERR(6, 657, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__164);
   __Pyx_GIVEREF(__pyx_tuple__164);
-  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(7, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__164, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_find_text, 650, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(6, 650, __pyx_L1_error)
+  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(7, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__164, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_find_text, 657, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(6, 657, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":706
+  /* "src/pyxpdf/document.pxi":713
  * 
  * 
  *     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,             # <<<<<<<<<<<<<<
  *                       rotation=0):
  *         """Find the `text` and get all the matches
  */
-  __pyx_tuple__165 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_text, __pyx_n_s_search_box, __pyx_n_s_case_sensitive, __pyx_n_s_wholeword, __pyx_n_s_rotation, __pyx_n_s_res); if (unlikely(!__pyx_tuple__165)) __PYX_ERR(6, 706, __pyx_L1_error)
+  __pyx_tuple__165 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_text, __pyx_n_s_search_box, __pyx_n_s_case_sensitive, __pyx_n_s_wholeword, __pyx_n_s_rotation, __pyx_n_s_res); if (unlikely(!__pyx_tuple__165)) __PYX_ERR(6, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__165);
   __Pyx_GIVEREF(__pyx_tuple__165);
-  __pyx_codeobj__93 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__165, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_find_all_text, 706, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__93)) __PYX_ERR(6, 706, __pyx_L1_error)
+  __pyx_codeobj__93 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__165, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_find_all_text, 713, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__93)) __PYX_ERR(6, 713, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":738
+  /* "src/pyxpdf/document.pxi":745
  * 
  * 
  *     def text_bytes(self, page_area=None, TextControl control = None):             # <<<<<<<<<<<<<<
  *         """Parse and extract text bytes from current page.
  * 
  */
-  __pyx_tuple__166 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_page_area, __pyx_n_s_control, __pyx_n_s_text_control, __pyx_n_s_out, __pyx_n_s_text_dev); if (unlikely(!__pyx_tuple__166)) __PYX_ERR(6, 738, __pyx_L1_error)
+  __pyx_tuple__166 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_page_area, __pyx_n_s_control, __pyx_n_s_text_control, __pyx_n_s_out, __pyx_n_s_text_dev); if (unlikely(!__pyx_tuple__166)) __PYX_ERR(6, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__166);
   __Pyx_GIVEREF(__pyx_tuple__166);
-  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__166, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text_bytes, 738, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) __PYX_ERR(6, 738, __pyx_L1_error)
+  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__166, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text_bytes, 745, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) __PYX_ERR(6, 745, __pyx_L1_error)
 
-  /* "src/pyxpdf/document.pxi":785
+  /* "src/pyxpdf/document.pxi":792
  * 
  * 
  *     def text(self, page_area=None, control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract UTF-8 decoded text from current page.
  * 
  */
-  __pyx_tuple__167 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_page_area, __pyx_n_s_control); if (unlikely(!__pyx_tuple__167)) __PYX_ERR(6, 785, __pyx_L1_error)
+  __pyx_tuple__167 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_page_area, __pyx_n_s_control); if (unlikely(!__pyx_tuple__167)) __PYX_ERR(6, 792, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__167);
   __Pyx_GIVEREF(__pyx_tuple__167);
-  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__167, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text, 785, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) __PYX_ERR(6, 785, __pyx_L1_error)
+  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__167, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_pyxpdf_document_pxi, __pyx_n_s_text, 792, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) __PYX_ERR(6, 792, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -39038,7 +38827,6 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
-  __pyx_umethod_PyByteArray_Type_extend.type = (PyObject*)&PyByteArray_Type;
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -39313,15 +39101,15 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Document, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_Document) < 0) __PYX_ERR(6, 17, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_Document) < 0) __PYX_ERR(6, 17, __pyx_L1_error)
   __pyx_ptype_6pyxpdf_4xpdf_Document = &__pyx_type_6pyxpdf_4xpdf_Document;
-  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 418, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 425, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_6pyxpdf_4xpdf_DocumentPageIterator.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator.tp_dictoffset && __pyx_type_6pyxpdf_4xpdf_DocumentPageIterator.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_6pyxpdf_4xpdf_DocumentPageIterator.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_DocumentPageIterator, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 418, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 418, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_DocumentPageIterator, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 425, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator) < 0) __PYX_ERR(6, 425, __pyx_L1_error)
   __pyx_ptype_6pyxpdf_4xpdf_DocumentPageIterator = &__pyx_type_6pyxpdf_4xpdf_DocumentPageIterator;
   __pyx_vtabptr_6pyxpdf_4xpdf_Page = &__pyx_vtable_6pyxpdf_4xpdf_Page;
   __pyx_vtable_6pyxpdf_4xpdf_Page.display_slice = (PyObject *(*)(struct __pyx_obj_6pyxpdf_4xpdf_Page *, OutputDev *, int, int, int, int, struct __pyx_opt_args_6pyxpdf_4xpdf_4Page_display_slice *__pyx_optional_args))__pyx_f_6pyxpdf_4xpdf_4Page_display_slice;
@@ -39329,7 +39117,7 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_6pyxpdf_4xpdf_Page._init_TextPage = (PyObject *(*)(struct __pyx_obj_6pyxpdf_4xpdf_Page *, int))__pyx_f_6pyxpdf_4xpdf_4Page__init_TextPage;
   __pyx_vtable_6pyxpdf_4xpdf_Page.get_label = (PyObject *(*)(struct __pyx_obj_6pyxpdf_4xpdf_Page *))__pyx_f_6pyxpdf_4xpdf_4Page_get_label;
   __pyx_vtable_6pyxpdf_4xpdf_Page._find_text = (PyObject *(*)(struct __pyx_obj_6pyxpdf_4xpdf_Page *, PyObject *, struct __pyx_opt_args_6pyxpdf_4xpdf_4Page__find_text *__pyx_optional_args))__pyx_f_6pyxpdf_4xpdf_4Page__find_text;
-  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 438, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 445, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_6pyxpdf_4xpdf_Page.tp_print = 0;
   #endif
@@ -39338,7 +39126,7 @@ static int __Pyx_modinit_type_init_code(void) {
   }
   #if CYTHON_COMPILING_IN_CPYTHON
   {
-    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_6pyxpdf_4xpdf_Page, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(6, 438, __pyx_L1_error)
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_6pyxpdf_4xpdf_Page, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(6, 445, __pyx_L1_error)
     if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
       __pyx_wrapperbase_6pyxpdf_4xpdf_4Page___init__ = *((PyWrapperDescrObject *)wrapper)->d_base;
       __pyx_wrapperbase_6pyxpdf_4xpdf_4Page___init__.doc = __pyx_doc_6pyxpdf_4xpdf_4Page___init__;
@@ -39346,21 +39134,21 @@ static int __Pyx_modinit_type_init_code(void) {
     }
   }
   #endif
-  if (__Pyx_SetVtable(__pyx_type_6pyxpdf_4xpdf_Page.tp_dict, __pyx_vtabptr_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 438, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Page, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 438, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 438, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_6pyxpdf_4xpdf_Page.tp_dict, __pyx_vtabptr_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 445, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Page, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 445, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_Page) < 0) __PYX_ERR(6, 445, __pyx_L1_error)
   __pyx_ptype_6pyxpdf_4xpdf_Page = &__pyx_type_6pyxpdf_4xpdf_Page;
-  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 824, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 831, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_6pyxpdf_4xpdf_page_iterator.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_6pyxpdf_4xpdf_page_iterator.tp_dictoffset && __pyx_type_6pyxpdf_4xpdf_page_iterator.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_6pyxpdf_4xpdf_page_iterator.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_page_iterator, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 824, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 824, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_page_iterator, (PyObject *)&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 831, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6pyxpdf_4xpdf_page_iterator) < 0) __PYX_ERR(6, 831, __pyx_L1_error)
   __pyx_ptype_6pyxpdf_4xpdf_page_iterator = &__pyx_type_6pyxpdf_4xpdf_page_iterator;
-  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf___pyx_scope_struct__find_all_text) < 0) __PYX_ERR(6, 706, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6pyxpdf_4xpdf___pyx_scope_struct__find_all_text) < 0) __PYX_ERR(6, 713, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_6pyxpdf_4xpdf___pyx_scope_struct__find_all_text.tp_print = 0;
   #endif
@@ -39830,19 +39618,19 @@ if (!__Pyx_RefNanny) {
  * #    return GString_to_unicode(text_str.toPDFTextString())
  * 
  * cdef TextString* to_TextString(tstr):             # <<<<<<<<<<<<<<
- *     cdef TextString* text_string
- *     text_string = new TextString(to_GString(tstr))
+ *     cdef:
+ *         unique_ptr[GString] gstr
  */
   __Pyx_TraceLine(84,0,__PYX_ERR(1, 84, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/helper.pxi":89
+  /* "src/pyxpdf/helper.pxi":92
  *     return text_string
  * 
  * cdef void append_to_cpp_string(void *stream, const char *text, int length):             # <<<<<<<<<<<<<<
  *     (<string*>stream)[0] += string(text, length)
  */
-  __Pyx_TraceLine(89,0,__PYX_ERR(1, 89, __pyx_L1_error))
+  __Pyx_TraceLine(92,0,__PYX_ERR(1, 92, __pyx_L1_error))
 
 
   /* "src/pyxpdf/pdferror.pxi":9
@@ -40363,8 +40151,8 @@ if (!__Pyx_RefNanny) {
  *         return cfg
  * 
  *     def load_file(self, cfg_path=None):             # <<<<<<<<<<<<<<
- *         if cfg_path == None:
- *             self._global = new GlobalParams(<const char*>NULL)
+ *         global globalParams
+ *         if globalParams != NULL:
  */
   __Pyx_TraceLine(35,0,__PYX_ERR(3, 35, __pyx_L1_error))
   __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_1load_file, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_load_file, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 35, __pyx_L1_error)
@@ -40373,45 +40161,45 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig);
 
-  /* "src/pyxpdf/globalconfig.pxi":48
+  /* "src/pyxpdf/globalconfig.pxi":51
  *         globalParams = self._global
  * 
  *     def reset(self):             # <<<<<<<<<<<<<<
  *         self.load_file(self.cfg_path)
  * 
  */
-  __Pyx_TraceLine(48,0,__PYX_ERR(3, 48, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_3reset, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_reset, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 48, __pyx_L1_error)
+  __Pyx_TraceLine(51,0,__PYX_ERR(3, 51, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_3reset, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_reset, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_reset, __pyx_t_1) < 0) __PYX_ERR(3, 48, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_reset, __pyx_t_1) < 0) __PYX_ERR(3, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig);
 
-  /* "src/pyxpdf/globalconfig.pxi":62
+  /* "src/pyxpdf/globalconfig.pxi":65
  * 
  * 
  *     def setup_base_fonts(self, dir):             # <<<<<<<<<<<<<<
  *         self._global.setupBaseFonts(_chars(dir))
  * 
  */
-  __Pyx_TraceLine(62,0,__PYX_ERR(3, 62, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_9setup_base_fonts, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_setup_base_f, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 62, __pyx_L1_error)
+  __Pyx_TraceLine(65,0,__PYX_ERR(3, 65, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_9setup_base_fonts, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_setup_base_f, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_setup_base_fonts, __pyx_t_1) < 0) __PYX_ERR(3, 62, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_setup_base_fonts, __pyx_t_1) < 0) __PYX_ERR(3, 65, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig);
 
-  /* "src/pyxpdf/globalconfig.pxi":75
+  /* "src/pyxpdf/globalconfig.pxi":78
  * 
  * 
  *     def map_name_to_unicode(self, char_name):             # <<<<<<<<<<<<<<
  *         return self._global.mapNameToUnicode(_chars(char_name))
  * 
  */
-  __Pyx_TraceLine(75,0,__PYX_ERR(3, 75, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_11map_name_to_unicode, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_map_name_to, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 75, __pyx_L1_error)
+  __Pyx_TraceLine(78,0,__PYX_ERR(3, 78, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_19_GlobalParamsConfig_11map_name_to_unicode, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_GlobalParamsConfig_map_name_to, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_map_name_to_unicode, __pyx_t_1) < 0) __PYX_ERR(3, 75, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig->tp_dict, __pyx_n_s_map_name_to_unicode, __pyx_t_1) < 0) __PYX_ERR(3, 78, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig);
 
@@ -40438,30 +40226,30 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_1) < 0) __PYX_ERR(7, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":202
+  /* "src/pyxpdf/globalconfig.pxi":211
  * 
  * 
  * Config = _GlobalParamsConfig()             # <<<<<<<<<<<<<<
  * Config.__doc__ = \
  * """
  */
-  __Pyx_TraceLine(202,0,__PYX_ERR(3, 202, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 202, __pyx_L1_error)
+  __Pyx_TraceLine(211,0,__PYX_ERR(3, 211, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_6pyxpdf_4xpdf__GlobalParamsConfig)); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Config, __pyx_t_1) < 0) __PYX_ERR(3, 202, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Config, __pyx_t_1) < 0) __PYX_ERR(3, 211, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/pyxpdf/globalconfig.pxi":203
+  /* "src/pyxpdf/globalconfig.pxi":212
  * 
  * Config = _GlobalParamsConfig()
  * Config.__doc__ = \             # <<<<<<<<<<<<<<
  * """
  * Global XPDF config object
  */
-  __Pyx_TraceLine(203,0,__PYX_ERR(3, 203, __pyx_L1_error))
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Config); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 203, __pyx_L1_error)
+  __Pyx_TraceLine(212,0,__PYX_ERR(3, 212, __pyx_L1_error))
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Config); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_doc_2, __pyx_kp_u_Global_XPDF_config_object_Metho) < 0) __PYX_ERR(3, 203, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_doc_2, __pyx_kp_u_Global_XPDF_config_object_Metho) < 0) __PYX_ERR(3, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/pyxpdf/pdftotext.pxi":7
@@ -40647,16 +40435,6 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_1) < 0) __PYX_ERR(7, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "src/pyxpdf/imageoutput.pxi":15
- * 
- * 
- * cdef bytearray splash_bitmap_to_pnm(SplashBitmap *bitmap):             # <<<<<<<<<<<<<<
- *     cdef:
- *         int x,y
- */
-  __Pyx_TraceLine(15,0,__PYX_ERR(9, 15, __pyx_L1_error))
-
 
   /* "src/pyxpdf/imageoutput.pxi":41
  * 
@@ -41138,97 +40916,97 @@ if (!__Pyx_RefNanny) {
  *             raise MemoryError("Cannot allocate memory for internal objects")
  * 
  *     cdef _load_from_char_array(self, char *pdf, int data_length):             # <<<<<<<<<<<<<<
- *         cdef Object *obj_null = new Object()
- *         cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+ *         cdef:
+ *             Object *obj_null
  */
   __Pyx_TraceLine(187,0,__PYX_ERR(6, 187, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":194
- *         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
+  /* "src/pyxpdf/document.pxi":201
+ *         del obj_null
  * 
  *     cdef check(self):             # <<<<<<<<<<<<<<
  *         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:
  *             if self.doc.getErrorCode() == errEncrypted:
  */
-  __Pyx_TraceLine(194,0,__PYX_ERR(6, 194, __pyx_L1_error))
+  __Pyx_TraceLine(201,0,__PYX_ERR(6, 201, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":204
+  /* "src/pyxpdf/document.pxi":211
  *             raise ErrorCodeMapping[err_code]
  * 
  *     cdef int label_to_index(self, label):             # <<<<<<<<<<<<<<
  *         cdef:
  *             int pgno
  */
-  __Pyx_TraceLine(204,0,__PYX_ERR(6, 204, __pyx_L1_error))
+  __Pyx_TraceLine(211,0,__PYX_ERR(6, 211, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":216
+  /* "src/pyxpdf/document.pxi":223
  *         return pgno
  * 
  *     cdef get_page(self, int idx):             # <<<<<<<<<<<<<<
  *         if idx < 0 or idx >= self.num_pages:
  *             raise IndexError(
  */
-  __Pyx_TraceLine(216,0,__PYX_ERR(6, 216, __pyx_L1_error))
+  __Pyx_TraceLine(223,0,__PYX_ERR(6, 223, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":312
+  /* "src/pyxpdf/document.pxi":319
  * 
  * 
  *     def info(self):             # <<<<<<<<<<<<<<
  *         """Get the PDF's info dictionary.
  * 
  */
-  __Pyx_TraceLine(312,0,__PYX_ERR(6, 312, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_17info, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_info, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__75)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 312, __pyx_L1_error)
+  __Pyx_TraceLine(319,0,__PYX_ERR(6, 319, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_17info, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_info, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__75)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_info, __pyx_t_1) < 0) __PYX_ERR(6, 312, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_info, __pyx_t_1) < 0) __PYX_ERR(6, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Document);
 
-  /* "src/pyxpdf/document.pxi":325
+  /* "src/pyxpdf/document.pxi":332
  *         return self.get_info_dict()
  * 
  *     def xmp_metadata(self):             # <<<<<<<<<<<<<<
  *         """Get the PDF's xmp metadata.
  * 
  */
-  __Pyx_TraceLine(325,0,__PYX_ERR(6, 325, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_19xmp_metadata, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_xmp_metadata, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__76)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 325, __pyx_L1_error)
+  __Pyx_TraceLine(332,0,__PYX_ERR(6, 332, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_19xmp_metadata, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_xmp_metadata, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__76)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_xmp_metadata, __pyx_t_1) < 0) __PYX_ERR(6, 325, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_xmp_metadata, __pyx_t_1) < 0) __PYX_ERR(6, 332, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Document);
 
-  /* "src/pyxpdf/document.pxi":335
+  /* "src/pyxpdf/document.pxi":342
  * 
  * 
  *     cpdef text_bytes(self, int start=0, int end=-1, TextControl control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract text from given page range.
  * 
  */
-  __Pyx_TraceLine(335,0,__PYX_ERR(6, 335, __pyx_L1_error))
+  __Pyx_TraceLine(342,0,__PYX_ERR(6, 342, __pyx_L1_error))
 
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_21text_bytes, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_text_bytes, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__77)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 335, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_21text_bytes, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_text_bytes, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__77)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_text_bytes, __pyx_t_1) < 0) __PYX_ERR(6, 335, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_text_bytes, __pyx_t_1) < 0) __PYX_ERR(6, 342, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Document);
 
-  /* "src/pyxpdf/document.pxi":377
+  /* "src/pyxpdf/document.pxi":384
  *         return deref(out)
  * 
  *     cpdef text(self, start=0, end=-1, control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract UTF-8 decoded text from given page range.
  * 
  */
-  __Pyx_TraceLine(377,0,__PYX_ERR(6, 377, __pyx_L1_error))
+  __Pyx_TraceLine(384,0,__PYX_ERR(6, 384, __pyx_L1_error))
 
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_23text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__78)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_8Document_23text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Document_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__78)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_text, __pyx_t_1) < 0) __PYX_ERR(6, 377, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Document->tp_dict, __pyx_n_s_text, __pyx_t_1) < 0) __PYX_ERR(6, 384, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Document);
 
@@ -41280,151 +41058,151 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_DocumentPageIterator);
 
-  /* "src/pyxpdf/document.pxi":515
+  /* "src/pyxpdf/document.pxi":522
  * 
  * 
  *     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,             # <<<<<<<<<<<<<<
  *                         double hDPI = 72, double vDPI = 72, int rotate = 0,
  *                         GBool use_media_box = gFalse, GBool crop = gTrue,
  */
-  __Pyx_TraceLine(515,0,__PYX_ERR(6, 515, __pyx_L1_error))
+  __Pyx_TraceLine(522,0,__PYX_ERR(6, 522, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":517
+  /* "src/pyxpdf/document.pxi":524
  *     cdef display_slice(self, OutputDev* out, int x1, int y1, int hgt, int wdt,
  *                         double hDPI = 72, double vDPI = 72, int rotate = 0,
  *                         GBool use_media_box = gFalse, GBool crop = gTrue,             # <<<<<<<<<<<<<<
  *                         GBool printing = gFalse):
  *         self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop,
  */
-  __Pyx_TraceLine(517,0,__PYX_ERR(6, 517, __pyx_L1_error))
+  __Pyx_TraceLine(524,0,__PYX_ERR(6, 524, __pyx_L1_error))
   __pyx_k__86 = gFalse;
   __pyx_k__87 = gTrue;
 
-  /* "src/pyxpdf/document.pxi":518
+  /* "src/pyxpdf/document.pxi":525
  *                         double hDPI = 72, double vDPI = 72, int rotate = 0,
  *                         GBool use_media_box = gFalse, GBool crop = gTrue,
  *                         GBool printing = gFalse):             # <<<<<<<<<<<<<<
  *         self.page.displaySlice(out, hDPI, vDPI, rotate, use_media_box, crop,
  *                                 x1, y1, hgt, wdt, printing)
  */
-  __Pyx_TraceLine(518,0,__PYX_ERR(6, 518, __pyx_L1_error))
+  __Pyx_TraceLine(525,0,__PYX_ERR(6, 525, __pyx_L1_error))
   __pyx_k__88 = gFalse;
 
-  /* "src/pyxpdf/document.pxi":522
+  /* "src/pyxpdf/document.pxi":529
  *                                 x1, y1, hgt, wdt, printing)
  * 
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,             # <<<<<<<<<<<<<<
  *                         int rotate = 0, GBool use_media_box = gFalse,
  *                         GBool crop = gTrue, GBool printing = gFalse):
  */
-  __Pyx_TraceLine(522,0,__PYX_ERR(6, 522, __pyx_L1_error))
+  __Pyx_TraceLine(529,0,__PYX_ERR(6, 529, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":523
+  /* "src/pyxpdf/document.pxi":530
  * 
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,
  *                         int rotate = 0, GBool use_media_box = gFalse,             # <<<<<<<<<<<<<<
  *                         GBool crop = gTrue, GBool printing = gFalse):
  *         self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate,
  */
-  __Pyx_TraceLine(523,0,__PYX_ERR(6, 523, __pyx_L1_error))
+  __Pyx_TraceLine(530,0,__PYX_ERR(6, 530, __pyx_L1_error))
   __pyx_k__89 = gFalse;
 
-  /* "src/pyxpdf/document.pxi":524
+  /* "src/pyxpdf/document.pxi":531
  *     cdef display(self, OutputDev* out, double hDPI = 72, double vDPI = 72,
  *                         int rotate = 0, GBool use_media_box = gFalse,
  *                         GBool crop = gTrue, GBool printing = gFalse):             # <<<<<<<<<<<<<<
  *         self.display_slice(out, -1, -1, -1, -1, hDPI, vDPI, rotate,
  *                             use_media_box, crop, printing)
  */
-  __Pyx_TraceLine(524,0,__PYX_ERR(6, 524, __pyx_L1_error))
+  __Pyx_TraceLine(531,0,__PYX_ERR(6, 531, __pyx_L1_error))
   __pyx_k__90 = gTrue;
   __pyx_k__91 = gFalse;
 
-  /* "src/pyxpdf/document.pxi":528
+  /* "src/pyxpdf/document.pxi":535
  *                             use_media_box, crop, printing)
  * 
  *     cdef _init_TextPage(self, int rotation):             # <<<<<<<<<<<<<<
  *         cdef:
  *             unique_ptr[TextOutputControl] text_control
  */
-  __Pyx_TraceLine(528,0,__PYX_ERR(6, 528, __pyx_L1_error))
+  __Pyx_TraceLine(535,0,__PYX_ERR(6, 535, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":539
+  /* "src/pyxpdf/document.pxi":546
  *         self.textpage.reset(deref(td).takeText())
  * 
  *     cdef get_label(self):             # <<<<<<<<<<<<<<
  *         cdef:
  *             unique_ptr[GString] glabel
  */
-  __Pyx_TraceLine(539,0,__PYX_ERR(6, 539, __pyx_L1_error))
+  __Pyx_TraceLine(546,0,__PYX_ERR(6, 546, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":553
+  /* "src/pyxpdf/document.pxi":560
  *         return None
  * 
  *     cdef _find_text(self, text, search_box=None, start_at_top=True, stop_at_bottom=True, start_at_last=False,             # <<<<<<<<<<<<<<
  *                 stop_at_last=False, case_sensitive=False, backward=False, wholeword=False, rotation=0):
  *         cdef double x_min = 0
  */
-  __Pyx_TraceLine(553,0,__PYX_ERR(6, 553, __pyx_L1_error))
+  __Pyx_TraceLine(560,0,__PYX_ERR(6, 560, __pyx_L1_error))
 
 
-  /* "src/pyxpdf/document.pxi":650
+  /* "src/pyxpdf/document.pxi":657
  * 
  * 
  *     def find_text(self, text, search_box=None, direction="top", case_sensitive=False,             # <<<<<<<<<<<<<<
  *                   wholeword=False, rotation=0):
  *         """Find the text in Page.
  */
-  __Pyx_TraceLine(650,0,__PYX_ERR(6, 650, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_7find_text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_find_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 650, __pyx_L1_error)
+  __Pyx_TraceLine(657,0,__PYX_ERR(6, 657, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_7find_text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_find_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 657, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_find_text, __pyx_t_1) < 0) __PYX_ERR(6, 650, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_find_text, __pyx_t_1) < 0) __PYX_ERR(6, 657, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Page);
 
-  /* "src/pyxpdf/document.pxi":706
+  /* "src/pyxpdf/document.pxi":713
  * 
  * 
  *     def find_all_text(self, text, search_box=None, case_sensitive=False, wholeword=False,             # <<<<<<<<<<<<<<
  *                       rotation=0):
  *         """Find the `text` and get all the matches
  */
-  __Pyx_TraceLine(706,0,__PYX_ERR(6, 706, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_9find_all_text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_find_all_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__93)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 706, __pyx_L1_error)
+  __Pyx_TraceLine(713,0,__PYX_ERR(6, 713, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_9find_all_text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_find_all_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__93)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_find_all_text, __pyx_t_1) < 0) __PYX_ERR(6, 706, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_find_all_text, __pyx_t_1) < 0) __PYX_ERR(6, 713, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Page);
 
-  /* "src/pyxpdf/document.pxi":738
+  /* "src/pyxpdf/document.pxi":745
  * 
  * 
  *     def text_bytes(self, page_area=None, TextControl control = None):             # <<<<<<<<<<<<<<
  *         """Parse and extract text bytes from current page.
  * 
  */
-  __Pyx_TraceLine(738,0,__PYX_ERR(6, 738, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_12text_bytes, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_text_bytes, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__94)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 738, __pyx_L1_error)
+  __Pyx_TraceLine(745,0,__PYX_ERR(6, 745, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_12text_bytes, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_text_bytes, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__94)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_text_bytes, __pyx_t_1) < 0) __PYX_ERR(6, 738, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_text_bytes, __pyx_t_1) < 0) __PYX_ERR(6, 745, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Page);
 
-  /* "src/pyxpdf/document.pxi":785
+  /* "src/pyxpdf/document.pxi":792
  * 
  * 
  *     def text(self, page_area=None, control=None):             # <<<<<<<<<<<<<<
  *         """Parse and extract UTF-8 decoded text from current page.
  * 
  */
-  __Pyx_TraceLine(785,0,__PYX_ERR(6, 785, __pyx_L1_error))
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_14text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 785, __pyx_L1_error)
+  __Pyx_TraceLine(792,0,__PYX_ERR(6, 792, __pyx_L1_error))
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6pyxpdf_4xpdf_4Page_14text, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Page_text, NULL, __pyx_n_s_pyxpdf_xpdf, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 792, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_text, __pyx_t_1) < 0) __PYX_ERR(6, 785, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6pyxpdf_4xpdf_Page->tp_dict, __pyx_n_s_text, __pyx_t_1) < 0) __PYX_ERR(6, 792, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_6pyxpdf_4xpdf_Page);
 
@@ -42000,7 +41778,6 @@ static CYTHON_SMALL_CODE void __Pyx_CleanupGlobals(void) {
       PyMem_Free(entries);
   }
 
-Py_CLEAR(__pyx_umethod_PyByteArray_Type_extend.method);
 }
 static void __pyx_module_cleanup(CYTHON_UNUSED PyObject *self) {
   /*--- Global cleanup code ---*/
@@ -44053,124 +43830,6 @@ static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, CYTHON_U
 }
 #endif
 
-/* UnpackUnboundCMethod */
-static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
-    PyObject *method;
-    method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
-    if (unlikely(!method))
-        return -1;
-    target->method = method;
-#if CYTHON_COMPILING_IN_CPYTHON
-    #if PY_MAJOR_VERSION >= 3
-    if (likely(__Pyx_TypeCheck(method, &PyMethodDescr_Type)))
-    #endif
-    {
-        PyMethodDescrObject *descr = (PyMethodDescrObject*) method;
-        target->func = descr->d_method->ml_meth;
-        target->flag = descr->d_method->ml_flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_STACKLESS);
-    }
-#endif
-    return 0;
-}
-
-/* CallUnboundCMethod1 */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg) {
-    if (likely(cfunc->func)) {
-        int flag = cfunc->flag;
-        if (flag == METH_O) {
-            return (*(cfunc->func))(self, arg);
-        } else if (PY_VERSION_HEX >= 0x030600B1 && flag == METH_FASTCALL) {
-            if (PY_VERSION_HEX >= 0x030700A0) {
-                return (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)cfunc->func)(self, &arg, 1);
-            } else {
-                return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
-            }
-        } else if (PY_VERSION_HEX >= 0x030700A0 && flag == (METH_FASTCALL | METH_KEYWORDS)) {
-            return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
-        }
-    }
-    return __Pyx__CallUnboundCMethod1(cfunc, self, arg);
-}
-#endif
-static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg){
-    PyObject *args, *result = NULL;
-    if (unlikely(!cfunc->func && !cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (cfunc->func && (cfunc->flag & METH_VARARGS)) {
-        args = PyTuple_New(1);
-        if (unlikely(!args)) goto bad;
-        Py_INCREF(arg);
-        PyTuple_SET_ITEM(args, 0, arg);
-        if (cfunc->flag & METH_KEYWORDS)
-            result = (*(PyCFunctionWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, NULL);
-        else
-            result = (*cfunc->func)(self, args);
-    } else {
-        args = PyTuple_New(2);
-        if (unlikely(!args)) goto bad;
-        Py_INCREF(self);
-        PyTuple_SET_ITEM(args, 0, self);
-        Py_INCREF(arg);
-        PyTuple_SET_ITEM(args, 1, arg);
-        result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
-    }
-#else
-    args = PyTuple_Pack(2, self, arg);
-    if (unlikely(!args)) goto bad;
-    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
-#endif
-bad:
-    Py_XDECREF(args);
-    return result;
-}
-
-/* PyObjectCallMethod1 */
-static PyObject* __Pyx__PyObject_CallMethod1(PyObject* method, PyObject* arg) {
-    PyObject *result = __Pyx_PyObject_CallOneArg(method, arg);
-    Py_DECREF(method);
-    return result;
-}
-static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg) {
-    PyObject *method = NULL, *result;
-    int is_method = __Pyx_PyObject_GetMethod(obj, method_name, &method);
-    if (likely(is_method)) {
-        result = __Pyx_PyObject_Call2Args(method, obj, arg);
-        Py_DECREF(method);
-        return result;
-    }
-    if (unlikely(!method)) return NULL;
-    return __Pyx__PyObject_CallMethod1(method, arg);
-}
-
-/* ByteArrayAppend */
-static CYTHON_INLINE int __Pyx_PyByteArray_Append(PyObject* bytearray, int value) {
-    PyObject *pyval, *retval;
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (likely(__Pyx_is_valid_index(value, 256))) {
-        Py_ssize_t n = Py_SIZE(bytearray);
-        if (likely(n != PY_SSIZE_T_MAX)) {
-            if (unlikely(PyByteArray_Resize(bytearray, n + 1) < 0))
-                return -1;
-            PyByteArray_AS_STRING(bytearray)[n] = value;
-            return 0;
-        }
-    } else {
-        PyErr_SetString(PyExc_ValueError, "byte must be in range(0, 256)");
-        return -1;
-    }
-#endif
-    pyval = PyInt_FromLong(value);
-    if (unlikely(!pyval))
-        return -1;
-    retval = __Pyx_PyObject_CallMethod1(bytearray, __pyx_n_s_append, pyval);
-    Py_DECREF(pyval);
-    if (unlikely(!retval))
-        return -1;
-    Py_DECREF(retval);
-    return 0;
-}
-
 /* SetItemIntByteArray */
 static CYTHON_INLINE int __Pyx_SetItemInt_ByteArray_Fast(PyObject* string, Py_ssize_t i, unsigned char v,
                                                          int wraparound, int boundscheck) {
@@ -45551,37 +45210,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_Unicode(Unicode value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_Guchar(Guchar value) {
-    const Guchar neg_one = (Guchar) ((Guchar) 0 - (Guchar) 1), const_zero = (Guchar) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(Guchar) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(Guchar) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(Guchar) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(Guchar) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(Guchar) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(Guchar),
-                                     little, !is_unsigned);
-    }
-}
-
-/* CIntToPy */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
@@ -46691,6 +46319,24 @@ static CYTHON_INLINE void __Pyx_ExceptionSwap(PyObject **type, PyObject **value,
     *tb = tmp_tb;
 }
 #endif
+
+/* PyObjectCallMethod1 */
+static PyObject* __Pyx__PyObject_CallMethod1(PyObject* method, PyObject* arg) {
+    PyObject *result = __Pyx_PyObject_CallOneArg(method, arg);
+    Py_DECREF(method);
+    return result;
+}
+static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg) {
+    PyObject *method = NULL, *result;
+    int is_method = __Pyx_PyObject_GetMethod(obj, method_name, &method);
+    if (likely(is_method)) {
+        result = __Pyx_PyObject_Call2Args(method, obj, arg);
+        Py_DECREF(method);
+        return result;
+    }
+    if (unlikely(!method)) return NULL;
+    return __Pyx__PyObject_CallMethod1(method, arg);
+}
 
 /* CoroutineBase */
 #include <structmember.h>

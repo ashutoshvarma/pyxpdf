@@ -27,7 +27,7 @@ cdef extern from "Dict.h" nogil:
 
         # Look up an entry and return the value.  Returns a null object
         # if <key> is not in the dictionary.
-        Object *lookup(const char *key, Object *obj, int recursion = 0)
+        Object *lookup(const char *key, Object *obj, int recursion)
         Object *lookupNF(const char *key, Object *obj)
 
         # Iterative accessors.

@@ -185,11 +185,18 @@ cdef class Document:
             raise MemoryError("Cannot allocate memory for internal objects")
 
     cdef _load_from_char_array(self, char *pdf, int data_length):
-        cdef Object *obj_null = new Object()
-        cdef MemStream *mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+        cdef:
+            Object *obj_null
+            MemStream *mem_stream
+
+        obj_null = new Object()
+        mem_stream = new MemStream(pdf, 0, data_length, obj_null.initNull())
+
         if mem_stream == NULL:
             raise MemoryError("Cannot allocate memory for internal objects")
         self.doc = new PDFDoc(mem_stream, self.ownerpass, self.userpass)
+
+        del obj_null
 
     cdef check(self):
         if self.doc.isOk() == gTrue or self.doc.getErrorCode() == errEncrypted:

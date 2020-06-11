@@ -58,7 +58,7 @@ cdef int utf32_to_Unicode_vector(text, vector[Unicode]& vec) except -1:
 
     # print(f"{l_bytes}")
     # print(f"Loop - {list(range(4, l_bytes, 4))}")
-    cdef size_t i 
+    cdef size_t i
     for i in range(4, l_bytes, 4):
         vec[(i//4) - 1] = deref(<Unicode*>(&ch[i]))
         #print(f"{(i/4) - 1} - {vec[(i/4) - 1]}")
@@ -67,23 +67,26 @@ cdef int utf32_to_Unicode_vector(text, vector[Unicode]& vec) except -1:
 
 cdef dict Dict_to_pydict(Dict* xdict, dict pydict = {}):
     cdef Object obj
-    cdef const char* key 
+    cdef const char* key
     if xdict != NULL:
         for i in range(xdict.getLength()):
             key = xdict.getKey(i)
-            if xdict.lookup(key, &obj).isString() == gTrue:
+            if xdict.lookup(key, &obj, 0).isString() == gTrue:
                 pydict[key.decode('UTF-8')] = GString_to_unicode(obj.getString())
-            elif xdict.lookup(key, &obj).isNum() == gTrue:
+            elif xdict.lookup(key, &obj, 0).isNum() == gTrue:
                 pydict[key.decode('UTF-8')] = obj.getNum()
-        obj.free()
+            obj.free()
     return pydict
 
 # cdef object TextString_to_unicode(TextString* text_str):
 #    return GString_to_unicode(text_str.toPDFTextString())
 
 cdef TextString* to_TextString(tstr):
-    cdef TextString* text_string
-    text_string = new TextString(to_GString(tstr))
+    cdef:
+        unique_ptr[GString] gstr
+        TextString* text_string
+    gstr.reset(to_GString(tstr))
+    text_string = new TextString(gstr.get())
     return text_string
 
 cdef void append_to_cpp_string(void *stream, const char *text, int length):

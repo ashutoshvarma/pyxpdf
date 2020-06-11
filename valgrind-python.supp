@@ -124,64 +124,65 @@
    fun:_dl_allocate_tls
 }
 
-{
-   ADDRESS_IN_RANGE/Invalid read of size 4
-   Memcheck:Addr4
-   fun:_PyObject_Free
-}
+###{
+###   ADDRESS_IN_RANGE/Invalid read of size 4
+###   Memcheck:Addr4
+###   fun:_PyObject_Free
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Invalid read of size 4
+###   Memcheck:Value4
+###   fun:_PyObject_Free
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
+###   Memcheck:Addr8
+###   fun:_PyObject_Free
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
+###   Memcheck:Value8
+###   fun:_PyObject_Free
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
+###   Memcheck:Cond
+###   fun:_PyObject_Free
+###}
 
-{
-   ADDRESS_IN_RANGE/Invalid read of size 4
-   Memcheck:Value4
-   fun:_PyObject_Free
-}
-
-{
-   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
-   Memcheck:Addr8
-   fun:_PyObject_Free
-}
-
-{
-   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
-   Memcheck:Value8
-   fun:_PyObject_Free
-}
-
-{
-   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
-   Memcheck:Cond
-   fun:_PyObject_Free
-}
-{
-   ADDRESS_IN_RANGE/Invalid read of size 4
-   Memcheck:Addr4
-   fun:_PyObject_Realloc
-}
-
-{
-   ADDRESS_IN_RANGE/Invalid read of size 4
-   Memcheck:Value4
-   fun:_PyObject_Realloc
-}
-
-{
-   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
-   Memcheck:Addr8
-   fun:_PyObject_Realloc
-}
-
-{
-   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
-   Memcheck:Value8
-   fun:_PyObject_Realloc
-}
-
-{
-   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
-   Memcheck:Cond
-   fun:_PyObject_Realloc
-}
+###{
+###   ADDRESS_IN_RANGE/Invalid read of size 4
+###   Memcheck:Addr4
+###   fun:_PyObject_Realloc
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Invalid read of size 4
+###   Memcheck:Value4
+###   fun:_PyObject_Realloc
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
+###   Memcheck:Addr8
+###   fun:_PyObject_Realloc
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Use of uninitialised value of size 8
+###   Memcheck:Value8
+###   fun:_PyObject_Realloc
+###}
+###
+###{
+###   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
+###   Memcheck:Cond
+###   fun:_PyObject_Realloc
+###}
 
 ###
 ### All the suppressions below are for errors that occur within libraries
@@ -495,3 +496,18 @@
    Memcheck:Addr4
    fun:PyUnicode_FSConverter
 }
+
+
+# For python 3.8 
+{
+    avx2 conditional jump suppression
+    Memcheck:Cond
+    fun:__wcsnlen_avx2
+}
+
+{
+    utf8_loop jump suppression
+    Memcheck:Cond
+    fun:internal_utf8_loop
+}
+

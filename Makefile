@@ -70,12 +70,27 @@ test_wheel: wheel
 	pip install -U dist/*.whl
 	$(PYTHON) runtests.py $(TESTFLAGS) $(TESTOPTS) 
 
-valgrind_test_inplace: inplace
+valgrind_test_inplace_all: inplace
 	# Don't know why but supression file is not supressing any python malloc errors
 	# So for Python >= 3.6, using this hack. 
-	export PYTHONMALLOC=malloc
-	valgrind --tool=memcheck --leak-check=full  --suppressions=valgrind-python.supp \
-		$(PYTHON) -E -tt test_x.py
+	#valgrind --tool=memcheck --leak-check=full  --suppressions=valgrind-python.supp
+	PYTHONMALLOC=malloc valgrind --leak-check=full \
+		         				--show-leak-kinds=all \
+				         		--track-origins=yes \
+						        --verbose \
+								--log-file=valgrind-out.log \
+								--suppressions=valgrind-python.supp \
+								python runtests.py 
+
+
+valgrind_test_inplace: inplace
+	PYTHONMALLOC=malloc valgrind --leak-check=full \
+								--show-leak-kinds=definite 	\
+								--errors-for-leak-kinds=definite \
+								--suppressions=valgrind-python.supp \
+								python runtests.py 
+
+
 
 doc: inplace
 	$(MAKE) -C docs html
@@ -93,6 +108,8 @@ testw: test_wheel
 
 valtest: valgrind_test_inplace
 
+valtest_all: valgrind_test_inplace_all
+
 ftest: ftest_inplace
 
 clean:
@@ -100,6 +117,6 @@ clean:
 	rm -rf build
 
 realclean: clean 
-	find src -path src/pyxpdf/cpp -prune -name '*.cpp' -exec rm -f {} \;
+	find src -name '*.cpp' -exec rm -f {} \;
 	rm -f TAGS
 	$(PYTHON) setup.py clean -a --without-cython

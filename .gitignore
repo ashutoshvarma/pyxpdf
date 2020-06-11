@@ -5,6 +5,7 @@ dist
 *.egg-info
 venv
 venv2
+venvd
 
 __pycache__
 *.pyc
@@ -22,6 +23,8 @@ libs
 
 src/*/*.html
 cython_debug/
+
+valgrind-out.log
 
 .coverage
 coverage/
