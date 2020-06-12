@@ -3,6 +3,16 @@ pyxpdf changelog
 
 .. begin changelog
 
+0.2.1 (2020-06-12)
+------------------
+
+**Bugs Fixed**
+
+- fix all direct memory leaks
+- Config: fix :any:`Config.text_encoding` setter, encodings with lowercase 
+  characters were not able to set.
+- fix weird bytes encoding problem in python debug builds
+
 0.2.0 (2020-06-11)
 ------------------
 

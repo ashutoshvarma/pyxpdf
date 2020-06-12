@@ -32,6 +32,8 @@ More Information
   - `Issues <https://github.com/ashutoshvarma/pyxpdf/issues>`_
   - `Pull requests <https://github.com/ashutoshvarma/pyxpdf/pulls>`_
 
+- `Speed Comparsion <https://pyxpdf.readthedocs.io/en/latest/compare.html>`_
+
 - `Changelog <https://pyxpdf.readthedocs.io/en/latest/changelog.html>`_
 
 License
