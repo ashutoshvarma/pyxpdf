@@ -1,4 +1,4 @@
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from pyxpdf.xpdf import (
     pdftotext_raw, PDFError, Config, Document, Page
