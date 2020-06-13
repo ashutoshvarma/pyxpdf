@@ -16,8 +16,8 @@ importing it in Python.
 
 .. toctree::
     :maxdepth: 1
+    :caption: Contents:
     
+    extract_text
+    extract_images
 
-.. todo::
-
-    Add Tutorials
