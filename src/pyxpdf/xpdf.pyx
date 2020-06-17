@@ -26,6 +26,7 @@ __all__ = [
 ]
 
 from libc cimport math as cmath
+from libcpp cimport bool as bool_t
 from libcpp.string cimport string
 from libcpp.memory cimport unique_ptr, make_unique
 from libcpp.vector cimport vector

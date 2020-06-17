@@ -6,7 +6,6 @@ from pyxpdf.includes.splash.SplashTypes cimport (
 from pyxpdf.includes.splash.SplashBitmap cimport (
     SplashBitmap, SplashBitmapRowSize
 )
-from pyxpdf.includes.BitmapOutputDev cimport PDFImage, BitmapOutputDev
 
 DEF BITMAP_ROW_PAD = 4
 DEF BITMAP_RESOLUTION = 150
@@ -472,6 +471,93 @@ cdef class RawImageOutput(PDFOutputDevice):
 
 
 
+from pyxpdf.includes.BitmapOutputDev cimport PDFBitmapImage, BitmapOutputDev, ImageType
+from pyxpdf.includes.GfxState cimport GfxColorSpaceMode
+from pyxpdf.includes.Stream cimport StreamKind
+
+cdef dict GFX_COLOR_SPACE_NAMES = {
+    GfxColorSpaceMode.csDeviceGray  :   u"gray",
+    GfxColorSpaceMode.csCalGray     :   u"gray",
+    GfxColorSpaceMode.csDeviceRGB   :   u"rgb",
+    GfxColorSpaceMode.csCalRGB      :   u"rgb",
+    GfxColorSpaceMode.csDeviceCMYK  :   u"cmyk",
+    GfxColorSpaceMode.csLab         :   u"lab",
+    GfxColorSpaceMode.csICCBased    :   u"icc",
+    GfxColorSpaceMode.csIndexed     :   u"index",
+    GfxColorSpaceMode.csSeparation  :   u"sep",
+    GfxColorSpaceMode.csDeviceN     :   u"devn",
+    # not including csPattern
+    #GfxColorSpaceMode.csPattern     :   u""
+}
+
+cdef dict IMAGE_STREAM_TYPES = {
+    StreamKind.strCCITTFax  :   u"ccitt",
+    StreamKind.strDCT       :   u"jpeg",
+    StreamKind.strJPX       :   u"jpx",
+    StreamKind.strJBIG2     :   u"jbig2"
+}
+
+cdef class PDFImage:
+    cdef:
+        readonly tuple bbox
+        readonly int page_index
+        readonly bint interpolate
+        readonly bint is_inline
+        readonly double hDPI
+        readonly double vDPI
+        readonly object colorspace
+        readonly object image_type
+        readonly object compression
+        readonly object image
+
+    @staticmethod
+    cdef PDFImage from_ptr(PDFBitmapImage *c_img):
+        cdef:
+            PDFImage img = PDFImage.__new__(PDFImage)
+            SplashBitmap *bmap
+            object mode
+        img.page_index = c_img.pageNum
+        img.bbox = (c_img.x1, c_img.y1, c_img.x2, c_img.y2)
+        img.hDPI = c_img.hDPI
+        img.vDPI = c_img.vDPI
+
+        img.interpolate = True if c_img.interpolate == gTrue else False
+        img.is_inline = True if c_img.inlineImg == gTrue else False
+
+        cs = GFX_COLOR_SPACE_NAMES.get(c_img.colorspace, None)
+        img.colorspace = cs if cs != None else ""
+
+        comp = IMAGE_STREAM_TYPES.get(c_img.compression, None)
+        img.compression = comp if comp != None else "image"
+
+        # image_type
+        if c_img.imgType == ImageType.imgImage:
+            img.image_type = "image"
+        elif c_img.imgType == ImageType.imgStencil:
+            img.image_type = "stencil"
+        elif c_img.imgType == ImageType.imgMask:
+            img.image_type = "mask"
+        elif c_img.imgType == ImageType.imgSmask:
+            img.image_type = "smask"
+        else:
+            raise ValueError(f"unexpected value of imgType")
+
+        bmap = c_img.bitmap.get()
+        if c_img.bitmapColorMode == SplashColorMode.splashModeMono1:
+            mode = "1"
+        elif c_img.bitmapColorMode == SplashColorMode.splashModeMono8:
+            mode = "L"
+        elif c_img.bitmapColorMode == SplashColorMode.splashModeRGB8:
+            mode = "RGB"
+        buff = splash_bitmap_to_buffer(bmap, mode)
+        img.image = pillow_image_from_buffer(mode, bmap.getHeight(), bmap.getWidth(), buff)
+
+        return img
+
+    def __repr__(self):
+        return f"<pyxpdf.xpdf.PDFImage type={self.image_type} compression={self.compression} colorspace={self.colorspace} bbox={self.bbox}>"
+
+
 cdef class PDFImageOutput:
     """Extract the images from PDF Document
 
@@ -495,7 +581,7 @@ cdef class PDFImageOutput:
         self.doc = doc
 
 
-    cdef int _get_PDFImages(self, page_no, vector[PDFImage] *img_vec) except -1:
+    cdef int _get_PDFBitmapImages(self, page_no, vector[PDFBitmapImage] *img_vec) except -1:
         cdef:
             unique_ptr[BitmapOutputDev] out = make_unique[BitmapOutputDev](img_vec)
             Page page = self.doc.get_page(page_no)
@@ -503,26 +589,16 @@ cdef class PDFImageOutput:
         page.display(out.get())
 
 
-    cdef list _get_pillow_images(self, page_no):
+    cdef list _get_images(self, page_no):
         cdef:
-            vector[PDFImage] img_vec
-            SplashBitmap *bmap
+            vector[PDFBitmapImage] img_vec
             size_t i
             list images = []
-            object mode
 
-        self._get_PDFImages(page_no, &img_vec)
+        self._get_PDFBitmapImages(page_no, &img_vec)
         for i in range(img_vec.size()):
-            bmap = img_vec[i].bitmap.get()
-            if img_vec[i].mode == SplashColorMode.splashModeMono1:
-                mode = "1"
-            elif img_vec[i].mode == SplashColorMode.splashModeMono8:
-                mode = "L"
-            elif img_vec[i].mode == SplashColorMode.splashModeRGB8:
-                mode = "RGB"
-            buff = splash_bitmap_to_buffer(bmap, mode)
-            pillow_image = pillow_image_from_buffer(mode, bmap.getHeight(), bmap.getWidth(), buff)
-            images.append(pillow_image)
+            img = PDFImage.from_ptr(&img_vec[i])
+            images.append(img)
 
         return images
 
@@ -540,7 +616,7 @@ cdef class PDFImageOutput:
         list of :class:`~PIL.Image.Image`
             All the images in PDF Page
         """
-        return self._get_pillow_images(page_no)
+        return self._get_images(page_no)
 
 
 

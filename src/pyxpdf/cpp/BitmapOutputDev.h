@@ -22,6 +22,7 @@
 
 #include "OutputDev.h"
 #include "SplashTypes.h"
+#include "GfxState.h"
 #include "gtypes.h"
 
 class GfxImageColorMap;
@@ -37,13 +38,19 @@ struct CTMatrix {
     double y0;
 };
 
-struct PDFImage {
+enum ImageType { imgImage, imgStencil, imgMask, imgSmask };
+
+struct PDFBitmapImage {
     int pageNum = 0;
     std::unique_ptr<SplashBitmap> bitmap;
-    SplashColorMode mode;
+    ImageType imgType = imgImage;
+    StreamKind compression;
+    bool interpolate;
+    bool inlineImg;
+    SplashColorMode bitmapColorMode;
+    GfxColorSpaceMode colorspace;
     double hDPI = 0;
     double vDPI = 0;
-    int bpc = 0;
     double x1 = 0;
     double y1 = 0;
     double x2 = 0;
@@ -62,7 +69,7 @@ static inline int splashFloor(SplashCoord x) { return (int)floor(x); }
 
 class BitmapOutputDev : public OutputDev {
 public:
-    BitmapOutputDev(std::vector<PDFImage> *image_listA);
+    BitmapOutputDev(std::vector<PDFBitmapImage> *image_listA);
 
     // Destructor.
     virtual ~BitmapOutputDev();
@@ -101,6 +108,11 @@ public:
                                    int x1, int y1, double xStep, double yStep);
 
     //----- image drawing
+
+    void makeImage(GfxState *state, Object *ref, Stream *str, int width,
+                   int height, GfxImageColorMap* colorMap, GBool inlineImg,
+                   GBool interpolate, ImageType type);
+
     virtual void drawImageMask(GfxState *state, Object *ref, Stream *str,
                                int width, int height, GBool invert,
                                GBool inlineImg, GBool interpolate);
@@ -129,8 +141,12 @@ public:
     void getBBox(GfxState *state, int width, int height, double *x1, double *y1,
                  double *x2, double *y2);
 
+    void setPDFimage(PDFBitmapImage *img, GfxState *state, Stream *str, int width,
+                     int height, GfxImageColorMap *colorMap, bool interpolate,
+                     bool inlineImg, ImageType imageType);
+
 private:
-    std::vector<PDFImage> &image_list;
+    std::vector<PDFBitmapImage> &image_list;
     int curPageNum;  // current page number
     GBool ok;        // set up ok?
 };

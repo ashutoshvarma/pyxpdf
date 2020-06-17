@@ -33,7 +33,7 @@
 #include "gmempp.h"
 #include "BitmapOutputDev.h"
 
-BitmapOutputDev::BitmapOutputDev(std::vector<PDFImage> *image_listA)
+BitmapOutputDev::BitmapOutputDev(std::vector<PDFBitmapImage> *image_listA)
     : image_list(*image_listA) {
     curPageNum = 0;
     ok = gTrue;
@@ -54,67 +54,30 @@ void BitmapOutputDev::tilingPatternFill(GfxState *state, Gfx *gfx,
     // do nothing -- this avoids the potentially slow loop in Gfx.cc
 }
 
-void BitmapOutputDev::drawImageMask(GfxState *state, Object *ref, Stream *str,
-                                    int width, int height, GBool invert,
-                                    GBool inlineImg, GBool interpolate) {
-    int size, n, i;
-    PDFImage img;
-    SplashColorPtr data;
-
-    img.pageNum = curPageNum;
-    img.bitmap = std::make_unique<SplashBitmap>(
-        width, height, 1, splashModeMono1, gFalse, upsideDown(),
-        (SplashBitmap *)NULL);
-    img.mode = splashModeMono1;
-    data = img.bitmap->getDataPtr();
-
-    // initialize stream
-    str->reset();
-
-    // copy the stream
-    size = img.bitmap->getRowSize() * height;
-    n = str->getBlock((char *)data, size);
-    if (n < size) {
-        for (i = n; i < size; i++) {
-            data[n] = 0;
-        }
-    }
-
-    str->close();
-
-    image_list.push_back(std::move(img));
-}
-
-void BitmapOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
+void BitmapOutputDev::makeImage(GfxState *state, Object *ref, Stream *str,
                                 int width, int height,
-                                GfxImageColorMap *colorMap, int *maskColors,
-                                GBool inlineImg, GBool interpolate) {
-    GfxColorSpaceMode csMode;
+                                GfxImageColorMap *colorMap, GBool inlineImg,
+                                GBool interpolate, ImageType type) {
+    PDFBitmapImage img;
     ImageStream *imgStr;
     Guchar *p;
     GfxRGB rgb;
     GfxGray gray;
     int x, y;
     int size, n, i;
-    PDFImage img;
     SplashColorPtr data;
     SplashBitmapRowSize rowSize = 0;
 
-    img.pageNum = curPageNum;
+    getBBox(state, width, height, &img.x1, &img.y1, &img.x2, &img.y2);
+    setPDFimage(&img, state, str, width, height, colorMap, interpolate,
+                inlineImg, type);
 
-    csMode = colorMap->getColorSpace()->getMode();
-    if (csMode == csIndexed) {
-        csMode = ((GfxIndexedColorSpace *)colorMap->getColorSpace())
-                     ->getBase()
-                     ->getMode();
-    }
-
-    if (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1) {
-        // open the image file and write the PBM header
+    if (!colorMap ||
+        (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1)) {
         img.bitmap = std::make_unique<SplashBitmap>(
             width, height, 1, splashModeMono1, gFalse, upsideDown(),
             (SplashBitmap *)NULL);
-        img.mode = splashModeMono1;
+        img.bitmapColorMode = splashModeMono1;
         data = img.bitmap->getDataPtr();
 
         // initialize stream
@@ -133,12 +96,13 @@ void BitmapOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
 
         // dump PGM file
     } else if (colorMap->getNumPixelComps() == 1 &&
-               (csMode == csDeviceGray || csMode == csCalGray)) {
+               (img.colorspace == csDeviceGray ||
+                img.colorspace == csCalGray)) {
         // open the image file and write the PGM header
         img.bitmap = std::make_unique<SplashBitmap>(
             width, height, 1, splashModeMono8, gFalse, gFalse,
             (SplashBitmap *)NULL);
-        img.mode = splashModeMono8;
+        img.bitmapColorMode = splashModeMono8;
         data = img.bitmap->getDataPtr();
         rowSize = img.bitmap->getRowSize();
 
@@ -173,7 +137,7 @@ void BitmapOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
         img.bitmap = std::make_unique<SplashBitmap>(
             width, height, 1, splashModeRGB8, gFalse, gFalse,
             (SplashBitmap *)NULL);
-        img.mode = splashModeRGB8;
+        img.bitmapColorMode = splashModeRGB8;
         data = img.bitmap->getDataPtr();
         rowSize = img.bitmap->getRowSize();
 
@@ -215,27 +179,41 @@ void BitmapOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
     image_list.push_back(std::move(img));
 }
 
+void BitmapOutputDev::drawImageMask(GfxState *state, Object *ref, Stream *str,
+                                    int width, int height, GBool invert,
+                                    GBool inlineImg, GBool interpolate) {
+    makeImage(state, ref, str, width, height, nullptr, inlineImg, interpolate,
+              imgStencil);
+}
+
+void BitmapOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
+                                int width, int height,
+                                GfxImageColorMap *colorMap, int *maskColors,
+                                GBool inlineImg, GBool interpolate) {
+    makeImage(state, ref, str, width, height, colorMap, inlineImg, interpolate,
+              imgImage);
+}
+
 void BitmapOutputDev::drawMaskedImage(GfxState *state, Object *ref, Stream *str,
                                       int width, int height,
                                       GfxImageColorMap *colorMap,
                                       Stream *maskStr, int maskWidth,
                                       int maskHeight, GBool maskInvert,
                                       GBool interpolate) {
-    drawImage(state, ref, str, width, height, colorMap, NULL, gFalse,
-
-              interpolate);
-    drawImageMask(state, ref, maskStr, maskWidth, maskHeight, maskInvert,
-                  gFalse, interpolate);
+    makeImage(state, ref, str, width, height, colorMap, gFalse, interpolate,
+              imgImage);
+    makeImage(state, ref, maskStr, maskWidth, maskHeight, nullptr, gFalse, interpolate,
+              imgMask);
 }
 
 void BitmapOutputDev::drawSoftMaskedImage(
     GfxState *state, Object *ref, Stream *str, int width, int height,
     GfxImageColorMap *colorMap, Stream *maskStr, int maskWidth, int maskHeight,
     GfxImageColorMap *maskColorMap, double *matte, GBool interpolate) {
-    drawImage(state, ref, str, width, height, colorMap, NULL, gFalse,
-              interpolate);
-    drawImage(state, ref, maskStr, maskWidth, maskHeight, maskColorMap, NULL,
-              gFalse, interpolate);
+    makeImage(state, ref, str, width, height, colorMap, gFalse, interpolate,
+              imgImage);
+    makeImage(state, ref, maskStr, maskWidth, maskHeight, maskColorMap, gFalse,
+              interpolate, imgSmask);
 }
 
 // taken from
@@ -328,3 +306,45 @@ void BitmapOutputDev::getBBox(GfxState *state, int width, int height,
     *y2 = *y1 + scaledHeight;
 }
 
+void BitmapOutputDev::setPDFimage(PDFBitmapImage *img, GfxState *state, Stream *str,
+                                  int width, int height,
+                                  GfxImageColorMap *colorMap, bool interpolate,
+                                  bool inlineImg, ImageType imageType) {
+    double hdpi, vdpi, x0, y0, x1, y1;
+    GfxColorSpaceMode csMode;
+
+    img->pageNum = curPageNum;
+    img->imgType = imageType;
+    img->compression = str->getKind();
+    img->interpolate = interpolate;
+    img->inlineImg = inlineImg;
+
+    if (colorMap && colorMap->isOk()) {
+        csMode = colorMap->getColorSpace()->getMode();
+        if (csMode == csIndexed) {
+            csMode = ((GfxIndexedColorSpace *)colorMap->getColorSpace())
+                         ->getBase()
+                         ->getMode();
+        }
+        img->colorspace = csMode;
+    }
+
+    // this works for 0/90/180/270-degree rotations, along with
+    // horizontal/vertical flips
+    state->transformDelta(1, 0, &x0, &y0);
+    state->transformDelta(0, 1, &x1, &y1);
+    x0 = fabs(x0);
+    y0 = fabs(y0);
+    x1 = fabs(x1);
+    y1 = fabs(y1);
+    if (x0 > y0) {
+        hdpi = (72 * width) / x0;
+        vdpi = (72 * height) / y1;
+    } else {
+        hdpi = (72 * height) / x1;
+        vdpi = (72 * width) / y0;
+    }
+
+    img->hDPI = hdpi;
+    img->vDPI = vdpi;
+}
