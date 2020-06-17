@@ -208,7 +208,7 @@ cdef class _GlobalParamsConfig:
         return self._global.defaultTextEncoding.decode('UTF-8')
 
 
-Config = _GlobalParamsConfig()
+Config = _GlobalParamsConfig.__new__(_GlobalParamsConfig)
 Config.__doc__ = \
 """
 Global XPDF config object
