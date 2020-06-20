@@ -494,7 +494,10 @@ cdef dict IMAGE_STREAM_TYPES = {
     StreamKind.strCCITTFax  :   u"ccitt",
     StreamKind.strDCT       :   u"jpeg",
     StreamKind.strJPX       :   u"jpx",
-    StreamKind.strJBIG2     :   u"jbig2"
+    StreamKind.strJBIG2     :   u"jbig2",
+    StreamKind.strFlate     :   u"flate",
+    StreamKind.strLZW       :   u"lzw",
+    StreamKind.strRunLength :   u"rle",
 }
 
 cdef class PDFImage:
@@ -528,7 +531,7 @@ cdef class PDFImage:
         img.colorspace = cs if cs != None else ""
 
         comp = IMAGE_STREAM_TYPES.get(c_img.compression, None)
-        img.compression = comp if comp != None else "image"
+        img.compression = comp if comp != None else "unknown"
 
         # image_type
         if c_img.imgType == ImageType.imgImage:
