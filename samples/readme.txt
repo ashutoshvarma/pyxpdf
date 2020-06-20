@@ -27,3 +27,8 @@ nonfree/dmca.pdf:
   http://www.copyright.gov/legislation/dmca.pdf
 
 
+Files under poppler subdirectory is taken from poppler project's tests.
+They are licensed under GPLv2. See poppler/COPYING.
+
+
+
