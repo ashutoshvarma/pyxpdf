@@ -1,0 +1,482 @@
+[
+    {
+        "bbox": [
+            100.0,
+            676.0,
+            164.0,
+            762.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            612.0,
+            164.0,
+            698.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            548.0,
+            164.0,
+            634.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            484.0,
+            164.0,
+            570.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            420.0,
+            164.0,
+            506.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            356.0,
+            164.0,
+            442.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            292.0,
+            164.0,
+            378.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            228.0,
+            164.0,
+            314.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            164.0,
+            164.0,
+            250.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            100.0,
+            164.0,
+            186.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            676.0,
+            334.66700000000003,
+            762.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            612.0,
+            334.66700000000003,
+            698.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            548.0,
+            334.66700000000003,
+            634.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            484.0,
+            334.66700000000003,
+            570.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            420.0,
+            334.66700000000003,
+            506.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            356.0,
+            334.66700000000003,
+            442.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            292.0,
+            334.66700000000003,
+            378.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            228.0,
+            334.66700000000003,
+            314.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            164.0,
+            334.66700000000003,
+            250.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            270.66700000000003,
+            100.0,
+            334.66700000000003,
+            186.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            676.0,
+            505.33299999999997,
+            762.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            612.0,
+            505.33299999999997,
+            698.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            548.0,
+            505.33299999999997,
+            634.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            484.0,
+            505.33299999999997,
+            570.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            420.0,
+            505.33299999999997,
+            506.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            356.0,
+            505.33299999999997,
+            442.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            292.0,
+            505.33299999999997,
+            378.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            228.0,
+            505.33299999999997,
+            314.0
+        ],
+        "colorspace": "cmyk",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            164.0,
+            505.33299999999997,
+            250.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            441.33299999999997,
+            100.0,
+            505.33299999999997,
+            186.0
+        ],
+        "colorspace": "rgb",
+        "compression": "jpeg",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 216.0
+    }
+]

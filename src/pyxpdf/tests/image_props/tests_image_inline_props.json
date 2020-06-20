@@ -1,0 +1,34 @@
+[
+    {
+        "bbox": [
+            200.0,
+            276.0,
+            264.0,
+            362.0
+        ],
+        "colorspace": "rgb",
+        "compression": "unknown",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": true,
+        "page_index": 1,
+        "vDPI": 216.0
+    },
+    {
+        "bbox": [
+            100.0,
+            276.0,
+            164.0,
+            362.0
+        ],
+        "colorspace": "rgb",
+        "compression": "unknown",
+        "hDPI": 216.00084375329592,
+        "image_type": "image",
+        "interpolate": false,
+        "is_inline": true,
+        "page_index": 1,
+        "vDPI": 216.0
+    }
+]

@@ -1,0 +1,514 @@
+[
+    {
+        "bbox": [
+            100.0,
+            232.0,
+            108.0,
+            275.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            142.75,
+            232.0,
+            150.75,
+            275.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            242.0,
+            108.0,
+            285.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            142.85000000000002,
+            242.0,
+            150.85000000000002,
+            285.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            252.0,
+            108.0,
+            295.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            142.95000000000002,
+            252.0,
+            150.95000000000002,
+            295.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            262.0,
+            108.0,
+            305.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.05,
+            262.0,
+            151.05,
+            305.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            272.0,
+            108.0,
+            315.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.15,
+            272.0,
+            151.15,
+            315.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            282.0,
+            108.0,
+            325.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.25,
+            282.0,
+            151.25,
+            325.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            292.0,
+            108.0,
+            335.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.35000000000002,
+            292.0,
+            151.35000000000002,
+            335.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            302.0,
+            108.0,
+            345.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.45000000000002,
+            302.0,
+            151.45000000000002,
+            345.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            312.0,
+            108.0,
+            355.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.55,
+            312.0,
+            151.55,
+            355.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            322.0,
+            108.0,
+            365.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.65,
+            322.0,
+            151.65,
+            365.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            332.0,
+            108.0,
+            375.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.75,
+            332.0,
+            151.75,
+            375.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            342.0,
+            108.0,
+            385.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.85000000000002,
+            342.0,
+            151.85000000000002,
+            385.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            352.0,
+            108.0,
+            395.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            143.95000000000002,
+            352.0,
+            151.95000000000002,
+            395.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            362.0,
+            108.0,
+            405.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            144.05,
+            362.0,
+            152.05,
+            405.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            372.0,
+            108.0,
+            415.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            144.15,
+            372.0,
+            152.15,
+            415.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            100.0,
+            382.0,
+            108.0,
+            425.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    },
+    {
+        "bbox": [
+            144.25,
+            382.0,
+            152.25,
+            425.0
+        ],
+        "colorspace": "",
+        "compression": "flate",
+        "hDPI": 288.0,
+        "image_type": "stencil",
+        "interpolate": false,
+        "is_inline": false,
+        "page_index": 1,
+        "vDPI": 1152.0
+    }
+]

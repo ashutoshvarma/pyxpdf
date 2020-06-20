@@ -27,6 +27,10 @@ class PropertyTextCase(unittest.TestCase):
         with self.assertRaises(exception):
             setattr(parent, property, value)
 
+    def assertPropertyDict(self, parent, property_dict):
+        for k, v in property_dict.items():
+            self.assertProperty(parent, k, v, setter=False)
+
 
 
 def file_in_test_dir(*args):
