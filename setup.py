@@ -60,7 +60,8 @@ if 'setuptools' in sys.modules:
         extra_options['extras_require'] = {
             'source': deps,
             'dev': ['cython',],
-            'encodings' : ['pyxpdf_data']
+            'encoding' : ['pyxpdf_data'],
+            'imaging' : ['Pillow']
         }
 
 extra_options['package_data'] = {
