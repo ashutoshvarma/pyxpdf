@@ -327,6 +327,9 @@ void BitmapOutputDev::setPDFimage(PDFBitmapImage *img, GfxState *state, Stream *
                          ->getMode();
         }
         img->colorspace = csMode;
+    } else {
+        // unknown colorspace
+        img->colorspace = (GfxColorSpaceMode)-1;
     }
 
     // this works for 0/90/180/270-degree rotations, along with
