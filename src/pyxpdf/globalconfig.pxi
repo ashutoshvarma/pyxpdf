@@ -65,6 +65,10 @@ cdef class _GlobalParamsConfig:
     def setup_base_fonts(self, dir):
         self._global.setupBaseFonts(_chars(dir))
 
+    def add_font_file(self, font_name, file):
+        # GlobalParams free these GStrings in its destructor
+        self._global.addFontFile(to_GString(font_name), to_GString(file))
+
 
     @property
     def base_dir(self):
