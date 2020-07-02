@@ -3,6 +3,11 @@
 PDFImageOutput Device
 =====================
 
+PDFImage
+--------
+
+.. autoclass:: pyxpdf.xpdf.PDFImage
+
 PDFImageOutput
 --------------
 

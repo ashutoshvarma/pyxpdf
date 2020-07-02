@@ -501,6 +501,53 @@ cdef dict IMAGE_STREAM_TYPES = {
 }
 
 cdef class PDFImage:
+    """ Represents a PDF Image.
+
+    Image Colorspace:
+        - **gray** : DeviceGray, CalGray
+        - **rgb** : DeviceRGB, CalRGB
+        - **cmyk** : DeviceCMYK
+        - **lab** : Lab
+        - **icc** : ICCBased
+        - **index** : Indexed
+        - **sep** : Sepration
+        - **devn** : DeviceN
+
+    Image Compression:
+        - **ccitt** : CCITTFax
+        - **jpeg** : DCT
+        - **jpx** : JPX
+        - **jbig2** : JBIG2
+        - **flate** : Flate
+        - **lzw** : LZW
+        - **rle** : RunLength
+
+    Attributes
+    ----------
+    bbox : tuple of float
+        Image's Boundary Box (:term:`BBox`)
+    image: :class:`~PIL.Image.Image`
+        Image data as Pillow Image
+    page_index : int
+        Index of Image's PDF page
+    interpolate : bool
+        Whether image is interpolated or not
+    is_inline : bool
+        Whether image is inline or not
+    hDPI : float
+        Image's horizontal DPI
+    vDPI : float
+        Image's vertical DPI
+    colorspace : {'gray', 'rgb', 'cmyk', 'lab', 'icc', 'index', 'sep', 'devn', 'unknown'}
+        Image's color space.
+    components : int
+        components in the image's colorspace.
+    bpc : int
+        bits per component.
+    compression : {'ccitt', 'jpeg', 'jpx', 'jbig2', 'flate', 'lzw', 'rle', 'unknown'}
+        Image's compression
+    """
+
     cdef:
         readonly tuple bbox
         readonly int page_index
@@ -509,6 +556,8 @@ cdef class PDFImage:
         readonly double hDPI
         readonly double vDPI
         readonly object colorspace
+        readonly int components
+        readonly int bpc
         readonly object image_type
         readonly object compression
         readonly object image
@@ -528,7 +577,10 @@ cdef class PDFImage:
         img.is_inline = True if c_img.inlineImg == gTrue else False
 
         cs = GFX_COLOR_SPACE_NAMES.get(c_img.colorspace, None)
-        img.colorspace = cs if cs != None else ""
+        img.colorspace = cs if cs != None else "unknown"
+
+        img.bpc = c_img.bpc
+        img.components = c_img.components
 
         comp = IMAGE_STREAM_TYPES.get(c_img.compression, None)
         img.compression = comp if comp != None else "unknown"
@@ -616,7 +668,7 @@ cdef class PDFImageOutput:
 
         Return
         ------
-        list of :class:`~PIL.Image.Image`
+        list of :class:`~pyxpdf.xpdf.PDFImage`
             All the images in PDF Page
         """
         return self._get_images(page_no)

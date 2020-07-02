@@ -225,6 +225,11 @@ Config.reset
 Config.load_file(cfg_path)
     load the settings from given `cfg_path` `xpdfrc`.
 
+Config.add_font_file(font_name, file)
+    Maps a PDF Font `font_name` to font from path `file`.
+    The font files can be Type 1 (.pfa or .pfb) or TrueType
+    (.ttf or .ttc)
+
 
 Attributes
 ----------
