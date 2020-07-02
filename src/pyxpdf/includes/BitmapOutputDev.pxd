@@ -25,6 +25,8 @@ cdef extern from "BitmapOutputDev.h" nogil:
         bool_t inlineImg
         SplashColorMode bitmapColorMode
         GfxColorSpaceMode colorspace
+        int components
+        int bpc
         double hDPI
         double vDPI
         double x1

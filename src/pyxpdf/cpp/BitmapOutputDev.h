@@ -49,6 +49,8 @@ struct PDFBitmapImage {
     bool inlineImg;
     SplashColorMode bitmapColorMode;
     GfxColorSpaceMode colorspace;
+    int components = 0;
+    int bpc = 0;
     double hDPI = 0;
     double vDPI = 0;
     double x1 = 0;

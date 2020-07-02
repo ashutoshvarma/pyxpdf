@@ -94,7 +94,6 @@ void BitmapOutputDev::makeImage(GfxState *state, Object *ref, Stream *str,
 
         str->close();
 
-        // dump PGM file
     } else if (colorMap->getNumPixelComps() == 1 &&
                (img.colorspace == csDeviceGray ||
                 img.colorspace == csCalGray)) {
@@ -113,17 +112,14 @@ void BitmapOutputDev::makeImage(GfxState *state, Object *ref, Stream *str,
 
         // for each line...
         for (y = 0; y < height; ++y) {
-            // write the line
             if ((p = imgStr->getLine())) {
                 for (x = 0; x < width; ++x) {
                     colorMap->getGray(p, &gray, state->getRenderingIntent());
-                    // fputc(colToByte(gray), f);
                     data[y * rowSize + x] = colToByte(gray);
                     ++p;
                 }
             } else {
                 for (x = 0; x < width; ++x) {
-                    // fputc(0, f);
                     data[y * rowSize + x] = 0;
                 }
             }
@@ -152,9 +148,6 @@ void BitmapOutputDev::makeImage(GfxState *state, Object *ref, Stream *str,
             if ((p = imgStr->getLine())) {
                 for (x = 0; x < width; ++x) {
                     colorMap->getRGB(p, &rgb, state->getRenderingIntent());
-                    // fputc(colToByte(rgb.r), f);
-                    // fputc(colToByte(rgb.g), f);
-                    // fputc(colToByte(rgb.b), f);
                     data[y * rowSize + (3 * x + 0)] = colToByte(rgb.r);
                     data[y * rowSize + (3 * x + 1)] = colToByte(rgb.g);
                     data[y * rowSize + (3 * x + 2)] = colToByte(rgb.b);
@@ -162,9 +155,6 @@ void BitmapOutputDev::makeImage(GfxState *state, Object *ref, Stream *str,
                 }
             } else {
                 for (x = 0; x < width; ++x) {
-                    // fputc(0, f);
-                    // fputc(0, f);
-                    // fputc(0, f);
                     data[y * rowSize + (3 * x + 0)] = 0;
                     data[y * rowSize + (3 * x + 1)] = 0;
                     data[y * rowSize + (3 * x + 2)] = 0;
@@ -202,8 +192,8 @@ void BitmapOutputDev::drawMaskedImage(GfxState *state, Object *ref, Stream *str,
                                       GBool interpolate) {
     makeImage(state, ref, str, width, height, colorMap, gFalse, interpolate,
               imgImage);
-    makeImage(state, ref, maskStr, maskWidth, maskHeight, nullptr, gFalse, interpolate,
-              imgMask);
+    makeImage(state, ref, maskStr, maskWidth, maskHeight, nullptr, gFalse,
+              interpolate, imgMask);
 }
 
 void BitmapOutputDev::drawSoftMaskedImage(
@@ -306,8 +296,8 @@ void BitmapOutputDev::getBBox(GfxState *state, int width, int height,
     *y2 = *y1 + scaledHeight;
 }
 
-void BitmapOutputDev::setPDFimage(PDFBitmapImage *img, GfxState *state, Stream *str,
-                                  int width, int height,
+void BitmapOutputDev::setPDFimage(PDFBitmapImage *img, GfxState *state,
+                                  Stream *str, int width, int height,
                                   GfxImageColorMap *colorMap, bool interpolate,
                                   bool inlineImg, ImageType imageType) {
     double hdpi, vdpi, x0, y0, x1, y1;
@@ -327,6 +317,9 @@ void BitmapOutputDev::setPDFimage(PDFBitmapImage *img, GfxState *state, Stream *
                          ->getMode();
         }
         img->colorspace = csMode;
+        img->components = colorMap->getNumPixelComps();
+        img->bpc = colorMap->getBits();
+
     } else {
         // unknown colorspace
         img->colorspace = (GfxColorSpaceMode)-1;
