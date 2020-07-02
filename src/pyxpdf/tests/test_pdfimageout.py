@@ -32,6 +32,7 @@ class PDFImageOutputTestCase(InitGlobalTextCase, PropertyTextCase):
     def fix_props(self, props):
         for prop in props:
             prop['bbox'] = tuple(prop['bbox'])
+            del prop['image']
         return props
 
     def test_extracted_image_properties(self):
