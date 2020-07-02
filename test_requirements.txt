@@ -5,6 +5,3 @@ Cython>=0.29.7
 pyxpdf_data>=1.0
 Pillow>=7.0.0
 
-#docs
-Sphinx==3.0.4
-

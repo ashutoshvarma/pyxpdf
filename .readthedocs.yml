@@ -21,9 +21,8 @@ formats:
 python:
    version: 3.8
    install:
-      - requirements: test_requirements.txt
+      - requirements: docs/requirements.txt
+      - requirements: requirements.txt
       - method: pip
         path: .
-        extra_requirements:
-            - docs
    system_packages: true
