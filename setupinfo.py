@@ -69,9 +69,23 @@ def _prefer_reldirs(base_dir, dirs):
 
 def ext_modules(static_include_dirs, static_library_dirs,
                 static_cflags, static_binaries):
-    from get_libxpdf import get_prebuilt_libxpdf
-    get_prebuilt_libxpdf(
-        OPTION_DOWNLOAD_DIR, static_include_dirs, static_library_dirs)
+    from get_libxpdf import get_prebuilt_libxpdf, build_libxpdf
+
+    if OPTION_BUILD_LIBXPDF:
+        btype='Release'
+        if OPTION_DEBUG_GCC:
+            btype = 'Debug'
+        libs = build_libxpdf(OPTION_DOWNLOAD_DIR, 'build/tmp',
+                             static_include_dirs, static_library_dirs,
+                             static_cflags, static_binaries,
+                             libxpdf_version=OPTION_LIBXPDF_VERSION,
+                             build_type=btype,
+                             multicore=OPTION_MULTICORE)
+        if not libs:
+            sys.exit(1)
+    else:
+        get_prebuilt_libxpdf(
+            OPTION_DOWNLOAD_DIR, static_include_dirs, static_library_dirs)
 
     modules = EXT_MODULES + COMPILED_MODULES
 
@@ -315,6 +329,9 @@ OPTION_WITH_SIGNATURE = has_option('with-signature')
 if OPTION_WITHOUT_CYTHON:
     CYTHON_INSTALLED = False
 OPTION_DEBUG_GCC = has_option('debug-gcc')
+OPTION_BUILD_LIBXPDF = has_option('build-libxpdf')
+OPTION_LIBXPDF_VERSION = option_value('libxpdf-version')
+OPTION_MULTICORE = option_value('multicore')
 OPTION_SHOW_WARNINGS = has_option('warnings')
 OPTION_AUTO_RPATH = has_option('auto-rpath')
 OPTION_DOWNLOAD_DIR = option_value('download-dir')
