@@ -34,6 +34,9 @@ all: inplace
 inplace:
 	CFLAGS='$(CFLAGS)' $(PYTHON) setup.py $(SETUPFLAGS) build_ext -i $(PYTHON_WITH_CYTHON) --warnings --with-signature --with-coverage $(PARALLEL)
 
+inplace_gcc_debug:
+	CFLAGS='$(CFLAGS)' $(PYTHON) setup.py $(SETUPFLAGS) build_ext -i $(PYTHON_WITH_CYTHON) --build-libxpdf --warnings --with-signature \
+																						   --with-coverage --debug-gcc $(PARALLEL)
 inplace2:
 	$(PYTHON2) setup.py $(SETUPFLAGS) build_ext -i $(PY2_WITH_CYTHON) --warnings --with-coverage $(PARALLEL2)
 
@@ -56,6 +59,8 @@ require-cython:
 
 wheel:
 	$(PYTHON) setup.py $(SETUPFLAGS) bdist_wheel $(PYTHON_WITH_CYTHON)
+
+gcc_debug: inplace_gcc_debug
 
 test_inplace: inplace
 	$(PYTHON) runtests.py $(TESTFLAGS) $(TESTOPTS) 
