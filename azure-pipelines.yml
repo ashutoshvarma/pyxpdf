@@ -64,21 +64,51 @@ jobs:
       displayName: "Create Artifacts"
 
 - deployment: publishWheels
-  displayName: Make Github Release
+  displayName: Make Release
   dependsOn: Build
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
   environment: 'pyxpdf-dev'
   strategy: 
     runOnce:
       deploy:
-        pool: {vmImage: "ubuntu-latest"}
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
+          - checkout: self
+
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.8'
+            displayName: "Python Setup"
+
           - task: DownloadBuildArtifacts@0
             inputs:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: 'wheelhouse'
-          - bash: ls wheelhouse
+
+          - bash: |
+              SDIST_FOLDER=wheelhouse/sdist
+              mkdir -p $SDIST_FOLDER
+              python3 -m pip install -U setuptools pip twine wheel
+              python3 setup.py sdist -d $SDIST_FOLDER
+              pushd $SDIST_FOLDER
+              python3 -m pip install pyxpdf* -v
+              python3 ../runtests.py
+              popd
+            displayName: Build & Test sdist
+
+          - bash: |
+              ls -lh wheelhouse
+              ls -lh wheelhouse/**/*
+              echo TWINE_USERNAME=$TWINE_USERNAME
+              python3 -m twine check wheelhouse/**/* || exit 1
+              python3 -m twine upload --non-interactive --skip-existing wheelhouse/**/*
+            displayName: Upload to PyPi
+            env:
+              TWINE_USERNAME: $(pypi_username)
+              TWINE_PASSWORD: $(pypi_token)
+
           - task: GitHubRelease@1
             inputs:
               gitHubConnection: 'github.com_ashutoshvarma'
@@ -88,6 +118,9 @@ jobs:
               tagSource: 'gitTag'
               tagPattern: 'v.+'
               releaseNotesSource: 'inline'
+              releaseNotesInline: 'Changelog - https://pyxpdf.readthedocs.io/en/latest/changelog.html'
               assets: 'wheelhouse/**/*'
               changeLogCompareToRelease: 'lastFullRelease'
               changeLogType: 'commitBased'
+            displayName: Make Github Release
+
