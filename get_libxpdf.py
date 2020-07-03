@@ -218,7 +218,7 @@ def call_subprocess(cmd, **kw):
     import subprocess
     cwd = kw.get('cwd', '.')
     cmd_desc = ' '.join(cmd)
-    log.info('Running "%s" in %s' % (cmd_desc, cwd))
+    print('Running "%s" in %s' % (cmd_desc, cwd))
     returncode = subprocess.call(cmd, **kw)
     if returncode:
         raise Exception('Command "%s" returned code %s' % (cmd_desc, returncode))
@@ -230,7 +230,14 @@ def safe_mkdir(dir):
 
 def check_cmake():
     import shutil
-    return False if not shutil.which('cmake') else True
+    import subprocess
+    if shutil.which('cmake'):
+        ret = subprocess.call(['cmake', '--version'])
+        if ret != 0:
+            return False
+        else:
+            return True
+    return False
 
 def cmake_run_install(configure_cmd, cmake_build_dir, install_prefix,
                       build_type='Release', multicore=None, **call_setup):
