@@ -3,6 +3,14 @@ pyxpdf changelog
 
 .. begin changelog
 
+0.2.2 (2020-07-03)
+------------------
+
+- Config: add function to add missing fonts :any:`Config.add_font_file()`
+- Introduce :class:`~pyxpdf.xpdf.PDFImage` to represent a PDF Image.
+- PDFImageOutput: :meth:`~pyxpdf.xpdf.PDFImageOutput.get` returns :class:`~pyxpdf.xpdf.PDFImage`
+  instead of Pillow :class:`Image`
+
 0.2.1 (2020-06-12)
 ------------------
 
