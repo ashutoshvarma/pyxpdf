@@ -243,7 +243,7 @@ def cflags(static_cflags):
         result.append('/Zc:__cplusplus')
 
     if not static_cflags:
-        static_cflags = env_var('CFLAGS')
+        static_cflags = env_var('CFLAGS') + env_var('CXXFLAGS') + env_var('CPPFLAGS')
     result.extend(static_cflags)
     return result
 

@@ -27,7 +27,6 @@ werrors="$werrors -Werror=implicit-function-declaration"
 # build with c++14 by default
 # setupinfo.py will load extra_compile_args from env CFLAGS
 # but still setting CPPFLAGS for future proofing.
-export CFLAGS="-std=c++14"
 export CPPFLAGS="-std=c++14"
 
 setup_base()
