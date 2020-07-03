@@ -34,7 +34,7 @@ jobs:
       python: 3.6
     - stage: Comprehensive tests
       python: 3.8
-      env: USE_SDIST=true WITH_COVERAGE=true
+      env: USE_SDIST=true WITH_COVERAGE=true BUILD_LIBXPDF=true
     - python: 2.7
   allow_failures:
     - python: 2.7
