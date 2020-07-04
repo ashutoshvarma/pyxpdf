@@ -40,9 +40,11 @@ License
 -------
 ``pyxpdf`` is licensed under the GNU General Public License (GPL), version 3. See the `LICENSE <https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE>`_
 
-It uses following third party sources :-
+Credits :-
 
-- `Xpdf Reader <https://www.xpdfreader.com/>`_ by Derek Noonburg
+- `xpdf reader <https://www.xpdfreader.com/>`_ by Derek Noonburg
+- `lxml <https://www.github.com/lxml/lxml>`_ - project structure and build adapted from lxml
+- `poppler <https://poppler.freedesktop.org/>`_ project
 
 
 .. |azure| image:: https://img.shields.io/azure-devops/build/ashutoshvarma/pyxpdf/1/master?label=Azure%20Pipelines&style=for-the-badge   
