@@ -101,6 +101,6 @@ include "textoutput.pxi"
 # Python Objects based on SplashOutputDev.pxd
 include "imageoutput.pxi"
 
-# Pythonn Objects based on PDFDoc.pxd ,Page.pxd
+# Python Objects based on PDFDoc.pxd ,Page.pxd
 include "document.pxi"
 

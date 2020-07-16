@@ -4,7 +4,7 @@ from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 # NOTE: This class should be always a singleton
 # only one object of this class should exist i.e 
 # global variable `Config`
-# This is beacuse xpdf `GlobalParams` class's destructor
+# This is because xpdf `GlobalParams` class's destructor
 # frees global builtin font tables. So more that one
 # `_GlobalParamsConfig` class will lead to double free
 # or corruption error.
@@ -15,7 +15,7 @@ cdef class _GlobalParamsConfig:
         public object __doc__
 
     cdef _set_defaults(self):
-        # only call after initialising self._global
+        # only call after initializing self._global
         # default text encoding 
         self._global.setTextEncoding("UTF-8")
 
@@ -159,16 +159,11 @@ cdef class _GlobalParamsConfig:
 
     @text_eol.setter
     def text_eol(self, eol):
-        cdef EndOfLineKind c_eol
-        if eol == "unix":
-            c_eol = EndOfLineKind.eolUnix
-        elif eol == "dos":
-            c_eol = EndOfLineKind.eolDOS
-        elif eol == 'mac':
-            c_eol = EndOfLineKind.eolMac
+        # cdef EndOfLineKind c_eol
+        if eol.lower() in (u'unix', u'mac', u'dos'):
+            self._global.setTextEOL(_chars(eol))
         else:
             raise XPDFConfigError(f"Invalid EOL type - {eol}.")
-        self._global.setTextEOL(_chars(eol))
 
 
     @property

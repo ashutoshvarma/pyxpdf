@@ -39,7 +39,7 @@ DEF BITMAP_RESOLUTION = 150
 #FIXME: buggy as hell, text does not render properly.
 cdef bytearray splash_bitmap_to_1bpc_1comp(SplashBitmap *bitmap):
     cdef:
-        int idx, x, y, i
+        int idx, y, i
         int height = bitmap.getHeight()
         int width = bitmap.getWidth()
         SplashBitmapRowSize row_size = bitmap.getRowSize()
@@ -49,7 +49,7 @@ cdef bytearray splash_bitmap_to_1bpc_1comp(SplashBitmap *bitmap):
 
     for y in range(height):
         i = 0
-        for x in range(0, width, 8):
+        for _ in range(0, width, 8):
             p = &data[y * row_size + i]
             idx = y * row_size + i
             img[idx] = p[0]
@@ -376,13 +376,11 @@ cdef class RawImageOutput(PDFOutputDevice):
                                                    double scale_y) except NULL:
         cdef:
             int rotation = 0
-            int total_pages = self.doc.doc.getNumPages()
             double page_h = 0
             double page_w = 0
             double tmp
             double res_x = self.resolution_x
             double res_y = self.resolution_y
-            SplashBitmap* bitmap
 
         if self.use_cropbox:
             page_h = self.doc.doc.getPageCropHeight(page_no + 1)
@@ -604,6 +602,8 @@ cdef class PDFImage:
             mode = "L"
         elif c_img.bitmapColorMode == SplashColorMode.splashModeRGB8:
             mode = "RGB"
+        else:
+            raise XPDFInternalError(f"Unsupported Bitmap SplashColorMode.")
         buff = splash_bitmap_to_buffer(bmap, mode)
         img.image = pillow_image_from_buffer(mode, bmap.getHeight(), bmap.getWidth(), buff)
 
