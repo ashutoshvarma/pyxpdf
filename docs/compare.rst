@@ -1,6 +1,6 @@
 Speed Comparsion
 ================
-Thanks to the brillant `xpdf reader`_ sources and the fact that pyxpdf is 
+Thanks to the brilliant `xpdf reader`_ sources and the fact that pyxpdf is 
 written in `cython`_ as Python C-API module makes it much faster than pure
 python based pdf parsers.
 
@@ -8,7 +8,7 @@ Text Extraction
 ---------------
 
 Comparing text extraction (while maintaining layout) speed with popular 
-`pdfminer.six`_ module.
+`pdfminer.six`_ module. (python script used - compare.py_)
 
     `Running Python 3.6.9, gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 
     Ubuntu 18.04, 
@@ -40,3 +40,4 @@ Size    pdfminer.six    pyxpdf      times faster
 .. _cython: https://cython.org/
 .. _xpdf reader: https://www.xpdfreader.com/about.html
 .. _pdfminer.six: https://pdfminersix.readthedocs.io/en/latest/
+.. _compare.py: https://github.com/ashutoshvarma/pyxpdf/blob/master/benchmark/compare.py
