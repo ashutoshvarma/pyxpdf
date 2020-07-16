@@ -2,6 +2,7 @@ pyxpdf
 ======
 pyxpdf is a fast and memory efficient python module for parsing PDF documents based on xpdf reader sources.
 
+
 .. start-badges
 
 .. list-table::
@@ -18,6 +19,15 @@ pyxpdf is a fast and memory efficient python module for parsing PDF documents ba
 
 .. end-badges
 
+Features
+--------
+- Almost x20 times faster than pure python based pdf parsers (see `Speed Comparison`_)
+- Extract text while maintaining original document layout (best possible)
+- Support almost all PDF encodings, CMaps and predefined CMaps.
+- Extract LZW, RLE, CCITTFax, DCT, JBIG2 and JPX compressed images and image masks along with their BBox.
+- Render PDF Pages as image with support of '1', 'L', 'LA', 'RGB', 'RGBA' and 'CMYK' color modes.
+- Thread Safe
+
 More Information
 ----------------
 
@@ -32,7 +42,7 @@ More Information
   - `Issues <https://github.com/ashutoshvarma/pyxpdf/issues>`_
   - `Pull requests <https://github.com/ashutoshvarma/pyxpdf/pulls>`_
 
-- `Speed Comparsion <https://pyxpdf.readthedocs.io/en/latest/compare.html>`_
+- `Speed Comparison`_
 
 - `Changelog <https://pyxpdf.readthedocs.io/en/latest/changelog.html>`_
 
@@ -46,6 +56,7 @@ Credits :-
 - `lxml <https://www.github.com/lxml/lxml>`_ - project structure and build adapted from lxml
 - `poppler <https://poppler.freedesktop.org/>`_ project
 
+.. _`Speed Comparison`: https://pyxpdf.readthedocs.io/en/latest/compare.html
 
 .. |azure| image:: https://img.shields.io/azure-devops/build/ashutoshvarma/pyxpdf/1/master?label=Azure%20Pipelines&style=for-the-badge   
    :alt: Azure DevOps builds (branch)
