@@ -88,5 +88,5 @@ html_theme_options = {
     'github_repo': 'pyxpdf',
     'github_button' : 'true',
     'description': 'The fastest PDF parser for python',
-    #'analytics_id' : 'xxxxxx',
+    'analytics_id' : 'UA-55591034-3',
 }
