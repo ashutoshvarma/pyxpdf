@@ -36,7 +36,8 @@ inplace:
 
 inplace_gcc_debug:
 	CFLAGS='$(CFLAGS)' $(PYTHON) setup.py $(SETUPFLAGS) build_ext -i $(PYTHON_WITH_CYTHON) --build-libxpdf --warnings --with-signature \
-																						   --with-coverage --debug-gcc $(PARALLEL)
+																						   --with-coverage --debug-gcc  --cython-gdb \
+																						   $(PARALLEL)
 inplace2:
 	$(PYTHON2) setup.py $(SETUPFLAGS) build_ext -i $(PY2_WITH_CYTHON) --warnings --with-coverage $(PARALLEL2)
 
