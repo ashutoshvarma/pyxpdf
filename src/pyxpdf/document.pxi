@@ -87,6 +87,9 @@ cdef class Document:
         """
 
     def __cinit__(self, pdf, ownerpass=None, userpass=None):
+        cdef object Path
+        from pathlib import Path
+
         self.doc = NULL
 
         # Type casting NULL to prebent MSVC/C14 errors
@@ -96,6 +99,9 @@ cdef class Document:
         # pdf file path
         if isinstance(pdf, basestring):
             self._load_from_file(to_GString(pdf))
+        # Path object
+        elif isinstance(pdf, Path):
+            self._load_from_file(to_GString(str(pdf)))
         # file-like object
         elif callable(getattr(pdf, 'read', None)):
             # copy buffer
