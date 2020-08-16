@@ -10,7 +10,7 @@ from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 # or corruption error.
 cdef class _GlobalParamsConfig:
     cdef:
-        object cfg_path
+        public object cfg_path
         GlobalParams* _global
         public object __doc__
 
