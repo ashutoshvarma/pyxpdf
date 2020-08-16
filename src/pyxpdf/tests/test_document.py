@@ -1,5 +1,6 @@
 import unittest
 from io import open
+from pathlib import Path
 
 from pyxpdf.xpdf import Document
 
@@ -71,6 +72,11 @@ class DocumentTextCase(InitGlobalTextCase, PropertyTextCase):
 
     def test_load_from_path(self):
         doc = Document(self.dmca_pdf)
+        self.dmca_prop["filename"] = self.dmca_pdf
+        self._test_doc_properties(doc)
+
+    def test_load_from_Path_object(self):
+        doc = Document(Path(self.dmca_pdf))
         self.dmca_prop["filename"] = self.dmca_pdf
         self._test_doc_properties(doc)
 
