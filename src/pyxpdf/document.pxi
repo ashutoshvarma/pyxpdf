@@ -158,16 +158,20 @@ cdef class Document:
     cdef Catalog *get_catalog(self):
         return self.doc.getCatalog()
 
-    cdef display_pages(self, OutputDev* out, int first, int end,
+    cdef display_pages(self, OutputDev* out, int first = 0, int end = -1,
                         double hDPI = 72, double vDPI = 72, int rotate = 0,
                         GBool use_media_box = gFalse, GBool crop = gTrue,
                         GBool printing = gFalse):
-        if first < 0 or first >= self.num_pages:
+        if first < 0 or first >= self.doc.getNumPages():
             first = 0
-        if end < 0 or end >= self.num_pages:
-            end = self.num_pages - 1
-        self.doc.displayPages(out, first + 1, end + 1, hDPI, vDPI, rotate,
-                            use_media_box, crop, printing)
+        if end < 0 or end >= self.doc.getNumPages():
+            end = self.doc.getNumPages() - 1
+
+        # xpdf source count pages from 1
+        for i in range(first + 1, end + 2):
+            #print(i)
+            self.doc.displayPage(out, i, hDPI, vDPI, rotate,
+                                use_media_box, crop, printing)
 
     cdef dict get_info_dict(self):
         cdef:
