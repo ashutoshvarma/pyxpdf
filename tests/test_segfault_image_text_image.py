@@ -21,12 +21,12 @@ from pathlib import Path
 
 from pyxpdf import xpdf as x
 
-x.Config.print_commands = True
+# x.Config.print_commands = True
 
 
 class Segfault_Image_Text_Image_TextCase(unittest.TestCase):
     def test_segfault_image_text_image(self):
-        pdf = (Path(__file__).parents[2].absolute()) / "samples/nonfree/mandarin.pdf"
+        pdf = (Path(__file__).parents[1].absolute()) / "samples/nonfree/mandarin.pdf"
         doc = x.Document(pdf)
 
         # can be any PDFOutput except TextOutput

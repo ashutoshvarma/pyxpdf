@@ -65,14 +65,16 @@ Options:
 # and cleaner though, at the expense of more limited functionality.
 #
 
-import re
+import getopt
 import os
+import re
 import sys
 import time
-import types
-import getopt
-import unittest
 import traceback
+import types
+import unittest
+from importlib import import_module as _im
+from pathlib import Path
 
 try:
     # Python >=2.7 and >=3.2
@@ -92,37 +94,37 @@ class Options:
     """Configurable properties of the test runner."""
 
     # test location
-    basedir = ''                # base directory for tests (defaults to
+    basedir = ""  # base directory for tests (defaults to
     # basedir of argv[0] + 'src'), must be absolute
-    follow_symlinks = True      # should symlinks to subdirectories be
+    follow_symlinks = True  # should symlinks to subdirectories be
     # followed? (hardcoded, may cause loops)
 
     # which tests to run
-    unit_tests = False          # unit tests (default if both are false)
-    functional_tests = False    # functional tests
+    unit_tests = False  # unit tests (default if both are false)
+    functional_tests = False  # functional tests
 
     # test filtering
-    level = 1                   # run only tests at this or lower level
+    level = 1  # run only tests at this or lower level
     # (if None, runs all tests)
-    pathname_regex = ''         # regexp for filtering filenames
-    test_regex = ''             # regexp for filtering test cases
+    pathname_regex = ""  # regexp for filtering filenames
+    test_regex = ""  # regexp for filtering test cases
 
     # actions to take
-    list_files = False          # --list-files
-    list_tests = False          # --list-tests
-    list_hooks = False          # --list-hooks
-    run_tests = True            # run tests (disabled by --list-foo)
+    list_files = False  # --list-files
+    list_tests = False  # --list-tests
+    list_hooks = False  # --list-hooks
+    run_tests = True  # run tests (disabled by --list-foo)
 
     # output verbosity
-    verbosity = 0               # verbosity level (-v)
-    quiet = 0                   # do not print anything on success (-q)
-    warn_omitted = False        # produce warnings when a test case is
+    verbosity = 0  # verbosity level (-v)
+    quiet = 0  # do not print anything on success (-q)
+    warn_omitted = False  # produce warnings when a test case is
     # not included in a test suite (-w)
-    progress = False            # show running progress (-p)
-    coverage = False            # produce coverage reports (--coverage)
-    coverdir = 'coverage'       # where to put them (currently hardcoded)
-    immediate_errors = False    # show tracebacks twice (currently hardcoded)
-    screen_width = 80           # screen width (autodetected)
+    progress = False  # show running progress (-p)
+    coverage = False  # produce coverage reports (--coverage)
+    coverdir = "coverage"  # where to put them (currently hardcoded)
+    immediate_errors = False  # show tracebacks twice (currently hardcoded)
+    screen_width = 80  # screen width (autodetected)
 
 
 def compile_matcher(regex):
@@ -134,9 +136,9 @@ def compile_matcher(regex):
     """
     if not regex:
         return lambda x: True
-    elif regex == '!':
+    elif regex == "!":
         return lambda x: False
-    elif regex.startswith('!'):
+    elif regex.startswith("!"):
         rx = re.compile(regex[1:])
         return lambda x: rx.search(x) is None
     else:
@@ -154,7 +156,7 @@ def walk_with_symlinks(top, func, arg):
     except os.error:
         return
     func(arg, top, names)
-    exceptions = ('.', '..')
+    exceptions = (".", "..")
     for name in names:
         if name not in exceptions:
             name = os.path.join(top, name)
@@ -168,73 +170,85 @@ def get_test_files(cfg):
     results = []
     test_names = []
     if cfg.unit_tests:
-        test_names.append('tests')
+        test_names.append("tests")
     if cfg.functional_tests:
-        test_names.append('ftests')
+        test_names.append("ftests")
     baselen = len(cfg.basedir) + 1
 
     def visit(ignored, dir, files):
         if os.path.basename(dir) not in test_names:
             for name in test_names:
-                if name + '.py' in files:
-                    path = os.path.join(dir, name + '.py')
+                if name + ".py" in files:
+                    path = os.path.join(dir, name + ".py")
                     if matcher(path[baselen:]):
                         results.append(path)
             return
-        if '__init__.py' not in files:
+        if "__init__.py" not in files:
             stderr("%s is not a package" % dir)
             return
         for file in files:
-            if file.startswith('test') and file.endswith('.py'):
+            if file.startswith("test") and file.endswith(".py"):
                 path = os.path.join(dir, file)
                 if matcher(path[baselen:]):
                     results.append(path)
+
     if cfg.follow_symlinks:
         walker = walk_with_symlinks
     else:
         walker = os.path.walk
     walker(cfg.basedir, visit, None)
+    walker(os.path.join(os.path.dirname(sys.argv[0]), "tests"), visit, None)
     results.sort()
     return results
 
 
 def import_module(filename, cfg, cov=None):
     """Imports and returns a module."""
-    filename = os.path.splitext(filename)[0]
-    modname = filename[len(cfg.basedir):].replace(os.path.sep, '.')
-
-    if modname.startswith('.'):
-        modname = modname[1:]
+    filename = Path(filename).with_suffix("").absolute()
+    root_dir = Path(__file__).parent.absolute()
+    relative_fn = filename.relative_to(root_dir)
+    modname = ".".join(str(relative_fn).split(os.sep))
 
     if cov is not None:
         cov.start()
+    # try:
+    #     mod = __import__(modname)
+    # except ImportError:
+    #     # get the dir where 'tests'/'ftests' are located.
+    #     parent_path = os.sep.join(filename.split(os.sep)[:-2])
 
-    try:
-        mod = __import__(modname)
-    except ImportError:
-        # get the dir where 'tests'/'ftests' are located.
-        parent_path = os.sep.join(filename.split(os.sep)[:-2])
-        # get the module name like 'tests.demo_test'
-        modname = '.'.join(filename.split(os.sep)[-2:])
-        sys.path.reverse()
-        sys.path.insert(0, parent_path)
-        mod = __import__(modname)
-
+    #     old_path = sys.path[:]
+    #     # remove basedir so that inplace module is not imported
+    #     # sys.path.remove(cfg.basedir)
+    #     # move parent_path to front
+    #     if parent_path in sys.path:
+    #         idx = sys.path.index(parent_path)
+    #         sys.path = [parent_path,] + sys.path[:idx] + sys.path[idx + 1 :]
+    #     else:
+    #         sys.path.insert(0, parent_path)
+    #     # get the module name like 'tests.demo_test'
+    #     modname = ".".join(filename.split(os.sep)[-2:])
+    #     mod = __import__(modname)
+    #     # restore sys.path
+    #     sys.path = old_path
+    #     # remove previous imported "tests"
+    #     del sys.modules["tests"]
+    mod = _im(modname)
     if cov is not None:
         cov.stop()
-    components = modname.split('.')
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
+    # components = modname.split(".")
+    # for comp in components[1:]:
+    #     mod = getattr(mod, comp)
     return mod
 
 
 def filter_testsuite(suite, matcher, level=None):
     """Returns a flattened list of test cases that match the given matcher."""
     if not isinstance(suite, unittest.TestSuite):
-        raise TypeError('not a TestSuite', suite)
+        raise TypeError("not a TestSuite", suite)
     results = []
     for test in suite._tests:
-        if level is not None and getattr(test, 'level', 0) > level:
+        if level is not None and getattr(test, "level", 0) > level:
             continue
         if isinstance(test, unittest.TestCase):
             testname = test.id()  # package.module.class.method
@@ -250,11 +264,12 @@ def get_all_test_cases(module):
     """Returns a list of all test case classes defined in a given module."""
     results = []
     for name in dir(module):
-        if not name.startswith('Test'):
+        if not name.startswith("Test"):
             continue
         item = getattr(module, name)
-        if (isinstance(item, (type, types.ClassType)) and
-                issubclass(item, unittest.TestCase)):
+        if isinstance(item, (type, types.ClassType)) and issubclass(
+            item, unittest.TestCase
+        ):
             results.append(item)
     return results
 
@@ -262,7 +277,7 @@ def get_all_test_cases(module):
 def get_test_classes_from_testsuite(suite):
     """Returns a set of test case classes used in a test suite."""
     if not isinstance(suite, unittest.TestSuite):
-        raise TypeError('not a TestSuite', suite)
+        raise TypeError("not a TestSuite", suite)
     results = set()
     for test in suite._tests:
         if isinstance(test, unittest.TestCase):
@@ -293,10 +308,11 @@ def get_test_cases(test_files, cfg, cov=None):
             for test_class in difference:
                 # surround the warning with blank lines, otherwise it tends
                 # to get lost in the noise
-                stderr("\n%s: WARNING: %s not in test suite\n"
-                       % (file, test_class.__name__))
-        if (cfg.level is not None and
-                getattr(test_suite, 'level', 0) > cfg.level):
+                stderr(
+                    "\n%s: WARNING: %s not in test suite\n"
+                    % (file, test_class.__name__)
+                )
+        if cfg.level is not None and getattr(test_suite, "level", 0) > cfg.level:
             continue
         filtered = filter_testsuite(test_suite, matcher, cfg.level)
         results.extend(filtered)
@@ -308,14 +324,14 @@ def get_test_hooks(test_files, cfg, cov=None):
     results = []
     dirs = set(map(os.path.dirname, test_files))
     for dir in list(dirs):
-        if os.path.basename(dir) == 'ftests':
-            dirs.add(os.path.join(os.path.dirname(dir), 'tests'))
+        if os.path.basename(dir) == "ftests":
+            dirs.add(os.path.join(os.path.dirname(dir), "tests"))
     dirs = list(dirs)
     dirs.sort()
     for dir in dirs:
-        filename = os.path.join(dir, 'checks.py')
+        filename = os.path.join(dir, "checks.py")
         if os.path.exists(filename):
-            module = import_module(filename, cfg, tracer=tracer)
+            module = import_module(filename, cfg)
             if cov is not None:
                 cov.start()
             hooks = module.test_hooks()
@@ -356,8 +372,9 @@ class CustomTestResult(_TextTestResult):
             n = self.testsRun + 1
             self.stream.write("\r%4d" % n)
             if self.count:
-                self.stream.write("/%d (%5.1f%%)"
-                                  % (self.count, n * 100.0 / self.count))
+                self.stream.write(
+                    "/%d (%5.1f%%)" % (self.count, n * 100.0 / self.count)
+                )
             if self.showAll:  # self.cfg.verbosity == 1
                 self.stream.write(": ")
             elif self.cfg.verbosity:
@@ -386,9 +403,9 @@ class CustomTestResult(_TextTestResult):
             # limit case is 'testname (...)'
             pos = s.find(" (")
             if pos + len(" (...)") > self._maxWidth:
-                s = s[:self._maxWidth - 3] + "..."
+                s = s[: self._maxWidth - 3] + "..."
             else:
-                s = "%s...%s" % (s[:pos + 2], s[pos + 5 - self._maxWidth:])
+                s = "%s...%s" % (s[: pos + 2], s[pos + 5 - self._maxWidth :])
         return s
 
     def printErrors(self):
@@ -447,8 +464,9 @@ class CustomTestRunner(unittest.TextTestRunner):
         run = result.testsRun
         if not self.cfg.quiet:
             self.stream.writeln(result.separator2)
-            self.stream.writeln("Ran %d test%s in %.3fs" %
-                                (run, run != 1 and "s" or "", timeTaken))
+            self.stream.writeln(
+                "Ran %d test%s in %.3fs" % (run, run != 1 and "s" or "", timeTaken)
+            )
             self.stream.writeln()
         if not result.wasSuccessful():
             self.stream.write("FAILED (")
@@ -465,9 +483,14 @@ class CustomTestRunner(unittest.TextTestRunner):
         return result
 
     def _makeResult(self):
-        return CustomTestResult(self.stream, self.descriptions, self.verbosity,
-                                cfg=self.cfg, count=self.count,
-                                hooks=self.hooks)
+        return CustomTestResult(
+            self.stream,
+            self.descriptions,
+            self.verbosity,
+            cfg=self.cfg,
+            count=self.count,
+            hooks=self.hooks,
+        )
 
 
 def main(argv):
@@ -475,13 +498,13 @@ def main(argv):
 
     # Environment
     if sys.version_info < (2, 7):
-        stderr('%s: need Python 2.7 or later' % argv[0])
-        stderr('your python is %s' % sys.version)
+        stderr("%s: need Python 2.7 or later" % argv[0])
+        stderr("your python is %s" % sys.version)
         return 1
 
     # Defaults
     cfg = Options()
-    cfg.basedir = os.path.join(os.path.dirname(argv[0]), 'src')
+    cfg.basedir = os.path.join(os.path.dirname(argv[0]), "src")
     cfg.basedir = os.path.abspath(cfg.basedir)
 
     # Figure out terminal size
@@ -492,7 +515,7 @@ def main(argv):
     else:
         try:
             curses.setupterm()
-            cols = curses.tigetnum('cols')
+            cols = curses.tigetnum("cols")
             if cols > 0:
                 cfg.screen_width = cols
         except (curses.error, TypeError):
@@ -500,97 +523,85 @@ def main(argv):
             pass
 
     # Option processing
-    opts, args = getopt.gnu_getopt(argv[1:], 'hvpqufw',
-                                   ['list-files', 'list-tests', 'list-hooks',
-                                    'level=', 'all-levels', 'coverage'])
+    opts, args = getopt.gnu_getopt(
+        argv[1:],
+        "hvpqufw",
+        ["list-files", "list-tests", "list-hooks", "level=", "all-levels", "coverage"],
+    )
     for k, v in opts:
-        if k == '-h':
+        if k == "-h":
             print(__doc__)
             return 0
-        elif k == '-v':
+        elif k == "-v":
             cfg.verbosity += 1
             cfg.quiet = False
-        elif k == '-p':
+        elif k == "-p":
             cfg.progress = True
             cfg.quiet = False
-        elif k == '-q':
+        elif k == "-q":
             cfg.verbosity = 0
             cfg.progress = False
             cfg.quiet = True
-        elif k == '-u':
+        elif k == "-u":
             cfg.unit_tests = True
-        elif k == '-f':
+        elif k == "-f":
             cfg.functional_tests = True
-        elif k == '-w':
+        elif k == "-w":
             cfg.warn_omitted = True
-        elif k == '--list-files':
+        elif k == "--list-files":
             cfg.list_files = True
             cfg.run_tests = False
-        elif k == '--list-tests':
+        elif k == "--list-tests":
             cfg.list_tests = True
             cfg.run_tests = False
-        elif k == '--list-hooks':
+        elif k == "--list-hooks":
             cfg.list_hooks = True
             cfg.run_tests = False
-        elif k == '--coverage':
+        elif k == "--coverage":
             cfg.coverage = True
-        elif k == '--level':
+        elif k == "--level":
             try:
                 cfg.level = int(v)
             except ValueError:
-                stderr('%s: invalid level: %s' % (argv[0], v))
-                stderr('run %s -h for help')
+                stderr("%s: invalid level: %s" % (argv[0], v))
+                stderr("run %s -h for help")
                 return 1
-        elif k == '--all-levels':
+        elif k == "--all-levels":
             cfg.level = None
         else:
-            stderr('%s: invalid option: %s' % (argv[0], k))
-            stderr('run %s -h for help')
+            stderr("%s: invalid option: %s" % (argv[0], k))
+            stderr("run %s -h for help")
             return 1
     if args:
         cfg.pathname_regex = args[0]
     if len(args) > 1:
         cfg.test_regex = args[1]
     if len(args) > 2:
-        stderr('%s: too many arguments: %s' % (argv[0], args[2]))
-        stderr('run %s -h for help')
+        stderr("%s: too many arguments: %s" % (argv[0], args[2]))
+        stderr("run %s -h for help")
         return 1
     if not cfg.unit_tests and not cfg.functional_tests:
         cfg.unit_tests = True
 
     # Set up the python path
-    # sys.path.append(cfg.basedir)
-    sys.path.insert(0, cfg.basedir)
+    sys.path.append(cfg.basedir)
+    # sys.path.insert(0, cfg.basedir)
 
     # Set up tracing before we start importing things
     cov = None
     if cfg.run_tests and cfg.coverage:
         from coverage import coverage
+
         # load the coverage file from same directory
-        cov_cfg = os.path.join(os.path.dirname(
-            os.path.realpath(__file__)), '.coveragerc')
+        cov_cfg = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), ".coveragerc"
+        )
         if not os.path.isfile(cov_cfg):
             cov_cfg = None
         cov = coverage(config_file=cov_cfg)
 
     # Finding and importing
     test_files = get_test_files(cfg)
-
-    # Determine whether using inpace module or from site-packages
-    try:
-        filename = os.path.splitext(test_files[0])[0]
-        modname = filename[len(cfg.basedir):].replace(os.path.sep, '.')
-        if modname.startswith('.'):
-            modname = modname[1:]
-        mod = __import__(modname)
-    except ImportError:
-        if cfg.verbosity:
-            print("Using package from site-packages.")
-    else:
-        if cfg.verbosity:
-            print("Using inplace built. {mpath}".format(mpath=mod.__file__))
-        del mod
-        del sys.modules[modname]
 
     if cov is not None:
         cov.start()
@@ -601,6 +612,7 @@ def main(argv):
 
     # Configure the logging module
     import logging
+
     logging.basicConfig()
     logging.root.setLevel(logging.CRITICAL)
 
@@ -626,11 +638,11 @@ def main(argv):
         del run_result
 
     if cov is not None:
-        traced_file_types = ('.py', '.pyx', '.pxi', '.pxd')
+        traced_file_types = (".py", ".pyx", ".pxi", ".pxd")
         modules = []
 
         def add_file(_, path, files):
-            if 'tests' in os.path.relpath(path, cfg.basedir).split(os.sep):
+            if "tests" in os.path.relpath(path, cfg.basedir).split(os.sep):
                 return
             for filename in files:
                 if filename.endswith(traced_file_types):
@@ -643,7 +655,7 @@ def main(argv):
         walker(os.path.abspath(cfg.basedir), add_file, None)
 
         try:
-            cov.xml_report(modules, outfile='coverage.xml')
+            cov.xml_report(modules, outfile="coverage.xml")
             if cfg.coverdir:
                 cov.html_report(modules, directory=cfg.coverdir)
         finally:
@@ -657,6 +669,6 @@ def main(argv):
         return 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     exitcode = main(sys.argv)
     sys.exit(exitcode)
