@@ -2,7 +2,7 @@ from pyxpdf.includes.GlobalParams cimport GlobalParams, globalParams, EndOfLineK
 from pyxpdf.includes.UnicodeMap cimport UnicodeMap
 
 # NOTE: This class should be always a singleton
-# only one object of this class should exist i.e 
+# only one object of this class should exist i.e
 # global variable `Config`
 # This is because xpdf `GlobalParams` class's destructor
 # frees global builtin font tables. So more that one
@@ -67,7 +67,13 @@ cdef class _GlobalParamsConfig:
 
     def add_font_file(self, font_name, file):
         # GlobalParams free these GStrings in its destructor
-        self._global.addFontFile(to_GString(font_name), to_GString(file))
+        cdef:
+            GString *g_file
+
+        g_file = to_GString(file)
+        if c_readable(g_file.getCString()) == False:
+            raise FileNotFoundError("Failed to open {file}".format(file=file))
+        self._global.addFontFile(to_GString(font_name), g_file)
 
 
     @property

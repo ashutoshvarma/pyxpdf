@@ -91,3 +91,14 @@ cdef TextString* to_TextString(tstr):
 
 cdef void append_to_cpp_string(void *stream, const char *text, int length):
     (<string*>stream)[0] += string(text, length)
+
+
+cdef bint c_readable(char *file_path):
+    cdef:
+        cstdio.FILE *_fp
+        bint readable = False
+    _fp = cstdio.fopen(file_path, 'r')
+    if _fp != NULL:
+        cstdio.fclose(_fp)
+        readable = True
+    return readable

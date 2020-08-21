@@ -37,6 +37,11 @@ class GlobalConfigTestCase(InitGlobalTextCase, PropertyTextCase):
         self.assertProperty(Config, "error_quiet", True)
         self.assertProperty(Config, "error_quiet", False)
 
+    def test_add_font_file(self):
+        # FIXME: add font loading case also
+        with self.assertRaises(FileNotFoundError):
+            Config.add_font_file('abcd', 'abcd')
+
     def test_without_pyxpdf_data(self):
         # making impossible to import pyxpdf_data even if installed
         sys.modules["pyxpdf_data"] = None
