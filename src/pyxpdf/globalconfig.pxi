@@ -234,6 +234,9 @@ Config.add_font_file(font_name, file)
 
 Attributes
 ----------
+Config.cfg_path : str
+    Path of xpdfrc currently loaded.
+
 Config.text_encoding : str,
     Sets the encoding to use for text output. 'UTF-8', 'Latin1', 'ASCII7',
     'Symbol', 'ZapfDingbats', 'UCS-2' is pre defined. For more encodings
