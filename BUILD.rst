@@ -1,14 +1,15 @@
 How to build pyxpdf from source
 ===============================
 
-For now, we are using pre-compiled `libxpdf <https://github.com/ashutoshvarma/libxpdf>`_
+We are using pre-compiled `libxpdf <https://github.com/ashutoshvarma/libxpdf>`_
 for given platforms :-
 
 - Windows (both x86 and x86_64)
 - Linux (both x86 and x86_64)
 - macOS (only x86_64)
 
-If you want to build ``pyxpdf`` for other platforms you have manually compiled and add the library path (`-L`) and include path (`-I`) through ``CFALGS`` environment variable.
+If you want to build ``pyxpdf`` for other platforms or want to debug libxpdf you can use ``--build-libxpdf`` flag for setup.py which will build lib using cmake.
+
 
 The entire build system and folder structure is adpated from lxml project, so you might see some similarities.
 
