@@ -3,6 +3,18 @@ pyxpdf changelog
 
 .. begin changelog
 
+0.2.3 (2020-08-31)
+-------------------
+
+- Config: make :any:`Config.cfg_path` public attribute
+- Document: add support for :class:`~pathlib.Path` for loading pdf
+- pyxpdf_data: add 35 base Postscript fonts from ghostscript
+
+**Bugs Fixed**
+
+- Fix #9: segfault using :meth:`~pyxpdf.xpdf.Document.text()`
+- Fix #8: add checks for file in :any:`Config.add_font_file()`
+
 0.2.2 (2020-07-03)
 ------------------
 
