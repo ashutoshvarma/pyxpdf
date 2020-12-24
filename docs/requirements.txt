@@ -1,2 +1,2 @@
 #docs
-Sphinx==3.2.1
+Sphinx==3.4.1
