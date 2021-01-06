@@ -38,12 +38,12 @@ jobs:
         versionSpec: '3.8'
       displayName: "Python Setup"
       
-    - bash: |
-        brew postinstall openssl
-        export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem
-        echo "##vso[task.setvariable variable=SSL_CERT_FILE]$SSL_CERT_FILE"
-      displayName: "Update SSL Certs"
-      condition: contains(variables['imageName'], 'macOS')
+#     - bash: |
+#         brew postinstall openssl
+#         export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem
+#         echo "##vso[task.setvariable variable=SSL_CERT_FILE]$SSL_CERT_FILE"
+#       displayName: "Update SSL Certs"
+#       condition: contains(variables['imageName'], 'macOS')
     - bash: |
         python -m pip install --upgrade pip setuptools wheel
         pip install -r test_requirements.txt
