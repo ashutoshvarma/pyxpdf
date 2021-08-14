@@ -149,6 +149,7 @@ setup(
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
         "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Cython",
         # NOTE: keep in sync with 'python_requires' list above.
