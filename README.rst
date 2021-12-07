@@ -49,7 +49,8 @@ More Information
 
 License
 -------
-``pyxpdf`` is licensed under the GNU General Public License (GPL), version 3. See the `LICENSE <https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE>`_
+``pyxpdf`` is licensed under the GNU General Public License (GPL),
+version 2 or 3. See the `LICENSE <https://github.com/ashutoshvarma/pyxpdf/blob/master/LICENSE>`_
 
 Credits
 -------
