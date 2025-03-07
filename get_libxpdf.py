@@ -7,6 +7,7 @@ import re
 import sys
 import tarfile
 import zipfile
+import json
 from contextlib import closing
 
 try:
@@ -40,17 +41,16 @@ def is64():
 
 
 def download_and_extract_libxpdf(destdir):
-    url = "https://github.com/ashutoshvarma/libxpdf/releases"
-    filenames = list(_list_dir_urllib(url))
-
-    lib_version = find_max_version(
-        "libxpdf", filenames, re.compile(r"/releases/tag/v([0-9.]+[0-9])$")
-    )
+    dlurl = "https://github.com/ashutoshvarma/libxpdf/releases"
+    apiurl = "https://api.github.com/repos/ashutoshvarma/libxpdf/releases"
+    response = urlopen(apiurl)
+    data=json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
+    lib_version = data[0]['tag_name'].replace('v', '')
     release_path = "/download/v%s/" % lib_version
-    url += release_path
-    filenames = [
-        filename.rsplit("/", 1)[1] for filename in filenames if release_path in filename
-    ]
+    dlurl += release_path
+    filenames=[]
+    for asset in data[0]['assets']:
+        filenames.append(asset['name'])
 
     if platform.system() == "Windows":
         arch = "win64" if is64() else "win32"
@@ -67,7 +67,7 @@ def download_and_extract_libxpdf(destdir):
     if not os.path.exists(destdir):
         os.makedirs(destdir)
 
-    lib_url = urljoin(url, libname)
+    lib_url = urljoin(dlurl, libname)
     lib_dest_path = os.path.join(destdir, "libxpdf")
 
     if os.path.exists(os.path.join(destdir, libname + lib_version + ".keep")):
